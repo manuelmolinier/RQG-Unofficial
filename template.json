@@ -1,0 +1,426 @@
+{
+"Actor": {
+  "types": ["character"],
+  "character": {
+    "biography": "",
+    "general": {
+      "birthyear": {
+        "label":"Birth Year",
+        "value":0
+      },
+      "age": {
+        "label":"Age",
+        "value":0
+      },
+      "occupation": {
+        "label":"Occupation",
+        "value":""
+      },
+      "ransom": {
+        "label":"Ransom",
+        "value":""
+      },
+      "gender": {
+        "label":"Gender",
+        "value":""
+      },
+      "homeland": {
+        "label":"Homeland",
+        "value":""
+      },
+      "reputation": {
+        "label":"Reputation",
+        "value":""
+      },
+      "standardofliving": {
+        "label":"Standard of Living",
+        "value":""
+      },
+      "tribe": {
+        "label":"Tribe",
+        "value":""
+      },
+      "clan": {
+        "label":"Clan",
+        "value":""
+      },
+      "baseincome": {
+        "label":"Base Income",
+        "value":""
+      },
+      "campaign": {
+        "label":"Campaign",
+        "value":""
+      }
+    },
+    "health": {
+      "value": 10,
+      "min": 0,
+      "max": 10
+    },
+    "power": {
+      "value": 5,
+      "min": 0,
+      "max": 5
+    },
+    "attributes": {
+      "magicpoints": {
+        "value": 10,
+        "min": 0,
+        "max": 10
+      },
+      "hitpoints": {
+        "value": 10,
+        "min": 0,
+        "max": 10
+      },
+      "healingrate":0,
+      "damagebonus":"",
+      "spiritcombatdamage": "",
+      "maximumenc": 0,
+      "dexsr": 0,
+      "sizsr": 0,
+      "meleesr":0
+    },
+    "characteristics":{
+      "strength": {
+        "base":0,
+        "value": 0,
+        "modifier": [],
+        "label": "STR"
+      },
+      "constitution": {
+        "base":0,
+        "value": 0,
+        "modifier": [],
+        "label": "CON"
+      },
+      "size": {
+        "base":0,
+        "value": 0,
+        "modifier": [],
+        "label": "SIZ"
+      },
+      "intelligence": {
+        "base":0,
+        "value": 0,
+        "modifier": [],
+        "label": "INT"
+      },
+      "power": {
+        "base":0,
+        "value": 0,
+        "modifier": [],
+        "label": "POW"
+      },
+      "dexterity": {
+        "base":0,
+        "value": 0,
+        "modifier": [],
+        "label": "DEX"
+      },
+      "charisma": {
+        "base":0,
+        "value": 0,
+        "modifier": [],
+        "label": "CHA"
+      }
+    },
+    "skillcategory":{
+      "agility": {
+        "label": "Agility",
+        "modifier": 0
+      },
+      "communication": {
+        "label": "Communication",
+        "modifier": 0
+      },
+      "knowledge": {
+        "label": "Knowledge",
+        "modifier": 0
+      },
+      "magic": {
+        "label": "Magic",
+        "modifier": 0
+      },
+      "manipulation": {
+        "label": "Manipulation",
+        "modifier": 0
+      },
+      "perception": {
+        "label": "Perception",
+        "modifier": 0
+      },
+      "stealth": {
+        "label": "Stealth",
+        "modifier": 0
+      },
+      "meleeweapons": {
+        "label": "Melee Weapon",
+        "modifier": 0
+      },
+      "missileweapons": {
+        "label": "Missile Weapon",
+        "modifier": 0
+      },
+      "shields": {
+        "label": "Shields",
+        "modifier": 0
+      },
+      "naturalweapons": {
+        "label": "Shields",
+        "modifier": 0
+      }      
+    },
+    "elementalrunes": {
+      "air": {
+        "value": 0,
+        "label": "Air"
+      },
+      "fire": {
+        "value": 0,
+        "label": "Fire"
+      },
+      "darkness": {
+        "value": 0,
+        "label": "Darkness"
+      },
+      "water": {
+        "value": 0,
+        "label": "Water"
+      },
+      "earth": {
+        "value": 0,
+        "label": "Earth"
+      },
+      "moon": {
+        "value": 0,
+        "label": "Moon"
+      }
+    },
+    "powerrunes":{
+      "manbeast":{
+        "man": {
+          "value": 50,
+          "label": "Man"
+        },
+        "beast": {
+          "value": 50,
+          "label": "Beast"
+        }
+      },
+      "fertilitydeath":{
+        "fertility": {
+          "value": 50,
+          "label": "Fertility"
+        },
+        "death": {
+          "value": 50,
+          "label": "Death"
+        }
+      },
+      "harmonydisorder":{
+        "harmony": {
+          "value": 50,
+          "label": "Harmony"
+        },
+        "disorder": {
+          "value": 50,
+          "label": "Disorder"
+        }
+      },
+      "truthillusion":{
+        "truth": {
+          "value": 50,
+          "label": "Truth"
+        },
+        "illusion": {
+          "value": 50,
+          "label": "Illusion"
+        }
+      },
+      "stasismovement":{
+        "stasis": {
+          "value": 50,
+          "label": "Stasis"
+        },
+        "movement": {
+          "value": 50,
+          "label": "Movement"
+        }
+      }
+    }
+  }
+},
+"Item": {
+  "types": ["item","skill","passion","meleeattack","missileattack","naturalattack","spiritspell","runespell","sorceryspell","hitlocation"],
+  "templates": {
+    "quantity": {
+      "quantity": {
+      "type": "Number",
+      "label": "Quantity",
+      "value": 1
+      }
+    },
+    "encumbrance": {
+      "encumbrance": {
+      "type": "Number",
+      "label": "Encumbrance",
+      "value": 0
+      }
+    },
+    "price": {
+      "price": {
+      "type": "String",
+      "label": "Price",
+      "gc": 0,
+      "ss": 0,
+      "bp": 0
+      }
+    },
+    "availability": {
+      "availability": {
+      "type": "String",
+      "label": "Availability",
+      "value": ""
+      }
+    },
+    "description": {
+      "description": {
+      "type": "String",
+      "label": "Description",
+      "value": ""
+      },
+      "gmdescription": {
+        "type": "String",
+        "label": "Description",
+        "value": ""
+      }
+    },
+    "location": {
+      "location": {
+      "type": "Number",
+      "label": "Location",
+      "value": 0
+      }
+    }
+  },  
+  "item": {
+    "description": "",
+    "quantity": 1,
+    "weight": 0,
+    "attributes": {}
+  },
+  "skill": {
+    "name": "",
+    "templates": ["description"],
+    "base": 0,
+    "increase": 0,
+    "modifier": 0,
+    "total": 0,
+    "experience": true,
+    "skillcategory": ""
+  },
+  "passion": {
+    "name": "",
+    "templates": ["description"],
+    "base": 0,
+    "increase": 0,
+    "modifier": 0,
+    "total": 0,
+    "experience": false,
+    "skillcategory": ""
+  },
+  "spiritspell": {
+    "name": "",
+    "templates": ["description"],
+    "mpcost": 0,
+    "attributes": [],
+    "range":"",
+    "duration": "",
+    "type":"",
+    "keywords": []
+  },
+  "runespell": {
+    "name": "",
+    "templates": ["description"],
+    "points": 0,
+    "keywords": [],
+    "rune": ""
+  },
+  "sorceryspell": {
+    "name": "",
+    "templates": ["description"],
+    "points": 0,
+    "keywords": [],
+    "runestechniques": []
+  },
+  "meleeattack":{
+    "name": "",
+    "skillused": "",
+    "wsr": 0,
+    "sr": 0,
+    "skillvalue": 0,
+    "modifier": 0,
+    "damage": "1D6",
+    "db": true,
+    "type": "S",
+    "specialtype": "S",
+    "hpmax": 0,
+    "hpcurrent":0,
+    "enc":0,
+    "STR":0,
+    "DEX":0,
+    "length":""
+  },
+  "missileattack":{
+    "name": "",
+    "skillused": "",
+    "sr": 0,
+    "skillvalue": 0,
+    "modifier": 0,
+    "damage": "1D6",
+    "db": false,
+    "specialtype": "I",
+    "range": 0,
+    "rate": "",
+    "hpmax": 0,
+    "hpcurrent":0,
+    "amno": 0
+  },
+  "naturalattack":{
+    "name": "",
+    "skillused": "",
+    "wsr": 0,
+    "sr": 0,
+    "skillvalue": 0,
+    "modifier": 0,
+    "damage": "1D6",
+    "db": true,
+    "type": "H",
+    "specialtype": "C",
+    "hpmax": 0,
+    "hpcurrent":0
+  },
+  "hitlocation":{
+    "name": "",
+    "armor": 0,
+    "hp": {
+      "value": 10,
+      "min": -20,
+      "max": 10
+    },    
+    "wounds": 0,
+    "condition":"normal"
+  },
+  "cult": {
+    "name": "",
+    "templates": ["description"],
+    "rank": "initiate",
+    "currentrunepoint": 3,
+    "maxrunepoint": 3,
+    "subcult": "",
+    "spells": []    
+  }
+}
+}

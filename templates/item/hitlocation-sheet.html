@@ -1,0 +1,38 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="details">Details</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        {{!-- Attributes Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <div class="form-group">
+                <label class="label-text">{{localize "HP"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.hp.value"  value="{{data.hp.value}}"  data-dtype="Number"  />
+                <input  class="attribute-value"  type="text"  name="data.hp.min"  value="{{data.hp.min}}"  data-dtype="Number"  />
+                <input  class="attribute-value"  type="text"  name="data.hp.max"  value="{{data.hp.max}}"  data-dtype="Number"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "AP"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.armor"  value="{{data.armor}}"  data-dtype="Number"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "wounds"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.wounds"  value="{{data.wounds}}"  data-dtype="Number"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "Condition"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.condition"  value="{{data.condition}}"  data-dtype="String"  />
+            </div>   
+        </div>
+    </section>
+</form>

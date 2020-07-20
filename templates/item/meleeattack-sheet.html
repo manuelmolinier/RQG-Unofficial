@@ -1,0 +1,67 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="details">Details</a>
+        <a class="item" data-tab="description">Description</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        {{!-- Attributes Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <div class="form-group">
+                <label class="label-text">{{localize "Skill Used"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.skillused"  value="{{data.skillused}}"  data-dtype="String"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "Modifier"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.modifier"  value="{{data.modifier}}"  data-dtype="Number"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "Damage"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.damage"  value="{{data.damage}}"  data-dtype="String"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "Special Type"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.specialtype"  value="{{data.specialtype}}"  data-dtype="String"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "Damage Bonus"}}</label>
+                <label class="label-text">{{data.db}}</label>
+            </div>            
+            <div class="form-group">
+                <label class="label-text">{{localize "Weapon SR"}}</label>
+                <label class="label-text">{{data.sr}}</label>
+            </div>   
+            <div class="form-group">
+                <label class="label-text">{{localize "STR"}}</label>
+                <label class="label-text">{{data.STR}}</label>
+            </div>               
+            <div class="form-group">
+                <label class="label-text">{{localize "DEX"}}</label>
+                <label class="label-text">{{data.DEX}}</label>
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "HP"}}</label>
+                <label class="label-text">{{data.hpcurrent}}</label>
+                <label class="label-text">{{data.hpmax}}</label>
+            </div>               
+            <div class="form-group">
+                <label class="label-text">{{localize "Length"}}</label>
+                <label class="label-text">{{data.length}}</label>
+            </div>
+        </div>
+        {{!-- Description Tab --}}
+        <div class="tab" data-group="primary" data-tab="description">
+            {{editor content=data.description.description.value target="data.description.description.value" button=true owner=owner editable=editable}}
+        </div>
+
+    </section>
+</form>
