@@ -1,5 +1,5 @@
-# Simple Worldbuilding System
+# Runequest Glorantha for Foundry
 
-A simple game system for Foundry VTT which allows for flexible definition of Actors and Items to assist with worldbuilding or for running games which do not have a more complete system implementation available.
+An implementation of Runequest system for Foundry VTT.
 
 Now in Gitlab and with CICD releases:)
