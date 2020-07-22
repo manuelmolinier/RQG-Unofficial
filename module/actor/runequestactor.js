@@ -66,6 +66,7 @@ export class RunequestActor extends Actor {
 
     const  actorData = this.data;
     const  data = actorData.data;
+    this._prepareCharacterFlags(actorData);
     for (const [index, charac] of Object.entries(data.characteristics)) {
       const characid=charac.label;
       let modifier= Number(charac.modifier);
@@ -79,7 +80,14 @@ export class RunequestActor extends Actor {
     this._prepareattributes(data);
     this._prepareskillcategoriesmodifier(data);
   }
-
+  _prepareCharacterFlags(sheetData) {
+    console.log(sheetData);
+    sheetData.flags.runequestspell= {
+      "bladesharp": 0,
+      "trueweapon": false,
+      "strength": 0
+    };
+  }
   prepareItems(){
     let actorData = duplicate(this.data)
     // These containers are for the various type of items

@@ -25,7 +25,7 @@ export class RunequestActorSheet extends ActorSheet {
     // Prepare items.
     if (this.actor.data.type == 'character') {
       this._prepareCharacterItems(data);
-      this._prepareCharacterFlags(data);
+      //this._prepareCharacterFlags(data);
     }
 
     return data;
@@ -37,20 +37,17 @@ export class RunequestActorSheet extends ActorSheet {
    *
    * @return {undefined}
    */
+/*
   _prepareCharacterFlags(sheetData) {
     const actorData = sheetData.actor;
     console.log(actorData.flags);
     actorData.flags.runequestspell= {
-      "bladesharp": 5,
-      "trueweapon": true,
-      "strength": 6
+      "bladesharp": 0,
+      "trueweapon": false,
+      "strength": 0
     };
-    /*
-    actorData.setFlag("runequest.spell","bladesharp",5);
-    actorData.setFlag("runequest.spell","trueweapon",true);
-    actorData.setFlag("runequest.spell","strength",4);
-    */
   }
+*/
   /**
    * Organize and classify Items for Character sheets.
    *
