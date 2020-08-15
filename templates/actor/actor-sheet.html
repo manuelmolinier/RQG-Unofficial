@@ -6,16 +6,16 @@
         <div class="header-fields">
             <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
             <div class="resource">
-                <h3 class="charname">{{localize "HP"}}</h3>
-                <input type="text" name="data.attributes.hitpoints.value" value="{{data.attributes.hitpoints.value}}" data-dtype="Number"/>
+                <h3 class="charname">{{localize 'RQG.HP'}}</h3>
+                <input type="text" name="data.hitpoints.value" value="{{data.hitpoints.value}}" data-dtype="Number"/>
                 <span> / </span>
-                <input type="text" name="data.attributes.hitpoints.max" value="{{data.attributes.hitpoints.max}}" data-dtype="Number"/>
+                <input type="text" name="data.hitpoints.max" value="{{data.hitpoints.max}}" data-dtype="Number"/>
             </div>
             <div class="resource">
-                <h3 class="charname">{{localize "MP"}}</h3>
-                <input type="text" name="data.attributes.magicpoints.value" value="{{data.attributes.magicpoints.value}}" data-dtype="Number"/>
+                <h3 class="charname">{{localize 'RQG.MP'}}</h3>
+                <input type="text" name="data.magicpoints.value" value="{{data.magicpoints.value}}" data-dtype="Number"/>
                 <span> / </span>
-                <input type="text" name="data.attributes.magicpoints.max" value="{{data.attributes.magicpoints.max}}" data-dtype="Number"/>
+                <input type="text" name="data.magicpoints.max" value="{{data.magicpoints.max}}" data-dtype="Number"/>
             </div>
         </div>
     </header>
@@ -40,15 +40,17 @@
             <ol class="skills-list">          
                 <div class="skill-category" data-spelltype="spirit">
                     <li class="item flexrow item-header">
-                        <div class="item-name">{{localize "Spirit Spell"}}</div>
+                        <div class="item-name">{{localize 'SpiritSpell'}}</div>
                         <div class="item-controls">
                             <a class="item-control item-create" title="Create item" data-type="spiritspell"><i class="fas fa-plus"></i></a>
                         </div>
                     </li>
                     {{#each actor.spells.spirit as |spell id|}}
+                        {{log spell}}
                         <li class="item flexrow" data-item-id="{{spell._id}}" data-spellname="{{spell.name}}">
                             <h4 class="item-name"><a class="spiritspell-roll">{{spell.name}}</a></h4>
-                            <h4 class="item-name"><a class="spiritspell-roll">{{spell.data.points}}</a></h4>
+                            <h4 class="item-name"><a class="spiritspell-roll">{{spell.data.mpcost}}</a></h4>
+                            <input class="experiencecheck" type="checkbox" name="spell.flags.dynamiceffects.alwaysActive" {{checked spell.flags.dynamiceffects.alwaysActive}}/>
                             <div class="item-controls">
                                 <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                                 <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -61,7 +63,7 @@
             <ol class="skills-list">          
                 <div class="skill-category" data-spelltype="rune">
                     <li class="item flexrow item-header">
-                        <div class="item-name">{{localize "Rune Spell"}}</div>
+                        <div class="item-name">{{localize 'RQG.RuneSpell'}}</div>
                         <div class="item-controls">
                             <a class="item-control item-create" title="Create item" data-type="runespell"><i class="fas fa-plus"></i></a>
                         </div>
@@ -86,51 +88,51 @@
             <ol class="skills-list">
                 <li class="item flexrow item-header">
                     <div class="rqg-general">
-                        <h3 class="charname">{{localize data.general.birthyear.label}}</h3>
+                        <h3 class="charname">{{localize 'RQG.BirthYear'}}</h3>
                         <input type="text" name="data.general.birthyear.value" value="{{data.general.birthyear.value}}"/>
                     </div>            
                     <div class="rqg-general">
-                        <h3 class="charname">{{localize data.general.age.label}}</h3>
+                        <h3 class="charname">{{localize 'RQG.Age'}}</h3>
                         <input type="text" name="data.general.age.value" value="{{data.general.age.value}}"/>
                     </div>            
                     <div class="rqg-general">
-                        <h3 class="charname">{{localize data.general.occupation.label}}</h3>
+                        <h3 class="charname">{{localize 'RQG.Occupation'}}</h3>
                         <input type="text" name="data.general.occupation.value" value="{{data.general.occupation.value}}"/>
                     </div>
                     <div class="rqg-general">
-                        <h3 class="charname">{{localize data.general.ransom.label}}</h3>
+                        <h3 class="charname">{{localize 'RQG.Ransom'}}</h3>
                         <input type="text" name="data.general.ransom.value" value="{{data.general.ransom.value}}"/>
                     </div>
                     <div class="rqg-general">
-                        <h3 class="charname">{{localize data.general.gender.label}}</h3>
+                        <h3 class="charname">{{localize 'RQG.Gender'}}</h3>
                         <input type="text" name="data.general.gender.value" value="{{data.general.gender.value}}"/>
                     </div>
                     <div class="rqg-general">
-                        <h3 class="charname">{{localize data.general.homeland.label}}</h3>
+                        <h3 class="charname">{{localize 'RQG.Homeland'}}</h3>
                         <input type="text" name="data.general.homeland.value" value="{{data.general.homeland.value}}"/>
                     </div>
                     <div class="rqg-general">
-                        <h3 class="charname">{{localize data.general.reputation.label}}</h3>
+                        <h3 class="charname">{{localize 'RQG.Reputation'}}</h3>
                         <input type="text" name="data.general.reputation.value" value="{{data.general.reputation.value}}"/>
                     </div>
                     <div class="rqg-general">
-                        <h3 class="charname">{{localize data.general.standardofliving.label}}</h3>
+                        <h3 class="charname">{{localize 'RQG.StandardofLiving'}}</h3>
                         <input type="text" name="data.general.standardofliving.value" value="{{data.general.standardofliving.value}}"/>
                     </div>
                     <div class="rqg-general">
-                        <h3 class="charname">{{localize data.general.tribe.label}}</h3>
+                        <h3 class="charname">{{localize 'RQG.Tribe'}}</h3>
                         <input type="text" name="data.general.tribe.value" value="{{data.general.tribe.value}}"/>
                     </div>
                     <div class="rqg-general">
-                        <h3 class="charname">{{localize data.general.clan.label}}</h3>
+                        <h3 class="charname">{{localize 'RQG.Clan'}}</h3>
                         <input type="text" name="data.general.clan.value" value="{{data.general.clan.value}}"/>
                     </div>
                     <div class="rqg-general">
-                        <h3 class="charname">{{localize data.general.baseincome.label}}</h3>
+                        <h3 class="charname">{{localize 'RQG.BaseIncome'}}</h3>
                         <input type="text" name="data.general.baseincome.value" value="{{data.general.baseincome.value}}"/>
                     </div>
                     <div class="rqg-general">
-                        <h3 class="charname">{{localize data.general.campaign.label}}</h3>
+                        <h3 class="charname">{{localize 'RQG.Campaign'}}</h3>
                         <input type="text" name="data.general.campaign.value" value="{{data.general.campaign.value}}"/>
                     </div>             
                 </li>
@@ -139,7 +141,7 @@
                 <ol class="skills-list">          
                     <div class="skill-category">
                         <li class="item flexrow item-header">
-                            <div class="item-name">{{localize "Passions"}}</div>
+                            <div class="item-name">{{localize "RQG.Passions"}}</div>
                             <div class="item-controls">
                                 <a class="item-control item-create" title="Create item" data-type="passion"><i class="fas fa-plus"></i></a>
                             </div>
@@ -165,7 +167,7 @@
             <ol class="skills-list">          
                 <div class="skill-category">
                     <li class="item flexrow item-header">
-                        <div class="item-name">{{localize "Hit Locations"}}</div>
+                        <div class="item-name">{{localize "RQG.HitLocations"}}</div>
                         <div class="item-controls">
                             <a class="item-control item-create" title="Create item" data-type="hitlocation"><i class="fas fa-plus"></i></a>
                         </div>
@@ -197,7 +199,7 @@
             <ol class="skills-list">          
                 <div class="skill-category" data-attacktype="melee">
                     <li class="item flexrow item-header">
-                        <div class="item-name">{{localize "Melee Attacks"}}</div>
+                        <div class="item-name">{{localize "RQG.MeleeAttacks"}}</div>
                         <div class="item-controls">
                             <a class="item-control item-create" title="Create item" data-type="meleeattack"><i class="fas fa-plus"></i></a>
                         </div>
@@ -221,7 +223,7 @@
             <ol class="skills-list">          
                 <div class="skill-category" data-attacktype="missile">
                     <li class="item flexrow item-header">
-                        <div class="item-name">{{localize "Missile Attacks"}}</div>
+                        <div class="item-name">{{localize "RQG.MissileAttacks"}}</div>
                         <div class="item-controls">
                             <a class="item-control item-create" title="Create item" data-type="missileattack"><i class="fas fa-plus"></i></a>
                         </div>
@@ -245,7 +247,7 @@
             <ol class="skills-list">          
                 <div class="skill-category" data-attacktype="natural">
                     <li class="item flexrow item-header">
-                        <div class="item-name">{{localize "Natural Attacks"}}</div>
+                        <div class="item-name">{{localize "RQG.NaturalAttacks"}}</div>
                         <div class="item-controls">
                             <a class="item-control item-create" title="Create item" data-type="naturalattack"><i class="fas fa-plus"></i></a>
                         </div>
@@ -326,10 +328,10 @@
         {{!-- Attributes Tab --}}
         <div class="tab attributes" data-group="primary" data-tab="attributes">
             <header class="attributes-header flexrow">
-                <span class="attribute-key">{{localize "Characteristics"}}</span>
-                <span class="attribute-value">{{localize "Base"}}</span>
-                <span class="attribute-label">{{localize "Modifier"}}</span>
-                <span class="attribute-dtype">{{localize "Value"}}</span>
+                <span class="attribute-key">{{localize "RQG.Characteristics"}}</span>
+                <span class="attribute-value">{{localize "RQG.Base"}}</span>
+                <span class="attribute-label">{{localize "RQG.Modifier"}}</span>
+                <span class="attribute-dtype">{{localize "RQG.Value"}}</span>
             </header>
             <ol  class="attributes-list">
                 {{#each data.characteristics as |characteristic id|}}
