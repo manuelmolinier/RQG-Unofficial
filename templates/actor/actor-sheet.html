@@ -1,21 +1,24 @@
 <form class="{{cssClass}}" autocomplete="off">
 
     {{!-- Sheet Header --}}
+    {{log data}}
     <header class="sheet-header">
         <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
         <div class="header-fields">
             <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
             <div class="resource">
                 <h3 class="charname">{{localize 'RQG.HP'}}</h3>
-                <input type="text" name="data.hitpoints.value" value="{{data.hitpoints.value}}" data-dtype="Number"/>
+                {{log data.attributes.hitpoints}}
+                <input type="text" name="data.attributes.hitpoints.value" value="{{data.attributes.hitpoints.value}}" data-dtype="Number"/>
                 <span> / </span>
-                <input type="text" name="data.hitpoints.max" value="{{data.hitpoints.max}}" data-dtype="Number"/>
+                <input type="text" name="data.attributes.hitpoints.max" value="{{data.attributes.hitpoints.max}}" data-dtype="Number"/>
             </div>
             <div class="resource">
                 <h3 class="charname">{{localize 'RQG.MP'}}</h3>
-                <input type="text" name="data.magicpoints.value" value="{{data.magicpoints.value}}" data-dtype="Number"/>
+                {{log data.attributes.magicpoints}}
+                <input type="text" name="data.attributes.magicpoints.value" value="{{data.attributes.magicpoints.value}}" data-dtype="Number"/>
                 <span> / </span>
-                <input type="text" name="data.magicpoints.max" value="{{data.magicpoints.max}}" data-dtype="Number"/>
+                <input type="text" name="data.attributes.magicpoints.max" value="{{data.attributes.magicpoints.max}}" data-dtype="Number"/>
             </div>
         </div>
     </header>
@@ -275,6 +278,8 @@
                 {{#each actor.skills as |skills skillcategory|}}
                     <div class="skill-category" data-skillcategory="{{skillcategory}}">
                         <li class="item flexrow item-header">
+                            {{log skillcategory}}
+                            {{log skills}}
                             <div class="item-name">{{skillcategory}}</div>
                             <div class="item-name">
                                 <label  class="attribute-value"  type="text"  name="data.skillcategory.{{skillcategory}}.modifier"  value="{{skillcategorymodifier @root.actor.data.skillcategory skillcategory}}"  data-dtype="Number">Modifier: {{skillcategorymodifier @root.actor.data.skillcategory skillcategory}}</label>

@@ -1,6 +1,6 @@
 {
-    "RQG.HP": "Hit Points",
-    "RQG.MP": "Magic Points",
+    "RQG.HP": "Points de vie",
+    "RQG.MP": "Points de magie",
     "RQG.BirthYear": "Ne.e en",
     "RQG.Age":"Age",
     "RQG.Occupation": "Occupation",
@@ -71,5 +71,17 @@
     "RQG.Magic": "Magie",
     "RQG.Description": "Description",
     "RQG.Items": "Equipement",
-    "RQG.Flags": "Drapeaux"
+    "RQG.Flags": "Drapeaux",
+
+    "RQG.Agility": "Agilite",
+    "RQG.Communication": "Communication",
+    "RQG.Knowledge": "Connaissances",
+    "RQG.Manipulation": "Manipulation",
+    "RQG.Perception": "Perception",
+    "RQG.Stealth": "Discretion",
+    "RQG.MeleeWeapon": "Armes de Melee",
+    "RQG.MissileWeapon": "Armes a distance",
+    "RQG.NaturalWeapon": "Armes Naturelles",
+    "RQG.Shields": "Boucliers"
+
 }

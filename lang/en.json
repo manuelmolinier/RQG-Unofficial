@@ -71,6 +71,16 @@
     "RQG.Magic": "Magic",
     "RQG.Description": "Description",
     "RQG.Items": "Items",
-    "RQG.Flags": "Flags"
-    
+    "RQG.Flags": "Flags",
+
+    "RQG.Agility": "Agility",
+    "RQG.Communication": "Communication",
+    "RQG.Knowledge": "Knowledge",
+    "RQG.Manipulation": "Manipulation",
+    "RQG.Perception": "Perception",
+    "RQG.Stealth": "Stealth",
+    "RQG.MeleeWeapon": "Melee weapons",
+    "RQG.MissileWeapon": "Missile weapons",
+    "RQG.NaturalWeapon": "Natural weapons",
+    "RQG.Shields": "Shields"
 }
