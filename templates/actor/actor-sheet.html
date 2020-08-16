@@ -22,14 +22,14 @@
     {{log actor.items}}
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="general">General</a>
-        <a class="item" data-tab="attributes">Characteristics</a>
-        <a class="item" data-tab="skills">Skills</a>
-        <a class="item" data-tab="combat">Combat</a>
-        <a class="item" data-tab="magic">Magic</a>
-        <a class="item" data-tab="description">Description</a>
-        <a class="item" data-tab="items">Items</a>
-        <a class="item" data-tab="flags">Flags</a>
+        <a class="item" data-tab="general">{{localize 'RQG.General'}}</a>
+        <a class="item" data-tab="attributes">{{localize 'RQG.Characteristics'}}</a>
+        <a class="item" data-tab="skills">{{localize 'RQG.Skills'}}</a>
+        <a class="item" data-tab="combat">{{localize 'RQG.Combat'}}</a>
+        <a class="item" data-tab="magic">{{localize 'RQG.Magic'}}</a>
+        <a class="item" data-tab="description">{{localize 'RQG.Description'}}</a>
+        <a class="item" data-tab="items">{{localize 'RQG.Items'}}</a>
+        <a class="item" data-tab="flags">{{localize 'RQG.Flags'}}</a>
     </nav>
 
     {{!-- Sheet Body --}}
@@ -40,7 +40,7 @@
             <ol class="skills-list">          
                 <div class="skill-category" data-spelltype="spirit">
                     <li class="item flexrow item-header">
-                        <div class="item-name">{{localize 'SpiritSpell'}}</div>
+                        <div class="item-name">{{localize 'RQG.SpiritSpell'}}</div>
                         <div class="item-controls">
                             <a class="item-control item-create" title="Create item" data-type="spiritspell"><i class="fas fa-plus"></i></a>
                         </div>

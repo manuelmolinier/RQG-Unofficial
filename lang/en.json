@@ -53,7 +53,24 @@
     "RQG.Modifier": "Modifier",
     "RQG.Value": "Value",
     "RQG.Roll": "Roll",
+    "RQG.Passions": "Passions",
+    "RQG.HitLocations": "Hit Locations",
+    "RQG.MeleeAttacks": "Melee Attacks",
+    "RQG.MissileAttacks": "Missile Attacks",
+    "RQG.NaturalAttacks": "Natural Attacks",
+    "RQG.RuneSpell": "Rune Spell",
+    "RQG.SpiritSpell": "Spirit Spell",
+
    
     "RQG.Category": "Category",
-    "RQG.Experience": "Experience"
+    "RQG.Experience": "Experience",
+
+    "RQG.General": "General",
+    "RQG.Skills": "Skills",
+    "RQG.Combat": "Combat",
+    "RQG.Magic": "Magic",
+    "RQG.Description": "Description",
+    "RQG.Items": "Items",
+    "RQG.Flags": "Flags"
+    
 }
