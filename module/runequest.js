@@ -7,7 +7,7 @@
 // Import Modules
 import { RunequestActor } from "./actor/runequestactor.js";
 import { RunequestItem } from "./item/RunequestItem.js";
-import { RunequestItemSheet } from "./item/RunequestItem-sheet.js";
+import { RunequestItemSheet } from "./item/RunequestItem-Sheet.js";
 import { RunequestActorSheet } from "./actor/runequestactor-sheet.js";
 console.log("importing RQGTools");
 import { RQGTools } from "./tools/rqgtools.js";
