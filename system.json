@@ -40,8 +40,8 @@
     }
 
   ],
-  "gridDistance": 5,
-  "gridUnits": "ft",
+  "gridDistance": 1.5,
+  "gridUnits": "m",
   "primaryTokenAttribute": "attributes.hitpoints",
   "secondaryTokenAttribute": "attributes.magicpoints",
   "url": "https://gitlab.com/manuelmolinier/runequest-foundryvtt",

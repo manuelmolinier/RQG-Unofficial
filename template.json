@@ -319,7 +319,7 @@
   }
 },
 "Item": {
-  "types": ["item","skill","passion","meleeattack","missileattack","naturalattack","spiritspell","runespell","sorceryspell","hitlocation"],
+  "types": ["item","skill","passion","meleeattack","missileattack","naturalattack","spiritspell","runespell","sorceryspell","hitlocation","cult"],
   "templates": {
     "quantity": {
       "quantity": {
