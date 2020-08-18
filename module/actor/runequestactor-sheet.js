@@ -175,9 +175,47 @@ export class RunequestActorSheet extends ActorSheet {
       const data = this.getData();
       const row= event.target.parentElement.parentElement;
       const characid = row.dataset["characteristic"];
-      const charname = game.i18n.localize(data.data.characteristics[characid].label);
-      const target = (data.data.characteristics[characid].value)*5;
-      this.basicRoll(charname,target);
+      let charname = game.i18n.localize(data.data.characteristics[characid].label);
+      let charvalue= data.data.characteristics[characid].value;
+      let difficultymultiplier = 5;
+      let dialogOptions = {
+        title: "Passion Roll",
+        template : "/systems/runequest/templates/chat/char-dialog.html",
+        // Prefilled dialog data
+
+        data : {
+          "charname": charname,
+          "charvalue": charvalue,
+          "difficultymultiplier": difficultymultiplier
+        },
+        callback : (html) => {
+          // When dialog confirmed, fill testData dialog information
+          // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
+          charname =    html.find('[name="charname"]').val();
+          let testmodifier =   Number(html.find('[name="testmodifier"]').val());
+          difficultymultiplier = Number(html.find('[name="difficultymultiplier"]').val());
+          charvalue =   Number(html.find('[name="charvalue"]').val());
+          const target = (charvalue*difficultymultiplier+testmodifier);
+          this.basicRoll(charname,target);              
+        }
+      };
+      renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
+        {
+          new Dialog(
+          {
+            title: dialogOptions.title,
+            content: dlg,
+            buttons:
+            {
+              rollButton:
+              {
+                label: game.i18n.localize("Roll"),
+                callback: html => dialogOptions.callback(html)
+              }
+            },
+            default: "rollButton"
+          }).render(true);
+        });
     });
     // Roll for Spirit Spells
     html.find('.spiritspell-roll').mousedown(event => {
@@ -214,12 +252,12 @@ export class RunequestActorSheet extends ActorSheet {
         callback : (html) => {
           // When dialog confirmed, fill testData dialog information
           // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
-          skillname =    html.find('[name="skillname"]').val();
+          passionname =    html.find('[name="skillname"]').val();
           let testmodifier =   Number(html.find('[name="testmodifier"]').val());
-          catmodifier = Number(html.find('[name="catmodifier"]').val());
-          skillvalue =   Number(html.find('[name="skillvalue"]').val());
+          let catmodifier = Number(html.find('[name="catmodifier"]').val());
+          let skillvalue =   Number(html.find('[name="skillvalue"]').val());
           const target = (skillvalue+catmodifier+testmodifier);
-          this.basicRoll(skillname,target);              
+          this.basicRoll(passionname,target);              
         }
       };
       renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
@@ -239,8 +277,6 @@ export class RunequestActorSheet extends ActorSheet {
             default: "rollButton"
           }).render(true);
         });
-      const target = (passion.data.total);
-      this.basicRoll(passionname,target);
     });
 
     // Roll for Rune Spells

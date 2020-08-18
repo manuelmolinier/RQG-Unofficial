@@ -1,0 +1,27 @@
+<form class="skill-test">
+  <div class="form-group">
+    <label>{{localize "RQG.Charname"}}</label>
+    <input readonly type="text" name="charname" value="{{charname}}" />
+  </div>
+  <div class="form-group">
+    <label>{{localize "RQG.Charvalue"}}</label>
+    <input readonly type="text" name="charvalue" value="{{charvalue}}" />
+  </div>
+  <div class="form-group">
+    <label>{{localize "RQG.Difficultymodifier"}}</label>
+    <select name="difficultymultiplier">
+      {{#select difficultymultiplier}}
+      <option value="0.5">{{localize "RQG.Nearlyimpossible"}}</option>
+      <option value="1">{{localize "RQG.Veryhard"}}</option>
+      <option value="2">{{localize "RQG.Hard"}}</option>
+      <option value="3">{{localize "RQG.Moderate"}}</option>
+      <option value="4">{{localize "RQG.Easy"}}</option>
+      <option value="5">{{localize "RQG.Simpleaction"}}</option>
+      {{/select}}
+    </select>
+  </div>
+  <div class="form-group">
+    <label>{{localize "RQG.Modifier"}}</label>
+    <input type="text" name="testmodifier" value="{{testmodifier}}" />
+  </div>
+</form>
