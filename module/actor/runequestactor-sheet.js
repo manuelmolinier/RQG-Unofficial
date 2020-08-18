@@ -471,7 +471,7 @@ export class RunequestActorSheet extends ActorSheet {
           catmodifier = Number(html.find('[name="catmodifier"]').val());
           skillvalue =   Number(html.find('[name="skillvalue"]').val());
           damagebonus =  html.find('[name="damagebonus"]').val();
-          const target = (skillvalue+catmodifier+modifier);
+          const target = (skillvalue+catmodifier+modifier+testmodifier);
           this.missileattackRoll(attack,target,damagebonus);
         }
       };
