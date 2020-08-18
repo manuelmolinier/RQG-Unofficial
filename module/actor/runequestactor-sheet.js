@@ -202,7 +202,7 @@ export class RunequestActorSheet extends ActorSheet {
       });
       console.log(passion);
       let dialogOptions = {
-        title: "Skill Roll",
+        title: "Passion Roll",
         template : "/systems/runequest/templates/chat/skill-dialog.html",
         // Prefilled dialog data
 
