@@ -17,12 +17,18 @@
         {{!-- Attributes Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
             <div class="form-group">
-                <label class="label-text">{{localize "Points"}}</label>
-                <input  class="attribute-value"  type="text"  name="data.points"  value="{{data.points}}"  data-dtype="Number"  />
+                <label class="label-text">{{localize "RQG.Points"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.currentrunepoint"  value="{{data.currentrunepoint}}"  data-dtype="Number"  />
+                /
+                <input  class="attribute-value"  type="text"  name="data.maxrunepoint"  value="{{data.maxrunepoint}}"  data-dtype="Number"  />
             </div>
             <div class="form-group">
-                <label class="label-text">{{localize "Rune"}}</label>
-                <input  class="attribute-value"  type="text"  name="data.rune"  value="{{data.rune}}"  data-dtype="String"  />
+                <label class="label-text">{{localize "RQG.Rank"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.rank"  value="{{data.rank}}"  data-dtype="String"  />              
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.Subcult"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.subcult"  value="{{data.subcult}}"  data-dtype="String"  />              
             </div>
         </div>
         {{!-- Description Tab --}}

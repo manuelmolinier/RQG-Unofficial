@@ -85,6 +85,7 @@ export class RunequestActorSheet extends ActorSheet {
       "sorcery":[]
     }
     const passions = [];
+    const cults = [];
     var hitlocations =[];
     // Iterate through items, allocating to containers
     // let totalWeight = 0;
@@ -127,6 +128,9 @@ export class RunequestActorSheet extends ActorSheet {
       }
       else if (i.type === 'passion') {
         passions.push(i);
+      }
+      else if (i.type === 'cult') {
+        cults.push(i);
       }      
     }
     // Assign and return
@@ -136,6 +140,7 @@ export class RunequestActorSheet extends ActorSheet {
     actorData.spells = spells;
     actorData.hitlocations = hitlocations;
     actorData.passions = passions;
+    actorData.cults = cults;
   }
 
   /* -------------------------------------------- */
@@ -244,15 +249,57 @@ export class RunequestActorSheet extends ActorSheet {
       const skillrow = event.target.parentElement.parentElement;
       const categoryid = catrow.dataset["skillcategory"];
       const skillid = skillrow.dataset["itemId"];
-      const skillname = skillrow.dataset["skillname"];
+      let skillname = skillrow.dataset["skillname"];
       const skill = data.actor.skills[categoryid].find(function(element) {
         return element._id==skillid;
       });
-      const catmodifier = data.data.skillcategory[skill.data.skillcategory].modifier;
-      const skillvalue = skill.data.total;
+      let catmodifier = data.data.skillcategory[skill.data.skillcategory].modifier;
+      let skillvalue = skill.data.total;
+      /*
+      const dialogoptions = {
+        "skillname": skillname,
+        "skillvalue": skillvalue,
+        "catmodifier": catmodifier
+      }
+      */
+      let dialogOptions = {
+        title: "Skill Roll",
+        template : "/systems/runequest/templates/chat/skill-dialog.html",
+        // Prefilled dialog data
 
-      const target = (skillvalue+catmodifier);
-      this.basicRoll(skillname,target);
+        data : {
+          "skillname": skillname,
+          "skillvalue": skillvalue,
+          "catmodifier": catmodifier
+        },
+        callback : (html) => {
+          // When dialog confirmed, fill testData dialog information
+          // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
+          skillname =    html.find('[name="skillname"]').val();
+          let testmodifier =   Number(html.find('[name="testmodifier"]').val());
+          catmodifier = Number(html.find('[name="catmodifier"]').val());
+          skillvalue =   Number(html.find('[name="skillvalue"]').val());
+          const target = (skillvalue+catmodifier+testmodifier);
+          this.basicRoll(skillname,target);              
+        }
+      };
+      renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
+        {
+          new Dialog(
+          {
+            title: dialogOptions.title,
+            content: dlg,
+            buttons:
+            {
+              rollButton:
+              {
+                label: game.i18n.localize("Roll"),
+                callback: html => dialogOptions.callback(html)
+              }
+            },
+            default: "rollButton"
+          }).render(true);
+        });
     });
     html.find('.meleeattack-roll').mousedown(event => {
       event.preventDefault();
@@ -263,21 +310,60 @@ export class RunequestActorSheet extends ActorSheet {
       const attack = data.actor.attacks["melee"].find(function(element) {
         return element._id==attackid;
       });
-      const attackname = attack.name;
-      const skillname= attack.data.skillused;
+      let attackname = attack.name;
+      let skillname= attack.data.skillused;
       const skill = data.actor.skills[categoryid].find(function(element) {
         return element.name==skillname;
       });
-      const damagebonus = data.data.attributes.damagebonus;
-      const catmodifier = data.data.skillcategory[skill.data.skillcategory].modifier;
-      const skillvalue = skill.data.total;
+      let damagebonus = data.data.attributes.damagebonus;
+      let catmodifier = data.data.skillcategory[skill.data.skillcategory].modifier;
+      let skillvalue = skill.data.total;
       let modifier= attack.data.modifier;
       console.log(data.actor.flags.runequestspell["bladesharp"]);
       if(data.actor.flags.runequestspell["bladesharp"]) {
         modifier = modifier+(data.actor.flags.runequestspell["bladesharp"]*5);
       }
-      const target = (skillvalue+catmodifier+modifier);
-      this.attackRoll(attack,target,damagebonus);
+      let dialogOptions = {
+        title: "Melee Attack Roll",
+        template : "/systems/runequest/templates/chat/meleeattack-dialog.html",
+        // Prefilled dialog data
+
+        data : {
+          "skillname": skillname,
+          "skillvalue": skillvalue,
+          "catmodifier": catmodifier,
+          "damagebonus": damagebonus
+        },
+        callback : (html) => {
+          // When dialog confirmed, fill testData dialog information
+          // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
+          skillname =    html.find('[name="skillname"]').val();
+          let testmodifier =   Number(html.find('[name="testmodifier"]').val());
+          catmodifier = Number(html.find('[name="catmodifier"]').val());
+          skillvalue =   Number(html.find('[name="skillvalue"]').val());
+          damagebonus =  html.find('[name="damagebonus"]').val();
+          const target = (skillvalue+catmodifier+modifier+testmodifier);
+          this.attackRoll(attack,target,damagebonus);
+    
+        }
+      };
+      renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
+        {
+          new Dialog(
+          {
+            title: dialogOptions.title,
+            content: dlg,
+            buttons:
+            {
+              rollButton:
+              {
+                label: game.i18n.localize("Roll"),
+                callback: html => dialogOptions.callback(html)
+              }
+            },
+            default: "rollButton"
+          }).render(true);
+        });
     });
     html.find('.naturalattack-roll').mousedown(event => {
       event.preventDefault();
@@ -292,18 +378,56 @@ export class RunequestActorSheet extends ActorSheet {
         return element._id==attackid;
       });
       console.log(attack);
-      const attackname = attack.name;
-      const skillname= attack.data.skillused;
+      let attackname = attack.name;
+      let skillname= attack.data.skillused;
       const skill = data.actor.skills[categoryid].find(function(element) {
         return element.name==skillname;
       });
-      const damagebonus = data.data.attributes.damagebonus;
-      const catmodifier = data.data.skillcategory[skill.data.skillcategory].modifier;
-      const skillvalue = skill.data.total;
-      const modifier= attack.data.modifier;
+      let damagebonus = data.data.attributes.damagebonus;
+      let catmodifier = data.data.skillcategory[skill.data.skillcategory].modifier;
+      let skillvalue = skill.data.total;
+      let modifier= attack.data.modifier;
+      let dialogOptions = {
+        title: "Natural Attack Roll",
+        template : "/systems/runequest/templates/chat/meleeattack-dialog.html",
+        // Prefilled dialog data
 
-      const target = (skillvalue+catmodifier+modifier);
-      this.attackRoll(attack,target,damagebonus);
+        data : {
+          "skillname": skillname,
+          "skillvalue": skillvalue,
+          "catmodifier": catmodifier,
+          "damagebonus": damagebonus
+        },
+        callback : (html) => {
+          // When dialog confirmed, fill testData dialog information
+          // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
+          skillname =    html.find('[name="skillname"]').val();
+          let testmodifier =   Number(html.find('[name="testmodifier"]').val());
+          catmodifier = Number(html.find('[name="catmodifier"]').val());
+          skillvalue =   Number(html.find('[name="skillvalue"]').val());
+          damagebonus =  html.find('[name="damagebonus"]').val();
+          const target = (skillvalue+catmodifier+modifier+testmodifier);
+          this.attackRoll(attack,target,damagebonus);
+    
+        }
+      };
+      renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
+        {
+          new Dialog(
+          {
+            title: dialogOptions.title,
+            content: dlg,
+            buttons:
+            {
+              rollButton:
+              {
+                label: game.i18n.localize("Roll"),
+                callback: html => dialogOptions.callback(html)
+              }
+            },
+            default: "rollButton"
+          }).render(true);
+        });
     });
     html.find('.missileattack-roll').mousedown(event => {
       event.preventDefault();
@@ -318,18 +442,56 @@ export class RunequestActorSheet extends ActorSheet {
         return element._id==attackid;
       });
       console.log(attack);
-      const attackname = attack.name;
-      const skillname= attack.data.skillused;
+      let attackname = attack.name;
+      let skillname= attack.data.skillused;
       const skill = data.actor.skills[categoryid].find(function(element) {
         return element.name==skillname;
       });
-      const damagebonus = data.data.attributes.damagebonus;
-      const catmodifier = data.data.skillcategory[skill.data.skillcategory].modifier;
-      const skillvalue = skill.data.total;
-      const modifier= attack.data.modifier;
+      let damagebonus = data.data.attributes.damagebonus;
+      let catmodifier = data.data.skillcategory[skill.data.skillcategory].modifier;
+      let skillvalue = skill.data.total;
+      let modifier= attack.data.modifier;
 
-      const target = (skillvalue+catmodifier+modifier);
-      this.missileattackRoll(attack,target,damagebonus);
+      let dialogOptions = {
+        title: "Missile Attack Roll",
+        template : "/systems/runequest/templates/chat/meleeattack-dialog.html",
+        // Prefilled dialog data
+
+        data : {
+          "skillname": skillname,
+          "skillvalue": skillvalue,
+          "catmodifier": catmodifier,
+          "damagebonus": damagebonus
+        },
+        callback : (html) => {
+          // When dialog confirmed, fill testData dialog information
+          // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
+          skillname =    html.find('[name="skillname"]').val();
+          let testmodifier =   Number(html.find('[name="testmodifier"]').val());
+          catmodifier = Number(html.find('[name="catmodifier"]').val());
+          skillvalue =   Number(html.find('[name="skillvalue"]').val());
+          damagebonus =  html.find('[name="damagebonus"]').val();
+          const target = (skillvalue+catmodifier+modifier);
+          this.missileattackRoll(attack,target,damagebonus);
+        }
+      };
+      renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
+        {
+          new Dialog(
+          {
+            title: dialogOptions.title,
+            content: dlg,
+            buttons:
+            {
+              rollButton:
+              {
+                label: game.i18n.localize("Roll"),
+                callback: html => dialogOptions.callback(html)
+              }
+            },
+            default: "rollButton"
+          }).render(true);
+        });
     });
     html.find('.experiencecheck').mousedown(event => {
       event.preventDefault();

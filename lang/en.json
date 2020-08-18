@@ -82,5 +82,10 @@
     "RQG.MeleeWeapon": "Melee weapons",
     "RQG.MissileWeapon": "Missile weapons",
     "RQG.NaturalWeapon": "Natural weapons",
-    "RQG.Shields": "Shields"
+    "RQG.Shields": "Shields",
+
+    "RQG.Points": "Points",
+    "RQG.Rune": "Rune",
+    "RQG.Cult": "Cult"
+
 }

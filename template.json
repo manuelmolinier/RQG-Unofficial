@@ -249,7 +249,8 @@
           "label": "RQG.Movement"
         }
       }
-    }
+    },
+    "cults": []
   },
   "npc": {
     "biography": "",
