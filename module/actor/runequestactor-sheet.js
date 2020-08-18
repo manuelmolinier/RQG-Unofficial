@@ -195,12 +195,50 @@ export class RunequestActorSheet extends ActorSheet {
       const data = this.getData();
       const row= event.target.parentElement.parentElement;
       console.log(row);
-      const passionname = row.dataset["passionname"];
+      let passionname = row.dataset["passionname"];
       const passionid = row.dataset["itemId"];
       const passion = data.actor.passions.find(function(element) {
         return element._id==passionid;
       });
       console.log(passion);
+      let dialogOptions = {
+        title: "Skill Roll",
+        template : "/systems/runequest/templates/chat/skill-dialog.html",
+        // Prefilled dialog data
+
+        data : {
+          "skillname": passionname,
+          "skillvalue": passion.data.total,
+          "catmodifier": 0
+        },
+        callback : (html) => {
+          // When dialog confirmed, fill testData dialog information
+          // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
+          skillname =    html.find('[name="skillname"]').val();
+          let testmodifier =   Number(html.find('[name="testmodifier"]').val());
+          catmodifier = Number(html.find('[name="catmodifier"]').val());
+          skillvalue =   Number(html.find('[name="skillvalue"]').val());
+          const target = (skillvalue+catmodifier+testmodifier);
+          this.basicRoll(skillname,target);              
+        }
+      };
+      renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
+        {
+          new Dialog(
+          {
+            title: dialogOptions.title,
+            content: dlg,
+            buttons:
+            {
+              rollButton:
+              {
+                label: game.i18n.localize("Roll"),
+                callback: html => dialogOptions.callback(html)
+              }
+            },
+            default: "rollButton"
+          }).render(true);
+        });
       const target = (passion.data.total);
       this.basicRoll(passionname,target);
     });
