@@ -1,14 +1,22 @@
+@font-face {
+  font-family: AtlantisRegular;
+  src: url("./fonts/AtlantisRegular.ttf");
+}
 .worldbuilding {
   /* Sheet Tabs */
   /* Items List */
   /* Attributes */
+  /*font-family: AtlantisRegular;*/
 }
 .worldbuilding .window-content {
   height: 100%;
   padding: 5px;
-  overflow-y: hidden;
+  overflow-y: scroll;
 }
 .worldbuilding .sheet-header {
+  height: 150px;
+  overflow: scroll;
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -64,7 +72,7 @@
   text-shadow: none;
 }
 .worldbuilding .sheet-body {
-  overflow: hidden;
+  overflow: scroll;
 }
 .worldbuilding .sheet-body .tab {
   height: 100%;
@@ -72,7 +80,7 @@
 }
 .worldbuilding .editor,
 .worldbuilding .editor-content {
-  height: 100%;
+  height: 400px;
 }
 .worldbuilding .items-list {
   list-style: none;
@@ -139,6 +147,190 @@
   min-width: 460px;
   min-height: 400px;
 }
-.worldbuilding .runequest-roll-button {
-  src: url(../icons/runes/luck.png);
+.worldbuilding .runequest-roll-button{
+  content: url(../icons/runes/luck.png);
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  flex: initial;
+}
+
+.worldbuilding .skills-list {
+  list-style: none;
+  margin: 7px 0;
+  padding: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+.worldbuilding .skills-list .item {
+  height: auto;
+  line-height: 24px;
+  padding: 3px 0;
+  border-bottom: 1px solid #BBB;
+  justify-content: flex-end;
+}
+.worldbuilding .skills-list .item img {
+  flex: 0 0 24px;
+  margin-right: 10px;
+}
+.worldbuilding .skills-list .item-name {
+  margin-left: 5px;
+  flex: 4 4 100px;
+}
+.worldbuilding .skills-list .item-controls {
+  flex: 0 0 36px;
+  margin-left: 5px;
+}
+.worldbuilding .skills-list .skill-value{
+  flex: 0 0 30px;
+  margin-left: 5px;
+}
+.worldbuilding .skills-list .skill-name{
+  flex: 4 4 100px;
+  margin: 35px;
+}
+.worldbuilding .skills-list .skill-category{
+  max-height: 100%;
+  max-width: 100%;
+  width: 50%;
+  flex: 4 1 250px;
+  border-style: double;
+}
+.worldbuilding .characteristics-list {
+  list-style: none;
+  margin: 7px 0;
+  padding: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  margin-bottom: 10px;  
+}
+.worldbuilding .characteristics-list li > * {
+  margin: 0 3px;
+  height: 28px;
+  line-height: 24px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #AAA;
+}
+.worldbuilding .summary-characteristic-list {
+  /* font-family: AtlantisRegular; */
+  list-style: none;
+  margin: 0px;
+  padding: 2px;
+  border: 2px solid rgb(8, 8, 8);
+  width:20%;    
+}
+.worldbuilding .summary-characteristics-label {
+  flex: 2;
+}
+.worldbuilding .summary-characteristics-value {
+  flex: 1;
+}
+.worldbuilding .summary-characteristics-li {
+  margin: 0 3px;
+  height: 28px;
+  width: 100%;
+  line-height: 24px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #AAA;
+}
+.worldbuilding .summary-meleeattack-list {
+  /* font-family: AtlantisRegular; */
+  font-size:14px;
+  list-style: none;
+  margin: 2px;
+  padding: 2px;
+  width:20%;
+  margin-bottom: 10px;
+  border: 2px solid rgb(8, 8, 8);  
+}
+.worldbuilding .summary-meleeattack-list .item {
+  height: auto;
+  line-height: 24px;
+  padding: 3px 0;
+  border-bottom: 1px solid #BBB;
+  justify-content: flex-end;
+}
+.worldbuilding .summary-attack-label {
+  flex: 1;
+}
+.worldbuilding .summary-attack-value {
+  flex: 1;
+}
+.worldbuilding .summary-attack-damage {
+  flex: 1;
+}
+.worldbuilding .summary-runes-label {
+  flex: 2;
+}
+.worldbuilding .summary-runes-value {
+  flex: 1;
+}
+.worldbuilding .summary-runes-li {
+  margin: 0 3px;
+  height: 28px;
+  width: 100%;
+  line-height: 24px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #AAA;
+}
+.worldbuilding .summary-runes-list {
+  /* font-family: AtlantisRegular; */
+  list-style: none;
+  margin: 2px;
+  padding: 2px;
+  width:25%;
+  border: 2px solid rgb(8, 8, 8);    
+}
+.worldbuilding .summary-powerrunes-list {
+  /* font-family: AtlantisRegular; */
+  font-size:14px;
+  list-style: none;
+  margin: 2px;
+  padding: 2px;
+  width:50%;
+  border: 2px solid rgb(8, 8, 8);    
+}
+.worldbuilding .summary-missileattack-list {
+  /* font-family: AtlantisRegular; */
+  font-size:14px;
+  list-style: none;
+  margin: 2px;
+  padding: 2px;
+  width:40%;
+  margin-bottom: 10px;
+  border: 2px solid rgb(8, 8, 8);  
+}
+.worldbuilding .summary-skill-label {
+  flex: 2;
+}
+.worldbuilding .summary-skill-value {
+  flex: 1;
+}
+.worldbuilding .summary-skill-list {
+  /* font-family: AtlantisRegular; */
+  font-size:14px;
+  list-style: none;
+  margin: 2px;
+  padding: 2px;
+  width:20%;
+  margin-bottom: 10px;
+  border: 2px solid rgb(8, 8, 8);  
+}
+.worldbuilding .summary-skill-list .item {
+  height: auto;
+  line-height: 24px;
+  padding: 3px 0;
+  border-bottom: 1px solid #BBB;
+  justify-content: flex-end;
 }

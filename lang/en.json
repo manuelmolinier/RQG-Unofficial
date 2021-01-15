@@ -65,6 +65,7 @@
     "RQG.Category": "Category",
     "RQG.Experience": "Experience",
 
+    "RQG.Summary": "Summary",
     "RQG.General": "General",
     "RQG.Skills": "Skills",
     "RQG.Combat": "Combat",
@@ -86,6 +87,15 @@
 
     "RQG.Points": "Points",
     "RQG.Rune": "Rune",
-    "RQG.Cult": "Cult"
+    "RQG.Cult": "Cult",
+    
+    "RQG.Nearlyimpossible": "Nearly impossible",
+    "RQG.Veryhard": "Very hard",
+    "RQG.Hard": "Hard",
+    "RQG.Moderate": "Moderate",
+    "RQG.Easy": "Easy",
+    "RQG.Simpleaction": "Simple action",
+
+    "RQG.Defense": "Defense"
 
 }

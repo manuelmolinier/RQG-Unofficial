@@ -1,0 +1,74 @@
+{{!-- First Row --}}
+
+<ol class="skills-list">
+    {{!-- characteristic --}}
+    <ol  class="summary-characteristic-list">
+        {{#each data.characteristics as |characteristic id|}}
+            <li  class="summary-characteristics-li flexrow"  data-attribute="" data-characteristic="{{id}}">
+                <span class="summary-characteristics-label characteristic-roll rollable" name="data.characteristics.{{id}}.label">{{localize characteristic.label}}</span>
+                <span class="summary-characteristics-value" name="data.characteristics.{{id}}.value"><a class="characteristic-roll rollable">{{characteristic.value}}</a></span>  
+            </li>
+        {{/each}}
+    </ol>
+    {{!-- Elemental Runes --}}
+    <ol  class="summary-runes-list">
+        {{#each data.elementalrunes as |elementalrune id|}}
+            <li class="summary-runes-li flexrow"  data-attribute="" data-rune="{{id}}">
+                <span class="summary-runes-label"  name="data.elementalrunes.{{id}}.label"><a class="elementalrunes-roll">{{localize elementalrune.label}}</a></span>
+                <span class="summary-runes-value" name="data.elementalrunes.{{id}}.value"><a class="elementalrunes-roll rollable">{{elementalrune.value}}</a></span>  
+            </li>
+        {{/each}}
+    </ol>
+    {{!-- Power Runes --}}
+    <ol  class="summary-powerrunes-list">
+        {{#each data.powerrunes as |powerrunepair pairid|}}
+            <li  class="summary-runes-li flexrow"  data-attribute="" data-runepair="{{pairid}}">
+            {{#each powerrunepair as |powerrune runeid|}}
+                <span class="summary-runes-label"  name="data.powerrunes.{{pairid}}.{{runeid}}.label"><a class="powerrunes-roll" data-rune="{{runeid}}">{{localize powerrune.label}}</a></span>
+                <span class="summary-runes-value"  name="data.powerrunes.{{pairid}}.{{runeid}}.value">{{powerrune.value}}</span>
+            {{/each}}
+            </li>
+        {{/each}}
+    </ol>    
+</ol>
+{{!-- Second Row --}}
+<ol class="skills-list">
+    <ol class="summary-meleeattack-list" data-attacktype="melee">
+        <li class="item item-header">
+            <div class="item-name flexrow">{{localize "RQG.MeleeAttacks"}}</div>
+        </li>
+        {{#each actor.attacks.melee as |attack id|}}
+            <li class="item flexrow" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="meleeweapons">
+                <span class="summary-attack-label"><a class="meleeattack-roll">{{attack.name}}</a></span>
+                <span class="summary-attack-value">{{attack.data.skillvalue}}</label>
+                <span class="summary-attack-damage">{{attack.data.damage}}</span>
+            </li>
+        {{/each}}
+    </ol>
+    <ol class="summary-missileattack-list" data-attacktype="missile">
+        <li class="item item-header">
+            <div class="item-name flexrow">{{localize "RQG.MissileAttacks"}}</div>
+        </li>
+        {{#each actor.attacks.missile as |attack id|}}
+            <li class="item flexrow" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="missileweapons">
+                <h4 class="item-name"><a class="missileattack-roll">{{attack.name}}</a></h4>
+                <label class="skill-value">{{attack.data.skillvalue}}</label>
+                <h4 class="item-name">{{attack.data.damage}}</h4>
+            </li>
+        {{/each}}
+    </ol>
+    {{!-- Defense --}}
+    <ol class="summary-skill-list">
+        <li class="item item-header">
+            <div class="item-name flexrow">{{localize "RQG.Defense"}}</div>
+        </li>
+        {{#each actor.defense as |item id|}}
+            {{log item}}
+            <li class="item flexrow" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.skillcategory}}">
+                <span class="summary-skill-label"><a class="summary-skill-roll">{{item.name}}</a></h4>
+                <a class="summary-skill-roll"><span class="summary-skill-value">{{item.data.total}}</label></a>
+            </li>
+        {{/each}}
+    </ol>
+
+</ol>

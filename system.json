@@ -8,7 +8,7 @@
   "templateVersion": 2,
   "author": "Astaroth",
   "esmodules": ["module/runequest.js"],
-  "styles": ["styles/simple.css"],
+  "styles": ["styles/simple-rqg.css"],
   "packs": [
     {
       "name": "skills",

@@ -1,7 +1,201 @@
 {
 "Actor": {
   "types": ["character","npc"],
+  "templates":{
+    "common":{
+      "attributes": {
+        "magicpoints": {
+          "value": 10,
+          "min": 0,
+          "max": 10
+        },
+        "hitpoints": {
+          "value": 10,
+          "min": 0,
+          "max": 10
+        },
+        "healingrate":0,
+        "damagebonus":"",
+        "spiritcombatdamage": "",
+        "maximumenc": 0,
+        "dexsr": 0,
+        "sizsr": 0,
+        "meleesr":0
+      },
+      "characteristics":{
+        "strength": {
+          "base":0,
+          "value": 0,
+          "modifier": [],
+          "label": "RQG.STR"
+        },
+        "constitution": {
+          "base":0,
+          "value": 0,
+          "modifier": [],
+          "label": "RQG.CON"
+        },
+        "size": {
+          "base":0,
+          "value": 0,
+          "modifier": [],
+          "label": "RQG.SIZ"
+        },
+        "intelligence": {
+          "base":0,
+          "value": 0,
+          "modifier": [],
+          "label": "RQG.INT"
+        },
+        "power": {
+          "base":0,
+          "value": 0,
+          "modifier": [],
+          "label": "RQG.POW"
+        },
+        "dexterity": {
+          "base":0,
+          "value": 0,
+          "modifier": [],
+          "label": "RQG.DEX"
+        },
+        "charisma": {
+          "base":0,
+          "value": 0,
+          "modifier": [],
+          "label": "RQG.CHA"
+        }
+      },
+      "skillcategory":{
+        "agility": {
+          "label": "RQG.Agility",
+          "modifier": 0
+        },
+        "communication": {
+          "label": "RQG.Communication",
+          "modifier": 0
+        },
+        "knowledge": {
+          "label": "RQG.Knowledge",
+          "modifier": 0
+        },
+        "magic": {
+          "label": "RQG.Magic",
+          "modifier": 0
+        },
+        "manipulation": {
+          "label": "RQG.Manipulation",
+          "modifier": 0
+        },
+        "perception": {
+          "label": "RQG.Perception",
+          "modifier": 0
+        },
+        "stealth": {
+          "label": "RQG.Stealth",
+          "modifier": 0
+        },
+        "meleeweapons": {
+          "label": "RQG.MeleeWeapon",
+          "modifier": 0
+        },
+        "missileweapons": {
+          "label": "RQG.MissileWeapon",
+          "modifier": 0
+        },
+        "shields": {
+          "label": "RQG.Shields",
+          "modifier": 0
+        },
+        "naturalweapons": {
+          "label": "RQG.NaturalWeapons",
+          "modifier": 0
+        }      
+      },
+      "elementalrunes": {
+        "air": {
+          "value": 0,
+          "label": "RQG.Air"
+        },
+        "fire": {
+          "value": 0,
+          "label": "RQG.Fire"
+        },
+        "darkness": {
+          "value": 0,
+          "label": "RQG.Darkness"
+        },
+        "water": {
+          "value": 0,
+          "label": "RQG.Water"
+        },
+        "earth": {
+          "value": 0,
+          "label": "RQG.Earth"
+        },
+        "moon": {
+          "value": 0,
+          "label": "RQG.Moon"
+        }
+      },
+      "powerrunes":{
+        "manbeast":{
+          "man": {
+            "value": 50,
+            "label": "RQG.Man"
+          },
+          "beast": {
+            "value": 50,
+            "label": "RQG.Beast"
+          }
+        },
+        "fertilitydeath":{
+          "fertility": {
+            "value": 50,
+            "label": "RQG.Fertility"
+          },
+          "death": {
+            "value": 50,
+            "label": "RQG.Death"
+          }
+        },
+        "harmonydisorder":{
+          "harmony": {
+            "value": 50,
+            "label": "RQG.Harmony"
+          },
+          "disorder": {
+            "value": 50,
+            "label": "RQG.Disorder"
+          }
+        },
+        "truthillusion":{
+          "truth": {
+            "value": 50,
+            "label": "RQG.Truth"
+          },
+          "illusion": {
+            "value": 50,
+            "label": "RQG.Illusion"
+          }
+        },
+        "stasismovement":{
+          "stasis": {
+            "value": 50,
+            "label": "RQG.Stasis"
+          },
+          "movement": {
+            "value": 50,
+            "label": "RQG.Movement"
+          }
+        }
+      },
+      "cults": []  
+    },
+    "humanoid":{}
+  },
   "character": {
+    "templates": ["common", "humanoid"],
     "biography": "",
     "general": {
       "birthyear": {
@@ -52,205 +246,7 @@
         "label":"Campaign",
         "value":""
       }
-    },
-    "health": {
-      "value": 10,
-      "min": 0,
-      "max": 10
-    },
-    "power": {
-      "value": 5,
-      "min": 0,
-      "max": 5
-    },
-    "attributes": {
-      "magicpoints": {
-        "value": 10,
-        "min": 0,
-        "max": 10
-      },
-      "hitpoints": {
-        "value": 10,
-        "min": 0,
-        "max": 10
-      },
-      "healingrate":0,
-      "damagebonus":"",
-      "spiritcombatdamage": "",
-      "maximumenc": 0,
-      "dexsr": 0,
-      "sizsr": 0,
-      "meleesr":0
-    },
-    "characteristics":{
-      "strength": {
-        "base":0,
-        "value": 0,
-        "modifier": [],
-        "label": "RQG.STR"
-      },
-      "constitution": {
-        "base":0,
-        "value": 0,
-        "modifier": [],
-        "label": "RQG.CON"
-      },
-      "size": {
-        "base":0,
-        "value": 0,
-        "modifier": [],
-        "label": "RQG.SIZ"
-      },
-      "intelligence": {
-        "base":0,
-        "value": 0,
-        "modifier": [],
-        "label": "RQG.INT"
-      },
-      "power": {
-        "base":0,
-        "value": 0,
-        "modifier": [],
-        "label": "RQG.POW"
-      },
-      "dexterity": {
-        "base":0,
-        "value": 0,
-        "modifier": [],
-        "label": "RQG.DEX"
-      },
-      "charisma": {
-        "base":0,
-        "value": 0,
-        "modifier": [],
-        "label": "RQG.CHA"
-      }
-    },
-    "skillcategory":{
-      "agility": {
-        "label": "RQG.Agility",
-        "modifier": 0
-      },
-      "communication": {
-        "label": "RQG.Communication",
-        "modifier": 0
-      },
-      "knowledge": {
-        "label": "RQG.Knowledge",
-        "modifier": 0
-      },
-      "magic": {
-        "label": "RQG.Magic",
-        "modifier": 0
-      },
-      "manipulation": {
-        "label": "RQG.Manipulation",
-        "modifier": 0
-      },
-      "perception": {
-        "label": "RQG.Perception",
-        "modifier": 0
-      },
-      "stealth": {
-        "label": "RQG.Stealth",
-        "modifier": 0
-      },
-      "meleeweapons": {
-        "label": "RQG.MeleeWeapon",
-        "modifier": 0
-      },
-      "missileweapons": {
-        "label": "RQG.MissileWeapon",
-        "modifier": 0
-      },
-      "shields": {
-        "label": "RQG.Shields",
-        "modifier": 0
-      },
-      "naturalweapons": {
-        "label": "RQG.NaturalWeapons",
-        "modifier": 0
-      }      
-    },
-    "elementalrunes": {
-      "air": {
-        "value": 0,
-        "label": "RQG.Air"
-      },
-      "fire": {
-        "value": 0,
-        "label": "RQG.Fire"
-      },
-      "darkness": {
-        "value": 0,
-        "label": "RQG.Darkness"
-      },
-      "water": {
-        "value": 0,
-        "label": "RQG.Water"
-      },
-      "earth": {
-        "value": 0,
-        "label": "RQG.Earth"
-      },
-      "moon": {
-        "value": 0,
-        "label": "RQG.Moon"
-      }
-    },
-    "powerrunes":{
-      "manbeast":{
-        "man": {
-          "value": 50,
-          "label": "RQG.Man"
-        },
-        "beast": {
-          "value": 50,
-          "label": "RQG.Beast"
-        }
-      },
-      "fertilitydeath":{
-        "fertility": {
-          "value": 50,
-          "label": "RQG.Fertility"
-        },
-        "death": {
-          "value": 50,
-          "label": "RQG.Death"
-        }
-      },
-      "harmonydisorder":{
-        "harmony": {
-          "value": 50,
-          "label": "RQG.Harmony"
-        },
-        "disorder": {
-          "value": 50,
-          "label": "RQG.Disorder"
-        }
-      },
-      "truthillusion":{
-        "truth": {
-          "value": 50,
-          "label": "RQG.Truth"
-        },
-        "illusion": {
-          "value": 50,
-          "label": "RQG.Illusion"
-        }
-      },
-      "stasismovement":{
-        "stasis": {
-          "value": 50,
-          "label": "RQG.Stasis"
-        },
-        "movement": {
-          "value": 50,
-          "label": "RQG.Movement"
-        }
-      }
-    },
-    "cults": []
+    }
   },
   "npc": {
     "biography": "",
@@ -320,7 +316,7 @@
   }
 },
 "Item": {
-  "types": ["item","skill","passion","meleeattack","missileattack","naturalattack","spiritspell","runespell","sorceryspell","hitlocation","cult"],
+  "types": ["item","skill","passion","meleeattack","missileattack","naturalattack","spiritspell","runespell","sorceryspell","hitlocation","cult","armor"],
   "templates": {
     "quantity": {
       "quantity": {
@@ -488,6 +484,15 @@
     "maxrunepoint": 3,
     "subcult": "",
     "spells": []    
+  },
+  "armor": {
+    "name": "",
+    "templates": ["description"],
+    "ap": 0,
+    "currentap":0,
+    "hitlocation": [],
+    "equiped": true,
+    "armorpenalty": 0    
   }
 }
 }

@@ -9,6 +9,7 @@ import { RunequestActor } from "./actor/runequestactor.js";
 import { RunequestItem } from "./item/RunequestItem.js";
 import { RunequestItemSheet } from "./item/RunequestItem-Sheet.js";
 import { RunequestActorSheet } from "./actor/runequestactor-sheet.js";
+import { preloadHandlebarsTemplates } from "./templates.js";
 console.log("importing RQGTools");
 import { RQGTools } from "./tools/rqgtools.js";
 
@@ -23,10 +24,10 @@ Hooks.once("init", async function() {
 	 * Set an initiative formula for the system
 	 * @type {String}
 	 */
-	CONFIG.Combat.initiative = {
-	  formula: "1d20",
+  CONFIG.Combat.initiative = {
+    formula: '@characteristics.dexterity.value',
     decimals: 2
-  };
+  }
 
 	// Define custom Entity classes
   CONFIG.Actor.entityClass = RunequestActor;
@@ -47,6 +48,8 @@ Hooks.once("init", async function() {
     default: true,
     config: true
   });
+  
+  preloadHandlebarsTemplates();
 });
 
 // Added Helpers to Handlebars

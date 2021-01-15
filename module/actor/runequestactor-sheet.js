@@ -60,6 +60,7 @@ export class RunequestActorSheet extends ActorSheet {
 
     // Initialize containers.
     const gear = [];
+    const defense = [];
     const skills = {
       "agility": [],
       "communication": [],
@@ -100,6 +101,12 @@ export class RunequestActorSheet extends ActorSheet {
       else if (i.type === 'skill') {
         if (i.data.skillcategory != undefined) {
           skills[i.data.skillcategory].push(i);
+          if(i.data.skillcategory == "shields"){
+            defense.push(i);
+          }
+          if(i.data.name == "Dodge") {
+            defense.push(i);
+          }
         }
         else {
           skills["others"].push(i);
@@ -141,6 +148,7 @@ export class RunequestActorSheet extends ActorSheet {
     actorData.hitlocations = hitlocations;
     actorData.passions = passions;
     actorData.cults = cults;
+    actorData.defense = defense;
   }
 
   /* -------------------------------------------- */
@@ -173,6 +181,9 @@ export class RunequestActorSheet extends ActorSheet {
     html.find('.characteristic-roll').mousedown(event => {
       event.preventDefault();
       const data = this.getData();
+      console.log(event.button);
+      if(event.button == 0) {}
+      else {return;}
       const row= event.target.parentElement.parentElement;
       const characid = row.dataset["characteristic"];
       let charname = game.i18n.localize(data.data.characteristics[characid].label);
@@ -221,6 +232,8 @@ export class RunequestActorSheet extends ActorSheet {
     html.find('.spiritspell-roll').mousedown(event => {
       event.preventDefault();
       const data = this.getData();
+      if(event.button == 0) {}
+      else {return;}      
       const row= event.target.parentElement.parentElement;
       console.log(row);
       const spellname = row.dataset["spellname"];
@@ -231,6 +244,8 @@ export class RunequestActorSheet extends ActorSheet {
     html.find('.passion-roll').mousedown(event => {
       event.preventDefault();
       const data = this.getData();
+      if(event.button == 0) {}
+      else {return;}      
       const row= event.target.parentElement.parentElement;
       console.log(row);
       let passionname = row.dataset["passionname"];
@@ -283,9 +298,12 @@ export class RunequestActorSheet extends ActorSheet {
     html.find('.runespell-roll').mousedown(event => {
       event.preventDefault();
       const data = this.getData();
+      if(event.button == 0) {}
+      else {return;}
       const row= event.target.parentElement.parentElement;
       console.log(row);
       const runename = row.dataset["rune"];
+      console.log(runename);
       const spellname = row.dataset["spellname"]+" ("+runename+")";
       const rune = this._findrune(data,runename);
       const target = rune.value;
@@ -295,6 +313,8 @@ export class RunequestActorSheet extends ActorSheet {
     html.find('.elementalrunes-roll').mousedown(event => {
       event.preventDefault();
       const data = this.getData();
+      if(event.button == 0) {}
+      else {return;}
       const runerow= event.target.parentElement.parentElement;
       const runeid = runerow.dataset["rune"];
       const charname = game.i18n.localize(data.data.elementalrunes[runeid].label);
@@ -304,6 +324,8 @@ export class RunequestActorSheet extends ActorSheet {
     html.find('.powerrunes-roll').mousedown(event => {
       event.preventDefault();
       const data = this.getData();
+      if(event.button == 0) {}
+      else {return;}      
       const runepairrow= event.target.parentElement.parentElement;
       console.log(runepairrow);
       const pairid = runepairrow.dataset["runepair"];
@@ -319,6 +341,8 @@ export class RunequestActorSheet extends ActorSheet {
     html.find('.skill-roll').mousedown(event => {
       event.preventDefault();
       const data = this.getData();
+      if(event.button == 0) {}
+      else {return;}
       const catrow = event.target.parentElement.parentElement.parentElement;
       const skillrow = event.target.parentElement.parentElement;
       const categoryid = catrow.dataset["skillcategory"];
@@ -378,6 +402,8 @@ export class RunequestActorSheet extends ActorSheet {
     html.find('.meleeattack-roll').mousedown(event => {
       event.preventDefault();
       const data = this.getData();
+      if(event.button == 0) {}
+      else {return;}
       const attackrow = event.target.parentElement.parentElement;
       const categoryid = "meleeweapons";
       const attackid = attackrow.dataset["itemId"];
@@ -390,6 +416,7 @@ export class RunequestActorSheet extends ActorSheet {
         return element.name==skillname;
       });
       let damagebonus = data.data.attributes.damagebonus;
+      console.log(data.data.skillcategory[skill.data.skillcategory]);
       let catmodifier = data.data.skillcategory[skill.data.skillcategory].modifier;
       let skillvalue = skill.data.total;
       let modifier= attack.data.modifier;
@@ -442,6 +469,8 @@ export class RunequestActorSheet extends ActorSheet {
     html.find('.naturalattack-roll').mousedown(event => {
       event.preventDefault();
       const data = this.getData();
+      if(event.button == 0) {}
+      else {return;}
       console.log(data);
       const attackrow = event.target.parentElement.parentElement;
       console.log(attackrow);
@@ -506,6 +535,8 @@ export class RunequestActorSheet extends ActorSheet {
     html.find('.missileattack-roll').mousedown(event => {
       event.preventDefault();
       const data = this.getData();
+      if(event.button == 0) {}
+      else {return;}
       console.log(data);
       const attackrow = event.target.parentElement.parentElement;
       console.log(attackrow);
@@ -571,6 +602,8 @@ export class RunequestActorSheet extends ActorSheet {
     html.find('.experiencecheck').mousedown(event => {
       event.preventDefault();
       const data = this.getData();
+      if(event.button == 0) {}
+      else {return;}
       const skillrow = event.target.parentElement;
       const skillid = skillrow.dataset["itemId"];
       const skillname = skillrow.dataset["skillname"];
@@ -584,6 +617,71 @@ export class RunequestActorSheet extends ActorSheet {
         skill.data.data.experience = true;
       }
     });
+    html.find('.summary-skill-roll').mousedown(event => {
+      event.preventDefault();
+      const data = this.getData();
+      if(event.button == 0) {}
+      else {return;}
+      //const catrow = event.target.parentElement.parentElement.parentElement;
+      const skillrow = event.target.parentElement.parentElement;
+      console.log(skillrow);
+      const categoryid = skillrow.dataset["skillcategory"];
+      const skillid = skillrow.dataset["itemid"];
+      let skillname = skillrow.dataset["skillname"];
+      console.log(categoryid);
+      console.log(skillid + " / "+skillname);
+      const skill = data.actor.skills[categoryid].find(function(element) {
+        return element._id==skillid;
+      });
+      let catmodifier = data.data.skillcategory[skill.data.skillcategory].modifier;
+      let skillvalue = skill.data.total;
+      /*
+      const dialogoptions = {
+        "skillname": skillname,
+        "skillvalue": skillvalue,
+        "catmodifier": catmodifier
+      }
+      */
+      let dialogOptions = {
+        title: "Skill Roll",
+        template : "/systems/runequest/templates/chat/skill-dialog.html",
+        // Prefilled dialog data
+
+        data : {
+          "skillname": skillname,
+          "skillvalue": skillvalue,
+          "catmodifier": catmodifier
+        },
+        callback : (html) => {
+          // When dialog confirmed, fill testData dialog information
+          // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
+          skillname =    html.find('[name="skillname"]').val();
+          let testmodifier =   Number(html.find('[name="testmodifier"]').val());
+          catmodifier = Number(html.find('[name="catmodifier"]').val());
+          skillvalue =   Number(html.find('[name="skillvalue"]').val());
+          const target = (skillvalue+catmodifier+testmodifier);
+          this.basicRoll(skillname,target);              
+        }
+      };
+      renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
+        {
+          new Dialog(
+          {
+            title: dialogOptions.title,
+            content: dlg,
+            buttons:
+            {
+              rollButton:
+              {
+                label: game.i18n.localize("Roll"),
+                callback: html => dialogOptions.callback(html)
+              }
+            },
+            default: "rollButton"
+          }).render(true);
+        });
+    });
+
   }
   /* -------------------------------------------- */
 
@@ -877,8 +975,11 @@ export class RunequestActorSheet extends ActorSheet {
     hitlocationtable.toMessage(hitlocation.results);
   }
   _findrune(data,runename) {
+    console.log(runename);
+    console.log(data.data.elementalrunes);
     if(typeof data.data.elementalrunes[runename] != 'undefined') {
       return data.data.elementalrunes[runename];
+      console.log(data.data.elementalrunes[runename]);
     }
     else {
       console.log(data.data.powerrunes);

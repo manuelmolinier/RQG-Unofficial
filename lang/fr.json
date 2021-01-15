@@ -65,6 +65,7 @@
     "RQG.Category": "Categorie",
     "RQG.Experience": "Experience",
 
+    "RQG.Summary": "Résumé",
     "RQG.General": "General",
     "RQG.Skills": "Compétences",
     "RQG.Combat": "Combat",
@@ -82,6 +83,15 @@
     "RQG.MeleeWeapon": "Armes de Melee",
     "RQG.MissileWeapon": "Armes a distance",
     "RQG.NaturalWeapon": "Armes Naturelles",
-    "RQG.Shields": "Boucliers"
+    "RQG.Shields": "Boucliers",
+
+    "RQG.Nearlyimpossible": "Presque impossible",
+    "RQG.Veryhard": "Très difficile",
+    "RQG.Hard": "Difficile",
+    "RQG.Moderate": "Moderée",
+    "RQG.Easy": "Facile",
+    "RQG.Simpleaction": "Action simple",
+
+    "RQG.Defense": "Defense"
 
 }
