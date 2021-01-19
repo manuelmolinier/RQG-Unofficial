@@ -334,3 +334,51 @@
   border-bottom: 1px solid #BBB;
   justify-content: flex-end;
 }
+.worldbuilding .characteristic-list-table {
+  width: 100%;
+  height: 70px;
+  border: none;
+}
+.worldbuilding .characteristic-list-thead {
+  height: 30px;
+  text-align: left;
+  font-family: 'PT Sans',sans-serif;
+  border: none;
+}
+.worldbuilding .characteristic-list-th {
+  height: 30px;
+  text-align: left;
+  font-family: 'PT Sans',sans-serif;
+  border: none;
+}
+.worldbuilding .characteristic-list-td {
+  width: 12.5%;
+  border: none;
+}
+.worldbuilding .general-list-table {
+  width: 80%;
+  height: 70px;
+  border: none;
+}
+.worldbuilding .general-list-thead {
+  height: 30px;
+  text-align: left;
+  font-family: 'PT Sans',sans-serif;
+  border: none;
+}
+.worldbuilding .general-list-th {
+  height: 30px;
+  text-align: left;
+  font-family: 'PT Sans',sans-serif;
+  border: none;
+}
+.worldbuilding .general-list-td {
+  width: 12.5%;
+  border: none;
+}
+.worldbuilding .summary-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}

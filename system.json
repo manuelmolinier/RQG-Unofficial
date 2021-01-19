@@ -25,6 +25,15 @@
       "path": "./packs/rolltables.db",
       "entity": "RollTable",
       "module": "runequest"
+    },
+    {
+      "name": "humanoidlocations",
+      "label": "Humanoid Locations",
+      "system": "runequest",
+      "module": "runequest",
+      "path": "./packs/humanoidlocations.db",
+      "entity": "Item",
+      "tag" : "hitlocation"   
     }    
   ],
   "languages": [

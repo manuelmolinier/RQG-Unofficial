@@ -1,10 +1,38 @@
 <form class="{{cssClass}}" autocomplete="off">
 
     {{!-- Sheet Header --}}
-    {{log data}}
     <header class="sheet-header">
         <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
         <div class="header-fields">
+            <div class="summary-general-list">
+                <table class="general-list-table">
+                    <thead class="general-list-thead">
+                        <th class="general-list-th" colspan="11"></th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td class="general-list-td" colspan="3">Name:<input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></td>
+                        <td class="general-list-td" colspan="2">{{localize 'RQG.BirthYear'}}: <input type="text" name="data.general.birthyear.value" value="{{data.general.birthyear.value}}"/></td>
+                        <td class="general-list-td">{{localize 'RQG.Age'}}:<input type="text" name="data.general.age.value" value="{{data.general.age.value}}"/></td>
+                        <td class="general-list-td" colspan="3">{{localize 'RQG.Occupation'}}:<input type="text" name="data.general.occupation.value" value="{{data.general.occupation.value}}"/></td>
+                        <td class="general-list-td" colspan="2">{{localize 'RQG.Ransom'}}:<input type="text" name="data.general.ransom.value" value="{{data.general.ransom.value}}"/></td>
+                        </tr>
+                        <tr>
+                        <td class="general-list-td" colspan="3">{{localize 'RQG.Gender'}}:<input type="text" name="data.general.gender.value" value="{{data.general.gender.value}}"/></td>
+                        <td class="general-list-td" colspan="3">{{localize 'RQG.Reputation'}}:<input type="text" name="data.general.reputation.value" value="{{data.general.reputation.value}}"/></td>
+                        <td class="general-list-td" colspan="3">{{localize 'RQG.StandardofLiving'}}:<input type="text" name="data.general.standardofliving.value" value="{{data.general.standardofliving.value}}"/></td>
+                        <td class="general-list-td" colspan="2">{{localize 'RQG.BaseIncome'}}:<input type="text" name="data.general.baseincome.value" value="{{data.general.baseincome.value}}"/></td>
+                        </tr>
+                        <tr>
+                        <td class="general-list-td" colspan="3">{{localize 'RQG.Homeland'}}:<input type="text" name="data.general.homeland.value" value="{{data.general.homeland.value}}"/></td>
+                        <td class="general-list-td" colspan="3">{{localize 'RQG.Tribe'}}:<input type="text" name="data.general.tribe.value" value="{{data.general.tribe.value}}"/></td>
+                        <td class="general-list-td" colspan="3">{{localize 'RQG.Clan'}}:<input type="text" name="data.general.clan.value" value="{{data.general.clan.value}}"/></td>
+                        <td class="general-list-td" colspan="2">{{localize 'RQG.Campaign'}}:<input type="text" name="data.general.campaign.value" value="{{data.general.campaign.value}}"/></td>
+                        </tr>
+                    </tbody>
+                </table>    
+            </div> 
+        <!--
             <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
             <div class="resource">
                 <h3 class="charname">{{localize 'RQG.HP'}}</h3>
@@ -18,19 +46,18 @@
                 <span> / </span>
                 <input type="text" name="data.attributes.magicpoints.max" value="{{data.attributes.magicpoints.max}}" data-dtype="Number"/>
             </div>
+        -->
         </div>
     </header>
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="item" data-tab="summary">{{localize 'RQG.Summary'}}</a>
-        <a class="item" data-tab="general">{{localize 'RQG.General'}}</a>
-        <a class="item" data-tab="attributes">{{localize 'RQG.Characteristics'}}</a>
         <a class="item" data-tab="skills">{{localize 'RQG.Skills'}}</a>
+        <a class="item" data-tab="attributes">{{localize 'RQG.Characteristics'}}</a>
         <a class="item" data-tab="combat">{{localize 'RQG.Combat'}}</a>
         <a class="item" data-tab="magic">{{localize 'RQG.Magic'}}</a>
         <a class="item" data-tab="description">{{localize 'RQG.Description'}}</a>
         <a class="item" data-tab="items">{{localize 'RQG.Items'}}</a>
-        <!-- <a class="item" data-tab="flags">{{localize 'RQG.Flags'}}</a> -->
     </nav>
 
     {{!-- Sheet Body --}}
@@ -109,85 +136,6 @@
                 </div>
             </ol>
         </div>
-
-        {{!-- General Tab --}}
-        <div  class="tab general"  data-group="primary"  data-tab="general">
-            <ol class="skills-list">
-                <li class="item flexrow item-header">
-                    <div class="rqg-general">
-                        <h3 class="charname">{{localize 'RQG.BirthYear'}}</h3>
-                        <input type="text" name="data.general.birthyear.value" value="{{data.general.birthyear.value}}"/>
-                    </div>            
-                    <div class="rqg-general">
-                        <h3 class="charname">{{localize 'RQG.Age'}}</h3>
-                        <input type="text" name="data.general.age.value" value="{{data.general.age.value}}"/>
-                    </div>            
-                    <div class="rqg-general">
-                        <h3 class="charname">{{localize 'RQG.Occupation'}}</h3>
-                        <input type="text" name="data.general.occupation.value" value="{{data.general.occupation.value}}"/>
-                    </div>
-                    <div class="rqg-general">
-                        <h3 class="charname">{{localize 'RQG.Ransom'}}</h3>
-                        <input type="text" name="data.general.ransom.value" value="{{data.general.ransom.value}}"/>
-                    </div>
-                    <div class="rqg-general">
-                        <h3 class="charname">{{localize 'RQG.Gender'}}</h3>
-                        <input type="text" name="data.general.gender.value" value="{{data.general.gender.value}}"/>
-                    </div>
-                    <div class="rqg-general">
-                        <h3 class="charname">{{localize 'RQG.Homeland'}}</h3>
-                        <input type="text" name="data.general.homeland.value" value="{{data.general.homeland.value}}"/>
-                    </div>
-                    <div class="rqg-general">
-                        <h3 class="charname">{{localize 'RQG.Reputation'}}</h3>
-                        <input type="text" name="data.general.reputation.value" value="{{data.general.reputation.value}}"/>
-                    </div>
-                    <div class="rqg-general">
-                        <h3 class="charname">{{localize 'RQG.StandardofLiving'}}</h3>
-                        <input type="text" name="data.general.standardofliving.value" value="{{data.general.standardofliving.value}}"/>
-                    </div>
-                    <div class="rqg-general">
-                        <h3 class="charname">{{localize 'RQG.Tribe'}}</h3>
-                        <input type="text" name="data.general.tribe.value" value="{{data.general.tribe.value}}"/>
-                    </div>
-                    <div class="rqg-general">
-                        <h3 class="charname">{{localize 'RQG.Clan'}}</h3>
-                        <input type="text" name="data.general.clan.value" value="{{data.general.clan.value}}"/>
-                    </div>
-                    <div class="rqg-general">
-                        <h3 class="charname">{{localize 'RQG.BaseIncome'}}</h3>
-                        <input type="text" name="data.general.baseincome.value" value="{{data.general.baseincome.value}}"/>
-                    </div>
-                    <div class="rqg-general">
-                        <h3 class="charname">{{localize 'RQG.Campaign'}}</h3>
-                        <input type="text" name="data.general.campaign.value" value="{{data.general.campaign.value}}"/>
-                    </div>             
-                </li>
-            {{!-- Passions --}}
-            <li class="item flexrow item-header">         
-                <ol class="skills-list">          
-                    <div class="skill-category">
-                        <li class="item flexrow item-header">
-                            <div class="item-name">{{localize "RQG.Passions"}}</div>
-                            <div class="item-controls">
-                                <a class="item-control item-create" title="Create item" data-type="passion"><i class="fas fa-plus"></i></a>
-                            </div>
-                        </li>
-                        {{#each actor.passions as |passion id|}}
-                            <li class="item flexrow" data-item-id="{{passion._id}}" data-passionname="{{passion.name}}">
-                                <h4 class="item-name"><a class="passion-roll">{{passion.name}}</a></h4>
-                                <h4 class="item-name"><a class="passion-roll">{{passion.data.total}}</a></h4>
-                                <div class="item-controls">
-                                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                                </div>
-                            </li>
-                        {{/each}}
-                    </div>
-                </ol>
-            </li>
-        </div>
-
         {{!-- Combat Tab --}}
         <div  class="tab combat"  data-group="primary"  data-tab="combat">
             {{> "systems/runequest/templates/actor/parts/actor-combat.html"}}

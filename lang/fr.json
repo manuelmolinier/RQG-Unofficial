@@ -52,6 +52,7 @@
     "RQG.Increase": "Augmentation",
     "RQG.Modifier": "Modificateur",
     "RQG.Value": "Valeur",
+    "RQG.CategoryModifier":"Modificateur de catégorie",    
     "RQG.Roll": "Jet de dé",
     "RQG.Passions": "Passions",
     "RQG.HitLocations": "Localisations",
@@ -92,6 +93,20 @@
     "RQG.Easy": "Facile",
     "RQG.Simpleaction": "Action simple",
 
-    "RQG.Defense": "Defense"
+    "RQG.Defense": "Defense",
+
+    "RQG.HEAD": "Tête",
+    "RQG.ABDOMEN": "Abdomen",
+    "RQG.CHEST": "Poitrine",
+    "RQG.LARM": "Bras gauche",
+    "RQG.LLEG": "Jambe gauche",
+    "RQG.RARM": "Bras droit",
+    "RQG.RLEG": "Jambe Droite",
+
+    "RQG.HITPOINTS": "Points de vie",
+    "RQG.MAXHITPOINTS": "Max PV",
+    "RQG.ARMOR": "Armure",
+    "RQG.WOUNDS": "Blessures",
+    "RQG.RANGE": "Range"
 
 }

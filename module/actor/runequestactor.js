@@ -8,6 +8,7 @@ export class RunequestActor extends Actor {
 
 
   static async create(data, options) {
+    console.log("Create Actor");
     // If the created actor has items (only applicable to duplicated actors) bypass the new actor creation logic
     if (data.items)
     {
@@ -34,6 +35,7 @@ export class RunequestActor extends Actor {
   }
 
   getRollData() {
+    console.log("getRollData");
     const data = super.getRollData();
     const shorthand = game.settings.get("Runequest", "macroShorthand");
 
@@ -63,16 +65,13 @@ export class RunequestActor extends Actor {
 
   prepareData() {
     super.prepareData();
-
+    console.log("prepareData for: "+this.data.name);
     const  actorData = this.data;
     const  data = actorData.data;
     this._prepareCharacterFlags(actorData);
     for (const [index, charac] of Object.entries(data.characteristics)) {
       const characid=charac.label;
       let modifier= Number(charac.modifier);
-      console.log("Preparing stats");
-      console.log(modifier);
-      console.log(actorData);
       const characvalue=Number(charac.base)+modifier;
       data.characteristics[index].value=characvalue;
       //data.defense.value = Number(attr.agility.value)+Number(attr.dodge.value);    
@@ -80,8 +79,13 @@ export class RunequestActor extends Actor {
     this._prepareattributes(data);
     this._prepareskillcategoriesmodifier(data);
   }
+/*
+  _prepareDerivedData(){
+    console.log("prepareDerivedData");
+    this._preparehitlocations(data);
+  }
+*/
   _prepareCharacterFlags(sheetData) {
-    console.log(sheetData);
     sheetData.flags.runequestspell= {
       "bladesharp": 0,
       "trueweapon": false,
@@ -89,17 +93,15 @@ export class RunequestActor extends Actor {
     };
   }
   prepareItems(){
+    console.log("start prepareItems");
     let actorData = duplicate(this.data)
     // These containers are for the various type of items
     const skills = [];
-    console.log("prepareItems");
     for (let i of actorData.items) 
     {
       try 
       {
         i.img = i.img || DEFAULT_TOKEN;
-        console.log("Prepare Items");
-        console.log(i);
         // *********** Skills ***********
         if (i.type === "skill") 
         {
@@ -116,6 +118,8 @@ export class RunequestActor extends Actor {
       }
     }
     //End of items sorting
+    console.log("PrepareItems - logging skills array");
+    console.log(skills);
     let preparedData = {
       skills: skills
     }
@@ -132,16 +136,17 @@ export class RunequestActor extends Actor {
    */
   prepareSkill(skill) 
   {
+    console.log("PrepareSkill"+skill.name);
     let actorData = this.data
     let catmodifier = actorData.data.skillcategory[skill.data.skillcategory].modifier;
     skill.data.total=skill.data.base+skill.data.increase+skill.data.modifier+catmodifier;
+    console.log(skill.data.total);
     return skill
   }
   _prepareattributes(data) {
     //Magic Points
     data.attributes.magicpoints.max = data.characteristics.power.value;
     // Total HP
-    console.log(data);
     data.attributes.hitpoints.max = this._preparehitpointstotal(data);
     //Damage Bonus
     data.attributes.damagebonus= this._preparedamagebonus(data);
@@ -165,6 +170,12 @@ export class RunequestActor extends Actor {
     }
     return hptotal;
   }
+/*
+  _preparehitlocations(data) {
+    console.log("preparehitlocations");
+    console.log(data);
+  }
+*/
   _preparedamagebonus(data) {
     var statvalue=data.characteristics.strength.value+data.characteristics.size.value;
     if(statvalue < 13) {
@@ -181,11 +192,11 @@ export class RunequestActor extends Actor {
     }
     else {
       let damagebonusdice = 1+Math.ceil((statvalue-40)/16);
-      console.log("damagebonusdice:"+damagebonusdice);
       return damagebonusdice+"D6";
     }
   }
   _prepareskillcategoriesmodifier(data) {
+    console.log("prepareskillcategoriesmodifier");
     for (const [index, category] of Object.entries(data.skillcategory)) {
       let categoryid=index;
       let modifiervalue=0;

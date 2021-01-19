@@ -1,6 +1,8 @@
 <form class="{{cssClass}}" autocomplete="off">
+    {{log "hit location html"}}
+    {{log item}}
     <header class="sheet-header">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{localize item.name}}"/>
         <div class="header-fields">
             <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
         </div>
@@ -13,13 +15,13 @@
 
     {{!-- Sheet Body --}}
     <section class="sheet-body">
-        {{!-- Attributes Tab --}}
+        {{!-- Details Tab --}}
+        {{log data}}
         <div class="tab details" data-group="primary" data-tab="details">
             <div class="form-group">
                 <label class="label-text">{{localize "HP"}}</label>
-                <input  class="attribute-value"  type="text"  name="data.hp.value"  value="{{data.hp.value}}"  data-dtype="Number"  />
-                <input  class="attribute-value"  type="text"  name="data.hp.min"  value="{{data.hp.min}}"  data-dtype="Number"  />
-                <input  class="attribute-value"  type="text"  name="data.hp.max"  value="{{data.hp.max}}"  data-dtype="Number"  />
+                <input  class="attribute-value"  type="text"  name="data.currenthp"  value="{{data.currenthp}}"  data-dtype="Number"  />
+                <input  class="attribute-value"  type="text"  name="data.maxhp"  value="{{data.maxhp}}"  data-dtype="Number"  />
             </div>
             <div class="form-group">
                 <label class="label-text">{{localize "AP"}}</label>
@@ -29,6 +31,11 @@
                 <label class="label-text">{{localize "wounds"}}</label>
                 <input  class="attribute-value"  type="text"  name="data.wounds"  value="{{data.wounds}}"  data-dtype="Number"  />
             </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "Range"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.rangestart"  value="{{data.rangestart}}"  data-dtype="Number"  />
+                <input  class="attribute-value"  type="text"  name="data.rangeend"  value="{{data.rangeend}}"  data-dtype="Number"  />
+            </div>            
             <div class="form-group">
                 <label class="label-text">{{localize "Condition"}}</label>
                 <input  class="attribute-value"  type="text"  name="data.condition"  value="{{data.condition}}"  data-dtype="String"  />

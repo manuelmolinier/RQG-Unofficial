@@ -52,6 +52,7 @@
     "RQG.Increase": "Increase",
     "RQG.Modifier": "Modifier",
     "RQG.Value": "Value",
+    "RQG.CategoryModifier":"Category Modifier",
     "RQG.Roll": "Roll",
     "RQG.Passions": "Passions",
     "RQG.HitLocations": "Hit Locations",
@@ -96,6 +97,19 @@
     "RQG.Easy": "Easy",
     "RQG.Simpleaction": "Simple action",
 
-    "RQG.Defense": "Defense"
+    "RQG.Defense": "Defense",
 
+    "RQG.HEAD": "Head",
+    "RQG.ABDOMEN": "Abdomen",
+    "RQG.CHEST": "Chest",
+    "RQG.LARM": "L Arm",
+    "RQG.LLEG": "L Leg",
+    "RQG.RARM": "R Arm",
+    "RQG.RLEG": "R Leg",
+
+    "RQG.HITPOINTS": "Hit points",
+    "RQG.MAXHITPOINTS": "Max HP",
+    "RQG.ARMOR": "Armor",
+    "RQG.WOUNDS": "Wounds",
+    "RQG.RANGE": "Range"
 }

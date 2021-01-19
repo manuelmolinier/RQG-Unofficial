@@ -11,10 +11,11 @@
             <li class="item flexrow" data-item-id="{{hl._id}}">
                 <h4 class="item-name">{{hl.name}}</h4>
                 <div  class="attribute-editbox">
-                    <input  class="attribute-value"  type="text"  name="hl.data.hp.value"  value="{{hl.data.hp.value}}"  data-dtype="Number"  />                                
+                    <!-- <input  class="attribute-value"  type="text"  name="hl.data.hp.value"  value="{{hl.data.hp.value}}"  data-dtype="Number"  /> -->
+                    <input id="{{id}}_{{hl._id}}_currenthp_hitloc" type="text" name="hl.data.currenthp" value="{{hl.data.currenthp}}" />
                 </div>
                 /
-                <h4 class="item-name">{{hl.data.hp.max}}</h4>
+                <h4 class="item-name">{{hl.data.maxhp}}</h4>
                 <div  class="attribute-editbox">
                     <input  class="attribute-value"  type="text"  name="hl.data.armor"  value="{{hl.data.armor}}"  data-dtype="Number"  />
                 </div>
@@ -26,6 +27,7 @@
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                 </div>
+
             </li>
         {{/each}}
     </div>

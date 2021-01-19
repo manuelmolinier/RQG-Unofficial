@@ -19,6 +19,7 @@ export class RunequestActorSheet extends ActorSheet {
 
   /** @override */
   getData() {
+    console.log("getData:"+this.actor.name+" / "+this.actor.data.type);
     const data = super.getData();
     data.dtypes = ["String", "Number", "Boolean"];
 
@@ -37,17 +38,7 @@ export class RunequestActorSheet extends ActorSheet {
    *
    * @return {undefined}
    */
-/*
-  _prepareCharacterFlags(sheetData) {
-    const actorData = sheetData.actor;
-    console.log(actorData.flags);
-    actorData.flags.runequestspell= {
-      "bladesharp": 0,
-      "trueweapon": false,
-      "strength": 0
-    };
-  }
-*/
+
   /**
    * Organize and classify Items for Character sheets.
    *
@@ -57,7 +48,8 @@ export class RunequestActorSheet extends ActorSheet {
    */
   _prepareCharacterItems(sheetData) {
     const actorData = sheetData.actor;
-
+    console.log("_prepareCharacterItems");
+    console.log(actorData);
     // Initialize containers.
     const gear = [];
     const defense = [];
@@ -99,6 +91,8 @@ export class RunequestActorSheet extends ActorSheet {
       }
       // Append to skills.
       else if (i.type === 'skill') {
+        console.log(i);
+        this._prepareSkill(i); // To be removed once fix is found
         if (i.data.skillcategory != undefined) {
           skills[i.data.skillcategory].push(i);
           if(i.data.skillcategory == "shields"){
@@ -181,7 +175,6 @@ export class RunequestActorSheet extends ActorSheet {
     html.find('.characteristic-roll').mousedown(event => {
       event.preventDefault();
       const data = this.getData();
-      console.log(event.button);
       if(event.button == 0) {}
       else {return;}
       const row= event.target.parentElement.parentElement;
@@ -235,7 +228,6 @@ export class RunequestActorSheet extends ActorSheet {
       if(event.button == 0) {}
       else {return;}      
       const row= event.target.parentElement.parentElement;
-      console.log(row);
       const spellname = row.dataset["spellname"];
       const target = (data.data.characteristics.power.value)*5;
       this.basicRoll(spellname,target);
@@ -247,13 +239,11 @@ export class RunequestActorSheet extends ActorSheet {
       if(event.button == 0) {}
       else {return;}      
       const row= event.target.parentElement.parentElement;
-      console.log(row);
       let passionname = row.dataset["passionname"];
       const passionid = row.dataset["itemId"];
       const passion = data.actor.passions.find(function(element) {
         return element._id==passionid;
       });
-      console.log(passion);
       let dialogOptions = {
         title: "Passion Roll",
         template : "/systems/runequest/templates/chat/skill-dialog.html",
@@ -416,11 +406,9 @@ export class RunequestActorSheet extends ActorSheet {
         return element.name==skillname;
       });
       let damagebonus = data.data.attributes.damagebonus;
-      console.log(data.data.skillcategory[skill.data.skillcategory]);
       let catmodifier = data.data.skillcategory[skill.data.skillcategory].modifier;
       let skillvalue = skill.data.total;
       let modifier= attack.data.modifier;
-      console.log(data.actor.flags.runequestspell["bladesharp"]);
       if(data.actor.flags.runequestspell["bladesharp"]) {
         modifier = modifier+(data.actor.flags.runequestspell["bladesharp"]*5);
       }
@@ -471,16 +459,12 @@ export class RunequestActorSheet extends ActorSheet {
       const data = this.getData();
       if(event.button == 0) {}
       else {return;}
-      console.log(data);
       const attackrow = event.target.parentElement.parentElement;
-      console.log(attackrow);
       const categoryid = "naturalweapons";
       const attackid = attackrow.dataset["itemId"];
-      console.log(attackid);
       const attack = data.actor.attacks["natural"].find(function(element) {
         return element._id==attackid;
       });
-      console.log(attack);
       let attackname = attack.name;
       let skillname= attack.data.skillused;
       const skill = data.actor.skills[categoryid].find(function(element) {
@@ -537,16 +521,12 @@ export class RunequestActorSheet extends ActorSheet {
       const data = this.getData();
       if(event.button == 0) {}
       else {return;}
-      console.log(data);
       const attackrow = event.target.parentElement.parentElement;
-      console.log(attackrow);
       const categoryid = "missileweapons";
       const attackid = attackrow.dataset["itemId"];
-      console.log(attackid);
       const attack = data.actor.attacks["missile"].find(function(element) {
         return element._id==attackid;
       });
-      console.log(attack);
       let attackname = attack.name;
       let skillname= attack.data.skillused;
       const skill = data.actor.skills[categoryid].find(function(element) {
@@ -576,7 +556,6 @@ export class RunequestActorSheet extends ActorSheet {
           catmodifier = Number(html.find('[name="catmodifier"]').val());
           skillvalue =   Number(html.find('[name="skillvalue"]').val());
           damagebonus =  html.find('[name="damagebonus"]').val();
-          console.log("missile modifier"+testmodifier);
           const target = (skillvalue+catmodifier+modifier+testmodifier);
           this.missileattackRoll(attack,target,damagebonus);
         }
@@ -624,12 +603,9 @@ export class RunequestActorSheet extends ActorSheet {
       else {return;}
       //const catrow = event.target.parentElement.parentElement.parentElement;
       const skillrow = event.target.parentElement.parentElement;
-      console.log(skillrow);
       const categoryid = skillrow.dataset["skillcategory"];
       const skillid = skillrow.dataset["itemid"];
       let skillname = skillrow.dataset["skillname"];
-      console.log(categoryid);
-      console.log(skillid + " / "+skillname);
       const skill = data.actor.skills[categoryid].find(function(element) {
         return element._id==skillid;
       });
@@ -681,7 +657,7 @@ export class RunequestActorSheet extends ActorSheet {
           }).render(true);
         });
     });
-
+    html.find('.summary-characteristic-roll').click(event => this._onCharacteristicRoll(event));       
   }
   /* -------------------------------------------- */
 
@@ -713,6 +689,58 @@ export class RunequestActorSheet extends ActorSheet {
     return this.actor.createOwnedItem(itemData);
   }
 
+  _onCharacteristicRoll(event) {
+    console.log(event);
+    event.preventDefault();
+    const characid = event.currentTarget.closest(".characteristic").dataset.characteristicId;
+    const data = this.getData();
+    if(event.button == 0) {}
+    else {return;}
+    const row= event.target.parentElement.parentElement;
+    let charname = game.i18n.localize(data.data.characteristics[characid].label);
+    let charvalue= data.data.characteristics[characid].value;
+    let difficultymultiplier = 5;
+    let dialogOptions = {
+      title: "Passion Roll",
+      template : "/systems/runequest/templates/chat/char-dialog.html",
+      // Prefilled dialog data
+
+      data : {
+        "charname": charname,
+        "charvalue": charvalue,
+        "difficultymultiplier": difficultymultiplier
+      },
+      callback : (html) => {
+        // When dialog confirmed, fill testData dialog information
+        // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
+        charname =    html.find('[name="charname"]').val();
+        let testmodifier =   Number(html.find('[name="testmodifier"]').val());
+        difficultymultiplier = Number(html.find('[name="difficultymultiplier"]').val());
+        charvalue =   Number(html.find('[name="charvalue"]').val());
+        const target = (charvalue*difficultymultiplier+testmodifier);
+        this.basicRoll(charname,target);              
+      }
+    };
+    renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
+      {
+        new Dialog(
+        {
+          title: dialogOptions.title,
+          content: dlg,
+          buttons:
+          {
+            rollButton:
+            {
+              label: game.i18n.localize("Roll"),
+              callback: html => dialogOptions.callback(html)
+            }
+          },
+          default: "rollButton"
+        }).render(true);
+      });
+
+    //return item.roll();    
+  }
 
   async basicRoll(charname, target) {
     const critical = Math.max(Math.round(target/20),1);
@@ -785,6 +813,18 @@ export class RunequestActorSheet extends ActorSheet {
     return result;
   }
 
+    /**
+   * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
+   * @private
+   */
+  _onItemRoll(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = this.actor.getOwnedItem(itemId);
+    return item.roll();
+  }
+
+  
   attackRoll(attack, target,damagebonus) {
     const critical = Math.max(Math.round(target/20),1);
     const special = Math.round(target/5);
@@ -975,14 +1015,10 @@ export class RunequestActorSheet extends ActorSheet {
     hitlocationtable.toMessage(hitlocation.results);
   }
   _findrune(data,runename) {
-    console.log(runename);
-    console.log(data.data.elementalrunes);
     if(typeof data.data.elementalrunes[runename] != 'undefined') {
       return data.data.elementalrunes[runename];
-      console.log(data.data.elementalrunes[runename]);
     }
     else {
-      console.log(data.data.powerrunes);
       for (let rp in data.data.powerrunes) {
         if(typeof data.data.powerrunes[rp][runename] != 'undefined') {
           return data.data.powerrunes[rp][runename];
@@ -1144,4 +1180,37 @@ export class RunequestActorSheet extends ActorSheet {
     ChatMessage.create(chatData);
   }  
 
+/*  
+  _updateObject(event, formData) {
+    const actor = this.getData().actor
+    const skills = actor.skillsAndPassions
+    const hitLocations = actor.hitLocations
+    if (event.target != null) {
+      if (event.target.id.includes("_hitloc")) {
+        let fieldInfo = event.target.id.split('_')
+        let hitLocIndex = fieldInfo[0]
+        let hitLoc = this.actor.getOwnedItem(fieldInfo[1])
+        let hitLocField = fieldInfo[2]
+        let updateField = ''
+        let newFieldValue = ''
+        if (hitLocField === 'name') {
+          updateField = 'name'
+          newFieldValue = formData['hl.name'][Number(hitLocIndex)]
+        } else {
+          updateField = 'data.' + hitLocField
+          newFieldValue =
+            formData['hl.data.' + hitLocField][Number(hitLocIndex)]
+        }
+        this.actor.updateEmbeddedEntity('OwnedItem', {
+          _id: hitLoc._id,
+          [updateField]: newFieldValue
+        })
+      }
+    }
+    return this.actor.update(formData)
+  }
+*/
+  _prepareSkill(skill) {
+    skill.data.total=skill.data.base+skill.data.increase;
+  }
 }

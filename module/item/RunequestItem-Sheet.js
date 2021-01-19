@@ -29,6 +29,7 @@ export class RunequestItemSheet extends ItemSheet {
     /** @override */
     getData() {
       const data = super.getData();
+      console.log("ItemSheet GetData:"+data.name);
       data.dtypes = ["String", "Number", "Boolean"];
       console.log(data);
       if(data.entity.type == "item") {
@@ -126,5 +127,7 @@ export class RunequestItemSheet extends ItemSheet {
       // Update the Item
       return this.object.update(formData);
     }
+
+    // Item Roll function to move it from Actor.
   }
   

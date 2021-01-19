@@ -10,7 +10,9 @@ export const preloadHandlebarsTemplates = async function() {
     //"systems/dnd5e/templates/actors/parts/active-effects.html",
 
     // Actor Sheet Partials
-    "systems/runequest/templates/actor/parts/actor-summary.html"
+    "systems/runequest/templates/actor/parts/actor-summary.html",
+    "systems/runequest/templates/actor/parts/actor-combat.html",
+    "systems/runequest/templates/actor/parts/actor-skills.html"
 
     // Item Sheet Partials
   ]);

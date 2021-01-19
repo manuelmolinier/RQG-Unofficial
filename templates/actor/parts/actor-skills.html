@@ -1,105 +1,31 @@
-{{!-- Hit Locations --}}
-<ol class="skills-list">          
-    <div class="skill-category">
-        <li class="item flexrow item-header">
-            <div class="item-name">{{localize "RQG.HitLocations"}}</div>
-            <div class="item-controls">
-                <a class="item-control item-create" title="Create item" data-type="hitlocation"><i class="fas fa-plus"></i></a>
-            </div>
-        </li>
-        {{#each actor.hitlocations as |hl id|}}
-            <li class="item flexrow" data-item-id="{{hl._id}}">
-                <h4 class="item-name">{{hl.name}}</h4>
-                <div  class="attribute-editbox">
-                    <input  class="attribute-value"  type="text"  name="hl.data.hp.value"  value="{{hl.data.hp.value}}"  data-dtype="Number"  />                                
+<ol class="skills-list">
+    {{#each actor.skills as |skills skillcategory|}}
+        <div class="skill-category" data-skillcategory="{{skillcategory}}">
+            <li class="item flexrow item-header">
+                <div class="item-name">{{skillcategory}}</div>
+                <div class="item-name">
+                    <label  class="attribute-value"  type="text"  name="data.skillcategory.{{skillcategory}}.modifier"  value="{{skillcategorymodifier @root.actor.data.skillcategory skillcategory}}"  data-dtype="Number">Modifier: {{skillcategorymodifier @root.actor.data.skillcategory skillcategory}}</label>
                 </div>
-                /
-                <h4 class="item-name">{{hl.data.hp.max}}</h4>
-                <div  class="attribute-editbox">
-                    <input  class="attribute-value"  type="text"  name="hl.data.armor"  value="{{hl.data.armor}}"  data-dtype="Number"  />
-                </div>
-                <div  class="attribute-editbox">
-                    <input  class="attribute-value"  type="text"  name="hl.data.wounds"  value="{{hl.data.wounds}}"  data-dtype="Number"  />
-                </div>
-                <h4 class="item-name">{{hl.data.condition}}</h4>
                 <div class="item-controls">
-                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    <a class="item-control item-create" title="Create item" data-type="skill" data-skillcategory="{{skillcategory}}"><i class="fas fa-plus"></i></a>
                 </div>
             </li>
-        {{/each}}
-    </div>
+            {{#each skills as |item id|}}
+                <li class="item flexrow" data-item-id="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.skillcategory}}">
+                    <h4 class="item-name"><a class="skill-roll">{{item.name}}</a></h4>
+                    <!--
+                    <label class="skill-value">{{item.data.base}}</label>
+                    <label class="skill-value">{{item.data.increase}}</label>
+                    <label class="skill-value">{{item.data.modifier}}</label>
+                    -->
+                    <a class="skill-roll"><label class="skill-value">{{item.data.total}}</label></a>
+                    <input class="experiencecheck" type="checkbox" name="item.data.experience" {{checked item.data.experience}}/>
+                    <div class="item-controls">
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>                               
+                </li>
+            {{/each}}
+        </div>
+    {{/each}}
 </ol>
-{{!-- Melee Attacks --}}
-<ol class="skills-list">          
-    <div class="skill-category" data-attacktype="melee">
-        <li class="item flexrow item-header">
-            <div class="item-name">{{localize "RQG.MeleeAttacks"}}</div>
-            <div class="item-controls">
-                <a class="item-control item-create" title="Create item" data-type="meleeattack"><i class="fas fa-plus"></i></a>
-            </div>
-        </li>
-        {{#each actor.attacks.melee as |attack id|}}
-            <li class="item flexrow" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="meleeweapons">
-                <h4 class="item-name"><a class="meleeattack-roll">{{attack.name}}</a></h4>
-                <h4 class="item-name">{{attack.data.skillused}}</h4>
-                <label class="skill-value">{{attack.data.modifier}}</label>
-                <h4 class="item-name">{{attack.data.damage}}</h4>
-                <h4 class="item-name">{{attack.data.hpcurrent}} / {{attack.data.hpmax}}</h4>
-                <div class="item-controls">
-                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                </div>
-            </li>
-        {{/each}}
-    </div>
-</ol>
-{{!-- Missile Attacks --}}
-<ol class="skills-list">          
-    <div class="skill-category" data-attacktype="missile">
-        <li class="item flexrow item-header">
-            <div class="item-name">{{localize "RQG.MissileAttacks"}}</div>
-            <div class="item-controls">
-                <a class="item-control item-create" title="Create item" data-type="missileattack"><i class="fas fa-plus"></i></a>
-            </div>
-        </li>
-        {{#each actor.attacks.missile as |attack id|}}
-            <li class="item flexrow" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="missileweapons">
-                <h4 class="item-name"><a class="missileattack-roll">{{attack.name}}</a></h4>
-                <h4 class="item-name">{{attack.data.skillused}}</h4>
-                <label class="skill-value">{{attack.data.modifier}}</label>
-                <h4 class="item-name">{{attack.data.damage}}</h4>
-                <h4 class="item-name">{{attack.data.hpcurrent}} / {{attack.data.hpmax}}</h4>
-                <div class="item-controls">
-                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                </div>
-            </li>
-        {{/each}}
-    </div>
-</ol>
-{{!-- Natural Attacks --}}
-<ol class="skills-list">          
-    <div class="skill-category" data-attacktype="natural">
-        <li class="item flexrow item-header">
-            <div class="item-name">{{localize "RQG.NaturalAttacks"}}</div>
-            <div class="item-controls">
-                <a class="item-control item-create" title="Create item" data-type="naturalattack"><i class="fas fa-plus"></i></a>
-            </div>
-        </li>
-        {{#each actor.attacks.natural as |attack id|}}
-            <li class="item flexrow" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="meleeweapons">
-                <h4 class="item-name"><a class="naturalattack-roll">{{attack.name}}</a></h4>
-                <h4 class="item-name">{{attack.data.skillused}}</h4>
-                <label class="skill-value">{{attack.data.modifier}}</label>
-                <h4 class="item-name">{{attack.data.damage}}</h4>
-                <h4 class="item-name">{{attack.data.hpcurrent}} / {{attack.data.hpmax}}</h4>
-                <div class="item-controls">
-                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                </div>
-            </li>
-        {{/each}}
-    </div>
-</ol>
-

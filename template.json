@@ -468,13 +468,12 @@
   "hitlocation":{
     "name": "",
     "armor": 0,
-    "hp": {
-      "value": 10,
-      "min": -20,
-      "max": 10
-    },    
+    "currenthp": 5,
+    "maxhp":5,
     "wounds": 0,
-    "condition":"normal"
+    "condition":"normal",
+    "rangestart": 0,
+    "rangeend": 0
   },
   "cult": {
     "name": "",
