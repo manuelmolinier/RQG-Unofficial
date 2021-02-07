@@ -61,3 +61,26 @@ Handlebars.registerHelper("skillcategorymodifier", function(skillcategories, ski
   var modifier = skillcat.modifier;
   return modifier;
 });
+// Added Helpers to Handlebars
+Handlebars.registerHelper("getruneletter", function(runeid) {
+  const runes= {
+    "air": "A",
+    "fire": "f",
+    "darkness": "D",
+    "water": "Z",
+    "earth": "e",
+    "moon": "6",
+    "man": "M",
+    "beast": "B",
+    "fertility": "X",
+    "death": "T",
+    "harmony": "H",
+    "disorder": "J",
+    "truth": "Y",
+    "illusion": "I",
+    "stasis": "U",
+    "movement": "V",
+    "chaos": "C"
+  }
+  return runes[runeid];
+});

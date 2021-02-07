@@ -20,7 +20,9 @@
         "maximumenc": 0,
         "dexsr": 0,
         "sizsr": 0,
-        "meleesr":0
+        "meleesr":0,
+        "hpmodifier": 0,
+        "totalwounds": 0
       },
       "characteristics":{
         "strength": {
@@ -316,7 +318,7 @@
   }
 },
 "Item": {
-  "types": ["item","skill","passion","meleeattack","missileattack","naturalattack","spiritspell","runespell","sorceryspell","hitlocation","cult","armor"],
+  "types": ["item","skill","passion","meleeattack","missileattack","naturalattack","spiritspell","runespell","sorceryspell","hitlocation","cult","armor","mpstorage","ally"],
   "templates": {
     "quantity": {
       "quantity": {
@@ -492,6 +494,72 @@
     "hitlocation": [],
     "equiped": true,
     "armorpenalty": 0    
+  },
+  "mpstorage": {
+    "name": "",
+    "templates": ["description"],
+    "maxmp": 0,
+    "currentmp":0,
+    "equiped": true
+  },
+  "ally": {
+    "name": "",
+    "templates": ["description"],
+    "type": "mount",
+    "attributes": {
+      "magicpoints": {
+        "value": 10,
+        "max": 10
+      },
+      "hitpoints": {
+        "value": 10,
+        "max": 10
+      },
+      "healingrate":0,
+      "damagebonus":"",
+      "spiritcombatdamage": "",
+      "dexsr": 0,
+      "sizsr": 0,
+      "meleesr":0,
+      "hpmodifier": 0,
+      "totalwounds": 0
+    },
+    "characteristics":{
+      "strength": {
+        "value": 0,
+        "label": "RQG.STR"
+      },
+      "constitution": {
+        "value": 0,
+        "label": "RQG.CON"
+      },
+      "size": {
+        "value": 0,
+        "label": "RQG.SIZ"
+      },
+      "intelligence": {
+        "value": 0,
+        "label": "RQG.INT"
+      },
+      "power": {
+        "value": 0,
+        "label": "RQG.POW"
+      },
+      "dexterity": {
+        "value": 0,
+        "label": "RQG.DEX"
+      },
+      "charisma": {
+        "value": 0,
+        "label": "RQG.CHA"
+      }
+    },
+    "attacks": [],
+    "skills": [],
+    "runes": [],
+    "runepoints": 0,
+    "hitlocations": [],
+    "passions": []
   }
-}
+}  
 }

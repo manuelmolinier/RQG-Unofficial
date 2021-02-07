@@ -29,9 +29,7 @@ export class RunequestItemSheet extends ItemSheet {
     /** @override */
     getData() {
       const data = super.getData();
-      console.log("ItemSheet GetData:"+data.name);
       data.dtypes = ["String", "Number", "Boolean"];
-      console.log(data);
       if(data.entity.type == "item") {
         for ( let attr of Object.values(data.data.attributes) ) {
           attr.isCheckbox = attr.dtype === "Boolean";

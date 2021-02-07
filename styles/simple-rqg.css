@@ -2,25 +2,56 @@
   font-family: AtlantisRegular;
   src: url("./fonts/AtlantisRegular.ttf");
 }
+@font-face {
+  font-family: RunequestRunes;
+  src: url("./fonts/RQ.ttf");
+}
+.worldbuilding .runefont {
+  font-family: 'RunequestRunes';
+}
 .worldbuilding {
   /* Sheet Tabs */
   /* Items List */
   /* Attributes */
-  /*font-family: AtlantisRegular;*/
+  font-family: 'Verdana';
 }
 .worldbuilding .window-content {
   height: 100%;
   padding: 5px;
   overflow-y: scroll;
+  background-image:url("./backgrounds/old-brown-paper-texture-image.jpg");
+  background-size: cover;
 }
-.worldbuilding .sheet-header {
-  height: 150px;
-  overflow: scroll;
+.worldbuilding header.sheet-header {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+  height: 200px;
+  overflow: scroll;
   margin-bottom: 10px;
+  font-size:12px;
+  align-items:flex-start;
+}
+input[type="text"]
+{
+  width: calc(100% - 2px);
+  min-width: 20px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1px 3px;
+  margin: 0;
+  color: #191813;
+  font-family: inherit;
+  font-size: inherit;
+  text-align: inherit;
+  line-height: inherit;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 .worldbuilding .sheet-header .profile-img {
   flex: 0 0 100px;
@@ -66,6 +97,7 @@
 .worldbuilding .tabs .item {
   line-height: 40px;
   font-weight: bold;
+  font-size:12px;
 }
 .worldbuilding .tabs .item.active {
   text-decoration: underline;
@@ -161,9 +193,24 @@
   padding: 0;
   overflow-y: auto;
   display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+  font-size: 10px;
+  font-weight: bold;
+  height:1000px
+}
+.worldbuilding .summary-second-row {
+  list-style: none;
+  margin: 7px 0;
+  padding: 0;
+  overflow-y: auto;
+  display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
   margin-bottom: 10px;
+  font-size: 10px;
+  font-weight: bold;
 }
 .worldbuilding .skills-list .item {
   height: auto;
@@ -248,7 +295,7 @@
   list-style: none;
   margin: 2px;
   padding: 2px;
-  width:20%;
+  width:90%;
   margin-bottom: 10px;
   border: 2px solid rgb(8, 8, 8);  
 }
@@ -289,8 +336,16 @@
   list-style: none;
   margin: 2px;
   padding: 2px;
-  width:25%;
+  border: 2px solid rgb(8, 8, 8);
+  flex:1,0,auto;    
+}
+.worldbuilding .summary-hitlocations-list {
+  /* font-family: AtlantisRegular; */
+  list-style: none;
+  margin: 2px;
+  padding: 2px;
   border: 2px solid rgb(8, 8, 8);    
+  flex:2,0,auto;    
 }
 .worldbuilding .summary-powerrunes-list {
   /* font-family: AtlantisRegular; */
@@ -307,7 +362,7 @@
   list-style: none;
   margin: 2px;
   padding: 2px;
-  width:40%;
+  width:90%;
   margin-bottom: 10px;
   border: 2px solid rgb(8, 8, 8);  
 }
@@ -381,4 +436,16 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+}
+.worldbuilding .skill-category-table {
+  width: 33%;
+  border: 2px solid green;
+  margin: 0.5em 0.5em;
+}
+.worldbuilding .resource-input {
+  width: 30px;
+  height: 14px;
+}
+.worldbuilding .runesbanner {
+  font-family: 'RunequestRunes';
 }

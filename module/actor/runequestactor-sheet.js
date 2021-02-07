@@ -79,7 +79,9 @@ export class RunequestActorSheet extends ActorSheet {
     }
     const passions = [];
     const cults = [];
+    const mpstorage = [];
     var hitlocations =[];
+    let totalwounds = 0;
     // Iterate through items, allocating to containers
     // let totalWeight = 0;
     for (let i of sheetData.items) {
@@ -91,7 +93,6 @@ export class RunequestActorSheet extends ActorSheet {
       }
       // Append to skills.
       else if (i.type === 'skill') {
-        console.log(i);
         this._prepareSkill(i); // To be removed once fix is found
         if (i.data.skillcategory != undefined) {
           skills[i.data.skillcategory].push(i);
@@ -125,13 +126,21 @@ export class RunequestActorSheet extends ActorSheet {
         spells["sorcery"].push(i);
       }
       else if (i.type === 'hitlocation') {
+        //update hitlocation
+        this._preparehitlocation(i,actorData);
+        totalwounds+= Number(i.data.wounds);
         hitlocations.push(i);
+        console.log("Total Wounds: "+totalwounds);
       }
       else if (i.type === 'passion') {
+        this._preparePassion(i);
         passions.push(i);
       }
       else if (i.type === 'cult') {
         cults.push(i);
+      }
+      else if(i.type === 'mpstorage') {
+        mpstorage.push(i);
       }      
     }
     // Assign and return
@@ -143,6 +152,8 @@ export class RunequestActorSheet extends ActorSheet {
     actorData.passions = passions;
     actorData.cults = cults;
     actorData.defense = defense;
+    actorData.mpstorage = mpstorage;
+    actorData.data.attributes.hitpoints.value = actorData.data.attributes.hitpoints.max - totalwounds;
   }
 
   /* -------------------------------------------- */
@@ -328,67 +339,7 @@ export class RunequestActorSheet extends ActorSheet {
       const target = (data.data.powerrunes[pairid][runeid].value);
       this.basicRoll(charname,target);
     });
-    html.find('.skill-roll').mousedown(event => {
-      event.preventDefault();
-      const data = this.getData();
-      if(event.button == 0) {}
-      else {return;}
-      const catrow = event.target.parentElement.parentElement.parentElement;
-      const skillrow = event.target.parentElement.parentElement;
-      const categoryid = catrow.dataset["skillcategory"];
-      const skillid = skillrow.dataset["itemId"];
-      let skillname = skillrow.dataset["skillname"];
-      const skill = data.actor.skills[categoryid].find(function(element) {
-        return element._id==skillid;
-      });
-      let catmodifier = data.data.skillcategory[skill.data.skillcategory].modifier;
-      let skillvalue = skill.data.total;
-      /*
-      const dialogoptions = {
-        "skillname": skillname,
-        "skillvalue": skillvalue,
-        "catmodifier": catmodifier
-      }
-      */
-      let dialogOptions = {
-        title: "Skill Roll",
-        template : "/systems/runequest/templates/chat/skill-dialog.html",
-        // Prefilled dialog data
-
-        data : {
-          "skillname": skillname,
-          "skillvalue": skillvalue,
-          "catmodifier": catmodifier
-        },
-        callback : (html) => {
-          // When dialog confirmed, fill testData dialog information
-          // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
-          skillname =    html.find('[name="skillname"]').val();
-          let testmodifier =   Number(html.find('[name="testmodifier"]').val());
-          catmodifier = Number(html.find('[name="catmodifier"]').val());
-          skillvalue =   Number(html.find('[name="skillvalue"]').val());
-          const target = (skillvalue+catmodifier+testmodifier);
-          this.basicRoll(skillname,target);              
-        }
-      };
-      renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
-        {
-          new Dialog(
-          {
-            title: dialogOptions.title,
-            content: dlg,
-            buttons:
-            {
-              rollButton:
-              {
-                label: game.i18n.localize("Roll"),
-                callback: html => dialogOptions.callback(html)
-              }
-            },
-            default: "rollButton"
-          }).render(true);
-        });
-    });
+    html.find('.skill-roll').mousedown(event => this._onSkillRoll(event));
     html.find('.meleeattack-roll').mousedown(event => {
       event.preventDefault();
       const data = this.getData();
@@ -596,67 +547,7 @@ export class RunequestActorSheet extends ActorSheet {
         skill.data.data.experience = true;
       }
     });
-    html.find('.summary-skill-roll').mousedown(event => {
-      event.preventDefault();
-      const data = this.getData();
-      if(event.button == 0) {}
-      else {return;}
-      //const catrow = event.target.parentElement.parentElement.parentElement;
-      const skillrow = event.target.parentElement.parentElement;
-      const categoryid = skillrow.dataset["skillcategory"];
-      const skillid = skillrow.dataset["itemid"];
-      let skillname = skillrow.dataset["skillname"];
-      const skill = data.actor.skills[categoryid].find(function(element) {
-        return element._id==skillid;
-      });
-      let catmodifier = data.data.skillcategory[skill.data.skillcategory].modifier;
-      let skillvalue = skill.data.total;
-      /*
-      const dialogoptions = {
-        "skillname": skillname,
-        "skillvalue": skillvalue,
-        "catmodifier": catmodifier
-      }
-      */
-      let dialogOptions = {
-        title: "Skill Roll",
-        template : "/systems/runequest/templates/chat/skill-dialog.html",
-        // Prefilled dialog data
-
-        data : {
-          "skillname": skillname,
-          "skillvalue": skillvalue,
-          "catmodifier": catmodifier
-        },
-        callback : (html) => {
-          // When dialog confirmed, fill testData dialog information
-          // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
-          skillname =    html.find('[name="skillname"]').val();
-          let testmodifier =   Number(html.find('[name="testmodifier"]').val());
-          catmodifier = Number(html.find('[name="catmodifier"]').val());
-          skillvalue =   Number(html.find('[name="skillvalue"]').val());
-          const target = (skillvalue+catmodifier+testmodifier);
-          this.basicRoll(skillname,target);              
-        }
-      };
-      renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
-        {
-          new Dialog(
-          {
-            title: dialogOptions.title,
-            content: dlg,
-            buttons:
-            {
-              rollButton:
-              {
-                label: game.i18n.localize("Roll"),
-                callback: html => dialogOptions.callback(html)
-              }
-            },
-            default: "rollButton"
-          }).render(true);
-        });
-    });
+    html.find('.summary-skill-roll').mousedown(event => this._onSkillRoll(event));
     html.find('.summary-characteristic-roll').click(event => this._onCharacteristicRoll(event));       
   }
   /* -------------------------------------------- */
@@ -690,7 +581,6 @@ export class RunequestActorSheet extends ActorSheet {
   }
 
   _onCharacteristicRoll(event) {
-    console.log(event);
     event.preventDefault();
     const characid = event.currentTarget.closest(".characteristic").dataset.characteristicId;
     const data = this.getData();
@@ -701,7 +591,7 @@ export class RunequestActorSheet extends ActorSheet {
     let charvalue= data.data.characteristics[characid].value;
     let difficultymultiplier = 5;
     let dialogOptions = {
-      title: "Passion Roll",
+      title: "Characteristic Roll",
       template : "/systems/runequest/templates/chat/char-dialog.html",
       // Prefilled dialog data
 
@@ -741,7 +631,78 @@ export class RunequestActorSheet extends ActorSheet {
 
     //return item.roll();    
   }
+  _onSkillRoll(event) {
+    event.preventDefault();
+    const data = this.getData();
+    console.log(event);
+    if(event.button == 0) {}
+    else if(event.button == 2) {
+      if(event.altKey == true){
+        this.actor.deleteOwnedItem(event.currentTarget.dataset.itemid);
+        return;
+      }
+      const item = this.actor.getOwnedItem(event.currentTarget.dataset.itemid);
+      item.sheet.render(true);
+      return;
+    }
+    else {return;}
+    //const catrow = event.target.parentElement.parentElement.parentElement;
+    console.log(event.currentTarget.dataset);
+    const skillid = event.currentTarget.dataset.itemid;
+    let skillname = event.currentTarget.dataset.skillname;
+    const categoryid= event.currentTarget.dataset.skillcategory;
+    console.log(data.actor.skills[categoryid]);
+    const skill = data.actor.skills[categoryid].find(function(element) {
+      return element._id==skillid;
+    });
+    let catmodifier = data.data.skillcategory[categoryid].modifier;
+    let skillvalue = skill.data.total;
+    /*
+    const dialogoptions = {
+      "skillname": skillname,
+      "skillvalue": skillvalue,
+      "catmodifier": catmodifier
+    }
+    */
+    let dialogOptions = {
+      title: "Skill Roll",
+      template : "/systems/runequest/templates/chat/skill-dialog.html",
+      // Prefilled dialog data
 
+      data : {
+        "skillname": skillname,
+        "skillvalue": skillvalue,
+        "catmodifier": catmodifier
+      },
+      callback : (html) => {
+        // When dialog confirmed, fill testData dialog information
+        // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
+        skillname =    html.find('[name="skillname"]').val();
+        let testmodifier =   Number(html.find('[name="testmodifier"]').val());
+        catmodifier = Number(html.find('[name="catmodifier"]').val());
+        skillvalue =   Number(html.find('[name="skillvalue"]').val());
+        const target = (skillvalue+catmodifier+testmodifier);
+        this.basicRoll(skillname,target);              
+      }
+    };
+    renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
+      {
+        new Dialog(
+        {
+          title: dialogOptions.title,
+          content: dlg,
+          buttons:
+          {
+            rollButton:
+            {
+              label: game.i18n.localize("Roll"),
+              callback: html => dialogOptions.callback(html)
+            }
+          },
+          default: "rollButton"
+        }).render(true);
+      });
+  }
   async basicRoll(charname, target) {
     const critical = Math.max(Math.round(target/20),1);
     const special = Math.round(target/5);
@@ -1180,7 +1141,7 @@ export class RunequestActorSheet extends ActorSheet {
     ChatMessage.create(chatData);
   }  
 
-/*  
+  
   _updateObject(event, formData) {
     const actor = this.getData().actor
     const skills = actor.skillsAndPassions
@@ -1206,11 +1167,56 @@ export class RunequestActorSheet extends ActorSheet {
           [updateField]: newFieldValue
         })
       }
-    }
+      else if (event.target.id.includes("_skill")) {
+        let fieldInfo = event.target.id.split('_')
+        console.log(fieldInfo);
+        let skillindex = fieldInfo[0]
+        let skill = this.actor.getOwnedItem(fieldInfo[1])
+        let skillField = fieldInfo[2]
+        let updateField = ''
+        let newFieldValue = ''
+        if (skillField === 'name') {
+          updateField = 'name'
+          newFieldValue = formData['item.name'][Number(skillIndex)]
+        } else {
+          updateField = 'data.' + skillField
+          console.log("skillField:"+skillField);
+          newFieldValue = formData['item.data.' + skillField][Number(skillindex)];
+        }
+        this.actor.updateEmbeddedEntity('OwnedItem', {
+          _id: skill._id,
+          [updateField]: newFieldValue
+        })
+      }
+
+      else {
+        super._updateObject(event, formData);
+      }
+    }  
     return this.actor.update(formData)
   }
-*/
   _prepareSkill(skill) {
     skill.data.total=skill.data.base+skill.data.increase;
   }
+  _preparePassion(passion) {
+    passion.data.total=passion.data.base+passion.data.increase+passion.data.modifier;
+  }
+  _preparehitlocation(hitlocation, actorData) {
+    // Prepare the HitLocations by calculating the Max HP of the location and the remaining HP based on wounds
+    console.log("prepare hit locations");
+    console.log(actorData);
+    let humanoidlocations={
+      "RQG.HEAD": 5,
+      "RQG.LARM": 4,
+      "RQG.RARM": 4,
+      "RQG.CHEST": 6,
+      "RQG.ABDOMEN": 5,
+      "RQG.LLEG": 5,
+      "RQG.RLEG": 5
+    };
+    console.log("Modifier:"+actorData.data.attributes.hpmodifier);
+    hitlocation.data.maxhp = humanoidlocations[hitlocation.name] + actorData.data.attributes.hpmodifier;
+    hitlocation.data.currenthp = hitlocation.data.maxhp - hitlocation.data.wounds;
+    console.log(hitlocation);
+  }  
 }

@@ -6,52 +6,75 @@
         <div class="header-fields">
             <div class="summary-general-list">
                 <table class="general-list-table">
-                    <thead class="general-list-thead">
-                        <th class="general-list-th" colspan="11"></th>
-                    </thead>
                     <tbody>
                         <tr>
-                        <td class="general-list-td" colspan="3">Name:<input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></td>
-                        <td class="general-list-td" colspan="2">{{localize 'RQG.BirthYear'}}: <input type="text" name="data.general.birthyear.value" value="{{data.general.birthyear.value}}"/></td>
-                        <td class="general-list-td">{{localize 'RQG.Age'}}:<input type="text" name="data.general.age.value" value="{{data.general.age.value}}"/></td>
-                        <td class="general-list-td" colspan="3">{{localize 'RQG.Occupation'}}:<input type="text" name="data.general.occupation.value" value="{{data.general.occupation.value}}"/></td>
-                        <td class="general-list-td" colspan="2">{{localize 'RQG.Ransom'}}:<input type="text" name="data.general.ransom.value" value="{{data.general.ransom.value}}"/></td>
+                        <td class="general-list-td" colspan="14">Name:<input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></td>
                         </tr>
                         <tr>
-                        <td class="general-list-td" colspan="3">{{localize 'RQG.Gender'}}:<input type="text" name="data.general.gender.value" value="{{data.general.gender.value}}"/></td>
-                        <td class="general-list-td" colspan="3">{{localize 'RQG.Reputation'}}:<input type="text" name="data.general.reputation.value" value="{{data.general.reputation.value}}"/></td>
-                        <td class="general-list-td" colspan="3">{{localize 'RQG.StandardofLiving'}}:<input type="text" name="data.general.standardofliving.value" value="{{data.general.standardofliving.value}}"/></td>
-                        <td class="general-list-td" colspan="2">{{localize 'RQG.BaseIncome'}}:<input type="text" name="data.general.baseincome.value" value="{{data.general.baseincome.value}}"/></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="strength" colspan="2">{{localize "RQG.STR"}}</td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="constitution" colspan="2">{{localize "RQG.CON"}}</td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="size" colspan="2">{{localize "RQG.SIZ"}}</td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="dexterity" colspan="2">{{localize "RQG.DEX"}}</td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="intelligence" colspan="2">{{localize "RQG.INT"}}</td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="power" colspan="2">{{localize "RQG.POW"}}</td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="charisma" colspan="2">{{localize "RQG.CHA"}}</td>
                         </tr>
                         <tr>
-                        <td class="general-list-td" colspan="3">{{localize 'RQG.Homeland'}}:<input type="text" name="data.general.homeland.value" value="{{data.general.homeland.value}}"/></td>
-                        <td class="general-list-td" colspan="3">{{localize 'RQG.Tribe'}}:<input type="text" name="data.general.tribe.value" value="{{data.general.tribe.value}}"/></td>
-                        <td class="general-list-td" colspan="3">{{localize 'RQG.Clan'}}:<input type="text" name="data.general.clan.value" value="{{data.general.clan.value}}"/></td>
-                        <td class="general-list-td" colspan="2">{{localize 'RQG.Campaign'}}:<input type="text" name="data.general.campaign.value" value="{{data.general.campaign.value}}"/></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="strength" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.strength.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="constitution" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.constitution.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="size" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.size.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="dexterity" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.dexterity.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="intelligence" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.intelligence.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="power" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.power.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="charisma" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.charisma.value}}</a></td>
                         </tr>
+                        <tr>
+                            <td class="characteristic-list-td" colspan="4">Damage Bonus: {{actor.data.attributes.damagebonus}}</td>
+                            <td class="characteristic-list-td" colspan="3">SIZ SR: {{actor.data.attributes.sizsr}}</td>
+                            <td class="characteristic-list-td" colspan="3">DEX SR: {{actor.data.attributes.dexsr}}</td>
+                            <td class="characteristic-list-td" colspan="4">Healing Rate: {{actor.data.attributes.healingrate}}</td>
+                        </tr>
+                        <tr>
+                            <td class="characteristic-list-td" colspan="7">
+                                <div>
+                                    {{localize 'RQG.HP'}}: <input class="resource-input" type="text" name="data.attributes.hitpoints.value" value="{{data.attributes.hitpoints.value}}" data-dtype="Number"/>
+                                    /
+                                    {{data.attributes.hitpoints.max}}
+                                </div>
+                            </td>                         
+                            <td class="characteristic-list-td" colspan="7">
+                                <div>
+                                    {{localize 'RQG.MP'}}: <input class="resource-input" type="text" name="data.attributes.magicpoints.value" value="{{data.attributes.magicpoints.value}}" data-dtype="Number"/>
+                                    /
+                                    {{data.attributes.magicpoints.max}}
+                                </div>
+                            </td>  
+
+                        </tr>                        
+                        <tr>
+                            <td class="characteristic-list-td" colspan="7">
+                                <div>
+                                    {{localize 'RQG.HP'}}: <input class="resource-input" type="text" name="data.attributes.hitpoints.value" value="{{data.attributes.hitpoints.value}}" data-dtype="Number"/>
+                                    /
+                                    {{data.attributes.hitpoints.max}}
+                                </div>
+                            </td>                         
+                            <td class="characteristic-list-td" colspan="7">
+                                <div>
+                                    {{localize 'RQG.MP'}}: <input class="resource-input" type="text" name="data.attributes.magicpoints.value" value="{{data.attributes.magicpoints.value}}" data-dtype="Number"/>
+                                    /
+                                    {{data.attributes.magicpoints.max}}
+                                </div>
+                            </td>  
+                        </tr>    
                     </tbody>
                 </table>    
             </div> 
-        <!--
-            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
-            <div class="resource">
-                <h3 class="charname">{{localize 'RQG.HP'}}</h3>
-                <input type="text" name="data.attributes.hitpoints.value" value="{{data.attributes.hitpoints.value}}" data-dtype="Number"/>
-                <span> / </span>
-                <input type="text" name="data.attributes.hitpoints.max" value="{{data.attributes.hitpoints.max}}" data-dtype="Number"/>
-            </div>
-            <div class="resource">
-                <h3 class="charname">{{localize 'RQG.MP'}}</h3>
-                <input type="text" name="data.attributes.magicpoints.value" value="{{data.attributes.magicpoints.value}}" data-dtype="Number"/>
-                <span> / </span>
-                <input type="text" name="data.attributes.magicpoints.max" value="{{data.attributes.magicpoints.max}}" data-dtype="Number"/>
-            </div>
-        -->
         </div>
     </header>
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="summary">{{localize 'RQG.Summary'}}</a>
+        <a class="item active" data-tab="summary">{{localize 'RQG.Summary'}}</a>
         <a class="item" data-tab="skills">{{localize 'RQG.Skills'}}</a>
         <a class="item" data-tab="attributes">{{localize 'RQG.Characteristics'}}</a>
         <a class="item" data-tab="combat">{{localize 'RQG.Combat'}}</a>
@@ -126,7 +149,7 @@
                         <li class="item flexrow" data-item-id="{{spell._id}}" data-spellname="{{spell.name}}" data-rune="{{spell.data.rune}}">
                             <h4 class="item-name"><a class="runespell-roll">{{spell.name}}</a></h4>
                             <h4 class="item-name"><a class="runespell-roll">{{spell.data.points}}</a></h4>
-                            <h4 class="item-name"><a class="runespell-roll">{{spell.data.rune}}</a></h4>
+                            <h4 class="item-name"><a class="runespell-roll"><span class="runefont">{{getruneletter spell.data.rune}}</span></a></h4>
                             <div class="item-controls">
                                 <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                                 <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -135,6 +158,28 @@
                     {{/each}}
                 </div>
             </ol>
+            {{!-- MP Storage --}}
+            <div class="summary-hitlocations-list">
+                <table style="height: 70px;" border="2">
+                <thead style="height: 28px;">
+                    <th style="width: 25%; text-align: center; height: 28px;">{{localize "RQG.NAME"}}</th>
+                    <th style="width: 15%; text-align: center; height: 28px;">{{localize "RQG.CURRENTMP"}}</th>
+                    <th style="width: 15%; text-align: center; height: 28px;">{{localize "RQG.MAXMP"}}</th>
+                    <th style="width: 10%; text-align: center; height: 28px;">{{localize "RQG.EQUIPED"}}</th>
+                    <th style="width: 10%; text-align: center; height: 28px;"><a class="item-control item-create" title="Create item" data-type="mpstorage"><i class="fas fa-plus"></i></a></th>
+                </thead>
+                <tbody>
+                {{#each actor.mpstorage as |storage id|}}
+                    <tr style="height: 28px;">
+                    <td style="width: 25%; height: 28px; text-align: center;">{{localize storage.name}}</td>
+                    <td style="width: 15%; height: 28px; text-align: center;"><input id="{{id}}_{{storage._id}}_currentmp_mpstorage" type="text" name="storage.data.currentmp" value="{{storage.data.currentmp}}"/></td>
+                    <td style="width: 15%; height: 28px; text-align: center;">{{storage.data.maxmp}}</td>
+                    <td style="width: 10%; text-align: center;">{{storage.data.equiped}}</td>
+                    </tr>        
+                {{/each}}
+                </tbody>
+                </table>
+            </div>
         </div>
         {{!-- Combat Tab --}}
         <div  class="tab combat"  data-group="primary"  data-tab="combat">
@@ -147,6 +192,30 @@
 
         {{!-- Biography Tab --}}
         <div class="tab biography" data-group="primary" data-tab="description">
+            <div class="summary-general-list">
+                <table class="general-list-table">
+                    <tbody>
+                        <tr>
+                        <td class="general-list-td" colspan="2">{{localize 'RQG.BirthYear'}}: <input type="text" name="data.general.birthyear.value" value="{{data.general.birthyear.value}}"/></td>
+                        <td class="general-list-td">{{localize 'RQG.Age'}}:<input type="text" name="data.general.age.value" value="{{data.general.age.value}}"/></td>
+                        <td class="general-list-td" colspan="3">{{localize 'RQG.Occupation'}}:<input type="text" name="data.general.occupation.value" value="{{data.general.occupation.value}}"/></td>
+                        <td class="general-list-td" colspan="2">{{localize 'RQG.Ransom'}}:<input type="text" name="data.general.ransom.value" value="{{data.general.ransom.value}}"/></td>
+                        </tr>
+                        <tr>
+                        <td class="general-list-td" colspan="3">{{localize 'RQG.Gender'}}:<input type="text" name="data.general.gender.value" value="{{data.general.gender.value}}"/></td>
+                        <td class="general-list-td" colspan="3">{{localize 'RQG.Reputation'}}:<input type="text" name="data.general.reputation.value" value="{{data.general.reputation.value}}"/></td>
+                        <td class="general-list-td" colspan="3">{{localize 'RQG.StandardofLiving'}}:<input type="text" name="data.general.standardofliving.value" value="{{data.general.standardofliving.value}}"/></td>
+                        <td class="general-list-td" colspan="2">{{localize 'RQG.BaseIncome'}}:<input type="text" name="data.general.baseincome.value" value="{{data.general.baseincome.value}}"/></td>
+                        </tr>
+                        <tr>
+                        <td class="general-list-td" colspan="3">{{localize 'RQG.Homeland'}}:<input type="text" name="data.general.homeland.value" value="{{data.general.homeland.value}}"/></td>
+                        <td class="general-list-td" colspan="3">{{localize 'RQG.Tribe'}}:<input type="text" name="data.general.tribe.value" value="{{data.general.tribe.value}}"/></td>
+                        <td class="general-list-td" colspan="3">{{localize 'RQG.Clan'}}:<input type="text" name="data.general.clan.value" value="{{data.general.clan.value}}"/></td>
+                        <td class="general-list-td" colspan="2">{{localize 'RQG.Campaign'}}:<input type="text" name="data.general.campaign.value" value="{{data.general.campaign.value}}"/></td>
+                        </tr>
+                    </tbody>
+                </table>    
+            </div> 
             {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
         </div>
 

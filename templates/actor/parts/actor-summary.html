@@ -33,14 +33,14 @@
             <tbody>
                 {{#each data.elementalrunes as |elementalrune id|}}
                     <tr data-rune="{{id}}">
-                        <td colspan="2"><a class="elementalrunes-roll rollable">{{localize elementalrune.label}}: {{elementalrune.value}}</a></td>
+                        <td colspan="2"><a class="elementalrunes-roll rollable"><span class="runefont">{{getruneletter id}}</span>{{localize elementalrune.label}}: {{elementalrune.value}}</a></td>
                         <td></td>
                     </tr>
                 {{/each}}
                 {{#each data.powerrunes as |powerrunepair pairid|}}
                     <tr data-runepair="{{pairid}}">
                     {{#each powerrunepair as |powerrune runeid|}}
-                        <td><a class="powerrunes-roll" data-rune="{{runeid}}">{{localize powerrune.label}}: {{powerrune.value}}</a></td>
+                        <td><a class="powerrunes-roll" data-rune="{{runeid}}"><span class="runefont">{{getruneletter runeid}}</span>{{localize powerrune.label}}: {{powerrune.value}}</a></td>
                     {{/each}}
                     </li>
                 {{/each}}
@@ -50,36 +50,9 @@
 </div>
 <div class="summary-row flexrow">
     <div class="summary-column flexcolumn">
-        <div class="summary-characteristics-list">
-            <table class="characteristic-list-table">
-                <thead class="characteristic-list-thead">
-                    <th class="characteristic-list-th" colspan="8">{{localize "RQG.Characteristics"}}</th>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td class="characteristic-list-td characteristic" data-characteristic-id="strength" colspan="2">{{localize "RQG.STR"}}: <a class="summary-characteristic-roll">{{actor.data.characteristics.strength.value}}</a></td>
-                    <td class="characteristic-list-td characteristic" data-characteristic-id="constitution" colspan="2">{{localize "RQG.CON"}}: <a class="summary-characteristic-roll">{{actor.data.characteristics.constitution.value}}</a></td>
-                    <td class="characteristic-list-td characteristic" data-characteristic-id="size" colspan="2">{{localize "RQG.SIZ"}}: <a class="summary-characteristic-roll">{{actor.data.characteristics.size.value}}</a></td>
-                    <td class="characteristic-list-td characteristic" data-characteristic-id="dexterity" colspan="2">{{localize "RQG.DEX"}}: <a class="summary-characteristic-roll">{{actor.data.characteristics.dexterity.value}}</a></td>
-                    </tr>
-                    <tr>
-                    <td class="characteristic-list-td characteristic" data-characteristic-id="intelligence" colspan="2">{{localize "RQG.INT"}}: <a class="summary-characteristic-roll">{{actor.data.characteristics.intelligence.value}}</a></td>
-                    <td class="characteristic-list-td characteristic" data-characteristic-id="power" colspan="2">{{localize "RQG.POW"}}: <a class="summary-characteristic-roll">{{actor.data.characteristics.power.value}}</a></td>
-                    <td class="characteristic-list-td characteristic" data-characteristic-id="charisma" colspan="2">{{localize "RQG.CHA"}}: <a class="summary-characteristic-roll">{{actor.data.characteristics.charisma.value}}</a></td>
-                    <td class="characteristic-list-td" colspan="2">&nbsp;</td>
-                    </tr>
-                    <tr>
-                    <td class="characteristic-list-td" colspan="2">Damage Bonus: {{actor.data.attributes.damagebonus}}</td>
-                    <td class="characteristic-list-td" colspan="2">SIZ SR: {{actor.data.attributes.sizsr}}</td>
-                    <td class="characteristic-list-td" colspan="2">DEX SR: {{actor.data.attributes.dexsr}}</td>
-                    <td class="characteristic-list-td" colspan="2">Healing Rate: {{actor.data.attributes.healingrate}}</td>
-                    </tr>
-                </tbody>
-            </table>    
-        </div>
         <div class="summary-passions-list">
             <div class="item flexrow item-header">         
-                <ol class="skills-list">          
+                <ol class="summary-second-row">          
                     <div class="skill-category">
                         <li class="item flexrow item-header">
                             <div class="item-name">{{localize "RQG.Passions"}}</div>
@@ -88,6 +61,7 @@
                             </div>
                         </li>
                         {{#each actor.passions as |passion id|}}
+                            {{log passion}}
                             <li class="item flexrow" data-item-id="{{passion._id}}" data-passionname="{{passion.name}}">
                                 <h4 class="item-name"><a class="passion-roll">{{passion.name}}</a></h4>
                                 <h4 class="item-name"><a class="passion-roll">{{passion.data.total}}</a></h4>
@@ -138,8 +112,8 @@
                 <tbody>
                 {{#each actor.defense as |item id|}}
                     <tr>
-                        <td data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.skillcategory}}">
-                            <a class="summary-skill-roll">{{item.name}}: {{item.data.total}}</a>                      
+                        <td class="skill summary-skill-roll" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.skillcategory}}">
+                            {{item.name}}: {{item.data.total}}                     
                         </td>
                     </tr>
                 {{/each}}

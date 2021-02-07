@@ -97,6 +97,7 @@ export class RunequestActor extends Actor {
     let actorData = duplicate(this.data)
     // These containers are for the various type of items
     const skills = [];
+    const passions= [];
     for (let i of actorData.items) 
     {
       try 
@@ -108,6 +109,11 @@ export class RunequestActor extends Actor {
           this.prepareSkill(i);
           skills.push(i);
         }
+        if (i.type === "passion") 
+        {
+          this.preparePassion(i);
+          passions.push(i);
+        }        
       }
       catch (error) 
       {
@@ -121,7 +127,8 @@ export class RunequestActor extends Actor {
     console.log("PrepareItems - logging skills array");
     console.log(skills);
     let preparedData = {
-      skills: skills
+      skills: skills,
+      passions: passions
     }
     return preparedData    
   }
@@ -141,15 +148,27 @@ export class RunequestActor extends Actor {
     let catmodifier = actorData.data.skillcategory[skill.data.skillcategory].modifier;
     skill.data.total=skill.data.base+skill.data.increase+skill.data.modifier+catmodifier;
     console.log(skill.data.total);
-    return skill
+    return skill;
   }
+  preparePassion(passion) 
+  {
+    console.log("PreparePassion"+passion.name);
+    let actorData = this.data
+    passion.data.total=passion.data.base+passion.data.increase+passion.data.modifier;
+    console.log(passion.data.total);
+    return passion;
+  }  
   _prepareattributes(data) {
+    console.log("prepare attributes in Actor");
+    console.log(data);
     //Magic Points
     data.attributes.magicpoints.max = data.characteristics.power.value;
     // Total HP
     data.attributes.hitpoints.max = this._preparehitpointstotal(data);
     //Damage Bonus
     data.attributes.damagebonus= this._preparedamagebonus(data);
+    // HP Modifier
+    data.attributes.hpmodifier = this._preparehpmodifier(data.attributes.hitpoints.max);
   }
   _preparehitpointstotal(data) {
     let hptotal=data.characteristics.constitution.value;
@@ -170,12 +189,7 @@ export class RunequestActor extends Actor {
     }
     return hptotal;
   }
-/*
-  _preparehitlocations(data) {
-    console.log("preparehitlocations");
-    console.log(data);
-  }
-*/
+
   _preparedamagebonus(data) {
     var statvalue=data.characteristics.strength.value+data.characteristics.size.value;
     if(statvalue < 13) {
@@ -285,5 +299,16 @@ export class RunequestActor extends Actor {
       bonus = bonus - (10+(Math.ceil((statvalue-20)/4)*5));
     }
     return bonus;    
+  }
+  _preparehpmodifier(hp) {
+    //compute Max HP modifier
+    let modifier=0;
+    if(hp < 13) {
+      modifier=Math.ceil((hp-13)/3);
+    }
+    else if(hp > 15) {
+      modifier=Math.ceil((hp-15)/3);
+    }
+    return modifier;    
   }
 }
