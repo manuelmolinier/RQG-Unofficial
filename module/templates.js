@@ -12,8 +12,10 @@ export const preloadHandlebarsTemplates = async function() {
     // Actor Sheet Partials
     "systems/runequest/templates/actor/parts/actor-summary.html",
     "systems/runequest/templates/actor/parts/actor-combat.html",
-    "systems/runequest/templates/actor/parts/actor-skills.html"
-
+    "systems/runequest/templates/actor/parts/actor-skills.html",
+    "systems/runequest/templates/actor/parts/actor-herosoul.html",
+    "systems/runequest/templates/actor/parts/actor-sheetheader.html",
+    "systems/runequest/templates/actor/parts/actor-magic.html"
     // Item Sheet Partials
   ]);
 };

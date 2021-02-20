@@ -11,7 +11,7 @@ export class RunequestItemSheet extends ItemSheet {
               template: "systems/runequest/templates/item/item-sheet.html",
               width: 520,
               height: 480,
-              tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description"}]
+              tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "details"}]
         });
     }
   

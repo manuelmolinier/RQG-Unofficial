@@ -111,5 +111,7 @@
     "RQG.MAXHITPOINTS": "Max HP",
     "RQG.ARMOR": "Armor",
     "RQG.WOUNDS": "Wounds",
-    "RQG.RANGE": "Range"
+    "RQG.RANGE": "Range",
+
+    "RQG.HEROSOUL": "Hero"
 }

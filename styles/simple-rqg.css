@@ -4,7 +4,7 @@
 }
 @font-face {
   font-family: RunequestRunes;
-  src: url("./fonts/RQ.ttf");
+  src: url("./fonts/RQ.TTF");
 }
 .worldbuilding .runefont {
   font-family: 'RunequestRunes';
@@ -193,12 +193,12 @@ input[type="text"]
   padding: 0;
   overflow-y: auto;
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row wrap;
   justify-content: flex-start;
   margin-bottom: 10px;
   font-size: 10px;
   font-weight: bold;
-  height:1000px
+  width:100%;
 }
 .worldbuilding .summary-second-row {
   list-style: none;

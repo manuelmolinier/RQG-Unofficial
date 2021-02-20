@@ -1,0 +1,69 @@
+    <header class="sheet-header">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+        <div class="header-fields">
+            <div class="summary-general-list">
+                <table class="general-list-table">
+                    <tbody>
+                        <tr>
+                        <td class="general-list-td" colspan="14">Name:<input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></td>
+                        </tr>
+                        <tr>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="strength" colspan="2">{{localize "RQG.STR"}}</td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="constitution" colspan="2">{{localize "RQG.CON"}}</td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="size" colspan="2">{{localize "RQG.SIZ"}}</td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="dexterity" colspan="2">{{localize "RQG.DEX"}}</td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="intelligence" colspan="2">{{localize "RQG.INT"}}</td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="power" colspan="2">{{localize "RQG.POW"}}</td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="charisma" colspan="2">{{localize "RQG.CHA"}}</td>
+                        </tr>
+                        <tr>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="strength" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.strength.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="constitution" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.constitution.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="size" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.size.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="dexterity" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.dexterity.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="intelligence" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.intelligence.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="power" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.power.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="charisma" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.charisma.value}}</a></td>
+                        </tr>
+                        <tr>
+                            <td class="characteristic-list-td" colspan="4">Damage Bonus: {{actor.data.attributes.damagebonus}}</td>
+                            <td class="characteristic-list-td" colspan="3">SIZ SR: {{actor.data.attributes.sizsr}}</td>
+                            <td class="characteristic-list-td" colspan="3">DEX SR: {{actor.data.attributes.dexsr}}</td>
+                            <td class="characteristic-list-td" colspan="4">Healing Rate: {{actor.data.attributes.healingrate}}</td>
+                        </tr>
+                        <tr>
+                            <td class="characteristic-list-td" colspan="7">
+                                <div>
+                                    {{localize 'RQG.HP'}}: <input class="resource-input" type="text" name="data.attributes.hitpoints.value" value="{{data.attributes.hitpoints.value}}" data-dtype="Number"/>
+                                    /
+                                    {{data.attributes.hitpoints.max}}
+                                </div>
+                            </td>                         
+                            <td class="characteristic-list-td" colspan="7">
+                                <div>
+                                    {{localize 'RQG.MP'}}: <input class="resource-input" type="text" name="data.attributes.magicpoints.value" value="{{data.attributes.magicpoints.value}}" data-dtype="Number"/>
+                                    /
+                                    {{data.attributes.magicpoints.max}}
+                                </div>
+                            </td>
+                        </tr>
+                        {{#each actor.cults as |cult id|}}
+                        <tr>
+                            <td class="characteristic-list-td" colspan="14">
+                                <li class="item flexrow" data-item-id="{{cult._id}}" data-cultname="{{cult.name}}">
+                                    <h4 class="item-name">{{cult.name}}</h4>
+                                    <h4 class="item-name">{{cult.data.rank}}</h4>
+                                    <h4 class="item-name">{{cult.data.subcult}}</h4>
+                                    <h4 class="item-name">{{cult.data.currentrunepoint}} / {{cult.data.maxrunepoint}}</h4>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                    </div>
+                                </li>
+                            </td>
+                        </tr>
+                        {{/each}}   
+                    </tbody>
+                </table>    
+            </div> 
+        </div>
+    </header>

@@ -248,6 +248,15 @@
         "label":"Campaign",
         "value":""
       }
+    },
+    "herosoul": {
+      "descriptions": "",
+      "heropoints": {
+        "maxheropoints": 0,
+        "currentheropoints":0
+      },
+      "heroquests": [],
+      "heroicabilities": []
     }
   },
   "npc": {
@@ -560,6 +569,17 @@
     "runepoints": 0,
     "hitlocations": [],
     "passions": []
-  }
+  },
+  "heroquest": {
+    "name": "",
+    "templates": ["description"],
+    "role": ""
+  },
+  "heroicability": {
+    "name": "",
+    "templates": ["description"],
+    "points": 0,
+    "rune": ""    
+  }  
 }  
 }
