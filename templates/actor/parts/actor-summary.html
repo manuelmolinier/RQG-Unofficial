@@ -1,3 +1,8 @@
+<div class="summary-row flexrow">
+    <button class="attack-roll runequest-roll-button">
+        Attack
+    </button>
+</div>
 {{!-- Hitlocations and Runes row --}}
 <div class="summary-row flexrow">
     <div class="summary-hitlocations-list">
@@ -82,7 +87,7 @@
                 </li>
                 {{#each actor.attacks.melee as |attack id|}}
                     <li class="item flexrow" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="meleeweapons">
-                        <span class="summary-attack-label"><a class="meleeattack-roll">{{attack.name}}</a></span>
+                        <span class="summary-attack-label"><a class="attack-roll">{{attack.name}}</a></span>
                         <span class="summary-attack-value">{{attack.data.skillvalue}}</label>
                         <span class="summary-attack-damage">{{attack.data.damage}}</span>
                     </li>
@@ -94,7 +99,7 @@
                 </li>
                 {{#each actor.attacks.missile as |attack id|}}
                     <li class="item flexrow" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="missileweapons">
-                        <h4 class="item-name"><a class="missileattack-roll">{{attack.name}}</a></h4>
+                        <h4 class="item-name"><a class="attack-roll">{{attack.name}}</a></h4>
                         <label class="skill-value">{{attack.data.skillvalue}}</label>
                         <h4 class="item-name">{{attack.data.damage}}</h4>
                     </li>

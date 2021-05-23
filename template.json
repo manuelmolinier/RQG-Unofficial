@@ -327,7 +327,7 @@
   }
 },
 "Item": {
-  "types": ["item","skill","passion","meleeattack","missileattack","naturalattack","spiritspell","runespell","sorceryspell","hitlocation","cult","armor","mpstorage","ally"],
+  "types": ["item","skill","passion","attack","meleeattack","missileattack","naturalattack","spiritspell","runespell","sorceryspell","hitlocation","cult","armor","mpstorage","ally"],
   "templates": {
     "quantity": {
       "quantity": {
@@ -377,6 +377,23 @@
       "label": "Location",
       "value": 0
       }
+    },
+    "weapon": {
+      "attack": "",
+      "skillused": "",
+      "wsr": 0,
+      "sr": 0,
+      "skillvalue": 0,
+      "modifier": 0,
+      "damage": "1D6",
+      "db": true,
+      "type": "S",
+      "specialtype": "S",
+      "hpmax": 0,
+      "hpcurrent":0,
+      "enc":0,
+      "STR":0,
+      "DEX":0
     }
   },  
   "item": {
@@ -431,50 +448,19 @@
   },
   "meleeattack":{
     "name": "",
-    "skillused": "",
-    "wsr": 0,
-    "sr": 0,
-    "skillvalue": 0,
-    "modifier": 0,
-    "damage": "1D6",
-    "db": true,
-    "type": "S",
-    "specialtype": "S",
-    "hpmax": 0,
-    "hpcurrent":0,
-    "enc":0,
-    "STR":0,
-    "DEX":0,
+    "templates": ["description","weapon"],
     "length":""
   },
   "missileattack":{
     "name": "",
-    "skillused": "",
-    "sr": 0,
-    "skillvalue": 0,
-    "modifier": 0,
-    "damage": "1D6",
-    "db": false,
-    "specialtype": "I",
+    "templates": ["description","weapon"],
     "range": 0,
     "rate": "",
-    "hpmax": 0,
-    "hpcurrent":0,
     "amno": 0
   },
   "naturalattack":{
     "name": "",
-    "skillused": "",
-    "wsr": 0,
-    "sr": 0,
-    "skillvalue": 0,
-    "modifier": 0,
-    "damage": "1D6",
-    "db": true,
-    "type": "H",
-    "specialtype": "C",
-    "hpmax": 0,
-    "hpcurrent":0
+    "templates": ["description","weapon"]
   },
   "hitlocation":{
     "name": "",
@@ -580,6 +566,20 @@
     "templates": ["description"],
     "points": 0,
     "rune": ""    
+  },
+  "attack":{
+    "name": "",
+    "templates": ["description","weapon"],
+    "attacktype":"melee",
+    "equiped":false,
+    "range": 0,
+    "rate": "",
+    "amno": 0
+  },  
+  "spellmatrix": {
+    "name": "",
+    "templates": ["description"],
+    "spell": []    
   }  
 }  
 }

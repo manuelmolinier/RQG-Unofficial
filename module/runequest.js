@@ -10,6 +10,8 @@ import { RunequestItem } from "./item/RunequestItem.js";
 import { RunequestItemSheet } from "./item/RunequestItem-Sheet.js";
 import { RunequestActorSheet } from "./actor/runequestactor-sheet.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
+import { RQG } from "./config.js"; // Config for RQG
+
 console.log("importing RQGTools");
 import { RQGTools } from "./tools/rqgtools.js";
 
@@ -29,9 +31,12 @@ Hooks.once("init", async function() {
     decimals: 2
   }
 
+  // Record Configuration Values
+  CONFIG.RQG = RQG;
 	// Define custom Entity classes
   CONFIG.Actor.entityClass = RunequestActor;
   CONFIG.Item.entityClass = RunequestItem;
+
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("Runequest Glorantha", RunequestActorSheet, { makeDefault: true });

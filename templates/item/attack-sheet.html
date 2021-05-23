@@ -1,0 +1,99 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+        </div>
+    </header>
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="details">Details</a>
+        <a class="item" data-tab="description">Description</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        {{!-- Attributes Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            {{!-- Attack Type --}}
+            <div class="form-group">
+                <label>{{ localize "RQG.AttackType" }}</label>
+                <select name="data.attacktype">
+                    {{#select data.attacktype}}
+                    {{#each config.attacktype as |name type|}}
+                    <option value="{{type}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>        
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.SkillUsed"}}</label>
+                <select name="data.skillused">
+                    {{#select data.skillused}}
+                    {{#each config.weaponskills as |name type|}}
+                    <option value="{{type}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>                
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.Modifier"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.modifier"  value="{{data.modifier}}"  data-dtype="Number"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.Damage"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.damage"  value="{{data.damage}}"  data-dtype="String"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.SpecialType"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.specialtype"  value="{{data.specialtype}}"  data-dtype="String"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.WSR"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.wsr"  value="{{data.wsr}}"  data-dtype="String"  />
+            </div>         
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.HPMax"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.hpmax"  value="{{data.hpmax}}"  data-dtype="String"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.HPCurrent"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.hpcurrent"  value="{{data.hpcurrent}}"  data-dtype="String"  />
+            </div>            
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.ENC"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.ENC"  value="{{data.ENC}}"  data-dtype="String"  />
+            </div>            
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.DEX"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.DEX"  value="{{data.DEX}}"  data-dtype="String"  />
+            </div>            
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.STR"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.STR"  value="{{data.STR}}"  data-dtype="String"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.Range"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.range"  value="{{data.range}}"  data-dtype="String"  />
+            </div>    
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.Rate"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.rate"  value="{{data.rate}}"  data-dtype="String"  />
+            </div> 
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.Amno"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.amno"  value="{{data.amno}}"  data-dtype="String"  />
+            </div>             
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.DamageBonus"}}</label>
+                <input type="checkbox" name="data.db" {{checked data.db}}/>
+            </div>            
+        </div>
+
+        {{!-- Description Tab --}}
+        <div class="tab" data-group="primary" data-tab="description">
+            {{editor content=data.description.description.value target="data.description.description.value" button=true owner=owner editable=editable}}
+        </div>
+
+    </section>
+</form>

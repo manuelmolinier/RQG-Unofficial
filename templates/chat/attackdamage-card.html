@@ -4,11 +4,12 @@
         <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
         <h3 class="item-name">{{item.name}}</h3>
     </header>
-
+    {{log attack.data}}
     <div class="card-content">
-        {{attack.name}} Roll using {{attack.data.skillused}}<br/>
+        {{attack.name}} Roll using {{attack.data.data.skillused}}<br/>
         Roll: {{roll.total}} vs {{target}}</br>
         {{result}} <br/>
+        Damage: {{damageData.totaldamage}}
     </div>
     <div class="card-content">
         Localization: {{hitlocation}}

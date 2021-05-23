@@ -42,9 +42,10 @@ export class RunequestActor extends Actor {
     // Re-map all attributes onto the base roll data
     if ( !!shorthand ) {
       for ( let [k, v] of Object.entries(data.attributes) ) {
+        console.log(k+":"+v.value);
         if ( !(k in data) ) data[k] = v.value;
       }
-      delete data.attributes;
+      //delete data.attributes;
     }
     // Map all items data using their slugified names
     data.items = this.data.items.reduce((obj, i) => {
@@ -66,6 +67,7 @@ export class RunequestActor extends Actor {
   prepareData() {
     super.prepareData();
     console.log("prepareData for: "+this.data.name);
+    console.log(this.data);
     const  actorData = this.data;
     const  data = actorData.data;
     this._prepareCharacterFlags(actorData);
@@ -79,12 +81,13 @@ export class RunequestActor extends Actor {
     this._prepareattributes(data);
     this._prepareskillcategoriesmodifier(data);
   }
-/*
-  _prepareDerivedData(){
+
+  prepareDerivedData(){
     console.log("prepareDerivedData");
-    this._preparehitlocations(data);
+    console.log(this.data);
+    super.prepareDerivedData();
   }
-*/
+
   _prepareCharacterFlags(sheetData) {
     sheetData.flags.runequestspell= {
       "bladesharp": 0,
@@ -169,7 +172,53 @@ export class RunequestActor extends Actor {
     data.attributes.damagebonus= this._preparedamagebonus(data);
     // HP Modifier
     data.attributes.hpmodifier = this._preparehpmodifier(data.attributes.hitpoints.max);
+    data.attributes.dexsr=this._preparedexsr(data.characteristics.dexterity);
+    data.attributes.sizsr=this._preparesizsr(data.characteristics.size);
+    console.log(data.attributes);
   }
+  _preparedexsr(dex) {
+    console.log("dexsr");
+    console.log(dex);
+    const value=dex.value;
+    console.log(value);
+    if(value > 18) {
+       return 0;
+    }
+    else if(value > 15) {
+      return 1;
+    }
+    else if(value >12) {
+      return 2;
+    }
+    else if(value > 8){
+      return 3;
+    }
+    else if(value > 5) {
+      return 4;
+    }
+    else {
+      return 5;
+    }
+  }
+  _preparesizsr(siz) {
+    console.log("sizsr");
+    console.log(siz);
+    const value=siz.value;
+    console.log(value);
+    if(value > 21) {
+       return 0;
+    }
+    else if(value > 14) {
+      return 1;
+    }
+    else if(value >6) {
+      return 2;
+    }
+    else {
+      return 3;
+    }
+  }
+
   _preparehitpointstotal(data) {
     let hptotal=data.characteristics.constitution.value;
     if(data.characteristics.size.value < 5) {

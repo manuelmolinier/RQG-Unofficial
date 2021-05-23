@@ -1,0 +1,26 @@
+<form class="skill-test">
+  <div class="form-group">
+    <label>{{localize "RQG.Attack"}}</label>
+    {{log attacks}}
+    {{!-- Attack Type --}}
+        <select name="attackname">
+            {{#each attacks.melee as |attack id|}}
+            {{log attack}}
+            <option value="{{attack._id}}">{{attack.name}}</option>
+            {{/each}}
+            {{#each attacks.missile as |attack id|}}
+            {{log attack}}
+            <option value="{{attack._id}}">{{attack.name}}</option>
+            {{/each}}
+            {{#each attacks.natural as |attack id|}}
+            {{log attack}}
+            <option value="{{attack._id}}">{{attack.name}}</option>
+            {{/each}}            
+        </select>
+    </div>   
+  </div>
+  <div class="form-group">
+    <label>{{localize "RQG.Modifier"}}</label>
+    <input type="text" name="testmodifier" value="{{testmodifier}}" />
+  </div>
+</form>

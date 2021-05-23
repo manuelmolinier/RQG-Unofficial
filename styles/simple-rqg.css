@@ -185,6 +185,7 @@ input[type="text"]
   max-width: 100%;
   width: auto;
   flex: initial;
+  font-size: xx-large;
 }
 
 .worldbuilding .skills-list {

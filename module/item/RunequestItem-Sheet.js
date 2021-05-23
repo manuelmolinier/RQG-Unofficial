@@ -29,6 +29,7 @@ export class RunequestItemSheet extends ItemSheet {
     /** @override */
     getData() {
       const data = super.getData();
+      data.config = CONFIG.RQG;
       data.dtypes = ["String", "Number", "Boolean"];
       if(data.entity.type == "item") {
         for ( let attr of Object.values(data.data.attributes) ) {

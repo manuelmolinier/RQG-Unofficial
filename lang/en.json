@@ -113,5 +113,47 @@
     "RQG.WOUNDS": "Wounds",
     "RQG.RANGE": "Range",
 
-    "RQG.HEROSOUL": "Hero"
+    "RQG.HEROSOUL": "Hero",
+    "RQG.Skillname": "Skill name",
+    "RQG.Skillvalue": "Skill value",
+    "RQG.Catmodifier": "Category modifier",
+    "RQG.DamageBonus": "Damage Bonus",
+
+    
+    "RQG.1H_Mace":"1H Mace",
+    "RQG.2H_Mace":"2H Mace",
+    "RQG.Sling":"Sling",
+    "RQG.Large_Shield":"Large Shield",
+    "RQG.Pike":"Pike",
+    "RQG.Medium_Shield":"Medium Shield",
+    "RQG.Javelin":"Javelin",
+    "RQG.1H_Axe":"1H Axe",
+    "RQG.Dagger":"Dagger",
+    "RQG.Rapier":"Rapier",
+    "RQG.2H_Spear":"2H Spear",
+    "RQG.Crossbow":"Crossbow",
+    "RQG.Shortsword":"Shortsword",
+    "RQG.Kopis":"Kopis",
+    "RQG.Throwing_Dagger":"Throwing Dagger",
+    "RQG.Grapple":"Grapple",
+    "RQG.2H_Axe":"2H Axe",
+    "RQG.Self_Bow":"Self Bow",
+    "RQG.Kick":"Kick",
+    "RQG.Small_Shield":"Small Shield",
+    "RQG.Fist":"Fist",
+    "RQG.1H_Spear":"1H Spear",
+    "RQG.Pole_Lasso":"Pole Lasso",
+    "RQG.Thrown_Axe":"Thrown Axe",
+    "RQG.Composite_Bow":"Composite Bow",
+    "RQG.Broadsword":"Broadsword",
+    "RQG.2H_Sword":"2H Sword",
+    "RQG.Improvised_Weapon":"Improvised Weapon",
+
+    "RQG.AttackType":"Attack type",
+    "RQG.SkillUsed":"Skill used",
+    "RQG.Damage":"Damage",
+    "RQG.SpecialType":"Special type",
+
+    "RQG.Attack": "Attack"
+
 }

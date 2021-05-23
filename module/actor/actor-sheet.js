@@ -20,6 +20,7 @@ export class SimpleActorSheet extends ActorSheet {
   /** @override */
   getData() {
     const data = super.getData();
+    data.config = CONFIG.RQG;
     data.dtypes = ["String", "Number", "Boolean"];
     return data;
   }
