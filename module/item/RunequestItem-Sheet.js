@@ -28,7 +28,8 @@ export class RunequestItemSheet extends ItemSheet {
   
     /** @override */
     getData() {
-      const data = super.getData();
+      const data = super.getData(options);
+      const actorData = data.data;
       data.config = CONFIG.RQG;
       data.dtypes = ["String", "Number", "Boolean"];
       if(data.entity.type == "item") {
@@ -39,6 +40,8 @@ export class RunequestItemSheet extends ItemSheet {
       else if(data.entity.type == "item") {
         //Will be used to prepare data for skills when we fully implement it
       }
+      data.item = itemData;
+      data.data = itemData.data;
       return data;
     }
   

@@ -1,9 +1,10 @@
 <div class="skills-list">
+    {{log actor}}
     {{#each actor.skills as |skills skillcategory|}}
         <table class="skill-category-table skillcategory" data-skillcategory="{{skillcategory}}">
             <thead>
                 <tr>
-                    <th class="item-name" colspan=2>{{skillcategory}}</div>
+                    <th class="item-name" colspan="2">{{skillcategory}}</th>
                     <th class="item-name">{{skillcategorymodifier @root.actor.data.skillcategory skillcategory}}</th>
                     <th class="item-name">
                         <a class="item-control item-create" title="Create item" data-type="skill" data-skillcategory="{{skillcategory}}"><i class="fas fa-plus"></i></a>
@@ -13,7 +14,7 @@
             </thead>
             {{#each skills as |item id|}}
                 <tr class="skill" data-item-id="{{item._id}}" data-itemid="{{item._id}}">
-                    <td class="item" data-itemid="{{item._id}}" colspan=2><a class="skill-roll" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.skillcategory}}">{{item.name}}</a></td>
+                    <td class="item" data-itemid="{{item._id}}" colspan="2"><a class="skill-roll" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.skillcategory}}">{{item.name}}</a></td>
                     <td class="item" data-itemid="{{item._id}}"><a class="skill-roll" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.skillcategory}}">{{item.data.total}}</a></td>
                     <td class="item" data-itemid="{{item._id}}"><input class="experience" id="{{id}}_{{item._id}}_experience_skill" type="checkbox" name="item.data.experience" {{checked item.data.experience}}/></td>                         
                 </tr>

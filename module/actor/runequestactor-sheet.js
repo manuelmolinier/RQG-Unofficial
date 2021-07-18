@@ -20,17 +20,18 @@ export class RunequestActorSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
-    const data = super.getData();
+  getData(options) {
+    const data = super.getData(options);
+    const actorData = data.data;
     data.dtypes = ["String", "Number", "Boolean"];
-
     data.config = CONFIG.RQG;
-
     // Prepare items.
     if (this.actor.data.type == 'character') {
       this._prepareCharacterItems(data);
       //this._prepareCharacterFlags(data);
     }
+    data.actor = actorData;
+    data.data = actorData.data;
     return data;
   }
   /**
@@ -84,6 +85,7 @@ export class RunequestActorSheet extends ActorSheet {
     let totalwounds = 0;
     // Iterate through items, allocating to containers
     // let totalWeight = 0;
+    console.log(actorData);
     for (let i of sheetData.items) {
       let item = i.data;
       i.img = i.img || DEFAULT_TOKEN;
@@ -99,12 +101,12 @@ export class RunequestActorSheet extends ActorSheet {
             defense.push(i);
           }
           if(i.data.name == "Dodge") {
-            i.data.base=actorData.data.characteristics.dexterity.value*2;
+            i.data.base=actorData.data.data.characteristics.dexterity.value*2;
             this._prepareSkill(i);
             defense.push(i);
           }
           if(i.data.name == "Jump") {
-            i.data.base=actorData.data.characteristics.dexterity.value*3;
+            i.data.base=actorData.data.data.characteristics.dexterity.value*3;
             this._prepareSkill(i);
           }
           skills[i.data.skillcategory].push(i);          
@@ -161,7 +163,7 @@ export class RunequestActorSheet extends ActorSheet {
     actorData.cults = cults;
     actorData.defense = defense;
     actorData.mpstorage = mpstorage;
-    actorData.data.attributes.hitpoints.value = actorData.data.attributes.hitpoints.max - totalwounds;
+    actorData.data.data.attributes.hitpoints.value = actorData.data.data.attributes.hitpoints.max - totalwounds;
     actorData.data.gear = gear;
     actorData.data.skills = skills;
     actorData.data.attacks = attacks;
@@ -171,7 +173,9 @@ export class RunequestActorSheet extends ActorSheet {
     actorData.data.cults = cults;
     actorData.data.defense = defense;
     actorData.data.mpstorage = mpstorage;
-    actorData.data.attributes.hitpoints.value = actorData.data.attributes.hitpoints.max - totalwounds;
+    actorData.data.data.attributes.hitpoints.value = actorData.data.data.attributes.hitpoints.max - totalwounds;
+    console.log("ActorSheet - Prepare Items");
+    console.log(actorData);
   }
 
   /* -------------------------------------------- */
@@ -1320,7 +1324,7 @@ export class RunequestActorSheet extends ActorSheet {
       "RQG.LLEG": 5,
       "RQG.RLEG": 5
     };
-    hitlocation.data.maxhp = humanoidlocations[hitlocation.name] + actorData.data.attributes.hpmodifier;
+    hitlocation.data.maxhp = humanoidlocations[hitlocation.name] + actorData.data.data.attributes.hpmodifier;
     hitlocation.data.currenthp = hitlocation.data.maxhp - hitlocation.data.wounds;
   }  
 }
