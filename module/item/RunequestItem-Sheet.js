@@ -28,8 +28,8 @@ export class RunequestItemSheet extends ItemSheet {
   
     /** @override */
     getData() {
-      const data = super.getData(options);
-      const actorData = data.data;
+      const data = super.getData();
+      const itemData = data.data;
       data.config = CONFIG.RQG;
       data.dtypes = ["String", "Number", "Boolean"];
       if(data.entity.type == "item") {

@@ -7,7 +7,7 @@
                     <a class="item-control item-create" title="Create item" data-type="spiritspell"><i class="fas fa-plus"></i></a>
                 </div>
             </li>
-            {{#each actor.spells.spirit as |spell id|}}
+            {{#each spells.spirit as |spell id|}}
                 <li class="item flexrow" data-item-id="{{spell._id}}" data-spellname="{{spell.name}}">
                     <h4 class="item-name"><a class="spiritspell-roll">{{spell.name}}</a></h4>
                     <h4 class="item-name"><a class="spiritspell-roll">{{spell.data.mpcost}}</a></h4>
@@ -29,7 +29,7 @@
                     <a class="item-control item-create" title="Create item" data-type="cult"><i class="fas fa-plus"></i></a>
                 </div>
             </li>
-            {{#each actor.cults as |cult id|}}
+            {{#each cults as |cult id|}}
                 <li class="item flexrow" data-item-id="{{cult._id}}" data-cultname="{{cult.name}}">
                     <h4 class="item-name">{{cult.name}}</h4>
                     <h4 class="item-name">{{cult.data.rank}}</h4>
@@ -52,7 +52,7 @@
                     <a class="item-control item-create" title="Create item" data-type="runespell"><i class="fas fa-plus"></i></a>
                 </div>
             </li>
-            {{#each actor.spells.rune as |spell id|}}
+            {{#each spells.rune as |spell id|}}
                 <li class="item flexrow" data-item-id="{{spell._id}}" data-spellname="{{spell.name}}" data-rune="{{spell.data.rune}}">
                     <h4 class="item-name"><a class="runespell-roll">{{spell.name}}</a></h4>
                     <h4 class="item-name"><a class="runespell-roll">{{spell.data.points}}</a></h4>
@@ -76,7 +76,7 @@
             <th style="width: 10%; text-align: center; height: 28px;"><a class="item-control item-create" title="Create item" data-type="mpstorage"><i class="fas fa-plus"></i></a></th>
         </thead>
         <tbody>
-        {{#each actor.mpstorage as |storage id|}}
+        {{#each mpstorage as |storage id|}}
             <tr style="height: 28px;">
             <td style="width: 25%; height: 28px; text-align: center;">{{localize storage.name}}</td>
             <td style="width: 15%; height: 28px; text-align: center;"><input id="{{id}}_{{storage._id}}_currentmp_mpstorage" type="text" name="storage.data.currentmp" value="{{storage.data.currentmp}}"/></td>

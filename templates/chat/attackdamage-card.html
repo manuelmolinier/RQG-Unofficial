@@ -1,15 +1,24 @@
 <div class="runequest chat-card skill-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}"
      {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}>
     <header class="card-header">
-        <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
+        <img src="{{item.parent.img}}" title="{{item.name}}" width="36" height="36"/>
         <h3 class="item-name">{{item.name}}</h3>
     </header>
-    {{log attack.data}}
     <div class="card-content">
-        {{attack.name}} Roll using {{attack.data.data.skillused}}<br/>
-        Roll: {{roll.total}} vs {{target}}</br>
-        {{result}} <br/>
-        Damage: {{damageData.totaldamage}}
+        Roll: {{roll.total}} vs {{target}}  - <h1>{{result}}</h1>
+        {{log damageData}}
+        Damage: <br/>
+            {{#if damageData.criticaldamage._evaluated}}
+                Weapon damage: {{damageData.criticaldamage._total}} <br/>
+            {{else}}
+                {{#if damageData.specialdamage._evaluated}}
+                    Weapon damage: {{damageData.specialdamage._total}} <br/>
+                {{else}}
+                    Weapon damage: {{damageData.damage._total}} <br/> 
+                {{/if}}
+            {{/if}}
+            Damage Bonus: {{damageData.damagebonus._total}} <br/> 
+            <h1>Total: {{damageData.totaldamage}}</h1>
     </div>
     <div class="card-content">
         Localization: {{hitlocation}}

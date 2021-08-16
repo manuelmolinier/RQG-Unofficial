@@ -19,8 +19,46 @@ export class RunequestActorSheet extends ActorSheet {
 
   /* -------------------------------------------- */
 
+  getData() {
+    // Retrieve the data structure from the base sheet. You can inspect or log
+    // the context variable to see the structure, but some key properties for
+    // sheets are the actor object, the data object, whether or not it's
+    // editable, the items array, and the effects array.
+    console.log("getData() starting");
+    const context = super.getData();
+
+    // Use a safe clone of the actor data for further operations.
+    const actorData = context.actor.data;
+
+    // Add the actor's data to context.data for easier access, as well as flags.
+    context.data = actorData.data;
+    context.flags = actorData.flags;
+
+    // Prepare character data and items.
+    if (actorData.type == 'character') {
+      this._prepareItems(context);
+      this._prepareCharacterData(context);
+    }
+
+    // Prepare NPC data and items.
+    if (actorData.type == 'npc') {
+      this._prepareItems(context);
+    }
+
+    // Add roll data for TinyMCE editors.
+    context.rollData = context.actor.getRollData();
+
+    // Prepare active effects
+    // Commented until new Active effects are added
+    //context.effects = prepareActiveEffectCategories(this.actor.effects);
+
+    return context;
+  }
+
   /** @override */
+  /**
   getData(options) {
+    console.log("getData(options) started");
     const data = super.getData(options);
     const actorData = data.data;
     data.dtypes = ["String", "Number", "Boolean"];
@@ -34,6 +72,7 @@ export class RunequestActorSheet extends ActorSheet {
     data.data = actorData.data;
     return data;
   }
+   */
   /**
    * Organize and prepare Flags for Character sheets. For testing purpose may set some flags
    *
@@ -41,6 +80,155 @@ export class RunequestActorSheet extends ActorSheet {
    *
    * @return {undefined}
    */
+
+  /**
+   * Organize and classify Items for Character sheets.
+   *
+   * @param {Object} actorData The actor to prepare.
+   *
+   * @return {undefined}
+   */
+   _prepareCharacterData(context) {
+  }
+
+  /**
+ * Organize and classify Items for Character sheets.
+ *
+ * @param {Object} actorData The actor to prepare.
+ *
+ * @return {undefined}
+ */
+  _prepareItems(context) {
+    /*
+    // Initialize containers.
+    const gear = [];
+    const defense = [];
+    const skills = {
+      "agility": [],
+      "communication": [],
+      "knowledge": [],
+      "magic": [],
+      "manipulation": [],
+      "perception": [],
+      "stealth": [],
+      "meleeweapons": [],
+      "missileweapons": [],
+      "shields": [],
+      "naturalweapons": [],
+      "others": []
+    };
+    const attacks = {
+      "melee": [],
+      "missile": [],
+      "natural":[]
+    }
+    const spells = {
+      "spirit": [],
+      "rune": [],
+      "sorcery":[]
+    }
+    const passions = [];
+    const cults = [];
+    const mpstorage = [];
+    var hitlocations =[];
+    let totalwounds = 0;
+    const features = [];
+    // Iterate through items, allocating to containers
+    for (let i of context.items) {
+      i.img = i.img || DEFAULT_TOKEN;
+      // Append to gear.
+      if (i.type === 'item') {
+        gear.push(i);
+      }
+      // Append to features.
+      else if (i.type === 'feature') {
+        features.push(i);
+      }
+      // Append to spells.
+      else if (i.type === 'spell') {
+        if (i.data.spellLevel != undefined) {
+          spells[i.data.spellLevel].push(i);
+        }
+      }
+      // Append to skills.
+      else if (i.type === 'skill') {
+        this._prepareSkill(i); // To be removed once fix is found
+        if (i.data.skillcategory != undefined) {
+          if(i.data.skillcategory == "shields"){
+            defense.push(i);
+          }
+          if(i.data.name == "Dodge") {
+            i.data.base=context.data.characteristics.dexterity.value*2;
+            this._prepareSkill(i);
+            defense.push(i);
+          }
+          if(i.data.name == "Jump") {
+            i.data.base=context.data.characteristics.dexterity.value*3;
+            this._prepareSkill(i);
+          }
+          skills[i.data.skillcategory].push(i);          
+        }
+        else {
+          skills["others"].push(i);
+        }
+      }
+      else if (i.type === 'attack') {
+        attacks[i.data.attacktype].push(i);
+      }
+      else if (i.type === 'meleeattack') {
+        attacks["melee"].push(i);
+      }
+      else if (i.type === 'missileattack') {
+        attacks["missile"].push(i);
+      }
+      else if (i.type === 'naturalattack') {
+        attacks["natural"].push(i);
+      }
+      else if (i.type === 'spiritspell') {
+        spells["spirit"].push(i);
+      }
+      else if (i.type === 'runespell') {
+        spells["rune"].push(i);
+      }
+      else if (i.type === 'sorceryspell') {
+        spells["sorcery"].push(i);
+      }
+      else if (i.type === 'hitlocation') {
+        //update hitlocation
+        this._preparehitlocation(i,context);
+        totalwounds+= Number(i.data.wounds);
+        hitlocations.push(i);
+      }
+      else if (i.type === 'passion') {
+        this._preparePassion(i);
+        passions.push(i);
+      }
+      else if (i.type === 'cult') {
+        cults.push(i);
+      }
+      else if(i.type === 'mpstorage') {
+        mpstorage.push(i);
+      }        
+    }
+
+    // Assign and return
+    context.gear = gear;
+    context.features = features;
+    context.spells = spells;
+    context.skills = skills;
+    context.gear = gear;
+    context.skills = skills;
+    context.attacks = attacks;
+    context.spells = spells;
+    context.hitlocations = hitlocations;
+    context.passions = passions;
+    context.cults = cults;
+    context.defense = defense;
+    context.mpstorage = mpstorage;
+    context.data.attributes.hitpoints.value = context.data.attributes.hitpoints.max - totalwounds;
+    */
+  }
+  
 
   /**
    * Organize and classify Items for Character sheets.
@@ -275,7 +463,7 @@ export class RunequestActorSheet extends ActorSheet {
       const row= event.target.parentElement.parentElement;
       let passionname = row.dataset["passionname"];
       const passionid = row.dataset["itemId"];
-      const passion = data.actor.passions.find(function(element) {
+      const passion = data.passions.find(function(element) {
         return element._id==passionid;
       });
       let dialogOptions = {
@@ -335,7 +523,8 @@ export class RunequestActorSheet extends ActorSheet {
 
     html.find('.elementalrunes-roll').mousedown(event => {
       event.preventDefault();
-      const data = this.getData();
+      const data = this.getData().data;
+      console.log(data);
       if(event.button == 0) {}
       else {return;}
       const runerow= event.target.parentElement.parentElement;
@@ -603,6 +792,8 @@ export class RunequestActorSheet extends ActorSheet {
   _onAttackRoll(event) {
     event.preventDefault();
     const data = this.getData();
+    console.log("starting _onAttackRoll");
+    console.log(data.data);
     if(event.button == 0) {}
     else {return;}
     const attackrow = event.target.parentElement.parentElement;
@@ -615,8 +806,8 @@ export class RunequestActorSheet extends ActorSheet {
         // Prefilled dialog data
 
         data : {
-          "attacks": data.actor.attacks,
-          "data": data
+          "attacks": data.data.attacks,
+          "data": data.data
         },
         callback : (html) => {
           // When dialog confirmed, fill testData dialog information
@@ -711,7 +902,16 @@ export class RunequestActorSheet extends ActorSheet {
   _onSkillRoll(event) {
     event.preventDefault();
     const data = this.getData();
-    if(event.button == 0) {}
+    console.log(event);
+    if(event.button == 0) {
+      if(event.ctrlKey == true){
+        const skillid = event.currentTarget.dataset.itemid;
+        let skill = this.actor.getOwnedItem(skillid);
+        console.log(skill)
+        skill.gainroll();
+        return;
+      }
+    }
     else if(event.button == 2) {
       if(event.altKey == true){
         this.actor.deleteOwnedItem(event.currentTarget.dataset.itemid);
@@ -1258,47 +1458,47 @@ export class RunequestActorSheet extends ActorSheet {
   }*/  
   _updateObject(event, formData) {
     const actor = this.getData().actor
-    const skills = actor.skillsAndPassions
+    const skills = actor.skills;
     const hitLocations = actor.hitLocations
     if (event.target != null) {
       if (event.target.id.includes("_hitloc")) {
-        let fieldInfo = event.target.id.split('_')
-        let hitLocIndex = fieldInfo[0]
-        let hitLoc = this.actor.getOwnedItem(fieldInfo[1])
-        let hitLocField = fieldInfo[2]
-        let updateField = ''
-        let newFieldValue = ''
+        let fieldInfo = event.target.id.split('_');
+        let hitLocIndex = fieldInfo[0];
+        let hitloc = this.actor.items.get(fieldInfo[1]);
+        console.log("updating localization");
+        console.log(hitloc);
+        let hitLocField = fieldInfo[2];
+        let updateField = '';
+        let newFieldValue = '';
         if (hitLocField === 'name') {
-          updateField = 'name'
-          newFieldValue = formData['hl.name'][Number(hitLocIndex)]
+          updateField = 'name';
+          newFieldValue = formData['hl.name'][Number(hitLocIndex)];
         } else {
-          updateField = 'data.' + hitLocField
-          newFieldValue =
-            formData['hl.data.' + hitLocField][Number(hitLocIndex)]
+          updateField = 'data.' + hitLocField;
+          newFieldValue = formData['hl.data.' + hitLocField][Number(hitLocIndex)];
         }
-        this.actor.updateEmbeddedEntity('OwnedItem', {
-          _id: hitLoc._id,
-          [updateField]: newFieldValue
-        })
+        hitloc.update({[updateField]:newFieldValue});
       }
       else if (event.target.id.includes("_skill")) {
-        let fieldInfo = event.target.id.split('_')
-        let skillindex = fieldInfo[0]
-        let skill = this.actor.getOwnedItem(fieldInfo[1])
-        let skillField = fieldInfo[2]
-        let updateField = ''
-        let newFieldValue = ''
+        let fieldInfo = event.target.id.split('_');
+        let skillindex = fieldInfo[0];
+        let skill = this.actor.items.get(fieldInfo[1]);
+        let skillField = fieldInfo[2];
+        let updateField = '';
+        let newFieldValue = '';
         if (skillField === 'name') {
-          updateField = 'name'
-          newFieldValue = formData['item.name'][Number(skillIndex)]
+          updateField = 'name';
+          newFieldValue = formData['item.name'][Number(skillIndex)];
         } else {
-          updateField = 'data.' + skillField
+          updateField = 'data.' + skillField;
           newFieldValue = formData['item.data.' + skillField][Number(skillindex)];
         }
-        this.actor.updateEmbeddedEntity('OwnedItem', {
-          _id: skill._id,
+        return skill.update({[updateField]:newFieldValue});
+/*        this.actor.updateEmbeddedDocuments('Item', {
+          _id: skill.id,
           [updateField]: newFieldValue
         })
+*/
       }
 
       else {
@@ -1324,7 +1524,7 @@ export class RunequestActorSheet extends ActorSheet {
       "RQG.LLEG": 5,
       "RQG.RLEG": 5
     };
-    hitlocation.data.maxhp = humanoidlocations[hitlocation.name] + actorData.data.data.attributes.hpmodifier;
+    hitlocation.data.maxhp = humanoidlocations[hitlocation.name] + actorData.data.attributes.hpmodifier;
     hitlocation.data.currenthp = hitlocation.data.maxhp - hitlocation.data.wounds;
   }  
 }

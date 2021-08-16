@@ -8,7 +8,6 @@ export class RunequestActor extends Actor {
 
 
   static async create(data, options) {
-    console.log("Create Actor");
     // If the created actor has items (only applicable to duplicated actors) bypass the new actor creation logic
     if (data.items)
     {
@@ -35,14 +34,12 @@ export class RunequestActor extends Actor {
   }
 
   getRollData() {
-    console.log("getRollData");
     const data = super.getRollData();
     const shorthand = game.settings.get("Runequest", "macroShorthand");
 
     // Re-map all attributes onto the base roll data
     if ( !!shorthand ) {
       for ( let [k, v] of Object.entries(data.attributes) ) {
-        console.log(k+":"+v.value);
         if ( !(k in data) ) data[k] = v.value;
       }
       //delete data.attributes;
@@ -80,11 +77,10 @@ export class RunequestActor extends Actor {
     }
     this._prepareattributes(data);
     this._prepareskillcategoriesmodifier(data);
+    this.prepareItems();
   }
 
   prepareDerivedData(){
-    console.log("prepareDerivedData");
-    console.log(this.data);
     super.prepareDerivedData();
   }
 
@@ -96,44 +92,125 @@ export class RunequestActor extends Actor {
     };
   }
   prepareItems(){
-    console.log("start prepareItems");
-    let actorData = duplicate(this.data)
-    // These containers are for the various type of items
-    const skills = [];
-    const passions= [];
-    for (let i of actorData.items) 
-    {
-      try 
-      {
-        i.img = i.img || DEFAULT_TOKEN;
-        // *********** Skills ***********
-        if (i.type === "skill") 
-        {
-          this.prepareSkill(i);
-          skills.push(i);
+    let context = this.data;
+    const gear = [];
+    const defense = [];
+    const skills = {
+      "agility": [],
+      "communication": [],
+      "knowledge": [],
+      "magic": [],
+      "manipulation": [],
+      "perception": [],
+      "stealth": [],
+      "meleeweapons": [],
+      "missileweapons": [],
+      "shields": [],
+      "naturalweapons": [],
+      "others": []
+    };
+    const attacks = {
+      "melee": [],
+      "missile": [],
+      "natural":[]
+    }
+    const spells = {
+      "spirit": [],
+      "rune": [],
+      "sorcery":[]
+    }
+    const passions = [];
+    const cults = [];
+    const mpstorage = [];
+    var hitlocations =[];
+    let totalwounds = 0;
+    const features = [];
+    // Iterate through items, allocating to containers
+    for (let i of context.items) {
+      // Append to gear.
+      if (i.type === 'item') {
+        gear.push(i);
+      }
+      // Append to features.
+      else if (i.type === 'feature') {
+        features.push(i);
+      }
+      // Append to skills.
+      else if (i.type === 'skill') {
+        this.prepareSkill(i); // To be removed once fix is found
+        if (i.data.data.skillcategory != undefined) {
+          if(i.data.data.skillcategory == "shields"){
+            defense.push(i);
+          }
+          if(i.data.name == "Dodge") {
+            i.data.data.base=context.data.characteristics.dexterity.value*2;
+            this.prepareSkill(i);
+            defense.push(i);
+          }
+          if(i.data.name == "Jump") {
+            i.data.data.base=context.data.characteristics.dexterity.value*3;
+            this.prepareSkill(i);
+          }
+          skills[i.data.data.skillcategory].push(i);          
         }
-        if (i.type === "passion") 
-        {
-          this.preparePassion(i);
-          passions.push(i);
-        }        
+        else {
+          skills["others"].push(i);
+        }
       }
-      catch (error) 
-      {
-        console.error("Something went wrong with preparing item " + i.name + ": " + error)
-        ui.notifications.error("Something went wrong with preparing item " + i.name + ": " + error)
-        ui.notifications.error("Deleting " + i.name);
-        this.deleteEmbeddedEntity("OwnedItem", i._id);
+      else if (i.type === 'attack') {
+        attacks[i.data.data.attacktype].push(i);
       }
+      else if (i.type === 'meleeattack') {
+        attacks["melee"].push(i);
+      }
+      else if (i.type === 'missileattack') {
+        attacks["missile"].push(i);
+      }
+      else if (i.type === 'naturalattack') {
+        attacks["natural"].push(i);
+      }
+      else if (i.type === 'spiritspell') {
+        spells["spirit"].push(i);
+      }
+      else if (i.type === 'runespell') {
+        spells["rune"].push(i);
+      }
+      else if (i.type === 'sorceryspell') {
+        spells["sorcery"].push(i);
+      }
+      else if (i.type === 'hitlocation') {
+        //update hitlocation
+        this._preparehitlocation(i,context);
+        totalwounds+= Number(i.data.wounds);
+        hitlocations.push(i);
+      }
+      else if (i.type === 'passion') {
+        this._preparePassion(i);
+        passions.push(i);
+      }
+      else if (i.type === 'cult') {
+        cults.push(i);
+      }
+      else if(i.type === 'mpstorage') {
+        mpstorage.push(i);
+      }        
     }
-    //End of items sorting
-    console.log("PrepareItems - logging skills array");
-    console.log(skills);
-    let preparedData = {
-      skills: skills,
-      passions: passions
-    }
-    return preparedData    
+
+    // Assign and return
+    context.data.gear = gear;
+    context.data.features = features;
+    context.data.spells = spells;
+    context.data.skills = skills;
+    context.data.gear = gear;
+    context.data.skills = skills;
+    context.data.attacks = attacks;
+    context.data.spells = spells;
+    context.data.hitlocations = hitlocations;
+    context.data.passions = passions;
+    context.data.cults = cults;
+    context.data.defense = defense;
+    context.data.mpstorage = mpstorage;
+    context.data.attributes.hitpoints.value = context.data.attributes.hitpoints.max - totalwounds;
   }
 
   /**
@@ -146,19 +223,14 @@ export class RunequestActor extends Actor {
    */
   prepareSkill(skill) 
   {
-    console.log("PrepareSkill"+skill.name);
-    let actorData = this.data
-    let catmodifier = actorData.data.skillcategory[skill.data.skillcategory].modifier;
-    skill.data.total=skill.data.base+skill.data.increase+skill.data.modifier+catmodifier;
-    console.log(skill.data.total);
+    let actorData = this.data;
+    skill.data.data.total=skill.data.data.base+skill.data.data.increase+skill.data.data.modifier;
     return skill;
   }
   preparePassion(passion) 
   {
-    console.log("PreparePassion"+passion.name);
     let actorData = this.data
     passion.data.total=passion.data.base+passion.data.increase+passion.data.modifier;
-    console.log(passion.data.total);
     return passion;
   }  
   _prepareattributes(data) {
@@ -177,10 +249,7 @@ export class RunequestActor extends Actor {
     console.log(data.attributes);
   }
   _preparedexsr(dex) {
-    console.log("dexsr");
-    console.log(dex);
     const value=dex.value;
-    console.log(value);
     if(value > 18) {
        return 0;
     }
@@ -201,10 +270,7 @@ export class RunequestActor extends Actor {
     }
   }
   _preparesizsr(siz) {
-    console.log("sizsr");
-    console.log(siz);
     const value=siz.value;
-    console.log(value);
     if(value > 21) {
        return 0;
     }
@@ -259,7 +325,6 @@ export class RunequestActor extends Actor {
     }
   }
   _prepareskillcategoriesmodifier(data) {
-    console.log("prepareskillcategoriesmodifier");
     for (const [index, category] of Object.entries(data.skillcategory)) {
       let categoryid=index;
       let modifiervalue=0;
@@ -350,6 +415,7 @@ export class RunequestActor extends Actor {
     return bonus;    
   }
   _preparehpmodifier(hp) {
+    console.log("Starting _preparehpmodifier");
     //compute Max HP modifier
     let modifier=0;
     if(hp < 13) {
@@ -360,4 +426,23 @@ export class RunequestActor extends Actor {
     }
     return modifier;    
   }
+  _preparePassion(passion) {
+    passion.data.total=passion.data.base+passion.data.increase+passion.data.modifier;
+  }
+  _preparehitlocation(hitlocation, actorData) {
+    // Prepare the HitLocations by calculating the Max HP of the location and the remaining HP based on wounds
+    console.log("_preparehitlocation");
+    console.log(hitlocation);
+    let humanoidlocations={
+      "RQG.HEAD": 5,
+      "RQG.LARM": 4,
+      "RQG.RARM": 4,
+      "RQG.CHEST": 6,
+      "RQG.ABDOMEN": 5,
+      "RQG.LLEG": 5,
+      "RQG.RLEG": 5
+    };
+    hitlocation.data.data.maxhp = humanoidlocations[hitlocation.name] + actorData.data.attributes.hpmodifier;
+    hitlocation.data.data.currenthp = hitlocation.data.data.maxhp - hitlocation.data.data.wounds;
+  }   
 }

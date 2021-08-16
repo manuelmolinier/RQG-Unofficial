@@ -17,37 +17,37 @@
                             <td class="characteristic-list-td characteristic" data-characteristic-id="charisma" colspan="2">{{localize "RQG.CHA"}}</td>
                         </tr>
                         <tr>
-                            <td class="characteristic-list-td characteristic" data-characteristic-id="strength" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.strength.value}}</a></td>
-                            <td class="characteristic-list-td characteristic" data-characteristic-id="constitution" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.constitution.value}}</a></td>
-                            <td class="characteristic-list-td characteristic" data-characteristic-id="size" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.size.value}}</a></td>
-                            <td class="characteristic-list-td characteristic" data-characteristic-id="dexterity" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.dexterity.value}}</a></td>
-                            <td class="characteristic-list-td characteristic" data-characteristic-id="intelligence" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.intelligence.value}}</a></td>
-                            <td class="characteristic-list-td characteristic" data-characteristic-id="power" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.power.value}}</a></td>
-                            <td class="characteristic-list-td characteristic" data-characteristic-id="charisma" colspan="2"><a class="summary-characteristic-roll">{{actor.data.characteristics.charisma.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="strength" colspan="2"><a class="summary-characteristic-roll">{{actor.data.data.characteristics.strength.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="constitution" colspan="2"><a class="summary-characteristic-roll">{{actor.data.data.characteristics.constitution.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="size" colspan="2"><a class="summary-characteristic-roll">{{actor.data.data.characteristics.size.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="dexterity" colspan="2"><a class="summary-characteristic-roll">{{actor.data.data.characteristics.dexterity.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="intelligence" colspan="2"><a class="summary-characteristic-roll">{{actor.data.data.characteristics.intelligence.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="power" colspan="2"><a class="summary-characteristic-roll">{{actor.data.data.characteristics.power.value}}</a></td>
+                            <td class="characteristic-list-td characteristic" data-characteristic-id="charisma" colspan="2"><a class="summary-characteristic-roll">{{actor.data.data.characteristics.charisma.value}}</a></td>
                         </tr>
                         <tr>
-                            <td class="characteristic-list-td" colspan="4">Damage Bonus: {{actor.data.attributes.damagebonus}}</td>
-                            <td class="characteristic-list-td" colspan="3">SIZ SR: {{actor.data.attributes.sizsr}}</td>
-                            <td class="characteristic-list-td" colspan="3">DEX SR: {{actor.data.attributes.dexsr}}</td>
-                            <td class="characteristic-list-td" colspan="4">Healing Rate: {{actor.data.attributes.healingrate}}</td>
+                            <td class="characteristic-list-td" colspan="4">Damage Bonus: {{actor.data.data.attributes.damagebonus}}</td>
+                            <td class="characteristic-list-td" colspan="3">SIZ SR: {{actor.data.data.attributes.sizsr}}</td>
+                            <td class="characteristic-list-td" colspan="3">DEX SR: {{actor.data.data.attributes.dexsr}}</td>
+                            <td class="characteristic-list-td" colspan="4">Healing Rate: {{actor.data.data.attributes.healingrate}}</td>
                         </tr>
                         <tr>
                             <td class="characteristic-list-td" colspan="7">
                                 <div>
-                                    {{localize 'RQG.HP'}}: <input class="resource-input" type="text" name="data.attributes.hitpoints.value" value="{{data.attributes.hitpoints.value}}" data-dtype="Number"/>
+                                    {{localize 'RQG.HP'}}: <input class="resource-input" type="text" name="actor.data.data.attributes.hitpoints.value" value="{{actor.data.data.attributes.hitpoints.value}}" data-dtype="Number"/>
                                     /
-                                    {{data.attributes.hitpoints.max}}
+                                    {{actor.data.data.attributes.hitpoints.max}}
                                 </div>
                             </td>                         
                             <td class="characteristic-list-td" colspan="7">
                                 <div>
-                                    {{localize 'RQG.MP'}}: <input class="resource-input" type="text" name="data.attributes.magicpoints.value" value="{{data.attributes.magicpoints.value}}" data-dtype="Number"/>
+                                    {{localize 'RQG.MP'}}: <input class="resource-input" type="text" name="actor.data.data.attributes.magicpoints.value" value="{{actor.data.data.attributes.magicpoints.value}}" data-dtype="Number"/>
                                     /
-                                    {{data.attributes.magicpoints.max}}
+                                    {{actor.data.data.attributes.magicpoints.max}}
                                 </div>
                             </td>
                         </tr>
-                        {{#each actor.cults as |cult id|}}
+                        {{#each cults as |cult id|}}
                         <tr>
                             <td class="characteristic-list-td" colspan="14">
                                 <li class="item flexrow" data-item-id="{{cult._id}}" data-cultname="{{cult.name}}">

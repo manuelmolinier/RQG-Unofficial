@@ -444,7 +444,8 @@
     "templates": ["description"],
     "points": 0,
     "keywords": [],
-    "runestechniques": []
+    "runestechniques": [],
+    "skill": ""
   },
   "meleeattack":{
     "name": "",
@@ -580,6 +581,11 @@
     "name": "",
     "templates": ["description"],
     "spell": []    
-  }  
+  },
+  "sorceryrune": {
+    "name": "",
+    "templates": ["description"],
+    "mastered": false    
+  }
 }  
 }

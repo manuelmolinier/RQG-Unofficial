@@ -59,12 +59,24 @@ Hooks.once("init", async function() {
 
 // Added Helpers to Handlebars
 Handlebars.registerHelper("skillcategorymodifier", function(skillcategories, skillcategory) {
+  console.log("skillcategorymodifier with:"+skillcategory)
   if(skillcategory == "others") {
     return 0;
   }
   var skillcat = skillcategories[skillcategory];
   var modifier = skillcat.modifier;
+  console.log("skillcategorymodifier exit with:"+modifier);
   return modifier;
+});
+Handlebars.registerHelper("getcharacterattackskills", function(actorid, attacktype) {
+  console.log("getcharacterattacks with:"+actorid);
+  console.log(attacktype);
+  const actor = game.actors.get(actorid);
+  const skillcategory = attacktype+"weapons";
+  console.log(actor);
+  console.log(skillcategory);
+  const attacks = actor.data.data.skills[skillcategory];
+  return attacks;
 });
 // Added Helpers to Handlebars
 Handlebars.registerHelper("getruneletter", function(runeid) {
@@ -88,4 +100,7 @@ Handlebars.registerHelper("getruneletter", function(runeid) {
     "chaos": "C"
   }
   return runes[runeid];
+});
+Handlebars.registerHelper('isdefined', function (value) {
+  return value !== undefined;
 });

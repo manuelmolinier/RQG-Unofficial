@@ -1,14 +1,12 @@
 <div class="runequest chat-card skill-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}"
      {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}>
     <header class="card-header">
-        <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
-        <h3 class="item-name">{{item.name}}</h3>
+        <img src="{{item.parent.img}}" title="{{item.name}}" width="36" height="36"/>
+        <h3 class="item-name">{{charname}}</h3>
     </header>
 
     <div class="card-content">
-        {{charname}} Roll<br/>
-        Rolls: {{roll.total}} vs {{target}}</br>
-        {{result}}
+        Rolls: {{roll.total}} vs {{target}} - <h1>{{result}}</h1>
     </div>
 
     <footer class="card-footer">
