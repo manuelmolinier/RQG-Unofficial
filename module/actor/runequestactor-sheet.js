@@ -758,7 +758,7 @@ export class RunequestActorSheet extends ActorSheet {
     });
     html.find('.summary-skill-roll').mousedown(event => this._onSkillRoll(event));
     html.find('.summary-characteristic-roll').click(event => this._onCharacteristicRoll(event));
-    html.find('.attack-roll').click(event => this._onAttackRoll(event));       
+    html.find('.attack-roll').click(event => this._onAttackRoll(event)); 
   }
   /* -------------------------------------------- */
 
@@ -1198,5 +1198,5 @@ export class RunequestActorSheet extends ActorSheet {
     };
     hitlocation.data.maxhp = humanoidlocations[hitlocation.name] + actorData.data.attributes.hpmodifier;
     hitlocation.data.currenthp = hitlocation.data.maxhp - hitlocation.data.wounds;
-  }  
+  }
 }
