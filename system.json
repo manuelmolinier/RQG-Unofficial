@@ -55,6 +55,6 @@
   "secondaryTokenAttribute": "attributes.magicpoints",
   "url": "https://gitlab.com/manuelmolinier/runequest-foundryvtt",
   "manifest": "https://gitlab.com/manuelmolinier/runequest-foundryvtt/-/raw/master/system.json",
-  "download": "https://gitlab.com/manuelmolinier/runequest-foundryvtt/-/archive/v0.1/runequest-foundryvtt-v0.1.zip",
+  "download": "https://gitlab.com/astarothrpg/runequest-foundryvtt/-/archive/latest/runequest-foundryvtt-latest.zip",
   "license": "LICENSE.txt"
 }
