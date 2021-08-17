@@ -38,14 +38,14 @@
             <tbody>
                 {{#each data.elementalrunes as |elementalrune id|}}
                     <tr data-rune="{{id}}">
-                        <td colspan="2"><a class="elementalrunes-roll rollable"><span class="runefont">{{getruneletter id}}</span>{{localize elementalrune.label}}: {{elementalrune.value}}</a></td>
+                        <td colspan="2"><a class="elementalrunes-roll rollable">{{localize elementalrune.label}}: {{elementalrune.value}}</a></td>
                         <td></td>
                     </tr>
                 {{/each}}
                 {{#each data.powerrunes as |powerrunepair pairid|}}
                     <tr data-runepair="{{pairid}}">
                     {{#each powerrunepair as |powerrune runeid|}}
-                        <td><a class="powerrunes-roll" data-rune="{{runeid}}"><span class="runefont">{{getruneletter runeid}}</span>{{localize powerrune.label}}: {{powerrune.value}}</a></td>
+                        <td><a class="powerrunes-roll" data-rune="{{runeid}}">{{localize powerrune.label}}: {{powerrune.value}}</a></td>
                     {{/each}}
                     </li>
                 {{/each}}
@@ -65,7 +65,7 @@
                                 <a class="item-control item-create" title="Create item" data-type="passion"><i class="fas fa-plus"></i></a>
                             </div>
                         </li>
-                        {{#each passions as |passion id|}}
+                        {{#each data.passions as |passion id|}}
                             <li class="item flexrow" data-item-id="{{passion._id}}" data-passionname="{{passion.name}}">
                                 <h4 class="item-name"><a class="passion-roll">{{passion.name}}</a></h4>
                                 <h4 class="item-name"><a class="passion-roll">{{passion.data.total}}</a></h4>
@@ -84,7 +84,7 @@
                 <li class="item item-header">
                     <div class="item-name flexrow">{{localize "RQG.MeleeAttacks"}}</div>
                 </li>
-                {{#each attacks.melee as |attack id|}}
+                {{#each data.attacks.melee as |attack id|}}
                     <li class="item flexrow" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="meleeweapons">
                         <span class="summary-attack-label"><a class="attack-roll">{{attack.name}}</a></span>
                         <span class="summary-attack-value">{{attack.data.skillvalue}}</label>
@@ -96,7 +96,7 @@
                 <li class="item item-header">
                     <div class="item-name flexrow">{{localize "RQG.MissileAttacks"}}</div>
                 </li>
-                {{#each attacks.missile as |attack id|}}
+                {{#each data.attacks.missile as |attack id|}}
                     <li class="item flexrow" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="missileweapons">
                         <h4 class="item-name"><a class="attack-roll">{{attack.name}}</a></h4>
                         <label class="skill-value">{{attack.data.skillvalue}}</label>
@@ -114,7 +114,7 @@
                     <th>{{localize "RQG.Defense"}}</th>
                 </thead>
                 <tbody>
-                {{#each defense as |item id|}}
+                {{#each data.defense as |item id|}}
                     <tr>
                         <td class="skill summary-skill-roll" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.skillcategory}}">
                             {{item.name}}: {{item.data.total}}                     

@@ -6,8 +6,29 @@ export class RunequestActor extends Actor {
 
   /** @override */
 
-
   static async create(data, options) {
+
+    // Case of compendium global import
+    if (data instanceof Array) {
+      return super.create(data, options);
+    }
+    // If the created actor has items (only applicable to duplicated actors) bypass the new actor creation logic
+    if (data.items) {
+      let actor = super.create(data, options);
+      return actor;
+    }
+
+    const competences = await this.loadCompendium("runequest.skills");
+    data.items = competences.map(i => i.toObject());
+    
+    return super.create(data, options);
+  }
+
+  /*
+  static async create(data, options) {
+    console.log("Entering create for Actor");
+    console.log(data);
+    console.log(options);
     // If the created actor has items (only applicable to duplicated actors) bypass the new actor creation logic
     if (data.items)
     {
@@ -22,16 +43,21 @@ export class RunequestActor extends Actor {
     const pack = game.packs.find(p => p.collection == "runequest.skills")
     var myskills;
     await pack.getIndex().then(index => myskills = index);
+    console.log(myskills);
     for (let sk of myskills)
     {
       let skillItem = undefined;
       await pack.getEntity(sk._id).then(skill => skillItem = skill);
+      console.log(skillItem);
       let skilldata = {"name":skillItem.data.name,"type":skillItem.data.type,"data":skillItem.data.data};
       let skill = new Item(skilldata);
+      console.log(skill);
       data.items.push(skill);
     }
+    console.log(data);
     return super.create(data, options);
   }
+  */  
 
   getRollData() {
     const data = super.getRollData();
@@ -444,5 +470,16 @@ export class RunequestActor extends Actor {
     };
     hitlocation.data.data.maxhp = humanoidlocations[hitlocation.name] + actorData.data.attributes.hpmodifier;
     hitlocation.data.data.currenthp = hitlocation.data.data.maxhp - hitlocation.data.data.wounds;
-  }   
+  }
+  /* -------------------------------------------- */
+  static async loadCompendiumData(compendium) {
+    const pack = game.packs.get(compendium);
+    return await pack?.getDocuments() ?? [];
+  }
+
+  /* -------------------------------------------- */
+  static async loadCompendium(compendium, filter = item => true) {
+    let compendiumData = await RunequestActor.loadCompendiumData(compendium);
+    return compendiumData.filter(filter);
+  }    
 }
