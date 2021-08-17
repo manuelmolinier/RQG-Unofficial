@@ -61,7 +61,6 @@
                             </div>
                         </li>
                         {{#each actor.passions as |passion id|}}
-                            {{log passion}}
                             <li class="item flexrow" data-item-id="{{passion._id}}" data-passionname="{{passion.name}}">
                                 <h4 class="item-name"><a class="passion-roll">{{passion.name}}</a></h4>
                                 <h4 class="item-name"><a class="passion-roll">{{passion.data.total}}</a></h4>

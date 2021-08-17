@@ -17,13 +17,13 @@
         </thead>
         <tbody>
         {{#each data.hitlocations as |hl id|}}
-            <tr style="height: 28px;">
+            <tr style="height: 28px;" class="item" data-itemid="{{hl._id}}">
             <td style="width: 25%; height: 28px; text-align: center;">{{localize hl.name}}</td>
             <td style="width: 15%; height: 28px; text-align: center;">{{hl.data.data.rangestart}}-{{hl.data.data.rangeend}}</td>
-            <td style="width: 15%; height: 28px; text-align: center;"><input id="{{id}}_{{hl._id}}_currenthp_hitloc" type="text" name="hl.data.data.currenthp" value="{{hl.data.data.currenthp}}"/></td>
+            <td style="width: 15%; height: 28px; text-align: center;"><input id="{{hl._id}}_currenthp" type="text" name="data.currenthp" value="{{hl.data.data.currenthp}}"/></td>
             <td style="width: 15%; height: 28px; text-align: center;">{{hl.data.data.maxhp}}</td>
-            <td style="width: 10%; height: 28px; text-align: center;"><input  id="{{id}}_{{hl._id}}_armor_hitloc" class="attribute-value"  type="text"  name="hl.data.data.armor"  value="{{hl.data.data.armor}}"  data-dtype="Number"  /></td>
-            <td style="width: 10%; text-align: center;"><input id="{{id}}_{{hl._id}}_wounds_hitloc" class="attribute-value"  type="text"  name="hl.data.data.wounds"  value="{{hl.data.data.wounds}}"  data-dtype="Number"  /></td>
+            <td style="width: 10%; height: 28px; text-align: center;"><input id="{{hl._id}}_armor" class="attribute-value hitloc-armor"  type="text"  name="data.armor"  value="{{hl.data.data.armor}}"  data-dtype="Number"  /></td>
+            <td style="width: 10%; text-align: center;"><input id="{{hl._id}}_wounds" class="attribute-value hitloc-wounds"  type="text"  name="data.wounds"  value="{{hl.data.data.wounds}}"  data-dtype="Number"  /></td>
             </tr>        
         {{/each}}
         </tbody>
@@ -68,7 +68,7 @@
                         {{#each data.passions as |passion id|}}
                             <li class="item flexrow" data-item-id="{{passion._id}}" data-passionname="{{passion.name}}">
                                 <h4 class="item-name"><a class="passion-roll">{{passion.name}}</a></h4>
-                                <h4 class="item-name"><a class="passion-roll">{{passion.data.total}}</a></h4>
+                                <h4 class="item-name"><a class="passion-roll">{{passion.data.data.total}}</a></h4>
                                 <div class="item-controls">
                                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -117,7 +117,7 @@
                 {{#each data.defense as |item id|}}
                     <tr>
                         <td class="skill summary-skill-roll" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.skillcategory}}">
-                            {{item.name}}: {{item.data.total}}                     
+                            {{item.name}}: {{item.data.data.total}}                     
                         </td>
                     </tr>
                 {{/each}}

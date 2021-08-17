@@ -1128,56 +1128,39 @@ export class RunequestActorSheet extends ActorSheet {
       return data.data.elementalrunes.air;  
     }
   }  
-  _updateObject(event, formData) {
+  async _updateObject(event, formData) {
+    console.log("_updateObjet");
+    console.log(event);
+    console.log(formData);
     const actor = this.getData().actor
-    const skills = actor.skills;
-    const hitLocations = actor.hitLocations
-    if (event.target != null) {
-      if (event.target.id.includes("_hitloc")) {
-        let fieldInfo = event.target.id.split('_');
-        let hitLocIndex = fieldInfo[0];
-        let hitloc = this.actor.items.get(fieldInfo[1]);
-        console.log("updating localization");
-        console.log(hitloc);
-        let hitLocField = fieldInfo[2];
-        let updateField = '';
-        let newFieldValue = '';
-        if (hitLocField === 'name') {
-          updateField = 'name';
-          newFieldValue = formData['hl.name'][Number(hitLocIndex)];
-        } else {
-          updateField = 'data.' + hitLocField;
-          newFieldValue = formData['hl.data.' + hitLocField][Number(hitLocIndex)];
+    const skills = actor.data.data.skills;
+    const hitLocations = actor.data.data.hitlocations;
+    if (event.target) {
+      console.log(event.currentTarget.classList);
+      if( event.currentTarget.classList){
+        console.log()
+        if(event.currentTarget.classList.contains('hitloc-wounds')){
+          console.log(event.currentTarget.closest('.item').dataset);
+					let hl = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemid);
+          console.log(hl);
+          
+          if(hl){
+            const value = event.currentTarget.value? parseInt(event.currentTarget.value) : null;
+            console.log("value:"+value);
+            console.log("name:"+event.currentTarget.name);
+            if( !event.currentTarget.value) {
+              await hl.update( {[event.currentTarget.name]: null});
+            }
+            else if( !isNaN(value)) {
+               await hl.update( {[event.currentTarget.name]: value});           
+						}
+            console.log(hl);
+          }
+          
         }
-        hitloc.update({[updateField]:newFieldValue});
       }
-      else if (event.target.id.includes("_skill")) {
-        let fieldInfo = event.target.id.split('_');
-        let skillindex = fieldInfo[0];
-        let skill = this.actor.items.get(fieldInfo[1]);
-        let skillField = fieldInfo[2];
-        let updateField = '';
-        let newFieldValue = '';
-        if (skillField === 'name') {
-          updateField = 'name';
-          newFieldValue = formData['item.name'][Number(skillIndex)];
-        } else {
-          updateField = 'data.' + skillField;
-          newFieldValue = formData['item.data.' + skillField][Number(skillindex)];
-        }
-        return skill.update({[updateField]:newFieldValue});
-/*        this.actor.updateEmbeddedDocuments('Item', {
-          _id: skill.id,
-          [updateField]: newFieldValue
-        })
-*/
-      }
-
-      else {
-        super._updateObject(event, formData);
-      }
-    }  
-    return this.actor.update(formData)
+    }
+    return this.object.update(formData);
   }
   _prepareSkill(skill) {
     skill.data.total=skill.data.base+skill.data.increase;

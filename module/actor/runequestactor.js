@@ -207,7 +207,8 @@ export class RunequestActor extends Actor {
       else if (i.type === 'hitlocation') {
         //update hitlocation
         this._preparehitlocation(i,context);
-        totalwounds+= Number(i.data.wounds);
+        console.log("totalwounds is:"+totalwounds+" and increase by:"+i.data.data.wounds);
+        totalwounds+= Number(i.data.data.wounds);
         hitlocations.push(i);
       }
       else if (i.type === 'passion') {

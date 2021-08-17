@@ -44,7 +44,7 @@
         {{#each data.attacks.melee as |attack id|}}
             <li class="item flexrow" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="meleeweapons">
                 <h4 class="item-name"><a class="attack-roll">{{attack.name}}</a></h4>
-                <h4 class="item-name">{{log lookup config.weaponskills [attack.data.data.skillused]}}</h4>
+                <h4 class="item-name">{{attack.data.data.skillused}}</h4>
                 <label class="skill-value">{{attack.data.data.modifier}}</label>
                 <h4 class="item-name">{{attack.data.data.damage}}</h4>
                 <h4 class="item-name">{{attack.data.data.hpcurrent}} / {{attack.data.data.hpmax}}</h4>
