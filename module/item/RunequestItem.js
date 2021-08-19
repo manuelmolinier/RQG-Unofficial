@@ -120,6 +120,7 @@ export class RunequestItem extends Item {
       const categoryid= skill.data.data.skillcategory;
       let catmodifier = actor.data.data.skillcategory[categoryid].modifier;
       let skillvalue = skill.data.data.total;
+      let result="failure";
 
       var dialogOptions;
       dialogOptions = {
@@ -141,10 +142,11 @@ export class RunequestItem extends Item {
           catmodifier = Number(html.find('[name="catmodifier"]').val());
           skillvalue =   Number(html.find('[name="skillvalue"]').val());
           const target = (skillvalue+catmodifier+testmodifier);
-          this.basicRoll(skillname,target);              
+          let result = this.basicRoll(skillname,target);
+          return result;
         }
       };
-      renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
+      result = renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
         {
           new Dialog(
           {
@@ -160,7 +162,8 @@ export class RunequestItem extends Item {
             },
             default: "rollButton"
           }).render(true);
-        }); 
+        });
+      console.log(result);        
     }
     async htmldamageroll(roll,target,result,attack,damagebonus) {
       //const itemData = this.data.data;

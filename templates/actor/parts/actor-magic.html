@@ -11,7 +11,6 @@
                 <li class="item flexrow" data-item-id="{{spell._id}}" data-spellname="{{spell.name}}">
                     <h4 class="item-name"><a class="spiritspell-roll">{{spell.name}}</a></h4>
                     <h4 class="item-name"><a class="spiritspell-roll">{{spell.data.mpcost}}</a></h4>
-                    <input class="experiencecheck" type="checkbox" name="spell.flags.dynamiceffects.alwaysActive" {{checked spell.flags.dynamiceffects.alwaysActive}}/>
                     <div class="item-controls">
                         <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                         <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -53,10 +52,10 @@
                 </div>
             </li>
             {{#each data.spells.rune as |spell id|}}
-                <li class="item flexrow" data-item-id="{{spell._id}}" data-spellname="{{spell.name}}" data-rune="{{spell.data.rune}}">
+                <li class="item flexrow" data-item-id="{{spell._id}}" data-spellname="{{spell.name}}" data-rune="{{spell.data.data.rune}}">
                     <h4 class="item-name"><a class="runespell-roll">{{spell.name}}</a></h4>
-                    <h4 class="item-name"><a class="runespell-roll">{{spell.data.points}}</a></h4>
-                    <h4 class="item-name"><a class="runespell-roll"><span class="runefont">{{getruneletter spell.data.rune}}</span></a></h4>
+                    <h4 class="item-name"><a class="runespell-roll">{{spell.data.data.points}}</a></h4>
+                    <h4 class="item-name"><a class="runespell-roll"><span class="runefont">{{spell.data.data.rune}}</span></a></h4>
                     <div class="item-controls">
                         <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                         <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

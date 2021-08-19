@@ -461,11 +461,12 @@ export class RunequestActorSheet extends ActorSheet {
       if(event.button == 0) {}
       else {return;}      
       const row= event.target.parentElement.parentElement;
+      console.log(row);
       let passionname = row.dataset["passionname"];
       const passionid = row.dataset["itemId"];
-      const passion = data.passions.find(function(element) {
-        return element._id==passionid;
-      });
+      console.log("passionname:"+passionname+" - passionid:"+passionid);
+      const passion = this.actor.getOwnedItem(passionid);
+      console.log(passion);
       let dialogOptions = {
         title: "Passion Roll",
         template : "/systems/runequest/templates/chat/skill-dialog.html",
@@ -474,7 +475,7 @@ export class RunequestActorSheet extends ActorSheet {
 
         data : {
           "skillname": passionname,
-          "skillvalue": passion.data.total,
+          "skillvalue": passion.data.data.total,
           "catmodifier": 0
         },
         callback : (html) => {
@@ -509,12 +510,16 @@ export class RunequestActorSheet extends ActorSheet {
 
     // Roll for Rune Spells
     html.find('.runespell-roll').mousedown(event => {
+      console.log("casting a runespell");
+      console.log(event);
+      console.log(event.button);
       event.preventDefault();
       const data = this.getData();
       if(event.button == 0) {}
       else {return;}
       const row= event.target.parentElement.parentElement;
       const runename = row.dataset["rune"];
+      console.log(runename);
       const spellname = row.dataset["spellname"]+" ("+runename+")";
       const rune = this._findrune(data,runename);
       const target = rune.value;

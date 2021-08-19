@@ -307,6 +307,40 @@ input[type="text"]
   border-bottom: 1px solid #BBB;
   justify-content: flex-end;
 }
+.worldbuilding .summary-passions-list {
+  /* font-family: AtlantisRegular; */
+  font-size:14px;
+  list-style: none;
+  margin: 2px;
+  padding: 2px;
+  width:90%;
+  margin-bottom: 10px;
+  border: 2px solid rgb(8, 8, 8);  
+}
+.worldbuilding .summary-passions-list .item {
+  height: auto;
+  line-height: 24px;
+  padding: 3px 0;
+  border-bottom: 1px solid #BBB;
+  justify-content: flex-end;
+}
+.worldbuilding .summary-naturalattack-list {
+  /* font-family: AtlantisRegular; */
+  font-size:14px;
+  list-style: none;
+  margin: 2px;
+  padding: 2px;
+  width:90%;
+  margin-bottom: 10px;
+  border: 2px solid rgb(8, 8, 8);  
+}
+.worldbuilding .summary-naturalattack-list .item {
+  height: auto;
+  line-height: 24px;
+  padding: 3px 0;
+  border-bottom: 1px solid #BBB;
+  justify-content: flex-end;
+}
 .worldbuilding .summary-attack-label {
   flex: 1;
 }
@@ -449,4 +483,7 @@ input[type="text"]
 }
 .worldbuilding .runesbanner {
   font-family: 'RunequestRunes';
+}
+.worldbuilding .section-padding {
+  padding: 10px;
 }

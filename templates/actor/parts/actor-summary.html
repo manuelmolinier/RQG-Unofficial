@@ -55,55 +55,83 @@
 </div>
 <div class="summary-row flexrow">
     <div class="summary-column flexcolumn">
-        <div class="summary-passions-list">
-            <div class="item flexrow item-header">         
-                <ol class="summary-second-row">          
-                    <div class="skill-category">
-                        <li class="item flexrow item-header">
-                            <div class="item-name">{{localize "RQG.Passions"}}</div>
-                            <div class="item-controls">
-                                <a class="item-control item-create" title="Create item" data-type="passion"><i class="fas fa-plus"></i></a>
-                            </div>
-                        </li>
-                        {{#each data.passions as |passion id|}}
-                            <li class="item flexrow" data-item-id="{{passion._id}}" data-passionname="{{passion.name}}">
-                                <h4 class="item-name"><a class="passion-roll">{{passion.name}}</a></h4>
-                                <h4 class="item-name"><a class="passion-roll">{{passion.data.data.total}}</a></h4>
-                                <div class="item-controls">
-                                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                                </div>
-                            </li>
-                        {{/each}}
-                    </div>
-                </ol>
-            </div>
-        </div>
         <ol class="skills-list">
+            <ol class="summary-passions-list">
+                <li class="item item-header">
+                    <div class="item-name">{{localize "RQG.Passions"}}</div>
+                    <div class="item-controls">
+                        <a class="item-control item-create" title="Create item" data-type="passion"><i class="fas fa-plus"></i></a>
+                    </div>
+                </li>
+                {{#each data.passions as |passion id|}}
+                <li class="item flexrow" data-item-id="{{passion._id}}" data-passionname="{{passion.name}}">
+                    <h4 class="item-name"><a class="passion-roll">{{passion.name}}</a></h4>
+                    <h4 class="item-name"><a class="passion-roll">{{passion.data.data.total}}</a></h4>
+                    <div class="item-controls">
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                </li>
+                {{/each}}
+            </ol>
+
             <ol class="summary-meleeattack-list" data-attacktype="melee">
                 <li class="item item-header">
                     <div class="item-name flexrow">{{localize "RQG.MeleeAttacks"}}</div>
+                    <div class="item-controls">
+                        <a class="item-control item-create" title="Create item" data-type="attack"><i class="fas fa-plus"></i></a>
+                    </div>                    
                 </li>
                 {{#each data.attacks.melee as |attack id|}}
                     <li class="item flexrow" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="meleeweapons">
                         <span class="summary-attack-label"><a class="attack-roll">{{attack.name}}</a></span>
-                        <span class="summary-attack-value">{{attack.data.skillvalue}}</label>
-                        <span class="summary-attack-damage">{{attack.data.damage}}</span>
+                        <span class="summary-attack-value">{{attack.data.data.skillvalue}}</span>
+                        <span class="summary-attack-damage">{{attack.data.data.damage}}</span>
+                        <div class="item-controls">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>                        
                     </li>
                 {{/each}}
             </ol>
             <ol class="summary-missileattack-list" data-attacktype="missile">
                 <li class="item item-header">
                     <div class="item-name flexrow">{{localize "RQG.MissileAttacks"}}</div>
+                    <div class="item-controls">
+                        <a class="item-control item-create" title="Create item" data-type="attack"><i class="fas fa-plus"></i></a>
+                    </div>                    
                 </li>
                 {{#each data.attacks.missile as |attack id|}}
                     <li class="item flexrow" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="missileweapons">
                         <h4 class="item-name"><a class="attack-roll">{{attack.name}}</a></h4>
-                        <label class="skill-value">{{attack.data.skillvalue}}</label>
-                        <h4 class="item-name">{{attack.data.damage}}</h4>
+                        <label class="skill-value">{{attack.data.data.skillvalue}}</label>
+                        <h4 class="item-name">{{attack.data.data.damage}}</h4>
+                        <div class="item-controls">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>                           
                     </li>
                 {{/each}}
             </ol>
+            <ol class="summary-naturalattack-list" data-attacktype="natural">
+                <li class="item item-header">
+                    <div class="item-name flexrow">{{localize "RQG.NaturalAttacks"}}</div>
+                    <div class="item-controls">
+                        <a class="item-control item-create" title="Create item" data-type="attack"><i class="fas fa-plus"></i></a>
+                    </div>                    
+                </li>
+                {{#each data.attacks.natural as |attack id|}}
+                    <li class="item flexrow" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="naturalweapons">
+                        <h4 class="item-name"><a class="attack-roll">{{attack.name}}</a></h4>
+                        <label class="skill-value">{{attack.data.data.skillvalue}}</label>
+                        <h4 class="item-name">{{attack.data.data.damage}}</h4>
+                        <div class="item-controls">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>                           
+                    </li>
+                {{/each}}
+            </ol>            
         </ol>        
     </div>
     <div class="summary-column flexcolumn">
