@@ -1143,7 +1143,7 @@ export class RunequestActorSheet extends ActorSheet {
     if (event.target) {
       console.log(event.currentTarget.classList);
       if( event.currentTarget.classList){
-        console.log()
+        console.log(event.currentTarget.classList);
         if(event.currentTarget.classList.contains('hitloc-wounds')){
           console.log(event.currentTarget.closest('.item').dataset);
 					let hl = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemid);
@@ -1160,9 +1160,51 @@ export class RunequestActorSheet extends ActorSheet {
                await hl.update( {[event.currentTarget.name]: value});           
 						}
             console.log(hl);
-          }
-          
+          }        
         }
+        if(event.currentTarget.classList.contains('mpstorage-current')) {
+          console.log(event.currentTarget.closest('.item').dataset);
+					let mpstorage = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemId);
+          console.log(mpstorage);
+          if(mpstorage){
+            const value = event.currentTarget.value? parseInt(event.currentTarget.value) : null;
+            console.log("value:"+value);
+            console.log("name:"+event.currentTarget.name);
+            if( !event.currentTarget.value) {
+              await mpstorage.update( {[event.currentTarget.name]: null});
+            }
+            else if( !isNaN(value)) {
+               await mpstorage.update( {[event.currentTarget.name]: value});           
+						}
+            console.log(mpstorage);
+          }
+        }
+        if(event.currentTarget.classList.contains('mpstorage-equiped')) {
+          console.log(event.currentTarget.closest('.item').dataset);
+					let mpstorage = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemId);
+          console.log(mpstorage);
+          console.log(event.currentTarget.value);
+          if(mpstorage){
+            const value = event.currentTarget.checked? true : false;
+            console.log("value:"+value);
+            console.log("name:"+event.currentTarget.name);
+            await mpstorage.update( {[event.currentTarget.name]: value});           
+            console.log(mpstorage);
+          }
+        }
+        if(event.currentTarget.classList.contains('skill-experience')) {
+          console.log(event.currentTarget.closest('.item').dataset);
+					let skill = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemid);
+          console.log(skill);
+          console.log(event.currentTarget.value);
+          if(skill){
+            const value = event.currentTarget.checked? true : false;
+            console.log("value:"+value);
+            console.log("name:"+event.currentTarget.name);
+            await skill.update( {[event.currentTarget.name]: value});           
+            console.log(skill);
+          }
+        }                 
       }
     }
     return this.object.update(formData);

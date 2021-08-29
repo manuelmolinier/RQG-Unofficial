@@ -112,7 +112,7 @@ export class RunequestItem extends Item {
       this.htmldamageroll(roll,target,result,attack,damagebonus);
   
     }
-    _skillroll(skill,actor){
+    async _skillroll(skill,actor){
       console.log("skillroll in item");
       console.log(skill);
       console.log(actor);
@@ -131,7 +131,8 @@ export class RunequestItem extends Item {
         data : {
           "skillname": skillname,
           "skillvalue": skillvalue,
-          "catmodifier": catmodifier
+          "catmodifier": catmodifier,
+          "skillid":skill._id
         },
         callback : (html) => {
           // When dialog confirmed, fill testData dialog information
@@ -141,8 +142,11 @@ export class RunequestItem extends Item {
           let testmodifier =   Number(html.find('[name="testmodifier"]').val());
           catmodifier = Number(html.find('[name="catmodifier"]').val());
           skillvalue =   Number(html.find('[name="skillvalue"]').val());
+          let skillid = html.find('[name="skillid"]').val();
+          console.log("In skillroll callback with skill._id = "+skillid);
           const target = (skillvalue+catmodifier+testmodifier);
           let result = this.basicRoll(skillname,target);
+         
           return result;
         }
       };
@@ -162,8 +166,7 @@ export class RunequestItem extends Item {
             },
             default: "rollButton"
           }).render(true);
-        });
-      console.log(result);        
+        });     
     }
     async htmldamageroll(roll,target,result,attack,damagebonus) {
       //const itemData = this.data.data;
@@ -195,8 +198,11 @@ export class RunequestItem extends Item {
         damageData.totaldamage = damageData.criticaldamage.total + damageData.damagebonus.total;
       }
       let hitlocationtable = RollTables.instance.getName("Hit Location - Humanoid");
+      console.log("Hit Location - Humanoid loading")
       console.log(hitlocationtable);
       let hitlocation = await hitlocationtable.draw({displayChat: false});
+      console.log("Hitlocation drawn:");
+      console.log(hitlocation);
   
   
       const templateData = {
@@ -207,7 +213,7 @@ export class RunequestItem extends Item {
         roll: roll,
         result: result,
         damageData: damageData,
-        hitlocation: hitlocation.results[0].text
+        hitlocation: hitlocation.results[0].data.text
       };
   
       // Render the chat card template
@@ -373,7 +379,7 @@ export class RunequestItem extends Item {
           }
         }
         console.log("experience:"+this.data.data.experience);
-        this.data.data.experience=true;
+        await this.update({["data.experience"]:true});
         console.log("updated experience"+this.data.data.experience);
         //this.update(this.data);
       }

@@ -228,6 +228,14 @@ input[type="text"]
   margin-left: 5px;
   flex: 4 4 100px;
 }
+.worldbuilding .skills-list .attack-type-name {
+  margin-left: 5px;
+  text-align: center;
+}
+.worldbuilding .elemental-rune {
+  margin-left: 5px;
+  text-align: center;
+}
 .worldbuilding .skills-list .item-controls {
   flex: 0 0 36px;
   margin-left: 5px;
@@ -478,8 +486,8 @@ input[type="text"]
   margin: 0.5em 0.5em;
 }
 .worldbuilding .resource-input {
-  width: 30px;
-  height: 14px;
+  width: 40px;
+  height: 18px;
 }
 .worldbuilding .runesbanner {
   font-family: 'RunequestRunes';

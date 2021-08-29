@@ -154,6 +154,7 @@
     "RQG.Damage":"Damage",
     "RQG.SpecialType":"Special type",
 
-    "RQG.Attack": "Attack"
+    "RQG.Attack": "Attack",
+    "RQG.GENERALWOUNDS": "General wounds"
 
 }

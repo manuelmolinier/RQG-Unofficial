@@ -9,6 +9,10 @@
           "min": 0,
           "max": 10
         },
+        "magicpointsreserve": {
+          "value": 10,
+          "max": 10
+        },
         "hitpoints": {
           "value": 10,
           "min": 0,
@@ -22,7 +26,9 @@
         "sizsr": 0,
         "meleesr":0,
         "hpmodifier": 0,
-        "totalwounds": 0
+        "generalwounds": 0,
+        "totalwounds": 0,
+        "hitlocationstype": "Humanoids"
       },
       "characteristics":{
         "strength": {
@@ -327,7 +333,7 @@
   }
 },
 "Item": {
-  "types": ["item","skill","passion","attack","meleeattack","missileattack","naturalattack","spiritspell","runespell","sorceryspell","hitlocation","cult","armor","mpstorage","ally"],
+  "types": ["item","skill","passion","attack","spiritspell","runespell","sorceryspell","hitlocation","cult","armor","mpstorage","ally"],
   "templates": {
     "quantity": {
       "quantity": {
@@ -415,7 +421,7 @@
   "passion": {
     "name": "",
     "templates": ["description"],
-    "base": 0,
+    "base": 60,
     "increase": 0,
     "modifier": 0,
     "total": 0,

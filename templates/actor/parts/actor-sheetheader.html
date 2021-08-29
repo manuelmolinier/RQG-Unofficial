@@ -34,20 +34,31 @@
                             <td class="characteristic-list-td" colspan="4">Healing Rate: {{actor.data.data.attributes.healingrate}}</td>
                         </tr>
                         <tr>
-                            <td class="characteristic-list-td" colspan="7">
+                            <td class="characteristic-list-td" colspan="5">
                                 <div>
-                                    {{localize 'RQG.HP'}}: <input class="resource-input" type="text" name="actor.data.data.attributes.hitpoints.value" value="{{actor.data.data.attributes.hitpoints.value}}" data-dtype="Number"/>
+                                    {{localize 'RQG.HP'}}: <input class="resource-input" type="text" name="data.attributes.hitpoints.value" value="{{actor.data.data.attributes.hitpoints.value}}" data-dtype="Number"/>
                                     /
                                     {{actor.data.data.attributes.hitpoints.max}}
                                 </div>
                             </td>                         
-                            <td class="characteristic-list-td" colspan="7">
+                            <td class="characteristic-list-td" colspan="4">
                                 <div>
-                                    {{localize 'RQG.MP'}}: <input class="resource-input" type="text" name="actor.data.data.attributes.magicpoints.value" value="{{actor.data.data.attributes.magicpoints.value}}" data-dtype="Number"/>
+                                    {{log "Header - Magic Points"}}
+                                    {{log actor.data.data.attributes.magicpoints}}
+                                    {{localize 'RQG.MP'}}: <input class="resource-input" type="text" name="data.attributes.magicpoints.value" value="{{actor.data.data.attributes.magicpoints.value}}" data-dtype="Number"/>
                                     /
                                     {{actor.data.data.attributes.magicpoints.max}}
                                 </div>
                             </td>
+                            <td class="characteristic-list-td" colspan="5">
+                                <div>
+                                    {{log "Header - Magic Points"}}
+                                    {{log actor.data.data.attributes.magicpointsreserve}}
+                                    {{localize 'RQG.MP'}}: <input class="resource-input" type="text" name="data.attributes.magicpointsreserve.value" value="{{actor.data.data.attributes.magicpointsreserve.value}}" data-dtype="Number"/>
+                                    /
+                                    {{actor.data.data.attributes.magicpointsreserve.max}}
+                                </div>
+                            </td>                            
                         </tr>
                         {{#each cults as |cult id|}}
                         <tr>

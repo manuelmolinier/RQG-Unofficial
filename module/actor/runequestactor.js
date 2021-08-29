@@ -26,9 +26,7 @@ export class RunequestActor extends Actor {
 
   /*
   static async create(data, options) {
-    console.log("Entering create for Actor");
-    console.log(data);
-    console.log(options);
+
     // If the created actor has items (only applicable to duplicated actors) bypass the new actor creation logic
     if (data.items)
     {
@@ -43,18 +41,17 @@ export class RunequestActor extends Actor {
     const pack = game.packs.find(p => p.collection == "runequest.skills")
     var myskills;
     await pack.getIndex().then(index => myskills = index);
-    console.log(myskills);
+
     for (let sk of myskills)
     {
       let skillItem = undefined;
       await pack.getEntity(sk._id).then(skill => skillItem = skill);
-      console.log(skillItem);
+
       let skilldata = {"name":skillItem.data.name,"type":skillItem.data.type,"data":skillItem.data.data};
       let skill = new Item(skilldata);
-      console.log(skill);
+
       data.items.push(skill);
     }
-    console.log(data);
     return super.create(data, options);
   }
   */  
@@ -89,8 +86,6 @@ export class RunequestActor extends Actor {
 
   prepareData() {
     super.prepareData();
-    console.log("prepareData for: "+this.data.name);
-    console.log(this.data);
     const  actorData = this.data;
     const  data = actorData.data;
     this._prepareCharacterFlags(actorData);
@@ -150,7 +145,11 @@ export class RunequestActor extends Actor {
     const mpstorage = [];
     var hitlocations =[];
     let totalwounds = 0;
+    let magicpointreservemax =0;
+    let magicpointreservecurrent =0;
+
     const features = [];
+
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       // Append to gear.
@@ -186,15 +185,6 @@ export class RunequestActor extends Actor {
       else if (i.type === 'attack') {
         attacks[i.data.data.attacktype].push(i);
       }
-      else if (i.type === 'meleeattack') {
-        attacks["melee"].push(i);
-      }
-      else if (i.type === 'missileattack') {
-        attacks["missile"].push(i);
-      }
-      else if (i.type === 'naturalattack') {
-        attacks["natural"].push(i);
-      }
       else if (i.type === 'spiritspell') {
         spells["spirit"].push(i);
       }
@@ -207,7 +197,6 @@ export class RunequestActor extends Actor {
       else if (i.type === 'hitlocation') {
         //update hitlocation
         this._preparehitlocation(i,context);
-        console.log("totalwounds is:"+totalwounds+" and increase by:"+i.data.data.wounds);
         totalwounds+= Number(i.data.data.wounds);
         hitlocations.push(i);
       }
@@ -219,10 +208,15 @@ export class RunequestActor extends Actor {
         cults.push(i);
       }
       else if(i.type === 'mpstorage') {
+        //Update MagicStoragePoints data
+        if(i.data.data.equiped) {
+          magicpointreservemax+= i.data.data.maxmp;
+          magicpointreservecurrent+= i.data.data.currentmp;  
+        }
         mpstorage.push(i);
       }        
     }
-
+    totalwounds+= context.data.attributes.generalwounds;
     // Assign and return
     context.data.gear = gear;
     context.data.features = features;
@@ -238,6 +232,8 @@ export class RunequestActor extends Actor {
     context.data.defense = defense;
     context.data.mpstorage = mpstorage;
     context.data.attributes.hitpoints.value = context.data.attributes.hitpoints.max - totalwounds;
+    context.data.attributes.magicpointsreserve.max = magicpointreservemax;
+    context.data.attributes.magicpointsreserve.value = magicpointreservecurrent;
   }
 
   /**
@@ -261,8 +257,6 @@ export class RunequestActor extends Actor {
     return passion;
   }  
   _prepareattributes(data) {
-    console.log("prepare attributes in Actor");
-    console.log(data);
     //Magic Points
     data.attributes.magicpoints.max = data.characteristics.power.value;
     // Total HP
@@ -273,7 +267,6 @@ export class RunequestActor extends Actor {
     data.attributes.hpmodifier = this._preparehpmodifier(data.attributes.hitpoints.max);
     data.attributes.dexsr=this._preparedexsr(data.characteristics.dexterity);
     data.attributes.sizsr=this._preparesizsr(data.characteristics.size);
-    console.log(data.attributes);
   }
   _preparedexsr(dex) {
     const value=dex.value;
@@ -442,7 +435,6 @@ export class RunequestActor extends Actor {
     return bonus;    
   }
   _preparehpmodifier(hp) {
-    console.log("Starting _preparehpmodifier");
     //compute Max HP modifier
     let modifier=0;
     if(hp < 13) {
@@ -458,8 +450,6 @@ export class RunequestActor extends Actor {
   }
   _preparehitlocation(hitlocation, actorData) {
     // Prepare the HitLocations by calculating the Max HP of the location and the remaining HP based on wounds
-    console.log("_preparehitlocation");
-    console.log(hitlocation);
     let humanoidlocations={
       "RQG.HEAD": 5,
       "RQG.LARM": 4,

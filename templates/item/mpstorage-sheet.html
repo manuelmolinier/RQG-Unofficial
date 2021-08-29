@@ -24,6 +24,10 @@
                 <label class="label-text">{{localize "RQG.CURRENTMP"}}</label>
                 <input  class="attribute-value"  type="text"  name="data.currentmp"  value="{{data.currentmp}}"  data-dtype="Number"  />
             </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "Equiped"}}</label>
+                <input type="checkbox" name="data.equiped" {{checked data.equiped}}/>
+            </div>              
         </div>
         {{!-- Description Tab --}}
         <div class="tab" data-group="primary" data-tab="description">
