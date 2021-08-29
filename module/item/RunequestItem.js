@@ -35,6 +35,9 @@ export class RunequestItem extends Item {
         case "skill":
           this._skillroll(item,actor);
           break;
+        case "passion":
+            this._passionroll(item,actor);
+            break;          
         default:
           break;
       }
@@ -168,6 +171,59 @@ export class RunequestItem extends Item {
           }).render(true);
         });     
     }
+    async _passionroll(passion,actor){
+      console.log("passionroll in item");
+      console.log(passion);
+      console.log(actor);
+      let passionname = passion.data.name;
+      let passionvalue = passion.data.data.total;
+      let result="failure";
+
+      var dialogOptions;
+      dialogOptions = {
+        title: "Passion Roll",
+        template : "/systems/runequest/templates/chat/skill-dialog.html",
+        // Prefilled dialog data
+
+        data : {
+          "skillname": passionname,
+          "skillvalue": passionvalue,
+          "catmodifier": 0,
+          "skillid":passion._id
+        },
+        callback : (html) => {
+          // When dialog confirmed, fill testData dialog information
+          // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
+          passionname =    html.find('[name="skillname"]').val();
+          console.log(passionname);
+          let testmodifier =   Number(html.find('[name="testmodifier"]').val());
+          passionvalue =   Number(html.find('[name="skillvalue"]').val());
+          let passionid = html.find('[name="skillid"]').val();
+          console.log("In passionroll callback with passion._id = "+passionid);
+          const target = (passionvalue+testmodifier);
+          let result = this.basicRoll(passionname,target);
+         
+          return result;
+        }
+      };
+      result = renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
+        {
+          new Dialog(
+          {
+            title: dialogOptions.title,
+            content: dlg,
+            buttons:
+            {
+              rollButton:
+              {
+                label: game.i18n.localize("Roll"),
+                callback: html => dialogOptions.callback(html)
+              }
+            },
+            default: "rollButton"
+          }).render(true);
+        });     
+    }    
     async htmldamageroll(roll,target,result,attack,damagebonus) {
       //const itemData = this.data.data;
       const actorData = this.actor.data.data;

@@ -455,7 +455,7 @@ export class RunequestActorSheet extends ActorSheet {
       this.basicRoll(spellname,target);
     });
     // Roll for Passions
-    html.find('.passion-roll').mousedown(event => {
+    html.find('.passion-roll-old').mousedown(event => {
       event.preventDefault();
       const data = this.getData();
       if(event.button == 0) {}
@@ -507,7 +507,7 @@ export class RunequestActorSheet extends ActorSheet {
           }).render(true);
         });
     });
-
+    html.find('.passion-roll').mousedown(event => this._onPassionRoll(event));
     // Roll for Rune Spells
     html.find('.runespell-roll').mousedown(event => {
       console.log("casting a runespell");
@@ -934,6 +934,36 @@ export class RunequestActorSheet extends ActorSheet {
     console.log(skill);
     skill.roll();       
   }
+  _onPassionRoll(event) {
+    event.preventDefault();
+    const data = this.getData();
+    console.log(event);
+    if(event.button == 0) {
+      if(event.ctrlKey == true){
+        const passionid = event.currentTarget.dataset.itemId;
+        let passion = this.actor.getOwnedItem(passionid);
+        console.log(passion)
+        passion.gainroll();
+        return;
+      }
+    }
+    else if(event.button == 2) {
+      if(event.altKey == true){
+        this.actor.deleteOwnedItem(event.currentTarget.dataset.itemid);
+        return;
+      }
+      const item = this.actor.getOwnedItem(event.currentTarget.dataset.itemid);
+      item.sheet.render(true);
+      return;
+    }
+    else {return;}
+    //const catrow = event.target.parentElement.parentElement.parentElement;
+    const passionid = event.currentTarget.dataset.itemId;
+    let passion = this.actor.getOwnedItem(passionid);
+    console.log("_onPassionRoll");
+    console.log(passion);
+    passion.roll();       
+  }  
   async basicRoll(charname, target) {
     const critical = Math.max(Math.round(target/20),1);
     const special = Math.round(target/5);
