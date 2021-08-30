@@ -2,7 +2,7 @@
   "name": "runequest",
   "title": "Runequest (Unofficial)",
   "description": "A fan made ruleset for Runequest Glorantha.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "minimumCoreVersion": "0.8.0",
   "compatibleCoreVersion": "0.8.0",
   "templateVersion": 2,
@@ -73,6 +73,6 @@
   "secondaryTokenAttribute": "attributes.magicpoints",
   "url": "https://gitlab.com/manuelmolinier/runequest-foundryvtt",
   "manifest": "https://gitlab.com/manuelmolinier/runequest-foundryvtt/-/raw/master/system.json",
-  "download": "https://gitlab.com/astarothrpg/runequest-foundryvtt/-/archive/latest/runequest-foundryvtt-latest.zip",
+  "download": "https://gitlab.com/astarothrpg/runequest-foundryvtt/-/archive/v0.1.3/runequest-foundryvtt-v0.1.3.zip",
   "license": "LICENSE.txt"
 }

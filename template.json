@@ -28,7 +28,8 @@
         "hpmodifier": 0,
         "generalwounds": 0,
         "totalwounds": 0,
-        "hitlocationstype": "Humanoids"
+        "hitlocationstype": "Humanoids",
+        "freeint": 0
       },
       "characteristics":{
         "strength": {
@@ -461,14 +462,6 @@
     "keywords": [],
     "rune": ""
   },
-  "sorceryspell": {
-    "name": "",
-    "templates": ["description"],
-    "points": 0,
-    "keywords": [],
-    "runestechniques": [],
-    "skill": ""
-  },
   "meleeattack":{
     "name": "",
     "templates": ["description","weapon"],
@@ -609,6 +602,14 @@
     "name": "",
     "templates": ["description"],
     "mastered": false    
+  },
+  "sorceryspell": {
+    "name": "",
+    "templates": ["description"],
+    "points": 0,
+    "keywords": [],
+    "runestechniques": [],
+    "skill": ""
   }
 }  
 }
