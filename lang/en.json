@@ -1,6 +1,7 @@
 {
-    "RQG.HP": "Hit Points",
-    "RQG.MP": "Magic Points",
+    "RQG.HP": "HP",
+    "RQG.MP": "MP",
+    "RQG.MPSTORAGE":"MP Storage",
     "RQG.BirthYear": "Birth Year",
     "RQG.Age":"Age",
     "RQG.Occupation": "Occupation",

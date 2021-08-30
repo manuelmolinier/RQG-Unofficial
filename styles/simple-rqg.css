@@ -172,8 +172,8 @@ input[type="text"]
   border: none;
 }
 .worldbuilding.sheet.actor {
-  min-width: 560px;
-  min-height: 420px;
+  min-width: 700px;
+  min-height: 500px;
 }
 .worldbuilding.sheet.item {
   min-width: 460px;
@@ -494,4 +494,7 @@ input[type="text"]
 }
 .worldbuilding .section-padding {
   padding: 10px;
+}
+.invisible {
+  display: none;
 }

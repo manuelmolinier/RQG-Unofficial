@@ -27,14 +27,32 @@
       "module": "runequest"
     },
     {
-      "name": "humanoidlocations",
-      "label": "Humanoid Locations",
+      "name": "Humanoidslocations",
+      "label": "Humanoids Locations",
       "system": "runequest",
       "module": "runequest",
       "path": "./packs/humanoidlocations.db",
       "entity": "Item",
       "tag" : "hitlocation"   
-    }    
+    },
+    {
+      "name": "Four-legged Animalslocations",
+      "label": "Four-legged Animals Locations",
+      "system": "runequest",
+      "module": "runequest",
+      "path": "./packs/four-legged-animals-locations.db",
+      "entity": "Item",
+      "tag" : "hitlocation"   
+    },
+    {
+      "name": "Humanoidswingedlocations",
+      "label": "Winged Humanoids Locations",
+      "system": "runequest",
+      "module": "runequest",
+      "path": "./packs/winged-humanoids-locations.db",
+      "entity": "Item",
+      "tag" : "hitlocation"   
+    }          
   ],
   "languages": [
     {

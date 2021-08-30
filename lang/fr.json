@@ -1,6 +1,7 @@
 {
     "RQG.HP": "PV",
     "RQG.MP": "MP",
+    "RQG.MPSTORAGE":"Stockage MP",
     "RQG.BirthYear": "Ne.e en",
     "RQG.Age":"Age",
     "RQG.Occupation": "Occupation",

@@ -38,13 +38,16 @@
             <tbody>
                 {{#each data.elementalrunes as |elementalrune id|}}
                     <tr class="elemental-rune" data-rune="{{id}}">
-                        <td class="elemental-rune" colspan="2"><a class="elementalrunes-roll rollable">{{localize elementalrune.label}}: {{elementalrune.value}}</a></td>
+                        <td class="elemental-rune" colspan="2"><a class="elementalrunes-roll rollable">{{localize elementalrune.label}}: {{elementalrune.value}}</a><input class="rune-experience" id="{{id}}_{{elementalrune._id}}_rune_experience" type="checkbox" name="data.elementalrunes.{{id}}.experience" {{checked elementalrune.experience}}/></td>
                     </tr>
                 {{/each}}
                 {{#each data.powerrunes as |powerrunepair pairid|}}
                     <tr data-runepair="{{pairid}}">
                     {{#each powerrunepair as |powerrune runeid|}}
-                        <td><a class="powerrunes-roll" data-rune="{{runeid}}">{{localize powerrune.label}}: {{powerrune.value}}</a></td>
+                        <td>
+                            <a class="powerrunes-roll" data-rune="{{runeid}}">{{localize powerrune.label}}: {{powerrune.value}}</a>
+                            <input class="rune-experience" id="{{id}}_{{powerrune._id}}_rune_experience" type="checkbox" name="data.powerrunes.{{pairid}}.{{runeid}}.experience" {{checked powerrune.experience}}/>
+                        </td>
                     {{/each}}
                     </li>
                 {{/each}}

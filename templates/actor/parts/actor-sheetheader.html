@@ -43,8 +43,6 @@
                             </td>                         
                             <td class="characteristic-list-td" colspan="4">
                                 <div>
-                                    {{log "Header - Magic Points"}}
-                                    {{log actor.data.data.attributes.magicpoints}}
                                     {{localize 'RQG.MP'}}: <input class="resource-input" type="text" name="data.attributes.magicpoints.value" value="{{actor.data.data.attributes.magicpoints.value}}" data-dtype="Number"/>
                                     /
                                     {{actor.data.data.attributes.magicpoints.max}}
@@ -52,9 +50,7 @@
                             </td>
                             <td class="characteristic-list-td" colspan="5">
                                 <div>
-                                    {{log "Header - Magic Points"}}
-                                    {{log actor.data.data.attributes.magicpointsreserve}}
-                                    {{localize 'RQG.MP'}}: <input class="resource-input" type="text" name="data.attributes.magicpointsreserve.value" value="{{actor.data.data.attributes.magicpointsreserve.value}}" data-dtype="Number"/>
+                                    {{localize 'RQG.MPSTORAGE'}}: <input class="resource-input" type="text" name="data.attributes.magicpointsreserve.value" value="{{actor.data.data.attributes.magicpointsreserve.value}}" data-dtype="Number"/>
                                     /
                                     {{actor.data.data.attributes.magicpointsreserve.max}}
                                 </div>

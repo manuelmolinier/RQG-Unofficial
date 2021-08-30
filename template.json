@@ -123,78 +123,94 @@
       "elementalrunes": {
         "air": {
           "value": 0,
-          "label": "RQG.Air"
+          "label": "RQG.Air",
+          "experience":false
         },
         "fire": {
           "value": 0,
-          "label": "RQG.Fire"
+          "label": "RQG.Fire",
+          "experience":false          
         },
         "darkness": {
           "value": 0,
-          "label": "RQG.Darkness"
+          "label": "RQG.Darkness",
+          "experience":false
         },
         "water": {
           "value": 0,
-          "label": "RQG.Water"
+          "label": "RQG.Water",
+          "experience":false
         },
         "earth": {
           "value": 0,
-          "label": "RQG.Earth"
+          "label": "RQG.Earth",
+          "experience":false
         },
         "moon": {
           "value": 0,
-          "label": "RQG.Moon"
+          "label": "RQG.Moon",
+          "experience":false
         }
       },
       "powerrunes":{
         "manbeast":{
           "man": {
             "value": 50,
-            "label": "RQG.Man"
+            "label": "RQG.Man",
+            "experience":false
           },
           "beast": {
             "value": 50,
-            "label": "RQG.Beast"
+            "label": "RQG.Beast",
+            "experience":false
           }
         },
         "fertilitydeath":{
           "fertility": {
             "value": 50,
-            "label": "RQG.Fertility"
+            "label": "RQG.Fertility",
+            "experience":false
           },
           "death": {
             "value": 50,
-            "label": "RQG.Death"
+            "label": "RQG.Death",
+            "experience":false
           }
         },
         "harmonydisorder":{
           "harmony": {
             "value": 50,
-            "label": "RQG.Harmony"
+            "label": "RQG.Harmony",
+            "experience":false
           },
           "disorder": {
             "value": 50,
-            "label": "RQG.Disorder"
+            "label": "RQG.Disorder",
+            "experience":false
           }
         },
         "truthillusion":{
           "truth": {
             "value": 50,
-            "label": "RQG.Truth"
+            "label": "RQG.Truth",
+            "experience":false
           },
           "illusion": {
             "value": 50,
-            "label": "RQG.Illusion"
+            "label": "RQG.Illusion",
+            "experience":false
           }
         },
         "stasismovement":{
           "stasis": {
             "value": 50,
-            "label": "RQG.Stasis"
+            "label": "RQG.Stasis",
+            "experience":false
           },
           "movement": {
             "value": 50,
-            "label": "RQG.Movement"
+            "label": "RQG.Movement",
+            "experience":false
           }
         }
       },
@@ -477,7 +493,8 @@
     "wounds": 0,
     "condition":"normal",
     "rangestart": 0,
-    "rangeend": 0
+    "rangeend": 0,
+    "basehp": 5
   },
   "cult": {
     "name": "",

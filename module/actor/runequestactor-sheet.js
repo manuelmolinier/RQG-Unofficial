@@ -30,6 +30,10 @@ export class RunequestActorSheet extends ActorSheet {
     // Use a safe clone of the actor data for further operations.
     const actorData = context.actor.data;
 
+    //Load config
+    context.config = CONFIG.RQG;
+
+
     // Add the actor's data to context.data for easier access, as well as flags.
     context.data = actorData.data;
     context.flags = actorData.flags;
@@ -1234,7 +1238,20 @@ export class RunequestActorSheet extends ActorSheet {
             await skill.update( {[event.currentTarget.name]: value});           
             console.log(skill);
           }
-        }                 
+        }
+        if(event.currentTarget.classList.contains('passion-experience')) {
+          console.log(event.currentTarget.closest('.item').dataset);
+					let passion = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemid);
+          console.log(passion);
+          console.log(event.currentTarget.value);
+          if(passion){
+            const value = event.currentTarget.checked? true : false;
+            console.log("value:"+value);
+            console.log("name:"+event.currentTarget.name);
+            await passion.update( {[event.currentTarget.name]: value});           
+            console.log(passion);
+          }
+        }                          
       }
     }
     return this.object.update(formData);
@@ -1247,16 +1264,8 @@ export class RunequestActorSheet extends ActorSheet {
   }
   _preparehitlocation(hitlocation, actorData) {
     // Prepare the HitLocations by calculating the Max HP of the location and the remaining HP based on wounds
-    let humanoidlocations={
-      "RQG.HEAD": 5,
-      "RQG.LARM": 4,
-      "RQG.RARM": 4,
-      "RQG.CHEST": 6,
-      "RQG.ABDOMEN": 5,
-      "RQG.LLEG": 5,
-      "RQG.RLEG": 5
-    };
-    hitlocation.data.maxhp = humanoidlocations[hitlocation.name] + actorData.data.attributes.hpmodifier;
-    hitlocation.data.currenthp = hitlocation.data.maxhp - hitlocation.data.wounds;
+    console.log(hitlocation);
+    hitlocation.data.data.maxhp = hitlocation.data.data.basehp + actorData.data.attributes.hpmodifier;
+    hitlocation.data.data.currenthp = hitlocation.data.data.maxhp - hitlocation.data.data.wounds;
   }
 }

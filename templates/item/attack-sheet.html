@@ -28,15 +28,10 @@
             </div>        
             <div class="form-group">
                 <label class="label-text">{{localize "RQG.SkillUsed"}}</label>
-                {{log "Skill used in attack"}}
-                {{log @root}}
                 {{#if @root.document.parent}}
-                {{log @root.document.parent.data._id}}
                 <select name="data.skillused">
                     {{#select data.skillused}}
-                    {{log (getcharacterattackskills @root.document.parent.data._id data.attacktype)}}
                     {{#each (getcharacterattackskills @root.document.parent.data._id data.attacktype) as |skill id|}}
-                    {{log skill}}
                     <option value="{{skill._id}}">{{skill.name}}</option>
                     {{/each}}
                     {{/select}}

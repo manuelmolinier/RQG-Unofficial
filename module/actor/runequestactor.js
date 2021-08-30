@@ -113,6 +113,7 @@ export class RunequestActor extends Actor {
     };
   }
   prepareItems(){
+    let actor = this;
     let context = this.data;
     const gear = [];
     const defense = [];
@@ -218,6 +219,27 @@ export class RunequestActor extends Actor {
     }
     totalwounds+= context.data.attributes.generalwounds;
     // Assign and return
+    console.log("In prepareItems with hitlocations.length = "+hitlocations.length);
+    console.log(hitlocations); 
+    if(hitlocations.length < 1) {
+      console.log(context.data.attributes);
+      let hitlocationslist = this._preparehitlocationtype(context.data.attributes.hitlocationstype).then(function(result) {
+        console.log(result);
+        console.log(actor);
+        let hitlocations=actor.createEmbeddedDocuments("Item",result);
+        console.log(hitlocations);    
+      });
+    }
+    hitlocations.sort(function(a, b) {
+      if (a.data.data.rangestart < b.data.data.rangestart) {
+          return -1;
+      }
+      if (a.data.data.rangestart > b.data.data.rangestart) {
+        return 1;
+      }
+      // a must be equal to b
+      return 0;
+    });
     context.data.gear = gear;
     context.data.features = features;
     context.data.spells = spells;
@@ -450,18 +472,18 @@ export class RunequestActor extends Actor {
   }
   _preparehitlocation(hitlocation, actorData) {
     // Prepare the HitLocations by calculating the Max HP of the location and the remaining HP based on wounds
-    let humanoidlocations={
-      "RQG.HEAD": 5,
-      "RQG.LARM": 4,
-      "RQG.RARM": 4,
-      "RQG.CHEST": 6,
-      "RQG.ABDOMEN": 5,
-      "RQG.LLEG": 5,
-      "RQG.RLEG": 5
-    };
-    hitlocation.data.data.maxhp = humanoidlocations[hitlocation.name] + actorData.data.attributes.hpmodifier;
+    console.log(hitlocation);
+    hitlocation.data.data.maxhp = hitlocation.data.data.basehp + actorData.data.attributes.hpmodifier;
     hitlocation.data.data.currenthp = hitlocation.data.data.maxhp - hitlocation.data.data.wounds;
   }
+  async _preparehitlocationtype(hitlocationtype) {
+    console.log("hitlocations was empty so we load them");
+    const compendiumname = "runequest."+hitlocationtype+"locations";
+    const hitlocationslist = await RunequestActor.loadCompendium(compendiumname);
+    const hitlocations = hitlocationslist.map(i => i.toObject());
+    console.log(hitlocations);
+    return hitlocations;
+  }  
   /* -------------------------------------------- */
   static async loadCompendiumData(compendium) {
     const pack = game.packs.get(compendium);
@@ -470,6 +492,7 @@ export class RunequestActor extends Actor {
 
   /* -------------------------------------------- */
   static async loadCompendium(compendium, filter = item => true) {
+    console.log("Loading compendium:"+compendium);
     let compendiumData = await RunequestActor.loadCompendiumData(compendium);
     return compendiumData.filter(filter);
   }    

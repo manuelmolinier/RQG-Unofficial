@@ -37,3 +37,9 @@ RQG.attacktype = {
     "missile":"RQG.MissileAttacks",
     "natural":"RQG.NaturalAttacks"
 }
+
+RQG.hitlocationstypes = {
+    "Humanoids": "RQG.Humanoid",
+    "Humanoidswinged": "RQG.HumanoidsWinged",
+    "Four-legged Animals": "RQG.Four-leggedAnimals"
+}
