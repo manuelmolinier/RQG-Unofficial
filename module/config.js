@@ -41,5 +41,14 @@ RQG.attacktype = {
 RQG.hitlocationstypes = {
     "Humanoids": "RQG.Humanoid",
     "Humanoidswinged": "RQG.HumanoidsWinged",
-    "Four-legged Animals": "RQG.Four-leggedAnimals"
+    "Four-legged Animals": "RQG.Four-leggedAnimals",
+    "Scorpionmen": "RQG.Scorpionmen",
+    "Others": "RQG.Others"
+}
+RQG.runetype = {
+    "elemental":"RQG.ELEMENTAL",
+    "power":"RQG.POWER",
+    "form":"RQG.FORM",
+    "condition": "RQG.CONDITION",
+    "others": "RQG.OTHERS"
 }

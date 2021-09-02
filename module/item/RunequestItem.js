@@ -38,6 +38,9 @@ export class RunequestItem extends Item {
         case "passion":
             this._passionroll(item,actor);
             break;          
+        case "rune":
+          this._runeroll(item,actor);
+          break;          
         default:
           break;
       }
@@ -223,7 +226,60 @@ export class RunequestItem extends Item {
             default: "rollButton"
           }).render(true);
         });     
-    }    
+    }
+    async _runeroll(rune,actor){
+      console.log("runeroll in item");
+      console.log(rune);
+      console.log(actor);
+      let runename = passion.data.name;
+      let runevalue = rune.data.data.total;
+      let result="failure";
+
+      var dialogOptions;
+      dialogOptions = {
+        title: "Rune Roll",
+        template : "/systems/runequest/templates/chat/skill-dialog.html",
+        // Prefilled dialog data
+
+        data : {
+          "skillname": runename,
+          "skillvalue": runevalue,
+          "catmodifier": 0,
+          "skillid":rune._id
+        },
+        callback : (html) => {
+          // When dialog confirmed, fill testData dialog information
+          // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
+          runename =    html.find('[name="skillname"]').val();
+          console.log(runename);
+          let testmodifier =   Number(html.find('[name="testmodifier"]').val());
+          runevalue =   Number(html.find('[name="skillvalue"]').val());
+          let runeid = html.find('[name="skillid"]').val();
+          console.log("In runeroll callback with rune._id = "+runeid);
+          const target = (runevalue+testmodifier);
+          let result = this.basicRoll(runename,target);
+         
+          return result;
+        }
+      };
+      result = renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
+        {
+          new Dialog(
+          {
+            title: dialogOptions.title,
+            content: dlg,
+            buttons:
+            {
+              rollButton:
+              {
+                label: game.i18n.localize("Roll"),
+                callback: html => dialogOptions.callback(html)
+              }
+            },
+            default: "rollButton"
+          }).render(true);
+        });     
+    }      
     async htmldamageroll(roll,target,result,attack,damagebonus) {
       //const itemData = this.data.data;
       const actorData = this.actor.data.data;
@@ -353,23 +409,23 @@ export class RunequestItem extends Item {
   
       if((roll.total < 96 && roll.total <= skillvalue) || roll.total <= 5) { //This is a success we check type of success
         if(roll.total <= critical) {
-          result = "critical - No gain";
+          result = "No gain";
         }
         else {
           if(roll.total <= special) {
-            result= "special - No Gain";
+            result= "No Gain";
           }
           else {
-            result = "success - No Gain"
+            result = "No Gain"
           }
         }
       }
       else {
         if(roll.total >= fumble) {
-          result = "fumble - You gain 1d6"; 
+          result = "You gain [[1d6]]"; 
         }
         else {
-          result = "failure - You gain 1d6";
+          result = "You gain [[1d6]]";
         }
       }
 

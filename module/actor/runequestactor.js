@@ -131,6 +131,13 @@ export class RunequestActor extends Actor {
       "naturalweapons": [],
       "others": []
     };
+    const runes = {
+      "elemental": [],
+      "power": [],
+      "form": [],
+      "condition": [],
+      "others": []
+    };
     const attacks = {
       "melee": [],
       "missile": [],
@@ -144,6 +151,7 @@ export class RunequestActor extends Actor {
     const passions = [];
     const cults = [];
     const mpstorage = [];
+    var armors = [];
     var hitlocations =[];
     let totalwounds = 0;
     let magicpointreservemax =0;
@@ -156,6 +164,9 @@ export class RunequestActor extends Actor {
       // Append to gear.
       if (i.type === 'item') {
         gear.push(i);
+      }
+      if (i.type === 'armor') {
+        armors.push(i);
       }
       // Append to features.
       else if (i.type === 'feature') {
@@ -181,6 +192,17 @@ export class RunequestActor extends Actor {
         }
         else {
           skills["others"].push(i);
+        }
+      }
+      else if (i.type === 'rune') {
+        console.log("handling a rune in Actor with:"+i.name);
+        console.log(i);
+        console.log(i.data.data.type);
+        if(i.data.data.type != "") {
+          runes[i.data.data.type].push(i);
+        }
+        else {
+          runes["others"].push(i);
         }
       }
       else if (i.type === 'attack') {
@@ -215,13 +237,16 @@ export class RunequestActor extends Actor {
           magicpointreservecurrent+= i.data.data.currentmp;  
         }
         mpstorage.push(i);
-      }        
+      }
+      else if(i.type === 'meleeattack' || i.type === 'missileattack' || i.type === 'naturalattack') {
+        console.log(i);
+      }
     }
     totalwounds+= context.data.attributes.generalwounds;
     // Assign and return
     console.log("In prepareItems with hitlocations.length = "+hitlocations.length);
     console.log(hitlocations); 
-    if(hitlocations.length < 1) {
+    if(hitlocations.length < 1 && context.data.attributes.hitlocationstype !== "Others") {
       console.log(context.data.attributes);
       let hitlocationslist = this._preparehitlocationtype(context.data.attributes.hitlocationstype).then(function(result) {
         console.log(result);
@@ -246,6 +271,7 @@ export class RunequestActor extends Actor {
     context.data.skills = skills;
     context.data.gear = gear;
     context.data.skills = skills;
+    context.data.runes = runes;
     context.data.attacks = attacks;
     context.data.spells = spells;
     context.data.hitlocations = hitlocations;
@@ -253,6 +279,7 @@ export class RunequestActor extends Actor {
     context.data.cults = cults;
     context.data.defense = defense;
     context.data.mpstorage = mpstorage;
+    context.data.armors = armors;
     context.data.attributes.hitpoints.value = context.data.attributes.hitpoints.max - totalwounds;
     context.data.attributes.magicpointsreserve.max = magicpointreservemax;
     context.data.attributes.magicpointsreserve.value = magicpointreservecurrent;
@@ -336,13 +363,13 @@ export class RunequestActor extends Actor {
       hptotal += -1;
     }
     else if(data.characteristics.size.value >= 13){
-      hptotal += 1+Math.ceil((data.characteristics.size.value-13)/4);
+      hptotal += Math.ceil((data.characteristics.size.value-13)/4);
     }
     if(data.characteristics.power.value < 5) {
       hptotal += -1;
     }
     else if(data.characteristics.power.value >= 17){
-      hptotal += 1+Math.ceil((data.characteristics.power.value-17)/4);
+      hptotal += Math.ceil((data.characteristics.power.value-17)/4);
     }
     return hptotal;
   }

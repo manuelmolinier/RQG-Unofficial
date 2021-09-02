@@ -1,0 +1,60 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+        </div>
+    </header>
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="details">Details</a>
+        <a class="item" data-tab="description">Description</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <!--
+        "rune": {
+            "name":"",
+            "img":"",
+            "type":"",
+            "value":"0",
+            "experience": false,
+            "paired": ""
+        }        
+    -->
+    {{log item}}
+    {{log data}}
+    <section class="sheet-body">
+        {{!-- Attributes Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">      
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.Type"}}</label>
+                <select name="data.type">
+                    {{#select data.type}}
+                    {{#each config.runetype as |name type|}}
+                    <option value="{{type}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>                           
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.Value"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.total"  value="{{data.total}}"  data-dtype="Number"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.Paired"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.paired"  value="{{data.paired}}"  data-dtype="String"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.Experience"}}</label>
+                <input type="checkbox" name="data.experience" {{checked data.experience}}/>
+            </div>            
+        </div>
+
+        {{!-- Description Tab --}}
+        <div class="tab" data-group="primary" data-tab="description">
+            {{editor content=data.description.description.value target="data.description.description.value" button=true owner=owner editable=editable}}
+        </div>
+
+    </section>
+</form>

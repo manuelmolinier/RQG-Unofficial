@@ -52,7 +52,16 @@
       "path": "./packs/winged-humanoids-locations.db",
       "entity": "Item",
       "tag" : "hitlocation"   
-    }          
+    },
+    {
+      "name": "Scorpionmenlocations",
+      "label": "Scorpion Men Locations",
+      "system": "runequest",
+      "module": "runequest",
+      "path": "./packs/scorpionmen-locations.db",
+      "entity": "Item",
+      "tag" : "hitlocation"   
+    }                
   ],
   "languages": [
     {

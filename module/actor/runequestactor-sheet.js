@@ -556,6 +556,7 @@ export class RunequestActorSheet extends ActorSheet {
       this.basicRoll(charname,target);
     });
     html.find('.skill-roll').mousedown(event => this._onSkillRoll(event));
+    html.find('.rune-roll').mousedown(event => this._onSkillRoll(event));    
     html.find('.meleeattack-roll').mousedown(event => {
       event.preventDefault();
       const data = this.getData();
@@ -766,7 +767,7 @@ export class RunequestActorSheet extends ActorSheet {
       }
     });
     html.find('.summary-skill-roll').mousedown(event => this._onSkillRoll(event));
-    html.find('.summary-characteristic-roll').click(event => this._onCharacteristicRoll(event));
+    html.find('.summary-characteristic-roll').mousedown(event => this._onCharacteristicRoll(event));
     html.find('.attack-roll').click(event => this._onAttackRoll(event)); 
   }
   /* -------------------------------------------- */
@@ -860,52 +861,96 @@ export class RunequestActorSheet extends ActorSheet {
     event.preventDefault();
     const characid = event.currentTarget.closest(".characteristic").dataset.characteristicId;
     const data = this.getData();
-    if(event.button == 0) {}
-    else {return;}
-    const row= event.target.parentElement.parentElement;
-    let charname = game.i18n.localize(data.data.characteristics[characid].label);
-    let charvalue= data.data.characteristics[characid].value;
-    let difficultymultiplier = 5;
-    let dialogOptions = {
-      title: "Characteristic Roll",
-      template : "/systems/runequest/templates/chat/char-dialog.html",
-      'z-index': 100,
-      // Prefilled dialog data
+    if(event.button == 0) {
+      const row= event.target.parentElement.parentElement;
+      let charname = game.i18n.localize(data.data.characteristics[characid].label);
+      let charvalue= data.data.characteristics[characid].value;
+      let difficultymultiplier = 5;
+      let dialogOptions = {
+        title: "Characteristic Roll",
+        template : "/systems/runequest/templates/chat/char-dialog.html",
+        'z-index': 100,
+        // Prefilled dialog data
 
-      data : {
-        "charname": charname,
-        "charvalue": charvalue,
-        "difficultymultiplier": difficultymultiplier
-      },
-      callback : (html) => {
-        // When dialog confirmed, fill testData dialog information
-        // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
-        charname =    html.find('[name="charname"]').val();
-        let testmodifier =   Number(html.find('[name="testmodifier"]').val());
-        difficultymultiplier = Number(html.find('[name="difficultymultiplier"]').val());
-        charvalue =   Number(html.find('[name="charvalue"]').val());
-        const target = (charvalue*difficultymultiplier+testmodifier);
-        this.basicRoll(charname,target);              
-      }
-    };
-    renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
-      {
-        new Dialog(
+        data : {
+          "charname": charname,
+          "charvalue": charvalue,
+          "difficultymultiplier": difficultymultiplier
+        },
+        callback : (html) => {
+          // When dialog confirmed, fill testData dialog information
+          // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
+          charname =    html.find('[name="charname"]').val();
+          let testmodifier =   Number(html.find('[name="testmodifier"]').val());
+          difficultymultiplier = Number(html.find('[name="difficultymultiplier"]').val());
+          charvalue =   Number(html.find('[name="charvalue"]').val());
+          const target = (charvalue*difficultymultiplier+testmodifier);
+          this.basicRoll(charname,target);              
+        }
+      };
+      renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
         {
-          title: dialogOptions.title,
-          content: dlg,
-          buttons:
+          new Dialog(
           {
-            rollButton:
+            title: dialogOptions.title,
+            content: dlg,
+            buttons:
             {
-              label: game.i18n.localize("Roll"),
-              callback: html => dialogOptions.callback(html)
-            }
-          },
-          default: "rollButton"
-        }).render(true);
-      });
+              rollButton:
+              {
+                label: game.i18n.localize("Roll"),
+                callback: html => dialogOptions.callback(html)
+              }
+            },
+            default: "rollButton"
+          }).render(true);
+        });
+    }
+    else if(event.button == 2) {
+      //Resistance roll
+      const row= event.target.parentElement.parentElement;
+      let charname = game.i18n.localize(data.data.characteristics[characid].label);
+      let charvalue= data.data.characteristics[characid].value;
+      let difficultymultiplier = 5;
+      let dialogOptions = {
+        title: "Resistance Roll",
+        template : "/systems/runequest/templates/chat/resistance-dialog.html",
+        'z-index': 100,
+        // Prefilled dialog data
 
+        data : {
+          "charname": charname,
+          "charvalue": charvalue,
+          "passive": 10
+        },
+        callback : (html) => {
+          // When dialog confirmed, fill testData dialog information
+          // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
+          charname =    html.find('[name="charname"]').val()+" - Resistance Roll";
+          let passive = Number(html.find('[name="passive"]').val());
+          charvalue =   Number(html.find('[name="charvalue"]').val());
+          const target = 50+(charvalue-passive)*5;
+          this.basicRoll(charname,target);              
+        }
+      };
+      renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
+        {
+          new Dialog(
+          {
+            title: dialogOptions.title,
+            content: dlg,
+            buttons:
+            {
+              rollButton:
+              {
+                label: game.i18n.localize("Roll"),
+                callback: html => dialogOptions.callback(html)
+              }
+            },
+            default: "rollButton"
+          }).render(true);
+        });
+    }
     //return item.roll();    
   }
   _onSkillRoll(event) {

@@ -350,7 +350,7 @@
   }
 },
 "Item": {
-  "types": ["item","skill","passion","attack","spiritspell","runespell","sorceryspell","hitlocation","cult","armor","mpstorage","ally"],
+  "types": ["item","skill","passion","attack","spiritspell","runespell","sorceryspell","hitlocation","cult","armor","mpstorage","ally","events","rune"],
   "templates": {
     "quantity": {
       "quantity": {
@@ -610,6 +610,22 @@
     "keywords": [],
     "runestechniques": [],
     "skill": ""
+  },
+  "events": {
+    "name": "",
+    "templates": ["description"],
+    "date": "1625",
+    "deed": "",
+    "rewards": "",
+    "reputationchange": 0   
+  },
+  "rune": {
+    "name":"",
+    "img":"",
+    "type":"",
+    "experience": false,
+    "paired": "",
+    "total": 50
   }
 }  
 }
