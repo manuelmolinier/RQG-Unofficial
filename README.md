@@ -10,7 +10,7 @@ An unofficial implementation of the Runequest Roleplaying in Glorantha game syst
 
 If you have any suggestions or feedback, please visit us on Discord in the `#chaosium` channel on the [Foundry Discord Server](discord.gg/foundryvtt)
 
-For the list of changes, see: [CHANGELOG](https://gitlab.com/astarothrpg/runequest-foundryvtt/-/blob/master/.gitlab/CHANGELOG.MD).
+For the list of changes, see: [CHANGELOG](https://gitlab.com/astarothrpg/runequest-foundryvtt/-/blob/master/.gitlab/CHANGELOG.md).
 
 ### Disclaimer.
 
@@ -21,7 +21,7 @@ This system is Unofficial.
 
 You can search "Runequest (Unofficial)" on the package finder.
 
-Usage help will come on the [Wiki]https://gitlab.com/astarothrpg/runequest-foundryvtt/-/wikis/home) and will be added in the sytem.
+Usage help will come on the [Wiki](https://gitlab.com/astarothrpg/runequest-foundryvtt/-/wikis/home) and will be added in the sytem.
 
 
 ## Licenses.
