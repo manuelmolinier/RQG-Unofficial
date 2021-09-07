@@ -9,11 +9,11 @@
                 <tbody>
                 {{#if data.flags.locked}}
                     {{#each attacks as |attack id|}}
-                    <tr class="item" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="meleeweapons">
-                        <td class="summary-attack-label"  colspan="4"><a class="attack-roll">{{attack.name}}</a></td>
-                        <td class="summary-attack-value" colspan="1">{{attack.data.data.modifier}}</td>
-                        <td class="summary-attack-damage" colspan="3">{{attack.data.data.damage}}</td>
-                        <td class="item-controls" colspan="2">
+                    <tr class="item" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="{{attacktype}}weapons">
+                        <td class="summary-attack-label"><a class="attack-roll">{{attack.name}}</a></td>
+                        <td class="summary-attack-value">{{attack.data.data.modifier}}</td>
+                        <td class="summary-attack-damage">{{attack.data.data.damage}}</td>
+                        <td class="item-controls">
                             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                             <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                         </td>                        
@@ -69,7 +69,7 @@
                         <th>{{localize "RQG.Edit"}}</th>
                     </tr>
                     {{#each attacks as |attack id|}}
-                    <tr class="item" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="meleeweapons">
+                    <tr class="item" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="{{attacktype}}weapons">
                         <td>
                             <input  class="attribute-value attacks"  type="text"  name="data.name"  value="{{attack.data.name}}"  data-dtype="String"  />
                         </td>
