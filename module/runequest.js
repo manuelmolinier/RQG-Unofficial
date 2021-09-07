@@ -65,17 +65,17 @@ Handlebars.registerHelper("skillcategorymodifier", function(skillcategories, ski
   }
   var skillcat = skillcategories[skillcategory];
   var modifier = skillcat.modifier;
-  console.log("skillcategorymodifier exit with:"+modifier);
   return modifier;
 });
 Handlebars.registerHelper("getcharacterattackskills", function(actorid, attacktype) {
-  console.log("getcharacterattacks with:"+actorid);
-  console.log(attacktype);
   const actor = game.actors.get(actorid);
   const skillcategory = attacktype+"weapons";
-  console.log(actor);
-  console.log(skillcategory);
-  const attacks = actor.data.data.skills[skillcategory];
+  let attacks = actor.data.data.skills[skillcategory];
+  if(attacktype === "melee") {
+    //Add the Shield skills to melee attack possible skills
+    attacks=attacks.concat(actor.data.data.skills["shields"]);
+    console.log(attacks);
+  }
   return attacks;
 });
 // Added Helpers to Handlebars

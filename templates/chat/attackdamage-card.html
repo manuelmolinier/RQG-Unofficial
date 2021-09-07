@@ -5,24 +5,61 @@
         <h3 class="item-name">{{item.name}}</h3>
     </header>
     <div class="card-content">
-        Roll: {{roll.total}} vs {{target}}  - <h1>{{result}}</h1>
+        <table>
+            <thead>
+                <th>{{item.type}}</th>
+                <th>{{localize "RQG.Roll"}}</th>
+                <th>{{localize "RQG.Target"}}</th>
+                <th>{{localize "RQG.Result"}}</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{item.name}}</td>
+                    <td>[[{{roll.total}}]]</td>
+                    <td>[[{{target}}]]</td>
+                    <td>{{result}}</td>
+                </tr>
+            </tbody>
+        </table>
         {{log damageData}}
-        Damage: <br/>
-            {{#if damageData.criticaldamage._evaluated}}
-                Weapon damage: {{damageData.criticaldamage._total}} <br/>
+        {{#if isFumble}}
+            <h3>Make a roll on the Fumble list</h3>
+        {{else}}
+            {{#if isFailure}}
+            <h3>Failed</h3>
             {{else}}
-                {{#if damageData.specialdamage._evaluated}}
-                    Weapon damage: {{damageData.specialdamage._total}} <br/>
-                {{else}}
-                    Weapon damage: {{damageData.damage._total}} <br/> 
-                {{/if}}
+                <h3>{{localize "RQG.Damage"}}</h3>
+                <table>
+                    <tbody>
+                            <tr>
+                                <td>{{localize "RQG.Weapon"}}</td>
+                                <td>{{item.name}}</td></tr>
+                            <tr>
+                                <td>{{localize "RQG.Weapon_damage"}}</td>
+                                <td>
+                                {{#if isCritical}}
+                                    [[{{damageData.criticaldamage._total}}]]
+                                {{else}}
+                                    {{#if isSpecial}}
+                                        [[{{damageData.specialdamage._total}}]]
+                                    {{else}}
+                                        {{!-- This is a success --}}
+                                        [[{{damageData.damage._total}}]]
+                                    {{/if}}
+                                {{/if}}      
+                                </td>
+                            </tr>
+                            <tr><td>{{localize "RQG.Damage_Bonus"}}</td><td>[[{{damageData.damagebonus._total}}]]</td></tr>
+                            <tr><td>{{localize "RQG.Total_damage"}}</td><td>[[{{damageData.totaldamage}}]]</td></tr>
+                    </tbody>
+                </table>
+                <div class="card-content">
+                    Localization: {{hitlocation}}
+                </div>
             {{/if}}
-            Damage Bonus: {{damageData.damagebonus._total}} <br/> 
-            <h1>Total: {{damageData.totaldamage}}</h1>
+        {{/if}}
     </div>
-    <div class="card-content">
-        Localization: {{hitlocation}}
-    </div>
+
 
     <footer class="card-footer">
     </footer>

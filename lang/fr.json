@@ -151,6 +151,14 @@
     "RQG.SpecialType":"Type de spécial",
 
     "RQG.Attack": "Attaque",
-    "RQG.GENERALWOUNDS": "Blessure générale"
-
+    "RQG.GENERALWOUNDS": "Blessure générale",
+    "RQG.Weapon": "Arme",
+    "RQG.Weapon_damage":"Dégats de l'arme",
+    "RQG.Damage_Bonus":"Bonus aux dégats",
+    "RQG.Total_damage":"Total des dégats",
+    
+    "RQG.Target": "Cible",
+    "RQG.Result": "Résultat",
+    "RQG.Failure": "Echec",
+    "RQG.Fumble": "Fumble"
 }

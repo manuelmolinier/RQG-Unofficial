@@ -121,6 +121,9 @@
           "modifier": 0
         }      
       },
+      "flags": {
+        "locked": true
+      },
       "elementalrunes": {
         "air": {
           "value": 0,

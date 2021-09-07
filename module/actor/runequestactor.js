@@ -99,6 +99,9 @@ export class RunequestActor extends Actor {
     this._prepareattributes(data);
     this._prepareskillcategoriesmodifier(data);
     this.prepareItems();
+    if(!data['data.flags.locked']) {
+      data['data.flags.locked'] = true;
+    }
   }
 
   prepareDerivedData(){
@@ -510,7 +513,12 @@ export class RunequestActor extends Actor {
     const hitlocations = hitlocationslist.map(i => i.toObject());
     console.log(hitlocations);
     return hitlocations;
-  }  
+  }
+  async toggleActorFlag (flagName) {
+    const flagValue = !this.data.data.flags[flagName]
+    const name = `data.flags.${flagName}`
+    await this.update({ [name]: flagValue })
+  }    
   /* -------------------------------------------- */
   static async loadCompendiumData(compendium) {
     const pack = game.packs.get(compendium);

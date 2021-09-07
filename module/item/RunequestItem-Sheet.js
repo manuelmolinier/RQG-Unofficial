@@ -7,7 +7,7 @@ export class RunequestItemSheet extends ItemSheet {
     /** @override */
       static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-              classes: ["worldbuilding", "sheet", "item"],
+              classes: ["rqg", "sheet", "item"],
               template: "systems/runequest/templates/item/item-sheet.html",
               width: 520,
               height: 480,

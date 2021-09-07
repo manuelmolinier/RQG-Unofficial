@@ -156,6 +156,14 @@
     "RQG.SpecialType":"Special type",
 
     "RQG.Attack": "Attack",
-    "RQG.GENERALWOUNDS": "General wounds"
+    "RQG.GENERALWOUNDS": "General wounds",
+    "RQG.Weapon": "Weapon",
+    "RQG.Weapon_damage":"weapon damage",
+    "RQG.Damage_Bonus":"Damage bonus",
+    "RQG.Total_damage":"Total damage",
 
+    "RQG.Target": "Target",
+    "RQG.Result": "Result",
+    "RQG.Failure": "Failure",
+    "RQG.Fumble": "Fumble"
 }

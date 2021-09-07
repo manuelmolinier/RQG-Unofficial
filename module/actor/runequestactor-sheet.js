@@ -9,7 +9,7 @@ export class RunequestActorSheet extends ActorSheet {
   /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-  	  classes: ["worldbuilding", "sheet", "actor"],
+  	  classes: ["rqg", "sheet", "actor"],
   	  template: "systems/runequest/templates/actor/actor-sheet.html",
       width: 600,
       height: 600,
@@ -48,7 +48,6 @@ export class RunequestActorSheet extends ActorSheet {
     if (actorData.type == 'npc') {
       this._prepareItems(context);
     }
-
     // Add roll data for TinyMCE editors.
     context.rollData = context.actor.getRollData();
 
@@ -768,10 +767,16 @@ export class RunequestActorSheet extends ActorSheet {
     });
     html.find('.summary-skill-roll').mousedown(event => this._onSkillRoll(event));
     html.find('.summary-characteristic-roll').mousedown(event => this._onCharacteristicRoll(event));
-    html.find('.attack-roll').click(event => this._onAttackRoll(event)); 
+    html.find('.attack-roll').click(event => this._onAttackRoll(event));
+    html.find('.unlock-character-sheet').click(event => this._onLockToggle(event));    
   }
   /* -------------------------------------------- */
 
+  async _onLockToggle(event) {
+    console.log('onLockToggle');
+    this.actor.toggleActorFlag ('locked');
+    console.log(this.actor);
+  }
   /**
    * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
    * @param {Event} event   The originating click event
@@ -1296,7 +1301,53 @@ export class RunequestActorSheet extends ActorSheet {
             await passion.update( {[event.currentTarget.name]: value});           
             console.log(passion);
           }
-        }                          
+        }
+        if(event.currentTarget.classList.contains('attacks')){
+          console.log(event.currentTarget.closest('.item').dataset);
+					let attack = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemId);
+          console.log(attack);        
+          if(attack){
+            let value = null;
+            if(event.currentTarget.dataset.dtype === "Number"){
+              value = event.currentTarget.value? parseInt(event.currentTarget.value) : null;
+            }
+            else {
+              value = event.currentTarget.value;
+            }
+            console.log("value:"+value);
+            console.log("name:"+event.currentTarget.name);
+            if(event.currentTarget.name !== "data.name" ) {
+              if( !event.currentTarget.value) {
+                await attack.update( {[event.currentTarget.name]: null});
+              }
+              else {
+                await attack.update( {[event.currentTarget.name]: value});           
+              }
+            }
+            else {
+              if( !event.currentTarget.value) {
+                await attack.update( {['name']: null});
+              }
+              else {
+                await attack.update( {['name']: value});           
+              }
+            }
+            console.log(attack);
+          }        
+        }
+        if(event.currentTarget.classList.contains('attacks-db')) {
+          console.log(event.currentTarget.closest('.item').dataset);
+					let attack = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemId);
+          console.log(attack);
+          console.log(event.currentTarget.value);
+          if(attack){
+            const value = event.currentTarget.checked? true : false;
+            console.log("value:"+value);
+            console.log("name:"+event.currentTarget.name);
+            await attack.update( {[event.currentTarget.name]: value});           
+            console.log(attack);
+          }
+        }
       }
     }
     return this.object.update(formData);

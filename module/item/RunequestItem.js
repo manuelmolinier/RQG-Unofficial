@@ -294,6 +294,12 @@ export class RunequestItem extends Item {
       let damageData = this.getdamagedata(attack,damagebonus);
   
       let rollMode = game.settings.get("core", "rollMode");
+      let isCritical = (result=="critical");
+      let isSpecial= (result=="special");
+      let isSuccess= (result== "success");
+      let isFailure= (result== "failure");
+      let isFumble= (result== "fumble");
+
       if( result== "success") {
         damageData.damage.roll();
         damageData.damagebonus.roll();
@@ -309,15 +315,21 @@ export class RunequestItem extends Item {
         damageData.damagebonus.roll();
         damageData.totaldamage = damageData.criticaldamage.total + damageData.damagebonus.total;
       }
+
       let hitlocationtable = RollTables.instance.getName("Hit Location - Humanoid");
       console.log("Hit Location - Humanoid loading")
       console.log(hitlocationtable);
       let hitlocation = await hitlocationtable.draw({displayChat: false});
       console.log("Hitlocation drawn:");
-      console.log(hitlocation);
+      console.log(hitlocationtable);
   
   
       const templateData = {
+        isCritical: isCritical,
+        isSpecial: isSpecial,
+        isSuccess: isSuccess,
+        isFailure: isFailure,
+        isFumble: isFumble,
         actor: this.actor,
         item: this,
         attack: attack,
@@ -429,7 +441,8 @@ export class RunequestItem extends Item {
         }
       }
 
-
+      //let skillroll = await roll.toMessage({}, {create:true});
+      //let skillrolled = await skillroll.getHTML();
       const templateData = {
         actor: actor,
         item: skill,
