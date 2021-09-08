@@ -1,4 +1,5 @@
 {
+    "RQG.Name": "Name",
     "RQG.HP": "HP",
     "RQG.MP": "MP",
     "RQG.MPSTORAGE":"MP Storage",
@@ -165,5 +166,6 @@
     "RQG.Target": "Target",
     "RQG.Result": "Result",
     "RQG.Failure": "Failure",
-    "RQG.Fumble": "Fumble"
+    "RQG.Fumble": "Fumble",
+    "RQG.MainTab":"Main"
 }

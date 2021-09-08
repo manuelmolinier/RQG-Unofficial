@@ -5,14 +5,15 @@
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item active" data-tab="summary">{{localize 'RQG.Summary'}}</a>
         <a class="item" data-tab="skills">{{localize 'RQG.Skills'}}</a>
+        <a class="item" data-tab="combat">{{localize 'RQG.Combat'}}</a>
         <!--
         <a class="item" data-tab="herosoul">{{localize 'RQG.HEROSOUL'}}</a>
         -->
         <a class="item" data-tab="attributes">{{localize 'RQG.Characteristics'}}</a>
-        <a class="item" data-tab="combat">{{localize 'RQG.Combat'}}</a>
+
         <a class="item" data-tab="magic">{{localize 'RQG.Magic'}}</a>
+        <a class="item active" data-tab="summary">{{localize 'RQG.MainTab'}}</a>
         <a class="item" data-tab="description">{{localize 'RQG.Description'}}</a>
         <a class="item" data-tab="items">{{localize 'RQG.Items'}}</a>
         {{log data.flags.locked}}
@@ -81,27 +82,6 @@
         </div>
         {{!-- Attributes Tab --}}
         <div class="tab attributes" data-group="primary" data-tab="attributes">
-            <header class="attributes-header flexrow">
-                <span class="attribute-key">{{localize "RQG.Characteristics"}}</span>
-                <span class="attribute-value">{{localize "RQG.Base"}}</span>
-                <span class="attribute-label">{{localize "RQG.Modifier"}}</span>
-                <span class="attribute-dtype">{{localize "RQG.Value"}}</span>
-            </header>
-            <ol  class="attributes-list">
-                {{#each data.characteristics as |characteristic id|}}
-                    <li  class="attribute flexrow"  data-attribute="" data-characteristic="{{id}}">
-                        <!-- <span  class="attribute-label" name="data.characteristics.{{id}}.label"><a class="characteristic-roll rollable">{{localize characteristic.label}}</a></span> -->
-                        <span class="attribute-label characteristic-roll rollable" name="data.characteristics.{{id}}.label">{{localize characteristic.label}}</span>
-                        <div  class="attribute-editbox">
-                            <input  class="attribute-value"  type="text"  name="data.characteristics.{{id}}.base"  value="{{characteristic.base}}"  data-dtype="Number"  />
-                        </div>  
-                        <div  class="attribute-editbox">
-                            <input  class="attribute-value"  type="text"  name="data.characteristics.{{id}}.modifier"  value="{{characteristic.modifier}}"  data-dtype="Number"  />
-                        </div>
-                        <span  class="attribute-label" name="data.characteristics.{{id}}.value"><a class="characteristic-roll rollable">{{characteristic.value}}</a></span>  
-                    </li>
-                {{/each}}
-            </ol>
             <ol  class="attributes-list">
                 {{#each data.elementalrunes as |elementalrune id|}}
                     <li  class="attribute flexrow"  data-attribute="" data-rune="{{id}}"">

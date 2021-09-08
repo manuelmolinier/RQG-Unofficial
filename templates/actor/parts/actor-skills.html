@@ -1,23 +1,19 @@
-<div class="skills-list">
-    {{#each data.skills as |skillList skillcat|}}
-        <table class="skill-category-table skillcategory" data-skillcategory="{{skillcat}}">
-            <thead>
-                <tr>
-                    <th class="item-name" colspan="2">{{skillcat}}</th>
-                    <th class="item-name">{{skillcategorymodifier @root.data.skillcategory skillcat}}</th>
-                    <th class="item-name">
-                        <a class="item-control item-create" title="Create item" data-type="skill" data-skillcategory="{{skillcat}}"><i class="fas fa-plus"></i></a>
-                    </th>
-
-                </tr>
-            </thead>
-            {{#each skillList as |item id|}}
-                <tr class="skill" data-item-id="{{item._id}}" data-itemid="{{item._id}}">
-                    <td class="item" data-itemid="{{item._id}}" colspan="2"><a class="skill-roll" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.data.skillcategory}}">{{item.name}}</a></td>
-                    <td class="item" data-itemid="{{item._id}}"><a class="skill-roll" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.data.skillcategory}}">{{item.data.data.total}}</a></td>
-                    <td class="item" data-itemid="{{item._id}}"><input class="skill-experience" id="{{id}}_{{item._id}}_experience_skill" type="checkbox" name="data.experience" {{checked item.data.data.experience}}/></td>                         
-                </tr>
-            {{/each}}
-        </table>
-    {{/each}}
+<div class="summary-row flexrow">
+    <div class="summary-runes-list flexcol">
+        {{> "systems/runequest/templates/actor/parts/actor-partial-skilltable.html" skillcat="agility" skillList=data.skills.agility}}
+        {{> "systems/runequest/templates/actor/parts/actor-partial-skilltable.html" skillcat="knowledge" skillList=data.skills.knowledge}}
+    </div>
+    <div class="summary-runes-list flexcol">
+        {{> "systems/runequest/templates/actor/parts/actor-partial-skilltable.html" skillcat="communication" skillList=data.skills.communication}}
+        {{> "systems/runequest/templates/actor/parts/actor-partial-skilltable.html" skillcat="magic" skillList=data.skills.magic}}
+        {{> "systems/runequest/templates/actor/parts/actor-partial-skilltable.html" skillcat="perception" skillList=data.skills.perception}}    
+        {{> "systems/runequest/templates/actor/parts/actor-partial-skilltable.html" skillcat="stealth" skillList=data.skills.stealth}}    
+    </div>
+    <div class="summary-runes-list flexcol">
+        {{> "systems/runequest/templates/actor/parts/actor-partial-skilltable.html" skillcat="manipulation" skillList=data.skills.manipulation}}
+        {{> "systems/runequest/templates/actor/parts/actor-partial-skilltable.html" skillcat="meleeweapons" skillList=data.skills.meleeweapons}}
+        {{> "systems/runequest/templates/actor/parts/actor-partial-skilltable.html" skillcat="missileweapons" skillList=data.skills.missileweapons}}
+        {{> "systems/runequest/templates/actor/parts/actor-partial-skilltable.html" skillcat="shields" skillList=data.skills.shields}}    
+        {{> "systems/runequest/templates/actor/parts/actor-partial-skilltable.html" skillcat="naturalweapons" skillList=data.skills.naturalweapons}}    
+    </div>
 </div>

@@ -1,0 +1,42 @@
+{{#if data.flags.locked}}
+    <tr>
+        {{#each data.characteristics as |characteristic id|}}
+            <td class="characteristic-list-td characteristic" data-characteristic-id="{{id}}"><a class="summary-characteristic-roll">{{localize characteristic.label}}</a></td>
+        {{/each}}
+    </tr>
+    <tr>
+        {{#each data.characteristics as |characteristic id|}}
+            <td class="characteristic-list-td characteristic" data-characteristic-id="{{id}}"><a class="summary-characteristic-roll">{{characteristic.value}}</a></td>
+        {{/each}}        
+    </tr>
+{{else}}
+    <tr>
+        <td class="characteristic-list-td characteristic">&nbsp;</td>
+        {{#each data.characteristics as |characteristic id|}}
+            <td class="characteristic-list-td characteristic" data-characteristic-id="{{id}}"><a class="summary-characteristic-roll">{{localize characteristic.label}}</a></td>
+        {{/each}}
+    </tr>
+    <tr>
+        <td class="characteristic-list-td characteristic">{{localize "RQG.Base"}}</td>
+        {{#each data.characteristics as |characteristic id|}}
+            <td class="characteristic-list-td characteristic" data-characteristic-id="{{id}}">
+                <input  class="attribute-value"  type="text"  name="data.characteristics.{{id}}.base"  value="{{characteristic.base}}"  data-dtype="Number" />
+            </td>
+        {{/each}}
+    </tr>
+    <tr>
+        <td class="characteristic-list-td characteristic">{{localize "RQG.Modifier"}}</td>
+        {{#each data.characteristics as |characteristic id|}}
+        <td class="characteristic-list-td characteristic" data-characteristic-id="{{id}}">
+            <input  class="attribute-value"  type="text"  name="data.characteristics.{{id}}.modifier"  value="{{characteristic.modifier}}"  data-dtype="Number"  />
+        </td>
+        {{/each}}
+    </tr>
+    <tr>
+        <td class="characteristic-list-td characteristic">{{localize "RQG.Value"}}</td>
+        {{#each data.characteristics as |characteristic id|}}
+            <td class="characteristic-list-td characteristic" data-characteristic-id="{{id}}"><a class="summary-characteristic-roll">{{characteristic.value}}</a></td>
+        {{/each}}
+    </tr>
+{{/if}}
+

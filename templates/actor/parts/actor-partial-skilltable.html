@@ -1,0 +1,19 @@
+<table class="skill-category-table skillcategory" data-skillcategory="{{skillcat}}">
+    <thead>
+        <tr>
+            <th class="item-name" colspan="2">{{skillcat}}</th>
+            <th class="item-name">{{skillcategorymodifier @root.data.skillcategory skillcat}}</th>
+            <th class="item-name">
+                <a class="item-control item-create" title="Create item" data-type="skill" data-skillcategory="{{skillcat}}"><i class="fas fa-plus"></i></a>
+            </th>
+
+        </tr>
+    </thead>
+    {{#each skillList as |item id|}}
+        <tr class="skill" data-item-id="{{item._id}}" data-itemid="{{item._id}}">
+            <td class="item" data-itemid="{{item._id}}" colspan="2"><a class="skill-roll" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.data.skillcategory}}">{{item.name}}</a></td>
+            <td class="item" data-itemid="{{item._id}}"><a class="skill-roll" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.data.skillcategory}}">{{item.data.data.total}}</a></td>
+            <td class="item" data-itemid="{{item._id}}"><input class="skill-experience" id="{{id}}_{{item._id}}_experience_skill" type="checkbox" name="data.experience" {{checked item.data.data.experience}}/></td>                         
+        </tr>
+    {{/each}}
+</table>

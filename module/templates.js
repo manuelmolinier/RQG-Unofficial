@@ -18,7 +18,11 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/runequest/templates/actor/parts/actor-magic.html",
     "systems/runequest/templates/actor/parts/actor-skills.html",
     "systems/runequest/templates/actor/parts/actor-inventory.html",
-    "systems/runequest/templates/actor/parts/actor-partial-attacks.html"
+    "systems/runequest/templates/actor/parts/actor-partial-attacks.html",
+    "systems/runequest/templates/actor/parts/actor-partial-hitlocations.html",
+    "systems/runequest/templates/actor/parts/actor-partial-armors.html",
+    "systems/runequest/templates/actor/parts/actor-partial-skilltable.html",
+    "systems/runequest/templates/actor/parts/actor-partial-characteristics.html"    
     // Item Sheet Partials
   ]);
 };

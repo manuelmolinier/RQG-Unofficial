@@ -1,4 +1,5 @@
 {
+    "RQG.Name": "Nom",
     "RQG.HP": "PV",
     "RQG.MP": "MP",
     "RQG.MPSTORAGE":"Stockage MP",
@@ -160,5 +161,6 @@
     "RQG.Target": "Cible",
     "RQG.Result": "Résultat",
     "RQG.Failure": "Echec",
-    "RQG.Fumble": "Fumble"
+    "RQG.Fumble": "Fumble",
+    "RQG.MainTab":"Main"
 }

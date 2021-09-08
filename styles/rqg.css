@@ -54,13 +54,13 @@ input[type="text"]
   user-select: text;
 }
 .rqg .sheet-header .profile-img {
-  flex: 0 0 100px;
-  height: 100px;
+  flex: 0 0 150px;
+  height: 150px;
   margin-right: 10px;
 }
 .rqg .sheet-header .header-fields {
-  flex: 1;
-  height: 100px;
+  flex: 1 0 72%;
+  height: 150px;
 }
 .rqg .sheet-header h1.charname {
   height: 50px;
@@ -215,7 +215,7 @@ input[type="text"]
 }
 .rqg .skills-list .item {
   height: auto;
-  line-height: 24px;
+  /*line-height: 24px;*/
   padding: 3px 0;
   border-bottom: 1px solid #BBB;
   justify-content: flex-end;
@@ -388,7 +388,7 @@ input[type="text"]
   margin: 2px;
   padding: 2px;
   border: 2px solid rgb(8, 8, 8);    
-  flex:2,0,auto;    
+  flex:1,0,auto;    
 }
 .rqg .summary-powerrunes-list {
   /* font-family: AtlantisRegular; */
@@ -417,7 +417,7 @@ input[type="text"]
 }
 .rqg .summary-skill-list {
   /* font-family: AtlantisRegular; */
-  font-size:14px;
+  font-size:12px;
   list-style: none;
   margin: 2px;
   padding: 2px;
@@ -481,9 +481,11 @@ input[type="text"]
   justify-content: flex-start;
 }
 .rqg .skill-category-table {
-  width: 33%;
+  width: 92%;
   border: 2px solid green;
   margin: 0.5em 0.5em;
+  font-size:10px;
+  font-weight: 900;  
 }
 .rqg .resource-input {
   width: 40px;
@@ -497,4 +499,39 @@ input[type="text"]
 }
 .invisible {
   display: none;
+}
+.hitlocationname {
+  text-align: center;
+  /*height: 28px;*/
+}
+.hitlocationlockedfield {
+  text-align: center;
+  /*height: 28px;*/
+}
+.hitlocationtable {
+  /*height: 70px;*/
+  border: 1px solid;
+}
+.generalwoundname {
+  width: 85%;
+  text-align: center;
+  flex: 4 0 200px;  
+  /*height: 28px;*/
+}
+.generalwounds {
+  text-align: center;
+  /*height: 28px;*/
+}
+.hitlocationunlockedfield {
+  text-align: center;
+  /*height: 28px;*/
+}
+.combat-defense-table {
+  width:100%;
+  /*height: 70px;*/
+  border: 1px solid;
+}
+.combat-defense-field {
+  text-align: center;
+  /*height: 28px;*/
 }

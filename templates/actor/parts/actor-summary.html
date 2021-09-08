@@ -1,34 +1,5 @@
 {{!-- Hitlocations and Runes row --}}
 <div class="summary-row flexrow">
-    <div class="summary-hitlocations-list">
-        <table style="height: 70px;" border="2">
-        <thead style="height: 28px;">
-            <th style="width: 25%; text-align: center; height: 28px;">{{localize "RQG.HitLocations"}}</th>
-            <th style="width: 15%; text-align: center; height: 28px;">{{localize "RQG.RANGE"}}</th>
-            <th style="width: 15%; text-align: center; height: 28px;">{{localize "RQG.HITPOINTS"}}</th>
-            <th style="width: 15%; text-align: center; height: 28px;">{{localize "RQG.MAXHITPOINTS"}}</th>
-            <th style="width: 10%; text-align: center; height: 28px;">{{localize "RQG.ARMOR"}}</th>
-            <th style="width: 10%; text-align: center;">{{localize "RQG.WOUNDS"}}</th>
-        </thead>
-        <tbody>
-        {{!-- General Wounds Management--}}
-        <tr style="height: 28px;" class="item">
-            <td style="width: 25%; height: 28px; text-align: center;" colspan="5">{{localize "RQG.GENERALWOUNDS"}}</td>
-            <td style="width: 10%; text-align: center;" colspan="1"><input class="attribute-value" type="text" name="data.attributes.generalwounds" value="{{actor.data.data.attributes.generalwounds}}" data-dtype="Number"/></td>
-        </tr>                  
-        {{#each data.hitlocations as |hl id|}}
-            <tr style="height: 28px;" class="item" data-itemid="{{hl._id}}">
-                <td style="width: 25%; height: 28px; text-align: center;">{{localize hl.name}}</td>
-                <td style="width: 15%; height: 28px; text-align: center;">{{hl.data.data.rangestart}}-{{hl.data.data.rangeend}}</td>
-                <td style="width: 15%; height: 28px; text-align: center;"><input id="{{hl._id}}_currenthp" type="text" name="data.currenthp" value="{{hl.data.data.currenthp}}"/></td>
-                <td style="width: 15%; height: 28px; text-align: center;">{{hl.data.data.maxhp}}</td>
-                <td style="width: 10%; height: 28px; text-align: center;"><input id="{{hl._id}}_armor" class="attribute-value hitloc-armor"  type="text"  name="data.armor"  value="{{hl.data.data.armor}}"  data-dtype="Number"  /></td>
-                <td style="width: 10%; text-align: center;"><input id="{{hl._id}}_wounds" class="attribute-value hitloc-wounds"  type="text"  name="data.wounds"  value="{{hl.data.data.wounds}}"  data-dtype="Number"  /></td>
-            </tr>        
-        {{/each}}
-        </tbody>
-        </table>
-    </div>
     {{!-- Runes --}}
     <div  class="summary-runes-list flexrow">
         <table>
