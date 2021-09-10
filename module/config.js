@@ -52,3 +52,8 @@ RQG.runetype = {
     "condition": "RQG.CONDITION",
     "others": "RQG.OTHERS"
 }
+RQG.specialtype = {
+    "S":"RQG.Slash",
+    "C":"RQG.Crush",
+    "I":"RQG.Impale"
+}

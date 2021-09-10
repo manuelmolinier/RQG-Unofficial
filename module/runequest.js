@@ -104,3 +104,8 @@ Handlebars.registerHelper("getruneletter", function(runeid) {
 Handlebars.registerHelper('isdefined', function (value) {
   return value !== undefined;
 });
+Handlebars.registerHelper("getcharacterhitlocations", function(actorid) {
+  const actor = game.actors.get(actorid);
+  let hitlocations = actor.data.data.hitlocations;
+  return hitlocations;
+});

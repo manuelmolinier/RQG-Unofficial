@@ -162,5 +162,17 @@
     "RQG.Result": "Résultat",
     "RQG.Failure": "Echec",
     "RQG.Fumble": "Fumble",
-    "RQG.MainTab":"Main"
+    "RQG.MainTab":"Main",
+
+    "RQG.WSR":"RA",
+    "RQG.HPMax":"PV Max",
+    "RQG.HPCurrent": "PV actuel",
+    "RQG.Range": "Portée",
+    "RQG.Rate": "Rate",
+    "RQG.Amno": "Munitions",
+    "RQG.Edit": "Editer",
+
+    "RQG.Slash":"S",
+    "RQG.Crush":"C",
+    "RQG.Impale":"I"
 }

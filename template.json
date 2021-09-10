@@ -419,7 +419,8 @@
       "hpcurrent":0,
       "enc":0,
       "STR":0,
-      "DEX":0
+      "DEX":0,
+      "attacktotal":0
     }
   },  
   "item": {
@@ -506,9 +507,11 @@
     "templates": ["description"],
     "ap": 0,
     "currentap":0,
-    "hitlocation": [],
+    "hitlocations": [],
     "equiped": true,
-    "armorpenalty": 0    
+    "armorpenalty": 0,
+    "ENC":0,
+    "hitlocationstype": "Humanoids"    
   },
   "mpstorage": {
     "name": "",

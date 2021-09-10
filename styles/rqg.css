@@ -27,6 +27,17 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+  /*height: 200px;*/
+  overflow: scroll;
+  margin-bottom: 10px;
+  font-size:12px;
+  align-items:flex-start;
+}
+.rqg header.character-sheet-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   height: 200px;
   overflow: scroll;
   margin-bottom: 10px;
@@ -54,11 +65,20 @@ input[type="text"]
   user-select: text;
 }
 .rqg .sheet-header .profile-img {
+  flex: 0 0 100px;
+  height: 100px;
+  margin-right: 10px;
+}
+.rqg .sheet-header .header-fields {
+  flex: 1 0 72%;
+  /*height: 150px;*/
+}
+.rqg .sheet-header .character-profile-img {
   flex: 0 0 150px;
   height: 150px;
   margin-right: 10px;
 }
-.rqg .sheet-header .header-fields {
+.rqg .sheet-header .character-header-fields {
   flex: 1 0 72%;
   height: 150px;
 }
@@ -534,4 +554,8 @@ input[type="text"]
 .combat-defense-field {
   text-align: center;
   /*height: 28px;*/
+}
+.attack-select {
+  height:20px;
+  font-size: 12px;
 }

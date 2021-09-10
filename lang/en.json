@@ -167,5 +167,17 @@
     "RQG.Result": "Result",
     "RQG.Failure": "Failure",
     "RQG.Fumble": "Fumble",
-    "RQG.MainTab":"Main"
+    "RQG.MainTab":"Main",
+
+    "RQG.WSR":"WSR",
+    "RQG.HPMax":"HP Max",
+    "RQG.HPCurrent": "HP Current",
+    "RQG.Range": "Range",
+    "RQG.Rate": "Rate",
+    "RQG.Amno": "Amno",
+    "RQG.Edit": "Edit",
+
+    "RQG.Slash":"S",
+    "RQG.Crush":"C",
+    "RQG.Impale":"I"
 }

@@ -56,7 +56,14 @@
             </div>
             <div class="form-group">
                 <label class="label-text">{{localize "RQG.SpecialType"}}</label>
-                <input  class="attribute-value"  type="text"  name="data.specialtype"  value="{{data.specialtype}}"  data-dtype="String"  />
+                <!--<input  class="attribute-value"  type="text"  name="data.specialtype"  value="{{data.specialtype}}"  data-dtype="String"  /> -->
+                <select name="data.specialtype">
+                    {{#select data.specialtype}}
+                    {{#each config.specialtype as |name type|}}
+                        <option value="{{type}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>                
             </div>
             <div class="form-group">
                 <label class="label-text">{{localize "RQG.WSR"}}</label>

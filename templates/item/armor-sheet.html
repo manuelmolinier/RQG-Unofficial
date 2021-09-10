@@ -1,0 +1,83 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+        </div>
+    </header>
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="details">Details</a>
+        <a class="item" data-tab="description">Description</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        {{!-- Attributes Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <!--            
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.HitLocation"}}</label>
+                {{#if @root.document.parent}}
+                <select name="data.hitloc">
+                    {{#select data.hitloc}}
+                    {{#each (getcharacterattackskills @root.document.parent.data._id data.attacktype) as |skill id|}}
+                    <option value="{{skill._id}}">{{skill.name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>                  
+                {{else}}
+                <select name="data.skillused">
+                    {{#select data.skillused}}
+                    {{#each config.weaponskills as |name type|}}
+                    <option value="{{type}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>                  
+                {{/if}}            
+            </div>
+            -->
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.HitLocationsType"}}</label>
+                <select name="data.hitlocationstype">
+                    {{#select data.hitlocationstype}}
+                    {{#each config.hitlocationstypes as |name type|}}
+                    <option value="{{type}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>  
+            </div>
+			<div class="skill-attributes" style="display: block;" data-set="hitlocations">
+                {{#each (data.hitlocations as |hl key|}}
+                    <span class="hitloc-property {{#if hl}}switched-on{{/if}}" data-hitlocation="{{key}}">{{localize hl}}</span>
+                {{/each}}
+			</div>            
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.ArmorPoints"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.ap"  value="{{data.ap}}"  data-dtype="Number"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.CurrentArmorPoints"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.currentap"  value="{{data.currentap}}"  data-dtype="Number"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.Equiped"}}</label>
+                <input type="checkbox" name="data.equiped" {{checked data.equiped}}/>
+            </div>         
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.ArmorPenalty"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.armorpenalty"  value="{{data.armorpenalty}}"  data-dtype="String"  />
+            </div>         
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.ENC"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.ENC"  value="{{data.ENC}}"  data-dtype="Number"  />
+            </div>                                 
+        </div>
+
+        {{!-- Description Tab --}}
+        <div class="tab" data-group="primary" data-tab="description">
+            {{editor content=data.description.description.value target="data.description.description.value" button=true owner=owner editable=editable}}
+        </div>
+
+    </section>
+</form>

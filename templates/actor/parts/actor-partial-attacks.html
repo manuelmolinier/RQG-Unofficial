@@ -1,18 +1,38 @@
 <div class="summary-row flexrow">
     <div class="summary-runes-list flexrow">
         <ol class="skills-list">
-            <table data-attacktype="melee">
+            <table data-attacktype="melee" border="2">
+                <colgroup>
+                    <col span="1" style="width: 35%;">
+                    <col span="1" style="width: 10%;">
+                    <col span="1" style="width: 20%;">
+                    <col span="1" style="width: 15%;">
+                    <col span="1" style="width: 10%;">
+                    <col span="1" style="width: 10%;">
+                </colgroup>            
                 <thead>
-                    <th colspan="14">{{localize attacklabel}}</th>
-                    <th colspan="2"><a class="item-control item-create" title="Create item" data-type="attack" data-attacktype="{{attacktype}}"><i class="fas fa-plus"></i></a></th>
+                    <th colspan="5">{{localize attacklabel}}</th>
+                    <th colspan="1"><a class="item-control item-create" title="Create item" data-type="attack" data-attacktype="{{attacktype}}"><i class="fas fa-plus"></i></a></th>
+                </thead>
+                <thead>
+                    <tr>
+                        <th class="summary-attack-label">{{localize "RQG.Attack"}}</th>
+                        <th class="summary-attack-value"> % </th>
+                        <th class="summary-attack-damage">{{localize "RQG.Damage"}}</th>
+                        <th class="summary-attack-damage">{{localize "RQG.HP"}}</th>
+                        <th class="summary-attack-damage">{{localize "RQG.SR"}}</th>
+                        <th class="summary-attack-damage">&nbsp;</th>
+                    </tr>                    
                 </thead>
                 <tbody>
                 {{#if data.flags.locked}}
                     {{#each attacks as |attack id|}}
                     <tr class="item" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="{{attacktype}}weapons">
                         <td class="summary-attack-label"><a class="attack-roll">{{attack.name}}</a></td>
-                        <td class="summary-attack-value">{{attack.data.data.modifier}}</td>
+                        <td class="summary-attack-value">{{attack.data.data.attacktotal}}</td>
                         <td class="summary-attack-damage">{{attack.data.data.damage}}</td>
+                        <td class="summary-attack-damage">{{attack.data.data.hpcurrent}}/{{attack.data.data.hpmax}}</td>
+                        <td class="summary-attack-damage">{{attack.data.data.sr}}</td>
                         <td class="item-controls">
                             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                             <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -39,20 +59,8 @@
                         <th>
                             {{localize "RQG.WSR"}}
                         </th>
-                        <th>
-                            {{localize "RQG.HPMax"}}
-                        </th>
-                        <th>
-                            {{localize "RQG.HPCurrent"}}
-                        </th>
-                        <th>
-                            {{localize "RQG.ENC"}}
-                        </th>
-                        <th>
-                            {{localize "RQG.DEX"}}
-                        </th>
-                        <th>
-                            {{localize "RQG.STR"}}
+                        <th colspan="2">
+                            {{localize "RQG.HP"}}
                         </th>
                         <th>
                             {{localize "RQG.Range"}}
@@ -77,7 +85,7 @@
                             {{log "In CS-Summary preparing display of attackskills"}}
                             {{log @root}}
                             {{#if @root.actor}}
-                            <select class= "attacks" name="data.skillused" data-dtype="String">
+                            <select class= "attack-select attacks" name="data.skillused" data-dtype="String">
                                 {{#select attack.data.data.skillused}}
                                 {{#each (getcharacterattackskills @root.actor.data._id attack.data.data.attacktype) as |skill id|}}
                                 <option value="{{skill._id}}">{{skill.name}}</option>
@@ -87,7 +95,7 @@
                             {{else}}
                             <select class= "attacks" name="data.skillused" data-dtype="String">
                                 {{#select attack.data.data.skillused}}
-                                {{#each config.weaponskills as |name type|}}
+                                {{#each @root.config.weaponskills as |name type|}}
                                 <option value="{{type}}">{{localize name}}</option>
                                 {{/each}}
                                 {{/select}}
@@ -101,7 +109,15 @@
                             <input  class="attribute-value attacks"  type="text"  name="data.damage"  value="{{attack.data.data.damage}}"  data-dtype="String"  />
                         </td>
                         <td>
-                            <input  class="attribute-value attacks"  type="text"  name="data.specialtype"  value="{{attack.data.data.specialtype}}"  data-dtype="String"  />
+                            <!-- <input  class="attribute-value attacks"  type="text"  name="data.specialtype"  value="{{attack.data.data.specialtype}}"  data-dtype="String"  /> -->
+                            {{log @root.config.specialtype}}
+                            <select class="attack-select attacks" name="data.specialtype">
+                                {{#select attack.data.data.specialtype}}
+                                {{#each @root.config.specialtype as |name type|}}
+                                    <option value="{{type}}">{{localize name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select> 
                         </td>
                         <td>
                             <input  class="attribute-value attacks"  type="text"  name="data.wsr"  value="{{attack.data.data.wsr}}"  data-dtype="String"  />
@@ -112,15 +128,6 @@
                         <td>
                             <input  class="attribute-value attacks"  type="text"  name="data.hpcurrent"  value="{{attack.data.data.hpcurrent}}"  data-dtype="String"  />
                         </td>            
-                        <td>
-                            <input  class="attribute-value attacks"  type="text"  name="data.ENC"  value="{{attack.data.data.ENC}}"  data-dtype="String"  />
-                        </td>            
-                        <td>
-                            <input  class="attribute-value attacks"  type="text"  name="data.DEX"  value="{{attack.data.data.DEX}}"  data-dtype="String"  />
-                        </td>            
-                        <td>
-                            <input  class="attribute-value attacks"  type="text"  name="data.STR"  value="{{attack.data.data.STR}}"  data-dtype="String"  />
-                        </td>
                         <td>
                             <input  class="attribute-value attacks"  type="text"  name="data.range"  value="{{attack.data.data.range}}"  data-dtype="String"  />
                         </td>    
