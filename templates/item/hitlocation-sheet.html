@@ -1,6 +1,4 @@
 <form class="{{cssClass}}" autocomplete="off">
-    {{log "hit location html"}}
-    {{log item}}
     <header class="sheet-header">
         <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{localize item.name}}"/>
         <div class="header-fields">
@@ -16,7 +14,6 @@
     {{!-- Sheet Body --}}
     <section class="sheet-body">
         {{!-- Details Tab --}}
-        {{log data}}
         <div class="tab details" data-group="primary" data-tab="details">
             <div class="form-group">
                 <label class="label-text">{{localize "HP"}}</label>

@@ -14,7 +14,7 @@
 
         <a class="item" data-tab="magic">{{localize 'RQG.Magic'}}</a>
         <a class="item active" data-tab="summary">{{localize 'RQG.MainTab'}}</a>
-        <a class="item" data-tab="description">{{localize 'RQG.Description'}}</a>
+        <a class="item" data-tab="description">{{localize 'RQG.Backstory'}}</a>
         <a class="item" data-tab="items">{{localize 'RQG.Items'}}</a>
         {{log data.flags.locked}}
         {{#if data.flags.locked}}
@@ -49,31 +49,7 @@
 
         {{!-- Biography Tab --}}
         <div class="tab biography" data-group="primary" data-tab="description">
-            <div class="summary-general-list">
-                <table class="general-list-table">
-                    <tbody>
-                        <tr>
-                        <td class="general-list-td" colspan="2">{{localize 'RQG.BirthYear'}}: <input type="text" name="data.general.birthyear.value" value="{{data.general.birthyear.value}}"/></td>
-                        <td class="general-list-td">{{localize 'RQG.Age'}}:<input type="text" name="data.general.age.value" value="{{data.general.age.value}}"/></td>
-                        <td class="general-list-td" colspan="3">{{localize 'RQG.Occupation'}}:<input type="text" name="data.general.occupation.value" value="{{data.general.occupation.value}}"/></td>
-                        <td class="general-list-td" colspan="2">{{localize 'RQG.Ransom'}}:<input type="text" name="data.general.ransom.value" value="{{data.general.ransom.value}}"/></td>
-                        </tr>
-                        <tr>
-                        <td class="general-list-td" colspan="3">{{localize 'RQG.Gender'}}:<input type="text" name="data.general.gender.value" value="{{data.general.gender.value}}"/></td>
-                        <td class="general-list-td" colspan="3">{{localize 'RQG.Reputation'}}:<input type="text" name="data.general.reputation.value" value="{{data.general.reputation.value}}"/></td>
-                        <td class="general-list-td" colspan="3">{{localize 'RQG.StandardofLiving'}}:<input type="text" name="data.general.standardofliving.value" value="{{data.general.standardofliving.value}}"/></td>
-                        <td class="general-list-td" colspan="2">{{localize 'RQG.BaseIncome'}}:<input type="text" name="data.general.baseincome.value" value="{{data.general.baseincome.value}}"/></td>
-                        </tr>
-                        <tr>
-                        <td class="general-list-td" colspan="3">{{localize 'RQG.Homeland'}}:<input type="text" name="data.general.homeland.value" value="{{data.general.homeland.value}}"/></td>
-                        <td class="general-list-td" colspan="3">{{localize 'RQG.Tribe'}}:<input type="text" name="data.general.tribe.value" value="{{data.general.tribe.value}}"/></td>
-                        <td class="general-list-td" colspan="3">{{localize 'RQG.Clan'}}:<input type="text" name="data.general.clan.value" value="{{data.general.clan.value}}"/></td>
-                        <td class="general-list-td" colspan="2">{{localize 'RQG.Campaign'}}:<input type="text" name="data.general.campaign.value" value="{{data.general.campaign.value}}"/></td>
-                        </tr>
-                    </tbody>
-                </table>    
-            </div> 
-            {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
+            {{> "systems/runequest/templates/actor/parts/actor-backstory.html"}}            
         </div>
 
         {{!-- Owned Items Tab --}}

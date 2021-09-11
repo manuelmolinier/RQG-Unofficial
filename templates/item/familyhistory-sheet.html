@@ -1,0 +1,60 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="details">Details</a>
+        <a class="item" data-tab="description">Description</a>
+        <a class="item" data-tab="history">History</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        {{!-- Attributes Tab --}}      
+        <div class="tab details" data-group="primary" data-tab="details">
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.Treasuresandboons"}}</label>              
+                <textarea name="data.treasuresandboons" class='family-history-text' style='height: max-content;resize: none;font-family: customSheetFont, "Palatino Linotype", serif;font-size: 0.75rem;' rows="4" >{{data.treasuresandboons}}</textarea>                
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.Famousancestors"}}</label>              
+                <textarea name="data.famousancestors" class='family-history-text' style='height: max-content;resize: none;font-family: customSheetFont, "Palatino Linotype", serif;font-size: 0.75rem;' rows="4" >{{data.famousancestors}}</textarea>                
+            </div>
+        </div>
+        {{!-- Description Tab --}}
+        <div class="tab" data-group="primary" data-tab="description">
+            {{editor content=data.description.description.value target="data.description.description.value" button=true owner=owner editable=editable}}
+        </div>
+        {{!-- History Tab--}}
+        <div class="tab" data-group="primary" data-tab="history">
+            <div class="flexrow">
+                <table>
+                  <tr>
+                    <th><label>Year</label></th>
+                    <th><label>Event</label></th>
+                    <th><label>Result</label></th>
+                    <th><label>Rewards</label></th>
+                    <th><label>Reputation change</label></th>
+                    <th><label>Fate</label></th>
+                    <th><i class="fas fa-plus add-event"></i></th>
+                  </tr>
+                  {{#each data.favoredgrandparenthistory as |event key|}}
+                    <tr data-index="{{@index}}">
+                      <td><input class="change-event" type="text" value="{{event.date}}"></td>
+                      <td><input class="change-event" type="text" value="{{event.name}}"></td>
+                      <td><input class="change-event" type="text" value="{{event.result}}"></td>
+                      <td><input class="change-event" type="text" value="{{event.rewards}}"></td>
+                      <td><input class="change-event" type="text" value="{{event.reputationchange}}"></td>
+                      <td><input class="change-event" type="text" value="{{event.killed}}"></td>                                       
+                      <td><i class="fas fa-trash remove-event"></i></td>
+                    </tr>
+                  {{/each}}
+                </table>
+              </div>
+        </div>
+    </section>
+</form>

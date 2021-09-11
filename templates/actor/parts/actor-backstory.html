@@ -1,0 +1,63 @@
+<div class="summary-general-list">
+    <table class="general-list-table">
+        <tbody>
+            <tr>
+            <td class="general-list-td" colspan="2">{{localize 'RQG.BirthYear'}}: <input type="text" name="data.general.birthyear.value" value="{{data.general.birthyear.value}}"/></td>
+            <td class="general-list-td">{{localize 'RQG.Age'}}:<input type="text" name="data.general.age.value" value="{{data.general.age.value}}"/></td>
+            <td class="general-list-td" colspan="3">{{localize 'RQG.Occupation'}}:<input type="text" name="data.general.occupation.value" value="{{data.general.occupation.value}}"/></td>
+            <td class="general-list-td" colspan="2">{{localize 'RQG.Ransom'}}:<input type="text" name="data.general.ransom.value" value="{{data.general.ransom.value}}"/></td>
+            </tr>
+            <tr>
+            <td class="general-list-td" colspan="3">{{localize 'RQG.Gender'}}:<input type="text" name="data.general.gender.value" value="{{data.general.gender.value}}"/></td>
+            <td class="general-list-td" colspan="3">{{localize 'RQG.Reputation'}}:<input type="text" name="data.general.reputation.value" value="{{data.general.reputation.value}}"/></td>
+            <td class="general-list-td" colspan="3">{{localize 'RQG.StandardofLiving'}}:<input type="text" name="data.general.standardofliving.value" value="{{data.general.standardofliving.value}}"/></td>
+            <td class="general-list-td" colspan="2">{{localize 'RQG.BaseIncome'}}:<input type="text" name="data.general.baseincome.value" value="{{data.general.baseincome.value}}"/></td>
+            </tr>
+            <tr>
+            <td class="general-list-td" colspan="3">{{localize 'RQG.Homeland'}}:<input type="text" name="data.general.homeland.value" value="{{data.general.homeland.value}}"/></td>
+            <td class="general-list-td" colspan="3">{{localize 'RQG.Tribe'}}:<input type="text" name="data.general.tribe.value" value="{{data.general.tribe.value}}"/></td>
+            <td class="general-list-td" colspan="3">{{localize 'RQG.Clan'}}:<input type="text" name="data.general.clan.value" value="{{data.general.clan.value}}"/></td>
+            <td class="general-list-td" colspan="2">{{localize 'RQG.Campaign'}}:<input type="text" name="data.general.campaign.value" value="{{data.general.campaign.value}}"/></td>
+            </tr>
+        </tbody>
+    </table>    
+</div>
+<div class="summary-general-list">
+    <table border="2">
+        <colgroup>
+            <col span="1" style="width: 10%;"> <!-- Year / date text -->
+            <col span="1" style="width: 40%;"> <!-- Event / name textbox -->
+            <col span="1" style="width: 40%;"> <!-- result textbox-->
+            <col span="1" style="width: 10%;"> <!-- killed checkbox-->
+        </colgroup>            
+        <thead>
+            <th colspan="3">{{localize "RQG.Familyhistory"}}</th>
+            <th colspan="1"><a class="item-control item-create" title="Create item" data-type="familyhistory"><i class="fas fa-plus"></i></a></th>
+        </thead>
+        <thead>
+            <tr>
+                <th class="summary-attack-label">{{localize "RQG.Year"}}</th>
+                <th class="summary-attack-damage">{{localize "RQG.Event"}}</th>
+                <th class="summary-attack-damage">{{localize "RQG.Result"}}</th>
+                <th class="summary-attack-damage">{{localize "RQG.Fate"}}</th>
+            </tr>                    
+        </thead>
+        <tbody>
+            {{#each data.familyhistory as |fhistory id|}}
+            {{log "Family History:"}}
+            {{log fhistory}}
+            <tr>
+                <td colspan="2">
+                    <label>{{localize "RQG.Treasureandboons"}}</label>
+                    <textarea class='family-history-text' style='height: max-content;resize: none;font-family: customSheetFont, "Palatino Linotype", serif;font-size: 0.75rem;' rows="4" >{{fhistory.data.data.treasuresandboons}}</textarea>
+                </td>
+                <td colspan="2">
+                    <label>{{localize "RQG.Famousancestors"}}</label>
+                    <textarea class='family-history-text' style='height: max-content;resize: none;font-family: customSheetFont, "Palatino Linotype", serif;font-size: 0.75rem;' rows="4" >{{fhistory.data.data.famousancestors}}</textarea>
+                </td>
+            </tr>
+        {{/each}}            
+        </tbody>
+    </table>
+
+</div>

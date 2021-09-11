@@ -283,6 +283,13 @@
       },
       "heroquests": [],
       "heroicabilities": []
+    },
+    "wealth": {
+      "wheels":0,
+      "lunars":0,
+      "clacks":0,
+      "bolgs":0,
+      "goods":0
     }
   },
   "npc": {
@@ -353,7 +360,7 @@
   }
 },
 "Item": {
-  "types": ["item","skill","passion","attack","spiritspell","runespell","sorceryspell","hitlocation","cult","armor","mpstorage","ally","events","rune"],
+  "types": ["item","skill","passion","attack","spiritspell","runespell","sorceryspell","hitlocation","cult","armor","mpstorage","ally","event","rune","parentage","familyhistory"],
   "templates": {
     "quantity": {
       "quantity": {
@@ -617,13 +624,14 @@
     "runestechniques": [],
     "skill": ""
   },
-  "events": {
+  "event": {
     "name": "",
     "templates": ["description"],
     "date": "1625",
-    "deed": "",
-    "rewards": "",
-    "reputationchange": 0   
+    "result": "",
+    "rewards": [],
+    "reputationchange": 0,
+    "killed":false  
   },
   "rune": {
     "name":"",
@@ -632,6 +640,32 @@
     "experience": false,
     "paired": "",
     "total": 50
+  },
+  "parentage": {
+    "favoredgrandparent": {
+      "name":"",
+      "occupation":""
+    },
+    "favoredparent":{
+      "name":"",
+      "occupation":""
+    },
+    "othergrandparent": {
+      "name":"",
+      "occupation":""
+    },
+    "otherparent":{
+      "name":"",
+      "occupation":""
+    }
+  },
+  "familyhistory": {
+    "favoredgrandparenthistory":[],
+    "favoredparenthistory":[],
+    "herohistory":[],
+    "treasuresandboons": "",
+    "famousancestors": ""
   }
-}  
+}
+
 }

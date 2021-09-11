@@ -159,6 +159,7 @@ export class RunequestActor extends Actor {
     let totalwounds = 0;
     let magicpointreservemax =0;
     let magicpointreservecurrent =0;
+    const familyhistory=[];
 
     const features = [];
 
@@ -244,6 +245,9 @@ export class RunequestActor extends Actor {
       else if(i.type === 'meleeattack' || i.type === 'missileattack' || i.type === 'naturalattack') {
         console.log(i);
       }
+      else if(i.type === 'familyhistory') {
+        familyhistory.push(i);
+      }
     }
     totalwounds+= context.data.attributes.generalwounds;
     // Assign and return
@@ -283,6 +287,7 @@ export class RunequestActor extends Actor {
     context.data.defense = defense;
     context.data.mpstorage = mpstorage;
     context.data.armors = armors;
+    context.data.familyhistory = familyhistory;
     context.data.attributes.hitpoints.value = context.data.attributes.hitpoints.max - totalwounds;
     context.data.attributes.magicpointsreserve.max = magicpointreservemax;
     context.data.attributes.magicpointsreserve.value = magicpointreservecurrent;

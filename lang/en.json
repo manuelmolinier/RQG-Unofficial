@@ -179,5 +179,6 @@
 
     "RQG.Slash":"S",
     "RQG.Crush":"C",
-    "RQG.Impale":"I"
+    "RQG.Impale":"I",
+    "RQG.Backstory": "Backstory"
 }

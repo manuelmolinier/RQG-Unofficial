@@ -22,7 +22,8 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/runequest/templates/actor/parts/actor-partial-hitlocations.html",
     "systems/runequest/templates/actor/parts/actor-partial-armors.html",
     "systems/runequest/templates/actor/parts/actor-partial-skilltable.html",
-    "systems/runequest/templates/actor/parts/actor-partial-characteristics.html"    
+    "systems/runequest/templates/actor/parts/actor-partial-characteristics.html",
+    "systems/runequest/templates/actor/parts/actor-backstory.html"    
     // Item Sheet Partials
   ]);
 };
