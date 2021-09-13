@@ -174,5 +174,27 @@
 
     "RQG.Slash":"S",
     "RQG.Crush":"C",
-    "RQG.Impale":"I"
+    "RQG.Impale":"I",
+    "RQG.Backstory": "Historique",
+    "RQG.QTY": "Qté",
+    "RQG.Weight": "Poids",
+    "RQG.Gear": "Equipement",
+    "RQG.SR":"RA",
+    "RQG.Armors": "Armures",
+    "RQG.ENC":"ENC",
+    "RQG.HitLocationsType": "Type de Localisations",
+    "RQG.ArmorPoints": "Points d'Armure",
+    "RQG.CurrentArmorPoints": "Points d'Armure restants",
+    "RQG.Equiped": "Equipé",
+    "RQG.ArmorPenalty": "Penalitée d'Armure",
+    "RQG.Runes": "Runes",
+    "RQG.CurrentMP": "PM restants",
+    "RQG.MaxMP": "Max PM",
+    "RQG.Familyhistory": "Histoire Familiale",
+    "RQG.Year": "Année",
+    "RQG.Event": "Evenement",
+    "RQG.Fate": "Destin",
+    "RQG.Treasureandboons": "Trésors & Aubaines",
+    "RQG.Famousancestors": "Ancêtres Célèbres",
+    "RQG.MPStorage": "Stockage de PM"            
 }

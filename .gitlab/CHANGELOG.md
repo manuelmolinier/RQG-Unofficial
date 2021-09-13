@@ -1,3 +1,25 @@
+**V0.1.6**
+**Bug Fixes**
+- Fixed reported bugs on existing features
+- Fixed missing localization strings when identified. More to follow.
+**Additional features**
+- Made changes to the Data model to support new features
+- Added first step of armors support. Players can now add armors on the CS. Hitlocations covered and Automation of AP on HL is not available
+- Added the Gear section which will allow to add various items to the CS.
+- Moved MPStorage and Armors to the Gear tab with all the rest of the equipment.
+- Moved Passions to the Runes & Passions tab as attributes.
+- Added a start of Family History.
+
+**V0.1.5**
+**Bug Fixes**
+-Fixed reported bugs on existing features
+**Additional features**
+- Added a locked / unlocked flag to display CS differently based on the flag and allow quick switch between game / roll and edition
+- REvamping of the CS starting.
+- Refactoring some of the templates
+- Start moving the stuff around to make the summary-tab useless
+
+
 **V0.1.4**
 **Bug Fixes**
 - Fixes bugs for HP total computation. SIZ and POW where adding 1 HP too much when above 13.

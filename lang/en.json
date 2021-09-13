@@ -180,5 +180,27 @@
     "RQG.Slash":"S",
     "RQG.Crush":"C",
     "RQG.Impale":"I",
-    "RQG.Backstory": "Backstory"
+    "RQG.Backstory": "Backstory",
+    "RQG.QTY": "Qty",
+    "RQG.Weight": "Weight",
+    "RQG.Gear": "Gear",
+    "RQG.SR":"SR",
+    "RQG.Armors": "Armors",
+    "RQG.ENC":"ENC",
+    "RQG.HitLocationsType": "Hit Locations Type",
+    "RQG.ArmorPoints": "Armor Points",
+    "RQG.CurrentArmorPoints": "Current Armor Points",
+    "RQG.Equiped": "Equiped",
+    "RQG.ArmorPenalty": "Armor Penalty",
+    "RQG.Runes": "Runes",
+    "RQG.CurrentMP": "Current MP",
+    "RQG.MaxMP": "Max MP",
+    "RQG.Familyhistory": "Family History",
+    "RQG.Year": "Year",
+    "RQG.Event": "Event",
+    "RQG.Fate": "Fate",
+    "RQG.Treasureandboons": "Treasure and Boons",
+    "RQG.Famousancestors": "Famous Ancestors",
+    "RQG.MPStorage": "MP Storage"
+
 }

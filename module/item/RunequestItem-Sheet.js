@@ -21,7 +21,8 @@ export class RunequestItemSheet extends ItemSheet {
     get template() {
       const path = "systems/runequest/templates/item";
       // REturn a unique sheet per item type      
-      return `${path}/${this.item.data.type}-sheet.html`;
+      const itemsheet = `${path}/${this.item.data.type}-sheet.html`;
+      return itemsheet;
     }
 
     /* -------------------------------------------- */
@@ -32,14 +33,13 @@ export class RunequestItemSheet extends ItemSheet {
       const itemData = data.data;
       data.config = CONFIG.RQG;
       data.dtypes = ["String", "Number", "Boolean"];
+      /*
       if(data.entity.type == "item") {
         for ( let attr of Object.values(data.data.attributes) ) {
           attr.isCheckbox = attr.dtype === "Boolean";
         }
       }
-      else if(data.entity.type == "item") {
-        //Will be used to prepare data for skills when we fully implement it
-      }
+      */
       data.item = itemData;
       data.data = itemData.data;
       return data;

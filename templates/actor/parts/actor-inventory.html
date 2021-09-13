@@ -1,12 +1,67 @@
-<ol class="items-list">
-{{#each actor.gear as |item id|}}
-    <li class="item flexrow" data-item-id="{{item._id}}">
-        <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-        <h4 class="item-name">{{item.name}}</h4>
-        <div class="item-controls">
+{{!-- Gear --}}
+<div class="summary-hitlocations-list">
+    <label>{{localize "RQG.Gear"}}</label>
+    <table style="height: 70px;" border="2">
+        <colgroup>
+            <col span="1" style="width: 20%;">
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 35%;">
+            <col span="1" style="width: 15%;">
+        </colgroup> 
+        <thead style="height: 28px;">
+            <th style="width: 25%; text-align: center; height: 28px;">{{localize "RQG.Name"}}</th>
+            <th style="width: 15%; text-align: center; height: 28px;">{{localize "RQG.QTY"}}</th>
+            <th style="width: 15%; text-align: center; height: 28px;">{{localize "RQG.Weight"}}</th>
+            <th style="width: 10%; text-align: center; height: 28px;">{{localize "RQG.Description"}}</th>
+            <th style="width: 10%; text-align: center; height: 28px;"><a class="item-control item-create" title="Create item" data-type="item"><i class="fas fa-plus"></i></a></th>
+        </thead>
+        <tbody>
+        {{#each data.gear as |item id|}}
+            {{log "Displaying gear item:"}}
+            {{log item}}
+            <tr class="item" data-item-id="{{item._id}}" style="height: 28px;">
+            <td style="width: 25%; height: 28px; text-align: center;">{{localize item.name}}</td>
+            <td style="width: 15%; height: 28px; text-align: center;"><input class="item-edit" id="{{id}}_{{item._id}}_item_qty" type="text" name="data.quantity" value="{{item.data.data.quantity}}"/></td>
+            <td style="width: 15%; height: 28px; text-align: center;">{{item.data.data.weight}}</td>
+            <td style="width: 10%; text-align: center;">
+                {{displayDescription item.data.data.description}} <!-- To be replaced by a better display once I find if Editor can be used readonly -->
+            </td>
+            <td>
+                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>                
+            </td>
+            </tr>        
+        {{/each}}
+        </tbody>
+    </table>
+</div>
+{{!-- MP Storage --}}
+<div class="summary-hitlocations-list">
+    <label>{{localize "RQG.MPStorage"}}</label>
+    <table style="height: 70px;" border="2">
+    <thead style="height: 28px;">
+        <th style="width: 25%; text-align: center; height: 28px;">{{localize "RQG.Name"}}</th>
+        <th style="width: 15%; text-align: center; height: 28px;">{{localize "RQG.CurrentMP"}}</th>
+        <th style="width: 15%; text-align: center; height: 28px;">{{localize "RQG.MaxMP"}}</th>
+        <th style="width: 10%; text-align: center; height: 28px;">{{localize "RQG.Equiped"}}</th>
+        <th style="width: 10%; text-align: center; height: 28px;"><a class="item-control item-create" title="Create item" data-type="mpstorage"><i class="fas fa-plus"></i></a></th>
+    </thead>
+    <tbody>
+    {{#each data.mpstorage as |storage id|}}
+        <tr class="item" data-item-id="{{storage._id}}" style="height: 28px;">
+        <td style="width: 25%; height: 28px; text-align: center;">{{localize storage.name}}</td>
+        <td style="width: 15%; height: 28px; text-align: center;"><input class="mpstorage-current" id="{{id}}_{{storage._id}}_currentmp_mpstorage" type="text" name="data.currentmp" value="{{storage.data.data.currentmp}}"/></td>
+        <td style="width: 15%; height: 28px; text-align: center;">{{storage.data.data.maxmp}}</td>
+        <td style="width: 10%; text-align: center;"><input class="mpstorage-equiped" id="{{id}}_{{storage._id}}_mpstorage_equiped" type="checkbox" name="data.equiped" {{checked storage.data.data.equiped}}/></td>
+        <td>
             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-        </div>
-    </li>
-{{/each}}
-</ol>
+            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>                
+        </td>
+        </tr>        
+    {{/each}}
+    </tbody>
+    </table>
+</div>
+{{!-- Armors --}}
+{{> "systems/runequest/templates/actor/parts/actor-partial-armors.html"}}

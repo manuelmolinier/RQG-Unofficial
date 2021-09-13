@@ -4,16 +4,18 @@
     {{> "systems/runequest/templates/actor/parts/actor-sheetheader.html"}}
 
     {{!-- Sheet Tab Navigation --}}
-    <nav class="sheet-tabs tabs" data-group="primary">
+    <nav class="sheet-tabs tabs flexrow" data-group="primary">
         <a class="item" data-tab="skills">{{localize 'RQG.Skills'}}</a>
         <a class="item" data-tab="combat">{{localize 'RQG.Combat'}}</a>
         <!--
         <a class="item" data-tab="herosoul">{{localize 'RQG.HEROSOUL'}}</a>
         -->
-        <a class="item" data-tab="attributes">{{localize 'RQG.Characteristics'}}</a>
+        <a class="item" data-tab="attributes">{{localize 'RQG.Runes'}}&nbsp;&amp;&nbsp;{{localize 'RQG.Passions'}}</a>
 
         <a class="item" data-tab="magic">{{localize 'RQG.Magic'}}</a>
+        <!--
         <a class="item active" data-tab="summary">{{localize 'RQG.MainTab'}}</a>
+        -->
         <a class="item" data-tab="description">{{localize 'RQG.Backstory'}}</a>
         <a class="item" data-tab="items">{{localize 'RQG.Items'}}</a>
         {{log data.flags.locked}}
@@ -58,28 +60,7 @@
         </div>
         {{!-- Attributes Tab --}}
         <div class="tab attributes" data-group="primary" data-tab="attributes">
-            <ol  class="attributes-list">
-                {{#each data.elementalrunes as |elementalrune id|}}
-                    <li  class="attribute flexrow"  data-attribute="" data-rune="{{id}}"">
-                        <span  class="attribute-label flexrow"  name="data.elementalrunes.{{id}}.label"><a class="elementalrunes-roll">{{localize elementalrune.label}}</a></span>
-                        <div  class="attribute-editbox">
-                            <input  class="attribute-value"  type="text"  name="data.elementalrunes.{{id}}.value"  value="{{elementalrune.value}}"  data-dtype="Number"  />
-                        </div>
-                    </li>
-                {{/each}}
-            </ol>
-            <ol  class="attributes-list">
-                {{#each data.powerrunes as |powerrunepair pairid|}}
-                    <li  class="attribute flexrow"  data-attribute="" data-runepair="{{pairid}}"">
-                    {{#each powerrunepair as |powerrune runeid|}}
-                        <span  class="attribute-label"  name="data.powerrunes.{{pairid}}.{{runeid}}.label"><a class="powerrunes-roll" data-rune="{{runeid}}">{{localize powerrune.label}}</a></span>
-                        <div  class="attribute-editbox">
-                            <input  class="attribute-value"  type="text"  name="data.powerrunes.{{pairid}}.{{runeid}}.value"  value="{{powerrune.value}}"  data-dtype="Number"  />
-                        </div>
-                    {{/each}}
-                    </li>
-                {{/each}}
-            </ol>
+            {{> "systems/runequest/templates/actor/parts/actor-runesandpassions.html"}}
         </div>
         {{!-- Flags Tab --}}
         <div class="tab flags" data-group="primary" data-tab="flags">

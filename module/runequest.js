@@ -109,3 +109,6 @@ Handlebars.registerHelper("getcharacterhitlocations", function(actorid) {
   let hitlocations = actor.data.data.hitlocations;
   return hitlocations;
 });
+Handlebars.registerHelper("displayDescription", function(description) {
+  return new Handlebars.SafeString(description);
+});

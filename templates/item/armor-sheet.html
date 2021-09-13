@@ -48,7 +48,8 @@
                 </select>  
             </div>
 			<div class="skill-attributes" style="display: block;" data-set="hitlocations">
-                {{#each (data.hitlocations as |hl key|}}
+                {{log data}}
+                {{#each data.hitlocations as |hl key|}}
                     <span class="hitloc-property {{#if hl}}switched-on{{/if}}" data-hitlocation="{{key}}">{{localize hl}}</span>
                 {{/each}}
 			</div>            
