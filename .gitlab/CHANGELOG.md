@@ -1,3 +1,8 @@
+**V0.1.7**
+**Bug Fixes**
+**Additional features**
+- Added Drag and Drop of Items to create Macros. Working for Skills, Attacks and Passions. known issues with Spells (Spirit and Rune).
+
 **V0.1.6**
 **Bug Fixes**
 - Fixed reported bugs on existing features
