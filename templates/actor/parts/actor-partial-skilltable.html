@@ -11,9 +11,9 @@
     </thead>
     {{#each skillList as |item id|}}
         <tr class="skill" data-item-id="{{item._id}}" data-itemid="{{item._id}}">
-            <td class="item" data-itemid="{{item._id}}" colspan="2"><a class="skill-roll" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.data.skillcategory}}">{{item.name}}</a></td>
-            <td class="item" data-itemid="{{item._id}}"><a class="skill-roll" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.data.skillcategory}}">{{item.data.data.total}}</a></td>
-            <td class="item" data-itemid="{{item._id}}"><input class="skill-experience" id="{{id}}_{{item._id}}_experience_skill" type="checkbox" name="data.experience" {{checked item.data.data.experience}}/></td>                         
+            <td class="item" data-item-id="{{item._id}}" colspan="2"><a class="skill-roll" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.data.skillcategory}}">{{item.name}}</a></td>
+            <td class="item" data-item-id="{{item._id}}"><a class="skill-roll" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.data.skillcategory}}">{{item.data.data.total}}</a></td>
+            <td class="item" data-item-id="{{item._id}}"><input class="skill-experience" id="{{id}}_{{item._id}}_experience_skill" type="checkbox" name="data.experience" {{checked item.data.data.experience}}/></td>                         
         </tr>
     {{/each}}
 </table>

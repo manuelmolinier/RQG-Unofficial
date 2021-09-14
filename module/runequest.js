@@ -53,9 +53,18 @@ Hooks.once("init", async function() {
     default: true,
     config: true
   });
+  game.Runequest = {
+    macros: {
+      itemRoll: RQGTools.itemRollMacro
+    }
+  }
+
   
   preloadHandlebarsTemplates();
 });
+Hooks.on('hotbarDrop', async (bar, data, slot) =>
+  RQGTools.createMacro(bar, data, slot)
+)
 
 // Added Helpers to Handlebars
 Handlebars.registerHelper("skillcategorymodifier", function(skillcategories, skillcategory) {

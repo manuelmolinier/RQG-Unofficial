@@ -52,7 +52,9 @@ export class RunequestItem extends Item {
           break;          
       case "rune":
         this._runeroll(item,actor);
-        break;          
+        break;
+      case "spiritspell":
+        this._spiritspellroll(item,actor);          
       default:
         break;
     }
@@ -240,10 +242,7 @@ export class RunequestItem extends Item {
       });     
   }
   async _runeroll(rune,actor){
-    console.log("runeroll in item");
-    console.log(rune);
-    console.log(actor);
-    let runename = passion.data.name;
+    let runename = rune.data.name;
     let runevalue = rune.data.data.total;
     let result="failure";
 
@@ -291,7 +290,56 @@ export class RunequestItem extends Item {
           default: "rollButton"
         }).render(true);
       });     
-  }      
+  }
+  _spiritspellroll(spell,actor) {
+    let spellname = spell.data.name;
+    let spellskill = actor.data.data.characteristics.power.value*5;
+    let result="failure";
+
+    var dialogOptions;
+    dialogOptions = {
+      title: "Spirit Spell Roll",
+      template : "/systems/runequest/templates/chat/skill-dialog.html",
+      // Prefilled dialog data
+
+      data : {
+        "skillname": spellname,
+        "skillvalue": spellskill,
+        "catmodifier": 0,
+        "skillid":spell._id
+      },
+      callback : (html) => {
+        // When dialog confirmed, fill testData dialog information
+        // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
+        spellname =    html.find('[name="skillname"]').val();
+        let testmodifier =   Number(html.find('[name="testmodifier"]').val());
+        spellskill =   Number(html.find('[name="skillvalue"]').val());
+        let spellid = html.find('[name="skillid"]').val();
+        const target = (spellskill+testmodifier);
+        let result = this.basicRoll(spellname,target);
+        
+        return result;
+      }
+    };
+    result = renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
+      {
+        new Dialog(
+        {
+          title: dialogOptions.title,
+          content: dlg,
+          buttons:
+          {
+            rollButton:
+            {
+              label: game.i18n.localize("Roll"),
+              callback: html => dialogOptions.callback(html)
+            }
+          },
+          default: "rollButton"
+        }).render(true);
+      });     
+
+  }        
   async htmldamageroll(roll,target,result,attack,damagebonus) {
     //const itemData = this.data.data;
     const actorData = this.actor.data.data;

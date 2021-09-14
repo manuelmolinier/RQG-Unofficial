@@ -1,4 +1,5 @@
 import {RQG} from '../config.js';
+import { RQGTools } from '../tools/rqgtools.js';
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -13,6 +14,7 @@ export class RunequestActorSheet extends ActorSheet {
   	  template: "systems/runequest/templates/actor/actor-sheet.html",
       width: 600,
       height: 600,
+      dragDrop: [{ dragSelector: '.item', dropSelector: null }],
       tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "summary"}]
     });
   }
@@ -102,134 +104,6 @@ export class RunequestActorSheet extends ActorSheet {
  * @return {undefined}
  */
   _prepareItems(context) {
-    /*
-    // Initialize containers.
-    const gear = [];
-    const defense = [];
-    const skills = {
-      "agility": [],
-      "communication": [],
-      "knowledge": [],
-      "magic": [],
-      "manipulation": [],
-      "perception": [],
-      "stealth": [],
-      "meleeweapons": [],
-      "missileweapons": [],
-      "shields": [],
-      "naturalweapons": [],
-      "others": []
-    };
-    const attacks = {
-      "melee": [],
-      "missile": [],
-      "natural":[]
-    }
-    const spells = {
-      "spirit": [],
-      "rune": [],
-      "sorcery":[]
-    }
-    const passions = [];
-    const cults = [];
-    const mpstorage = [];
-    var hitlocations =[];
-    let totalwounds = 0;
-    const features = [];
-    // Iterate through items, allocating to containers
-    for (let i of context.items) {
-      i.img = i.img || DEFAULT_TOKEN;
-      // Append to gear.
-      if (i.type === 'item') {
-        gear.push(i);
-      }
-      // Append to features.
-      else if (i.type === 'feature') {
-        features.push(i);
-      }
-      // Append to spells.
-      else if (i.type === 'spell') {
-        if (i.data.spellLevel != undefined) {
-          spells[i.data.spellLevel].push(i);
-        }
-      }
-      // Append to skills.
-      else if (i.type === 'skill') {
-        this._prepareSkill(i); // To be removed once fix is found
-        if (i.data.skillcategory != undefined) {
-          if(i.data.skillcategory == "shields"){
-            defense.push(i);
-          }
-          if(i.data.name == "Dodge") {
-            i.data.base=context.data.characteristics.dexterity.value*2;
-            this._prepareSkill(i);
-            defense.push(i);
-          }
-          if(i.data.name == "Jump") {
-            i.data.base=context.data.characteristics.dexterity.value*3;
-            this._prepareSkill(i);
-          }
-          skills[i.data.skillcategory].push(i);          
-        }
-        else {
-          skills["others"].push(i);
-        }
-      }
-      else if (i.type === 'attack') {
-        attacks[i.data.attacktype].push(i);
-      }
-      else if (i.type === 'meleeattack') {
-        attacks["melee"].push(i);
-      }
-      else if (i.type === 'missileattack') {
-        attacks["missile"].push(i);
-      }
-      else if (i.type === 'naturalattack') {
-        attacks["natural"].push(i);
-      }
-      else if (i.type === 'spiritspell') {
-        spells["spirit"].push(i);
-      }
-      else if (i.type === 'runespell') {
-        spells["rune"].push(i);
-      }
-      else if (i.type === 'sorceryspell') {
-        spells["sorcery"].push(i);
-      }
-      else if (i.type === 'hitlocation') {
-        //update hitlocation
-        this._preparehitlocation(i,context);
-        totalwounds+= Number(i.data.wounds);
-        hitlocations.push(i);
-      }
-      else if (i.type === 'passion') {
-        this._preparePassion(i);
-        passions.push(i);
-      }
-      else if (i.type === 'cult') {
-        cults.push(i);
-      }
-      else if(i.type === 'mpstorage') {
-        mpstorage.push(i);
-      }        
-    }
-
-    // Assign and return
-    context.gear = gear;
-    context.features = features;
-    context.spells = spells;
-    context.skills = skills;
-    context.gear = gear;
-    context.skills = skills;
-    context.attacks = attacks;
-    context.spells = spells;
-    context.hitlocations = hitlocations;
-    context.passions = passions;
-    context.cults = cults;
-    context.defense = defense;
-    context.mpstorage = mpstorage;
-    context.data.attributes.hitpoints.value = context.data.attributes.hitpoints.max - totalwounds;
-    */
   }
   
 
@@ -447,16 +321,7 @@ export class RunequestActorSheet extends ActorSheet {
         });
     });
     // Roll for Spirit Spells
-    html.find('.spiritspell-roll').mousedown(event => {
-      event.preventDefault();
-      const data = this.getData();
-      if(event.button == 0) {}
-      else {return;}      
-      const row= event.target.parentElement.parentElement;
-      const spellname = row.dataset["spellname"];
-      const target = (data.data.characteristics.power.value)*5;
-      this.basicRoll(spellname,target);
-    });
+    html.find('.spiritspell-roll').click(event => this._onSpiritSpellRoll(event));
     // Roll for Passions
     html.find('.passion-roll-old').mousedown(event => {
       event.preventDefault();
@@ -768,7 +633,8 @@ export class RunequestActorSheet extends ActorSheet {
     html.find('.summary-skill-roll').mousedown(event => this._onSkillRoll(event));
     html.find('.summary-characteristic-roll').mousedown(event => this._onCharacteristicRoll(event));
     html.find('.attack-roll').click(event => this._onAttackRoll(event));
-    html.find('.unlock-character-sheet').click(event => this._onLockToggle(event));    
+    html.find('.unlock-character-sheet').click(event => this._onLockToggle(event));
+    html.find('.item').on('dragstart', event => RQGTools._onDragItem(event,this.actor));    
   }
   /* -------------------------------------------- */
 
@@ -804,6 +670,12 @@ export class RunequestActorSheet extends ActorSheet {
     return this.actor.createOwnedItem(itemData);
   }
 
+  _onSpiritSpellRoll(event) {
+      event.preventDefault();
+      const spellid = event.currentTarget.dataset.itemId;
+      let spell = this.actor.getOwnedItem(spellid);
+      spell.roll();   
+  }
   _onAttackRoll(event) {
     event.preventDefault();
     const data = this.getData();
@@ -964,7 +836,7 @@ export class RunequestActorSheet extends ActorSheet {
     console.log(event);
     if(event.button == 0) {
       if(event.ctrlKey == true){
-        const skillid = event.currentTarget.dataset.itemid;
+        const skillid = event.currentTarget.dataset.itemId;
         let skill = this.actor.getOwnedItem(skillid);
         console.log(skill)
         skill.gainroll();
@@ -1278,7 +1150,7 @@ export class RunequestActorSheet extends ActorSheet {
         }
         if(event.currentTarget.classList.contains('skill-experience')) {
           console.log(event.currentTarget.closest('.item').dataset);
-					let skill = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemid);
+					let skill = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemId);
           console.log(skill);
           console.log(event.currentTarget.value);
           if(skill){
@@ -1291,7 +1163,7 @@ export class RunequestActorSheet extends ActorSheet {
         }
         if(event.currentTarget.classList.contains('passion-experience')) {
           console.log(event.currentTarget.closest('.item').dataset);
-					let passion = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemid);
+					let passion = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemId);
           console.log(passion);
           console.log(event.currentTarget.value);
           if(passion){
