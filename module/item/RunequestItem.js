@@ -444,7 +444,7 @@ export class RunequestItem extends Item {
         console.log(specialdamage);
         damageData.specialdamage= new Roll(specialdamage);
         console.log(damageData.specialdamage);
-        critdamage = damageData.specialdamage.clone().evaluate({maximize: true}).total;
+        critdamage = damageData.specialdamage.clone().evaluate({maximize: true}).total+"+"+damageData.damagebonus.clone().evaluate({maximize: true}).total;
         console.log(critdamage);
         damageData.criticaldamage = new Roll(""+critdamage);
         break;
