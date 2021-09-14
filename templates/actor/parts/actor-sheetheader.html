@@ -37,14 +37,15 @@
                                 </div>
                             </td>                            
                         </tr>
-                        {{#each cults as |cult id|}}
+                        {{#each data.cults as |cult id|}}
+                        {{log cult}}
                         <tr>
                             <td class="characteristic-list-td" colspan="14">
                                 <li class="item flexrow" data-item-id="{{cult._id}}" data-cultname="{{cult.name}}">
                                     <h4 class="item-name">{{cult.name}}</h4>
-                                    <h4 class="item-name">{{cult.data.rank}}</h4>
-                                    <h4 class="item-name">{{cult.data.subcult}}</h4>
-                                    <h4 class="item-name">{{cult.data.currentrunepoint}} / {{cult.data.maxrunepoint}}</h4>
+                                    <h4 class="item-name">{{cult.data.data.rank}}</h4>
+                                    <h4 class="item-name">{{cult.data.data.subcult}}</h4>
+                                    <h4 class="item-name">{{cult.data.data.currentrunepoint}} / {{cult.data.data.maxrunepoint}}</h4>
                                     <div class="item-controls">
                                         <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                                     </div>
