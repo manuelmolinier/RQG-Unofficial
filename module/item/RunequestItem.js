@@ -20,10 +20,22 @@ export class RunequestItem extends Item {
     if(itemData.type !== "attack") {
       data.total=data.base+data.increase+data.modifier;
     }
-    else {
+    else if(typeof actorData !== 'undefined'){
       //Setup the value from the attack skill
-      let skill=(this.actor && data.skillused !== "") ? this.actor.getEmbeddedDocument("Item",data.skillused).data.data : {total: 0}
-      data.skillvalue= skill.total;
+      let skill;
+      if(actorData && data.skillused !== "") {
+        try {
+          skill = this.actor.getEmbeddedDocument("Item",data.skillused).data.data;
+          data.skillvalue= skill.total;
+        }
+        catch (error)  {
+          data.skillvalue= 0;
+        }
+      }
+      else {
+        data.skillvalue= 0;
+      }
+
       //Setup the values for the attack.
       console.log(data.skillvalue+"+"+data.modifier);
       data.attacktotal=data.skillvalue+data.modifier;

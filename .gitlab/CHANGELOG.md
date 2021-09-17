@@ -1,5 +1,12 @@
 **V0.1.7**
 **Bug Fixes**
+- Fixes for HP computation on edge cases
+- Fixed a nasty bug that broke CS for "attack" imported from Item List or Compendium.
+**Additional features**
+- Added Description display back.
+
+**V0.1.7**
+**Bug Fixes**
 - Fixes for Crush Crit that were only using one time Max DB and not twice max DB.
 **Additional features**
 - Added Drag and Drop of Items to create Macros. Working for Skills, Attacks and Passions. known issues with Spells (Spirit and Rune).
