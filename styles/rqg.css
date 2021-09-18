@@ -559,3 +559,119 @@ input[type="text"]
   height:20px;
   font-size: 12px;
 }
+.npc-summary-element {
+  border:1px solid black;
+  padding-left: 5px;
+}
+.rqg header.grid-sheet-header {
+  display: grid;
+  grid-template-columns: 100px 1fr 1fr ;
+  grid-template-rows: [main] auto;
+  grid-template-areas: "picture info cults";
+  gap: 5px 5px;
+  place-items: stretch;
+  overflow: scroll;
+  margin-bottom: 10px;
+  font-size:12px;
+}
+.npc-header-img {
+  grid-area: picture;
+}
+.npc-header-generalinfo {
+  border:1px solid black;
+  grid-area: info;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+   "name name name age gender gender"
+   "home home home tribe tribe tribe"
+   "clan clan occupation occupation reputation reputation"
+   "app app app app app app";
+  gap: 5px 5px;
+  place-items: stretch;  
+}
+.npc-header-cults {
+  border:1px solid black;
+  grid-area: cults;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-template-rows: 1fr 3fr 3fr;
+  grid-template-areas:
+   "plus plus"
+   "cult0 edit0"
+   "cult1 edit1";
+  gap: 5px 5px;
+  place-items: stretch;  
+}
+.npc-header-name {
+  grid-area: name;
+}
+.npc-header-age {
+  grid-area: age;
+}
+.npc-header-gender {
+  grid-area: gender;
+}
+.npc-header-home {
+  grid-area: home;
+}
+.npc-header-tribe {
+  grid-area: tribe;
+}
+.npc-header-clan {
+  grid-area: clan;
+}
+.npc-header-occupation {
+  grid-area: occupation;
+}
+.npc-header-reputation {
+  grid-area: reputation;
+}
+.npc-header-app {
+  grid-area: app;
+}
+.npc-cults-header {
+  grid-area: header;
+}
+.npc-cults-plus {
+  grid-area: plus;
+  place-self: center;
+}
+.npc-cult-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+   "cult rank"
+   "subcult runepoints";
+  gap: 5px 5px;
+  place-items: stretch;  
+}
+.npc-cults-cult0 {
+  grid-area: cult0;
+}
+.npc-cults-edit0 {
+  grid-area: edit0;
+}
+.npc-cults-cult1 {
+  grid-area: cult1;
+}
+.npc-cults-edit1 {
+  grid-area: edit1;
+}
+.npc-cult-cult {
+  grid-area: cult;
+}
+.npc-cult-rank {
+  grid-area: rank;
+}
+.npc-cult-subcult {
+  grid-area: subcult;
+}
+.npc-cult-runepoints {
+  grid-area: runepoints;
+}
+
+
+

@@ -106,7 +106,7 @@ export class RunequestItem extends Item {
     const skillused = actor.getEmbeddedDocument("Item",attack.data.data.skillused);
     const skillname = skillused.name;
     console.log(skillused);
-    const categorymod = data.data.skillcategory[categoryid].modifier;
+    const categorymod = (categoryid == "spiritweapons")?data.data.skillcategory["magic"].modifier:data.data.skillcategory[categoryid].modifier;
     console.log("categoryid:"+categoryid+" / "+categorymod);
     let target= skillused.data.data.total+categorymod+attack.data.data.modifier+testmodifier;
     const critical = Math.max(Math.round(target/20),1);

@@ -2,7 +2,7 @@
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
  */
-export class RunequestActor extends Actor {
+export class RunequestActorNPC extends Actor {
 
   /** @override */
 
@@ -16,45 +16,9 @@ export class RunequestActor extends Actor {
     if (data.items) {
       let actor = super.create(data, options);
       return actor;
-    }
-
-    const competences = await this.loadCompendium("runequest.skills");
-    data.items = competences.map(i => i.toObject());
-    
+    } 
     return super.create(data, options);
   }
-
-  /*
-  static async create(data, options) {
-
-    // If the created actor has items (only applicable to duplicated actors) bypass the new actor creation logic
-    if (data.items)
-    {
-      return super.create(data, options);
-    }
-
-    // Initialize empty items
-    data.items = [];
-
-    // Iterate through items, allocating to containers
-    // let totalWeight = 0;
-    const pack = game.packs.find(p => p.collection == "runequest.skills")
-    var myskills;
-    await pack.getIndex().then(index => myskills = index);
-
-    for (let sk of myskills)
-    {
-      let skillItem = undefined;
-      await pack.getEntity(sk._id).then(skill => skillItem = skill);
-
-      let skilldata = {"name":skillItem.data.name,"type":skillItem.data.type,"data":skillItem.data.data};
-      let skill = new Item(skilldata);
-
-      data.items.push(skill);
-    }
-    return super.create(data, options);
-  }
-  */  
 
   getRollData() {
     const data = super.getRollData();
@@ -90,11 +54,9 @@ export class RunequestActor extends Actor {
     const  data = actorData.data;
     this._prepareCharacterFlags(actorData);
     for (const [index, charac] of Object.entries(data.characteristics)) {
-      const characid=charac.label;
       let modifier= Number(charac.modifier);
       const characvalue=Number(charac.base)+modifier;
-      data.characteristics[index].value=characvalue;
-      //data.defense.value = Number(attr.agility.value)+Number(attr.dodge.value);    
+      data.characteristics[index].value=characvalue;   
     }
     this._prepareattributes(data);
     this._prepareskillcategoriesmodifier(data);
@@ -120,21 +82,7 @@ export class RunequestActor extends Actor {
     let context = this.data;
     const gear = [];
     const defense = [];
-    const skills = {
-      "agility": [],
-      "communication": [],
-      "knowledge": [],
-      "magic": [],
-      "manipulation": [],
-      "perception": [],
-      "stealth": [],
-      "meleeweapons": [],
-      "missileweapons": [],
-      "shields": [],
-      "naturalweapons": [],
-      "spiritweapons": [],
-      "others": []
-    };
+    const skills = [];
     const runes = {
       "elemental": [],
       "power": [],
@@ -153,16 +101,12 @@ export class RunequestActor extends Actor {
       "rune": [],
       "sorcery":[]
     }
-    const passions = [];
     const cults = [];
     const mpstorage = [];
-    var armors = [];
     var hitlocations =[];
     let totalwounds = 0;
     let magicpointreservemax =0;
     let magicpointreservecurrent =0;
-    const familyhistory=[];
-
     const features = [];
 
     // Iterate through items, allocating to containers
@@ -171,9 +115,6 @@ export class RunequestActor extends Actor {
       if (i.type === 'item') {
         gear.push(i);
       }
-      if (i.type === 'armor') {
-        armors.push(i);
-      }
       // Append to features.
       else if (i.type === 'feature') {
         features.push(i);
@@ -181,28 +122,7 @@ export class RunequestActor extends Actor {
       // Append to skills.
       else if (i.type === 'skill') {
         this.prepareSkill(i); // To be removed once fix is found
-        if (i.data.data.skillcategory != undefined) {
-          if(i.data.data.skillcategory == "shields"){
-            defense.push(i);
-          }
-          if(i.data.name == "Dodge") {
-            i.data.data.base=context.data.characteristics.dexterity.value*2;
-            this.prepareSkill(i);
-            defense.push(i);
-          }
-          if(i.data.name == "Jump") {
-            i.data.data.base=context.data.characteristics.dexterity.value*3;
-            this.prepareSkill(i);
-          }
-          let spiritcombat = game.i18n.localize("RQG.SpiritCombat");
-          if(i.data.name == spiritcombat) {
-            skills["spiritweapons"].push(i);            
-          }
-          skills[i.data.data.skillcategory].push(i);          
-        }
-        else {
-          skills["others"].push(i);
-        }
+        skills.push(i);
       }
       else if (i.type === 'rune') {
         console.log("handling a rune in Actor with:"+i.name);

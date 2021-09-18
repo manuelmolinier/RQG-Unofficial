@@ -88,6 +88,10 @@
     "RQG.NaturalWeapon": "Armes Naturelles",
     "RQG.Shields": "Boucliers",
 
+    "RQG.Points": "Points",
+    "RQG.Rune": "Rune",
+    "RQG.Cult": "Culte",    
+
     "RQG.Nearlyimpossible": "Presque impossible",
     "RQG.Veryhard": "Très difficile",
     "RQG.Hard": "Difficile",
@@ -196,5 +200,11 @@
     "RQG.Fate": "Destin",
     "RQG.Treasureandboons": "Trésors & Aubaines",
     "RQG.Famousancestors": "Ancêtres Célèbres",
-    "RQG.MPStorage": "Stockage de PM"            
+    "RQG.MPStorage": "Stockage de PM",
+    "RQG.SpiritCombatAttacks": "Attaque de combat spirituel",
+    "RQG.SpiritCombat": "Combat spirituel",
+    "RQG.Rank": "Rang",
+    "RQG.Subcult": "Sous-culte",
+    "RQG.Runepoints": "Points de Rune"
+
 }

@@ -35,7 +35,8 @@ RQG.weaponskills = {
 RQG.attacktype = {
     "melee":"RQG.MeleeAttacks",
     "missile":"RQG.MissileAttacks",
-    "natural":"RQG.NaturalAttacks"
+    "natural":"RQG.NaturalAttacks",
+    "spirit": "RQG.SpiritCombatAttacks"
 }
 
 RQG.hitlocationstypes = {

@@ -5,13 +5,13 @@ import { RQGTools } from '../tools/rqgtools.js';
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class RunequestActorSheet extends ActorSheet {
+export class RunequestActorNPCSheet extends ActorSheet {
 
   /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
   	  classes: ["rqg", "sheet", "actor"],
-  	  template: "systems/runequest/templates/actor/actor-sheet.html",
+  	  template: "systems/runequest/templates/actor/npc-actor-sheet.html",
       width: 800,
       height: 600,
       dragDrop: [{ dragSelector: '.item', dropSelector: null }],
@@ -40,16 +40,9 @@ export class RunequestActorSheet extends ActorSheet {
     context.data = actorData.data;
     context.flags = actorData.flags;
 
-    // Prepare character data and items.
-    if (actorData.type == 'character') {
-      this._prepareItems(context);
-      this._prepareCharacterData(context);
-    }
-
     // Prepare NPC data and items.
-    if (actorData.type == 'npc') {
-      this._prepareItems(context);
-    }
+    this._prepareItems(context);
+    
     // Add roll data for TinyMCE editors.
     context.rollData = context.actor.getRollData();
 
@@ -61,23 +54,6 @@ export class RunequestActorSheet extends ActorSheet {
   }
 
   /** @override */
-  /**
-  getData(options) {
-    console.log("getData(options) started");
-    const data = super.getData(options);
-    const actorData = data.data;
-    data.dtypes = ["String", "Number", "Boolean"];
-    data.config = CONFIG.RQG;
-    // Prepare items.
-    if (this.actor.data.type == 'character') {
-      this._prepareCharacterItems(data);
-      //this._prepareCharacterFlags(data);
-    }
-    data.actor = actorData;
-    data.data = actorData.data;
-    return data;
-  }
-   */
   /**
    * Organize and prepare Flags for Character sheets. For testing purpose may set some flags
    *

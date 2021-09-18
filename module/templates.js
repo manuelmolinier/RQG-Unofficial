@@ -24,7 +24,11 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/runequest/templates/actor/parts/actor-partial-skilltable.html",
     "systems/runequest/templates/actor/parts/actor-partial-characteristics.html",
     "systems/runequest/templates/actor/parts/actor-backstory.html",
-    "systems/runequest/templates/actor/parts/actor-runesandpassions.html"        
+    "systems/runequest/templates/actor/parts/actor-runesandpassions.html",
+    // NPC Sheet Partial
+    "systems/runequest/templates/actor/parts/npc-sheetheader.html",
+    "systems/runequest/templates/actor/parts/npc-summary.html",
+    "systems/runequest/templates/actor/parts/npc-partial-characteristics.html"
     // Item Sheet Partials
   ]);
 };

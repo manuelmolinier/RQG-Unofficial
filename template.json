@@ -293,70 +293,45 @@
     }
   },
   "npc": {
+    "templates": ["common"],
     "biography": "",
-    "attributes": {
-      "magicpoints": {
-        "value": 10,
-        "min": 0,
-        "max": 10
-      },
-      "hitpoints": {
-        "value": 10,
-        "min": 0,
-        "max": 10
-      },
-      "damagebonus":"",
-      "spiritcombatdamage": "",
-      "dexsr": 0,
-      "sizsr": 0,
-      "meleesr":0
-    },
-    "characteristics":{
-      "strength": {
-        "base":0,
-        "value": 0,
-        "modifier": [],
-        "label": "STR"
-      },
-      "constitution": {
-        "base":0,
-        "value": 0,
-        "modifier": [],
-        "label": "CON"
-      },
-      "size": {
-        "base":0,
-        "value": 0,
-        "modifier": [],
-        "label": "SIZ"
-      },
-      "intelligence": {
-        "base":0,
-        "value": 0,
-        "modifier": [],
-        "label": "INT"
-      },
-      "power": {
-        "base":0,
-        "value": 0,
-        "modifier": [],
-        "label": "POW"
-      },
-      "dexterity": {
-        "base":0,
-        "value": 0,
-        "modifier": [],
-        "label": "DEX"
-      },
-      "charisma": {
-        "base":0,
-        "value": 0,
-        "modifier": [],
-        "label": "CHA"
-      }
-    },
     "skills": [],
-    "defense": 20
+    "defense": 20,
+    "general": {
+      "age": {
+        "label":"Age",
+        "value":0
+      },
+      "occupation": {
+        "label":"Occupation",
+        "value":""
+      },
+      "ransom": {
+        "label":"Ransom",
+        "value":""
+      },
+      "gender": {
+        "label":"Gender",
+        "value":""
+      },
+      "homeland": {
+        "label":"Homeland",
+        "value":""
+      },
+      "reputation": {
+        "label":"Reputation",
+        "value":""
+      },
+      "tribe": {
+        "label":"Tribe",
+        "value":""
+      },
+      "clan": {
+        "label":"Clan",
+        "value":""
+      },
+      "appearance": ""
+    }
   }
 },
 "Item": {

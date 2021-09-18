@@ -9,6 +9,7 @@ import { RunequestActor } from "./actor/runequestactor.js";
 import { RunequestItem } from "./item/RunequestItem.js";
 import { RunequestItemSheet } from "./item/RunequestItem-Sheet.js";
 import { RunequestActorSheet } from "./actor/runequestactor-sheet.js";
+import { RunequestActorNPCSheet } from "./actor/runequestactornpc-sheet.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 import { RQG } from "./config.js"; // Config for RQG
 
@@ -39,9 +40,19 @@ Hooks.once("init", async function() {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("Runequest Glorantha", RunequestActorSheet, { makeDefault: true });
+  //Actors.registerSheet("Runequest Glorantha", RunequestActorSheet, { makeDefault: true });
+  Actors.registerSheet("runequest", RunequestActorSheet, {
+    types: ["character"],
+    makeDefault: true,
+    label: "RQG.CharacterSheet"
+  });    
+  Actors.registerSheet("runequest", RunequestActorNPCSheet, {
+    types: ["npc"],
+    makeDefault: true,
+    label: "RQG.CharacterSheetNPC"
+  });  
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("RunequestGlorantha", RunequestItemSheet, {makeDefault: true});
+  Items.registerSheet("runequest", RunequestItemSheet, {makeDefault: true});
 
 
   // Register system settings
@@ -120,4 +131,18 @@ Handlebars.registerHelper("getcharacterhitlocations", function(actorid) {
 });
 Handlebars.registerHelper("displayDescription", function(description) {
   return new Handlebars.SafeString(description);
+});
+Handlebars.registerHelper({
+  eq: (v1, v2) => v1 === v2,
+  ne: (v1, v2) => v1 !== v2,
+  lt: (v1, v2) => v1 < v2,
+  gt: (v1, v2) => v1 > v2,
+  lte: (v1, v2) => v1 <= v2,
+  gte: (v1, v2) => v1 >= v2,
+  and() {
+      return Array.prototype.every.call(arguments, Boolean);
+  },
+  or() {
+      return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
+  }
 });

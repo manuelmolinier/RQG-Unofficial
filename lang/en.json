@@ -201,6 +201,10 @@
     "RQG.Fate": "Fate",
     "RQG.Treasureandboons": "Treasure and Boons",
     "RQG.Famousancestors": "Famous Ancestors",
-    "RQG.MPStorage": "MP Storage"
-
+    "RQG.MPStorage": "MP Storage",
+    "RQG.SpiritCombatAttacks": "Spirit Combat attack",
+    "RQG.SpiritCombat": "Spirit Combat",
+    "RQG.Rank": "Rank",
+    "RQG.Subcult": "Subcult",
+    "RQG.Runepoints": "Runepoints"
 }
