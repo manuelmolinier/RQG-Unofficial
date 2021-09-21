@@ -12,8 +12,8 @@ export class RunequestActorNPCSheet extends ActorSheet {
 	  return mergeObject(super.defaultOptions, {
   	  classes: ["rqg", "sheet", "actor"],
   	  template: "systems/runequest/templates/actor/npc-actor-sheet.html",
-      width: 800,
-      height: 600,
+      width: 900,
+      height: 700,
       dragDrop: [{ dragSelector: '.item', dropSelector: null }],
       tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "summary"}]
     });

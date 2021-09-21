@@ -22,6 +22,14 @@
   background-image:url("./backgrounds/old-brown-paper-texture-image.jpg");
   background-size: cover;
 }
+.rqg.actor .window-content form {
+  display: grid;
+  grid-template-columns: 34px auto;
+  grid-template-rows: min-content auto;
+  grid-template-areas: 
+    "header header"
+    "nav main";
+}
 .rqg header.sheet-header {
   display: flex;
   flex-direction: row;
@@ -33,20 +41,21 @@
   font-size:12px;
   align-items:flex-start;
 }
-.rqg header.character-sheet-header {
+.rqg header.npc-sheet-header {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  height: 200px;
+  /*height: 200px;*/
   overflow: scroll;
   margin-bottom: 10px;
   font-size:12px;
   align-items:flex-start;
+  grid-area:header;
 }
 input[type="text"]
 {
-  width: calc(100% - 2px);
+  width: calc(90% - 2px);
   min-width: 20px;
   height: 20px;
   background: rgba(0, 0, 0, 0.05);
@@ -118,13 +127,16 @@ input[type="text"]
   line-height: 40px;
   font-weight: bold;
   font-size:12px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  padding: 0px 0px 10px 0px;  
 }
 .rqg .tabs .item.active {
   text-decoration: underline;
   text-shadow: none;
 }
 .rqg .sheet-body {
-  overflow: scroll;
+  overflow: auto;
 }
 .rqg .sheet-body .tab {
   height: 100%;
@@ -192,8 +204,8 @@ input[type="text"]
   border: none;
 }
 .rqg.sheet.actor {
-  min-width: 700px;
-  min-height: 500px;
+  min-width: 800px;
+  min-height: 600px;
 }
 .rqg.sheet.item {
   min-width: 460px;
@@ -515,37 +527,69 @@ input[type="text"]
   font-family: 'RunequestRunes';
 }
 .rqg .section-padding {
-  padding: 10px;
+  padding: 0px 10px 0px 0px;
 }
 .invisible {
   display: none;
 }
 .hitlocationname {
   text-align: center;
+  font-size: 2em;
   /*height: 28px;*/
 }
 .hitlocationlockedfield {
   text-align: center;
+  font-size: 2em;  
   /*height: 28px;*/
 }
 .hitlocationtable {
   /*height: 70px;*/
   border: 1px solid;
 }
+
 .generalwoundname {
+  width: 85%;
+  text-align: center;
+  flex: 4 0 200px;
+  font-size: 2em;  
+  /*height: 28px;*/
+}
+.generalwounds {
+  text-align: center;
+  font-size: 2em;
+  /*height: 28px;*/
+}
+.hitlocationunlockedfield {
+  text-align: center;
+  font-size: 2em;  
+  /*height: 28px;*/
+}
+.npc-hitlocationname {
+  text-align: center;
+  font-size: 0.8em;
+  /*height: 28px;*/
+}
+.npc-hitlocationlockedfield {
+  text-align: center;
+  font-size: 0.8em;  
+  /*height: 28px;*/
+}
+.npc-generalwoundname {
   width: 85%;
   text-align: center;
   flex: 4 0 200px;  
   /*height: 28px;*/
 }
-.generalwounds {
+.npc-generalwounds {
   text-align: center;
   /*height: 28px;*/
 }
-.hitlocationunlockedfield {
+.npc-hitlocationunlockedfield {
   text-align: center;
+  font-size: 0.8em;  
   /*height: 28px;*/
 }
+
 .combat-defense-table {
   width:100%;
   /*height: 70px;*/
@@ -563,6 +607,9 @@ input[type="text"]
   border:1px solid black;
   padding-left: 5px;
 }
+.rqg nav.nav-sheet-tabs {
+  grid-area:nav;
+}
 .rqg header.grid-sheet-header {
   display: grid;
   grid-template-columns: 100px 1fr 1fr ;
@@ -570,9 +617,22 @@ input[type="text"]
   grid-template-areas: "picture info cults";
   gap: 5px 5px;
   place-items: stretch;
-  overflow: scroll;
+  overflow: auto;
   margin-bottom: 10px;
   font-size:12px;
+  grid-area:header;
+}
+.rqg header.character-sheet-header {
+  display: grid;
+  grid-template-columns: 100px 1fr 1fr ;
+  grid-template-rows: [main] auto;
+  grid-template-areas: "picture info info";
+  gap: 5px 5px;
+  place-items: stretch;
+  overflow: auto;
+  margin-bottom: 10px;
+  font-size:12px;
+  grid-area:header;
 }
 .npc-header-img {
   grid-area: picture;
@@ -672,6 +732,106 @@ input[type="text"]
 .npc-cult-runepoints {
   grid-area: runepoints;
 }
-
-
-
+.npc-summary-grid {
+  border:1px solid black;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas:
+   "charac hitloc hitloc skills magic"
+   "weapons weapons weapons skills magic";
+  gap: 5px 5px;
+  place-items: stretch;
+  overflow: auto;
+  margin-bottom: 10px;
+  font-size:12px;  
+}
+.npc-summary-charac {
+  border:1px solid black;
+  grid-area: charac;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(7, 20px);
+  grid-template-areas:
+   "strength strengthvalue intelligence intelligencevalue"
+   "constitution constitutionvalue power powervalue"
+   "size sizevalue charisma charismavalue"
+   "dexterity dexterityvalue . ."
+   "db db db db"
+   "sizsr sizsr dexsr dexsr"
+   "hp hp mp mp";
+  gap: 1px 1px;
+  place-items: stretch;
+}
+.npc-summary-hitloc {
+  border:1px solid black;
+  grid-area: hitloc;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 20px 1fr;
+  grid-template-areas:
+   "generalwoundname generalwoundvalue"
+   "hitlocations hitlocations";
+  gap: 1px 1px;
+  place-items: stretch;  
+}
+.npc-summary-skills {
+  border:1px solid black;
+  grid-area: skills;
+}
+.npc-summary-magic {
+  border:1px solid black;
+  grid-area: magic;
+}
+.npc-summary-weapons {
+  border:1px solid black;
+  grid-area: weapons;
+}
+.npc-locations-title {
+  grid-area:title;
+  place-self: center;
+}
+input[type="text"].attribute-input {
+  width: 3em;
+  min-width: 20px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1px 3px;
+  margin: 0;
+  color: #191813;
+  font-family: inherit;
+  font-size: inherit;
+  text-align: inherit;
+  line-height: inherit;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+.rqg .summary-hitlocations-list {
+  margin: 2px;
+  padding: 2px;
+  border: 2px solid rgb(8, 8, 8);
+  font-size:0.8em;
+}
+input[type="text"].npc-wounds {
+  width: 3em;
+  min-width: 20px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1px 3px;
+  margin: 0;
+  color: #191813;
+  font-family: inherit;
+  font-size: inherit;
+  text-align: inherit;
+  line-height: inherit;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}

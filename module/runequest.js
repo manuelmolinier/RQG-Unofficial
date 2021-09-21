@@ -90,11 +90,17 @@ Handlebars.registerHelper("skillcategorymodifier", function(skillcategories, ski
 Handlebars.registerHelper("getcharacterattackskills", function(actorid, attacktype) {
   const actor = game.actors.get(actorid);
   const skillcategory = attacktype+"weapons";
-  let attacks = actor.data.data.skills[skillcategory];
-  if(attacktype === "melee") {
-    //Add the Shield skills to melee attack possible skills
-    attacks=attacks.concat(actor.data.data.skills["shields"]);
-    console.log(attacks);
+  let attacks;
+  if(actor.type == 'npc') {
+    attacks = actor.data.data.skills;
+  }
+  else {
+    attacks = actor.data.data.skills[skillcategory];
+    if(attacktype === "melee") {
+      //Add the Shield skills to melee attack possible skills
+      attacks=attacks.concat(actor.data.data.skills["shields"]);
+      console.log(attacks);
+    }  
   }
   return attacks;
 });

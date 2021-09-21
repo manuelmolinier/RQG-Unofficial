@@ -1,13 +1,13 @@
-    <header class="sheet-header section-padding">
-        <img class="character-profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="150" width="150"/>
-        <div class="character-header-fields">
+    <header class="character-sheet-header section-padding">
+        <img class="character-profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="150" width="150" style="grid-area: picture;"/>
+        <div class="character-header-fields" style="grid-area: info">
             <div class="summary-general-list">
                 <table class="general-list-table">
                     <tbody>
                         <tr>
                         <td class="general-list-td" colspan="14">Name:<input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></td>
                         </tr>
-                        {{> "systems/runequest/templates/actor/parts/actor-partial-characteristics.html"}}
+                        {{> "systems/runequest/templates/actor/parts/character/actor-partial-characteristics.html"}}
                         <tr>
                             <td class="characteristic-list-td" colspan="2">Damage Bonus: {{actor.data.data.attributes.damagebonus}}</td>
                             <td class="characteristic-list-td" colspan="1">SIZ SR: {{actor.data.data.attributes.sizsr}}</td>

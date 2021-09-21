@@ -17,44 +17,13 @@ export class RunequestActor extends Actor {
       let actor = super.create(data, options);
       return actor;
     }
-
-    const competences = await this.loadCompendium("runequest.skills");
-    data.items = competences.map(i => i.toObject());
-    
-    return super.create(data, options);
-  }
-
-  /*
-  static async create(data, options) {
-
-    // If the created actor has items (only applicable to duplicated actors) bypass the new actor creation logic
-    if (data.items)
-    {
-      return super.create(data, options);
-    }
-
-    // Initialize empty items
-    data.items = [];
-
-    // Iterate through items, allocating to containers
-    // let totalWeight = 0;
-    const pack = game.packs.find(p => p.collection == "runequest.skills")
-    var myskills;
-    await pack.getIndex().then(index => myskills = index);
-
-    for (let sk of myskills)
-    {
-      let skillItem = undefined;
-      await pack.getEntity(sk._id).then(skill => skillItem = skill);
-
-      let skilldata = {"name":skillItem.data.name,"type":skillItem.data.type,"data":skillItem.data.data};
-      let skill = new Item(skilldata);
-
-      data.items.push(skill);
+    // We don't prefill skills for NPCs
+    if(data.type == 'character') {
+      const competences = await this.loadCompendium("runequest.skills");
+      data.items = competences.map(i => i.toObject());
     }
     return super.create(data, options);
   }
-  */  
 
   getRollData() {
     const data = super.getRollData();
@@ -98,7 +67,12 @@ export class RunequestActor extends Actor {
     }
     this._prepareattributes(data);
     this._prepareskillcategoriesmodifier(data);
-    this.prepareItems();
+    if(actorData.type == 'character') {
+      this.prepareItems();
+    }
+    else {
+      this.prepareNPCItems();
+    }
     if(!data['data.flags.locked']) {
       data['data.flags.locked'] = true;
     }
@@ -115,6 +89,7 @@ export class RunequestActor extends Actor {
       "strength": 0
     };
   }
+  // Prepare character items
   prepareItems(){
     let actor = this;
     let context = this.data;
@@ -298,7 +273,136 @@ export class RunequestActor extends Actor {
     context.data.attributes.magicpointsreserve.max = magicpointreservemax;
     context.data.attributes.magicpointsreserve.value = magicpointreservecurrent;
   }
+  prepareNPCItems(){
+    let actor = this;
+    let context = this.data;
+    const gear = [];
+    const defense = [];
+    const skills = [];
+    const runes = {
+      "elemental": [],
+      "power": [],
+      "form": [],
+      "condition": [],
+      "others": []
+    };
+    const attacks = {
+      "melee": [],
+      "missile": [],
+      "natural":[],
+      "spirit": []
+    }
+    const spells = {
+      "spirit": [],
+      "rune": [],
+      "sorcery":[]
+    }
+    const cults = [];
+    const mpstorage = [];
+    var hitlocations =[];
+    let totalwounds = 0;
+    let magicpointreservemax =0;
+    let magicpointreservecurrent =0;
+    const features = [];
 
+    // Iterate through items, allocating to containers
+    for (let i of context.items) {
+      // Append to gear.
+      if (i.type === 'item') {
+        gear.push(i);
+      }
+      // Append to features.
+      else if (i.type === 'feature') {
+        features.push(i);
+      }
+      // Append to skills.
+      else if (i.type === 'skill') {
+        this.prepareSkill(i); // To be removed once fix is found
+        skills.push(i);
+      }
+      else if (i.type === 'rune') {
+        console.log("handling a rune in Actor with:"+i.name);
+        console.log(i);
+        console.log(i.data.data.type);
+        if(i.data.data.type != "") {
+          runes[i.data.data.type].push(i);
+        }
+        else {
+          runes["others"].push(i);
+        }
+      }
+      else if (i.type === 'attack') {
+        attacks[i.data.data.attacktype].push(i);
+      }
+      else if (i.type === 'spiritspell') {
+        spells["spirit"].push(i);
+      }
+      else if (i.type === 'runespell') {
+        spells["rune"].push(i);
+      }
+      else if (i.type === 'sorceryspell') {
+        spells["sorcery"].push(i);
+      }
+      else if (i.type === 'hitlocation') {
+        //update hitlocation
+        this._preparehitlocation(i,context);
+        totalwounds+= Number(i.data.data.wounds);
+        hitlocations.push(i);
+      }
+      else if (i.type === 'cult') {
+        cults.push(i);
+      }
+      else if(i.type === 'mpstorage') {
+        //Update MagicStoragePoints data
+        if(i.data.data.equiped) {
+          magicpointreservemax+= i.data.data.maxmp;
+          magicpointreservecurrent+= i.data.data.currentmp;  
+        }
+        mpstorage.push(i);
+      }
+      else if(i.type === 'meleeattack' || i.type === 'missileattack' || i.type === 'naturalattack') {
+        console.log("error with incorrect item type" + i._id);
+      }
+    }
+    totalwounds+= context.data.attributes.generalwounds;
+    // Assign and return
+    console.log("In prepareItems with hitlocations.length = "+hitlocations.length);
+    console.log(hitlocations); 
+    if(hitlocations.length < 1 && context.data.attributes.hitlocationstype !== "Others") {
+      console.log(context.data.attributes);
+      let hitlocationslist = this._preparehitlocationtype(context.data.attributes.hitlocationstype).then(function(result) {
+        console.log(result);
+        console.log(actor);
+        let hitlocations=actor.createEmbeddedDocuments("Item",result);
+        console.log(hitlocations);    
+      });
+    }
+    hitlocations.sort(function(a, b) {
+      if (a.data.data.rangestart < b.data.data.rangestart) {
+          return -1;
+      }
+      if (a.data.data.rangestart > b.data.data.rangestart) {
+        return 1;
+      }
+      // a must be equal to b
+      return 0;
+    });
+    context.data.gear = gear;
+    context.data.features = features;
+    context.data.spells = spells;
+    context.data.skills = skills;
+    context.data.gear = gear;
+    context.data.runes = runes;
+    context.data.attacks = attacks;
+    context.data.spells = spells;
+    context.data.hitlocations = hitlocations;
+    context.data.cults = cults;
+    context.data.defense = defense;
+    context.data.mpstorage = mpstorage;
+    context.data.attributes.hitpoints.value = context.data.attributes.hitpoints.max - totalwounds;
+    context.data.attributes.magicpointsreserve.max = magicpointreservemax;
+    context.data.attributes.magicpointsreserve.value = magicpointreservecurrent;
+  }
   /**
    * Prepares a skill Item.
    * 

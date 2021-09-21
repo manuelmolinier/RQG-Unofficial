@@ -205,6 +205,9 @@
     "RQG.SpiritCombat": "Combat spirituel",
     "RQG.Rank": "Rang",
     "RQG.Subcult": "Sous-culte",
-    "RQG.Runepoints": "Points de Rune"
-
+    "RQG.Runepoints": "Points de Rune",
+    "RQG.DB": "Bonus dégats",
+    "RQG.SIZSR": "RA TAI",
+    "RQG.DEXSR": "RA DEX",
+    "RQG.WDS": "Bl."
 }

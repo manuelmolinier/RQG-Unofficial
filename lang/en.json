@@ -57,7 +57,7 @@
     "RQG.CategoryModifier":"Category Modifier",
     "RQG.Roll": "Roll",
     "RQG.Passions": "Passions",
-    "RQG.HitLocations": "Hit Locations",
+    "RQG.HitLocations": "Locations",
     "RQG.MeleeAttacks": "Melee Attacks",
     "RQG.MissileAttacks": "Missile Attacks",
     "RQG.NaturalAttacks": "Natural Attacks",
@@ -206,5 +206,9 @@
     "RQG.SpiritCombat": "Spirit Combat",
     "RQG.Rank": "Rank",
     "RQG.Subcult": "Subcult",
-    "RQG.Runepoints": "Runepoints"
+    "RQG.Runepoints": "Runepoints",
+    "RQG.DB": "Damage bonus",
+    "RQG.SIZSR": "SIZ SR",
+    "RQG.DEXSR": "DEX SR",
+    "RQG.WDS": "Wds."
 }

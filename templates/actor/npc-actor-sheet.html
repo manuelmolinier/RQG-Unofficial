@@ -1,9 +1,9 @@
 <form class="{{cssClass}}" autocomplete="off">
     {{!-- Sheet Header --}}
-    {{> "systems/runequest/templates/actor/parts/npc-sheetheader.html"}}
+    {{> "systems/runequest/templates/actor/parts/npc/npc-sheetheader.html"}}
 
     {{!-- Sheet Tab Navigation --}}
-    <nav class="sheet-tabs tabs flexrow" data-group="primary">
+    <nav class="nav-sheet-tabs sheet-tabs tabs flexrow" data-group="primary">
         <a class="item" data-tab="summary">{{localize 'RQG.MainTab'}}</a>
         <a class="item" data-tab="items">{{localize 'RQG.Items'}}</a>
         {{#if data.flags.locked}}
@@ -14,14 +14,14 @@
     </nav>
 
     {{!-- Sheet Body --}}
-    <section class="sheet-body section-padding">
+    <section class="sheet-body section-padding" style="grid-area:main;">
         {{!-- Summary Tab --}}
         <div  class="tab summary"  data-group="primary"  data-tab="summary">
-            {{> "systems/runequest/templates/actor/parts/npc-summary.html"}}
+            {{> "systems/runequest/templates/actor/parts/npc/npc-summary.html"}}
         </div> 
         {{!-- Owned Items Tab --}}
         <div class="tab items" data-group="primary" data-tab="items">
-            {{> "systems/runequest/templates/actor/parts/actor-inventory.html"}}
+            {{> "systems/runequest/templates/actor/parts/character/actor-inventory.html"}}
         </div>
         {{!-- Flags Tab --}}
         <div class="tab flags" data-group="primary" data-tab="flags">
