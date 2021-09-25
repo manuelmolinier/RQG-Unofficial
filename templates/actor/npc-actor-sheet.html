@@ -1,16 +1,22 @@
 <form class="{{cssClass}}" autocomplete="off">
+    <style>
+        :root {
+            --main-text-color: {{getGameSetting "generalTextColor"}};
+            --main-text-font: {{getGameSetting "generalTextFont"}};
+        }
+    </style>      
     {{!-- Sheet Header --}}
     {{> "systems/runequest/templates/actor/parts/npc/npc-sheetheader.html"}}
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="nav-sheet-tabs sheet-tabs tabs flexrow" data-group="primary">
-        <a class="item" data-tab="summary">{{localize 'RQG.MainTab'}}</a>
-        <a class="item" data-tab="items">{{localize 'RQG.Items'}}</a>
         {{#if data.flags.locked}}
             <a class="unlock-character-sheet" title="{{localize 'RQG.UnlockSheet'}}"> <i class="fas fa-lock"></i> </a>
         {{else}}
             <a class="unlock-character-sheet" title="{{localize 'RQG.LockSheet'}}"> <i class="fas fa-lock-open"></i></a>
         {{/if}}
+        <a class="item actor-item" data-tab="summary">{{localize 'RQG.MainTab'}}</a>
+        <a class="item actor-item" data-tab="items">{{localize 'RQG.Items'}}</a>
     </nav>
 
     {{!-- Sheet Body --}}

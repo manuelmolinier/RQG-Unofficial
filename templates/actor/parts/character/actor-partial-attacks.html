@@ -1,7 +1,11 @@
 <div class="summary-row flexrow">
     <div class="summary-runes-list flexrow">
         <ol class="skills-list">
-            <table data-attacktype="melee" border="2">
+            {{#if data.flags.locked}}            
+            <table class="attack-table-locked" data-attacktype="melee" border="2">
+            {{else}}
+            <table class="attack-table-unlocked" data-attacktype="melee" border="2">
+            {{/if}}
                 <colgroup>
                     <col span="1" style="width: 35%;">
                     <col span="1" style="width: 10%;">
@@ -10,11 +14,11 @@
                     <col span="1" style="width: 10%;">
                     <col span="1" style="width: 10%;">
                 </colgroup>            
-                <thead>
+                <thead  class="thead-attack">
                     <th colspan="5">{{localize attacklabel}}</th>
                     <th colspan="1"><a class="item-control item-create" title="Create item" data-type="attack" data-attacktype="{{attacktype}}"><i class="fas fa-plus"></i></a></th>
                 </thead>
-                <thead>
+                <thead class="thead-attack">
                     <tr>
                         <th class="summary-attack-label">{{localize "RQG.Attack"}}</th>
                         <th class="summary-attack-value"> % </th>
@@ -27,7 +31,7 @@
                 <tbody>
                 {{#if data.flags.locked}}
                     {{#each attacks as |attack id|}}
-                    <tr class="item" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="{{attacktype}}weapons">
+                    <tr class="item" data-itemid="{{attack._id}}" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="{{attacktype}}weapons">
                         <td class="summary-attack-label"><a class="attack-roll">{{attack.name}}</a></td>
                         <td class="summary-attack-value">{{attack.data.data.attacktotal}}</td>
                         <td class="summary-attack-damage">{{attack.data.data.damage}}</td>

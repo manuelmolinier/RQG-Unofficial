@@ -1,6 +1,7 @@
 <div class="summary-row flexrow">
     {{!-- Runes --}}
     {{#if data.flags.locked}}
+    <!--
     <div  class="summary-runes-list flexrow">
         <table>
             <tbody>
@@ -8,7 +9,6 @@
                     <tr class="elemental-rune" data-rune="{{id}}">
                         <td class="elemental-rune" colspan="2">
                             <a class="elementalrunes-roll rollable">{{localize elementalrune.label}}: {{elementalrune.value}}</a>
-                            <!-- <input class="rune-experience" id="{{id}}_{{elementalrune._id}}_rune_experience" type="checkbox" name="data.elementalrunes.{{id}}.experience" {{checked elementalrune.experience}}/> -->
                         </td>
                     </tr>
                 {{/each}}
@@ -17,13 +17,35 @@
                     {{#each powerrunepair as |powerrune runeid|}}
                         <td class="elemental-rune" >
                             <a class="powerrunes-roll" data-rune="{{runeid}}">{{localize powerrune.label}}: {{powerrune.value}}</a>
-                            <!-- <input class="rune-experience" type="checkbox" name="data.powerrunes.{{pairid}}.{{runeid}}.experience" {{checked powerrune.experience}}/> -->
                         </td>
                     {{/each}}
                     </li>
                 {{/each}}
             </tbody>
         </table>
+    </div>
+    -->
+    <div class="elemental-rune-grid-container">
+        {{#each data.elementalrunes as |elementalrune id|}}
+        <div class="elemental-rune-{{id}} elemental-rune tooltip" data-rune="{{id}}">
+            <span class="tooltiptext">{{localize elementalrune.label}}</span>
+        </div>
+        <div class="elemental-rune elemental-rune-{{id}}-value" data-rune="{{id}}">
+            <span><a class="elementalrunes-roll rollable" data-rune="{{id}}">{{elementalrune.value}}</a></span>         
+        </div>
+        {{/each}}
+    </div>
+    <div class="power-rune-grid-container">
+        {{#each data.powerrunes as |powerrunepair pairid|}}
+            {{#each powerrunepair as |powerrune runeid|}}
+                <div class="elemental-rune power-rune-{{runeid}} tooltip" >
+                    <span class="tooltiptext">{{localize powerrune.label}}</span>               
+                </div>
+                <div class="elemental-rune power-rune-{{runeid}}-value" data-runepair="{{pairid}}">
+                    <a class="powerrunes-roll" data-rune="{{runeid}}">{{powerrune.value}}</a>
+                </div>            
+            {{/each}}
+        {{/each}}
     </div>
     {{else}}
     <div  class="summary-runes-list flexrow">
@@ -68,7 +90,7 @@
                 </thead>
                 <tbody>
                     {{#each data.passions as |passion id|}}
-                    <tr class="item" data-itemid="{{passion._id}}" data-item-id="{{passion._id}}" data-passionname="{{passion.name}}">
+                    <tr class="item" data-item-id="{{passion._id}}" data-passionname="{{passion.name}}">
                         <td class="summary-passion-label"><a class="passion-roll" data-item-id="{{passion._id}}">{{passion.name}}</a></td>
                         <td class="summary-passion-value"><a class="passion-roll" data-item-id="{{passion._id}}">{{passion.data.data.total}}</a></td>
                         <td class="item summary-passion-check" data-item-id="{{passion._id}}"><input class="passion-experience" id="{{id}}_{{passion._id}}_passion_skill" type="checkbox" name="data.experience" {{checked passion.data.data.experience}}/></td>                         

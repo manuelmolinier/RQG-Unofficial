@@ -1,5 +1,8 @@
 import {RQG} from '../config.js';
 import { RQGTools } from '../tools/rqgtools.js';
+import {skillMenuOptions} from "../menu/skill-context.js";
+import {attackMenuOptions} from "../menu/attack-context.js";
+
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -19,6 +22,9 @@ export class RunequestActorSheet extends ActorSheet {
     });
   }
 
+  static confirmItemDelete(actor, itemId) {
+    actor.deleteOwnedItem(itemId);
+  }
   /* -------------------------------------------- */
 
   getData() {
@@ -252,6 +258,10 @@ export class RunequestActorSheet extends ActorSheet {
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
 
+    new ContextMenu(html, ".skill-roll", skillMenuOptions(this.actor, this.token));
+    new ContextMenu(html, ".summary-skill-roll", skillMenuOptions(this.actor, this.token));
+    new ContextMenu(html, ".passion-roll", skillMenuOptions(this.actor, this.token));
+    new ContextMenu(html, ".attack-roll", attackMenuOptions(this.actor, this.token));
     // Add Inventory Item
     html.find('.item-create').click(this._onItemCreate.bind(this));
 
@@ -411,7 +421,7 @@ export class RunequestActorSheet extends ActorSheet {
       const data = this.getData();
       if(event.button == 0) {}
       else {return;}      
-      const runepairrow= event.target.parentElement.parentElement;
+      const runepairrow= event.target.parentElement;
       const pairid = runepairrow.dataset["runepair"];
       const runerow=event.target; //.parentElement;
       const runeid=runerow.dataset["rune"];
@@ -419,7 +429,7 @@ export class RunequestActorSheet extends ActorSheet {
       const target = (data.data.powerrunes[pairid][runeid].value);
       this.basicRoll(charname,target);
     });
-    html.find('.skill-roll').mousedown(event => this._onSkillRoll(event));
+    html.find('.skill-roll').click(event => this._onSkillRoll(event));
     html.find('.rune-roll').mousedown(event => this._onSkillRoll(event));    
     html.find('.meleeattack-roll').mousedown(event => {
       event.preventDefault();
@@ -836,13 +846,14 @@ export class RunequestActorSheet extends ActorSheet {
     console.log(event);
     if(event.button == 0) {
       if(event.ctrlKey == true){
-        const skillid = event.currentTarget.dataset.itemId;
+        const skillid = event.currentTarget.dataset.itemid;
         let skill = this.actor.getOwnedItem(skillid);
         console.log(skill)
         skill.gainroll();
         return;
       }
     }
+    /*
     else if(event.button == 2) {
       if(event.altKey == true){
         this.actor.deleteOwnedItem(event.currentTarget.dataset.itemid);
@@ -852,6 +863,7 @@ export class RunequestActorSheet extends ActorSheet {
       item.sheet.render(true);
       return;
     }
+    */
     else {return;}
     //const catrow = event.target.parentElement.parentElement.parentElement;
     const skillid = event.currentTarget.dataset.itemid;

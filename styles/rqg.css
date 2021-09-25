@@ -6,6 +6,14 @@
   font-family: RunequestRunes;
   src: url("./fonts/RQ.TTF");
 }
+@font-face {
+  font-family: MedievalSharp;
+  src: url("./fonts/MedievalSharp-Regular.ttf");
+}
+:root {
+  --main-text-color: darkgreen;
+  --main-text-font: MedievalSharp;
+}
 .rqg .runefont {
   font-family: 'RunequestRunes';
 }
@@ -13,7 +21,9 @@
   /* Sheet Tabs */
   /* Items List */
   /* Attributes */
-  font-family: 'Verdana';
+  /*font-family: 'Verdana';*/
+  font-family: var(--main-text-font);
+  color: var(--main-text-color);
 }
 .rqg .window-content {
   height: 100%;
@@ -36,7 +46,7 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   /*height: 200px;*/
-  overflow: scroll;
+  overflow: auto;
   margin-bottom: 10px;
   font-size:12px;
   align-items:flex-start;
@@ -61,7 +71,7 @@ input[type="text"]
   background: rgba(0, 0, 0, 0.05);
   padding: 1px 3px;
   margin: 0;
-  color: #191813;
+  color: var(--main-text-color);
   font-family: inherit;
   font-size: inherit;
   text-align: inherit;
@@ -72,6 +82,11 @@ input[type="text"]
   -moz-user-select: text;
   -ms-user-select: text;
   user-select: text;
+}
+input[type="text"].header-input-name {
+  width: calc(80% - 2px);
+  font-size:1.2em;
+  height: 25px;  
 }
 .rqg .sheet-header .profile-img {
   flex: 0 0 100px;
@@ -127,9 +142,14 @@ input[type="text"]
   line-height: 40px;
   font-weight: bold;
   font-size:12px;
+}
+.rqg .tabs .actor-item {
+  line-height: 40px;
+  font-weight: bold;
+  font-size:12px;
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  padding: 0px 0px 10px 0px;  
+  padding: 0px 0px 10px 0px;
 }
 .rqg .tabs .item.active {
   text-decoration: underline;
@@ -229,8 +249,9 @@ input[type="text"]
   flex-flow: row wrap;
   justify-content: flex-start;
   margin-bottom: 10px;
-  font-size: 10px;
-  font-weight: bold;
+  font-size: 1.5em;
+  font-weight: 900;
+  color: var(--main-text-color);
   width:100%;
 }
 .rqg .summary-second-row {
@@ -253,7 +274,7 @@ input[type="text"]
   justify-content: flex-end;
 }
 .rqg .skills-list .item img {
-  flex: 0 0 24px;
+  flex: 1 1 24px;
   margin-right: 10px;
 }
 .rqg .skills-list .item-name {
@@ -267,9 +288,12 @@ input[type="text"]
 .rqg .elemental-rune {
   margin-left: 5px;
   text-align: center;
+  font-size:1.5em;
+  font-weight: 900;
+  color: var(--main-text-color);
 }
 .rqg .skills-list .item-controls {
-  flex: 0 0 36px;
+  flex: 1 1 36px;
   margin-left: 5px;
 }
 .rqg .skills-list .skill-value{
@@ -468,6 +492,7 @@ input[type="text"]
   width: 100%;
   height: 70px;
   border: none;
+  background: transparent;  
 }
 .rqg .characteristic-list-thead {
   height: 30px;
@@ -484,11 +509,18 @@ input[type="text"]
 .rqg .characteristic-list-td {
   width: 12.5%;
   border: none;
+  font-size:1.5em;
+}
+.rqg .header-attributes-list-td {
+  width: 12.5%;
+  border: none;
+  font-size:1.3em;
 }
 .rqg .general-list-table {
-  width: 80%;
+  width: 100%;
   height: 70px;
   border: none;
+  background: transparent;
 }
 .rqg .general-list-thead {
   height: 30px;
@@ -506,6 +538,11 @@ input[type="text"]
   width: 12.5%;
   border: none;
 }
+.rqg .header-name-td {
+  width: 12.5%;
+  border: none;
+  font-size:1.5em;  
+}
 .rqg .summary-row {
   display: flex;
   flex-direction: row;
@@ -514,10 +551,12 @@ input[type="text"]
 }
 .rqg .skill-category-table {
   width: 92%;
-  border: 2px solid green;
+  border: 2px solid var(--main-text-color);
   margin: 0.5em 0.5em;
   font-size:10px;
-  font-weight: 900;  
+  font-weight: 900;
+  color: var(--main-text-color);  
+  background: transparent;  
 }
 .rqg .resource-input {
   width: 40px;
@@ -535,11 +574,29 @@ input[type="text"]
 .hitlocationname {
   text-align: center;
   font-size: 2em;
+  color: var(--main-text-color);
   /*height: 28px;*/
+}
+.thead-hitlocationname {
+  text-align: center;
+  font-size: 1.5em;
+  background: var(--main-text-color);  
+}
+.thead-attack {
+  text-align: center;
+  font-size: 1.5em;
+  background: var(--main-text-color);    
 }
 .hitlocationlockedfield {
   text-align: center;
-  font-size: 2em;  
+  font-size: 1.5em;
+  color: var(--main-text-color);  
+  /*height: 28px;*/
+}
+.thead-hitlocationlockedfield {
+  text-align: center;
+  font-size: 1.5em;
+  background: var(--main-text-color);  
   /*height: 28px;*/
 }
 .hitlocationtable {
@@ -551,17 +608,18 @@ input[type="text"]
   width: 85%;
   text-align: center;
   flex: 4 0 200px;
-  font-size: 2em;  
+  font-size: 1.5em;
+  color: var(--main-text-color);  
   /*height: 28px;*/
 }
 .generalwounds {
   text-align: center;
-  font-size: 2em;
+  font-size: 1.5em;
   /*height: 28px;*/
 }
 .hitlocationunlockedfield {
   text-align: center;
-  font-size: 2em;  
+  font-size: 1.5em;  
   /*height: 28px;*/
 }
 .npc-hitlocationname {
@@ -594,6 +652,15 @@ input[type="text"]
   width:100%;
   /*height: 70px;*/
   border: 1px solid;
+  color: var(--main-text-color);
+  font-size:1.4em;
+}
+.character-passion-table {
+  width:100%;
+  border: 1px solid;
+  color: var(--main-text-color);
+  font-size:1.5em;
+  font-weight: 900;
 }
 .combat-defense-field {
   text-align: center;
@@ -612,15 +679,17 @@ input[type="text"]
 }
 .rqg header.grid-sheet-header {
   display: grid;
-  grid-template-columns: 100px 1fr 1fr ;
-  grid-template-rows: [main] auto;
-  grid-template-areas: "picture info cults";
+  grid-template-columns: 100px auto ;
+  grid-template-rows: min-content auto;
+  grid-template-areas: "picture info"
+                       "characteristics characteristics";
   gap: 5px 5px;
   place-items: stretch;
   overflow: auto;
   margin-bottom: 10px;
   font-size:12px;
   grid-area:header;
+  color: var(--main-text-color);
 }
 .rqg header.character-sheet-header {
   display: grid;
@@ -633,6 +702,8 @@ input[type="text"]
   margin-bottom: 10px;
   font-size:12px;
   grid-area:header;
+  color: var(--main-text-color);
+  font-weight: 900;
 }
 .npc-header-img {
   grid-area: picture;
@@ -735,11 +806,11 @@ input[type="text"]
 .npc-summary-grid {
   border:1px solid black;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: min-content auto;
   grid-template-areas:
-   "charac hitloc hitloc skills magic"
-   "weapons weapons weapons skills magic";
+   "hitloc hitloc skills magic"
+   "weapons weapons skills magic";
   gap: 5px 5px;
   place-items: stretch;
   overflow: auto;
@@ -748,7 +819,7 @@ input[type="text"]
 }
 .npc-summary-charac {
   border:1px solid black;
-  grid-area: charac;
+  grid-area: characteristics;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(7, 20px);
@@ -835,3 +906,234 @@ input[type="text"].npc-wounds {
   -ms-user-select: text;
   user-select: text;
 }
+.rqg .skill-table-name {
+  width:70%;
+  font-size:1.5em;
+}
+.rqg .skill-table-value {
+  width:20%;
+  font-size:1.5em;
+}
+.rqg .skill-table-check {
+  width:10%;
+}
+.rqg .skill-table-header {
+  font-size:1.5em;  
+}
+.rqg .skill-table-thead {
+  background: var(--main-text-color);
+}
+.rqg .combat-table-header {
+  font-size:1.5em;  
+}
+.rqg .combat-table-thead {
+  background: var(--main-text-color);
+}
+.rqg .attack-table-locked {
+  color: var(--main-text-color);
+  font-size:1.5em;
+}
+.rqg .attack-table-unlocked { 
+  color: var(--main-text-color);
+}
+.rqg .elemental-rune-grid-container {
+  flex: 0 1 400px;
+  display: grid;
+  grid-template-columns: repeat(8,35px);
+  grid-template-rows: repeat(5,30px);
+  grid-template-areas: ". . . fire firevalue . . ."
+                       ". . . . . . . ."
+                       "airvalue air . moon moonvalue . darkness darknessvalue"
+                       ". . . . . . . ."
+                       ". earthvalue earth . . water watervalue .";
+  gap: 5px 5px;
+  place-items: stretch;
+  overflow: auto;
+  margin-bottom: 10px;
+  font-size:1.2em;
+  font-weight: 900;
+}
+.rqg .elemental-rune-air {
+  grid-area: air;
+  background-image: url("./img/air.png");
+  background-size: cover;
+}
+.rqg .elemental-rune-air-value {
+  grid-area: airvalue;
+  color: darkblue;
+}
+.rqg .elemental-rune-fire {
+  grid-area: fire;
+  background-image: url("./img/fire.png");
+  background-size: cover;
+}
+.rqg .elemental-rune-fire-value {
+  grid-area: firevalue;
+  color: darkblue;  
+}
+.rqg .elemental-rune-darkness {
+  grid-area: darkness;
+  background-image: url("./img/darkness.png");
+  background-size: cover;
+}
+.rqg .elemental-rune-darkness-value {
+  grid-area: darknessvalue;
+  color: darkblue;
+}
+.rqg .elemental-rune-moon {
+  grid-area: moon;
+  background-image: url("./img/moon.png");
+  background-size: cover;
+}
+.rqg .elemental-rune-moon-value {
+  grid-area: moonvalue;
+  color: darkblue;
+}
+.rqg .elemental-rune-earth {
+  grid-area: earth;
+  background-image: url("./img/earth.png");
+  background-size: cover;
+}
+.rqg .elemental-rune-earth-value {
+  grid-area: earthvalue;
+  color: darkblue;
+}
+.rqg .elemental-rune-water {
+  grid-area: water;
+  background-image: url("./img/water.png");
+  background-size: cover;
+}
+.rqg .elemental-rune-water-value {
+  grid-area: watervalue;
+  color: darkblue;
+}
+.rqg .power-rune-grid-container {
+  flex: 0 1 300px;
+  display: grid;
+  grid-template-columns: repeat(4,35px);
+  grid-template-rows: repeat(6,35px);
+  grid-template-areas: ". man manvalue ."
+                       "fertilityvalue fertility death deathvalue"
+                       "harmonyvalue harmony disorder disordervalue"
+                       "truthvalue truth illusion illusionvalue"
+                       "stasisvalue stasis movement movementvalue"
+                       ". beastvalue beast .";
+  gap: 5px 5px;
+  place-items: stretch;
+  overflow: auto;
+  margin-bottom: 10px;
+  font-size:1.2em;
+  font-weight: 900;  
+}
+.rqg .power-rune-man {
+  grid-area: man;
+  background-image: url("./img/man.png");
+  background-size: cover;
+}
+.rqg .power-rune-man-value {
+  grid-area: manvalue;
+  color: darkblue;
+}
+.rqg .power-rune-beast {
+  grid-area: beast;
+  background-image: url("./img/beast.png");
+  background-size: cover;
+}
+.rqg .power-rune-beast-value {
+  grid-area: beastvalue;
+  color: darkblue;
+}
+.rqg .power-rune-fertility {
+  grid-area: fertility;
+  background-image: url("./img/fertility.png");
+  background-size: cover;
+}
+.rqg .power-rune-fertility-value {
+  grid-area: fertilityvalue;
+  color: darkblue;
+}
+.rqg .power-rune-death {
+  grid-area: death;
+  background-image: url("./img/death.png");
+  background-size: cover;
+}
+.rqg .power-rune-death-value {
+  grid-area: deathvalue;
+  color: darkblue;
+}
+.rqg .power-rune-harmony {
+  grid-area: harmony;
+  background-image: url("./img/harmony.png");
+  background-size: cover;
+}
+.rqg .power-rune-harmony-value {
+  grid-area: harmonyvalue;
+  color: darkblue;
+}
+.rqg .power-rune-disorder {
+  grid-area: disorder;
+  background-image: url("./img/disorder.png");
+  background-size: cover;
+}
+.rqg .power-rune-disorder-value {
+  grid-area: disordervalue;
+  color: darkblue;
+}
+.rqg .power-rune-truth {
+  grid-area: truth;
+  background-image: url("./img/truth.png");
+  background-size: cover;
+}
+.rqg .power-rune-truth-value {
+  grid-area: truthvalue;
+  color: darkblue;
+}
+.rqg .power-rune-illusion {
+  grid-area: illusion;
+  background-image: url("./img/illusion.png");
+  background-size: cover;
+}
+.rqg .power-rune-illusion-value {
+  grid-area: illusionvalue;
+  color: darkblue;
+}
+.rqg .power-rune-stasis {
+  grid-area: stasis;
+  background-image: url("./img/stasis.png");
+  background-size: cover;
+}
+.rqg .power-rune-stasis-value {
+  grid-area: stasisvalue;
+  color: darkblue;
+}
+.rqg .power-rune-movement {
+  grid-area: movement;
+  background-image: url("./img/movement.png");
+  background-size: cover;
+}
+.rqg .power-rune-movement-value {
+  grid-area: movementvalue;
+  color: darkblue;
+}
+.rqg .tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+.rqg .tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: var(--main-text-color);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  font-size: 0.5em;
+}
+.rqg .tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+

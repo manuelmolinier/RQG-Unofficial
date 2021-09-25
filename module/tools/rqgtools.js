@@ -53,6 +53,11 @@ export class RQGTools {
         }
         game.user.assignHotbarMacro(macro, slot);
         return false;
-    }           
+    }
+    static getDataset(el, dataset) {
+        const elem = el.target ? el.target : el[0];
+        const element = elem?.closest(`[data-${dataset}]`);
+        return element?.dataset[dataset];
+    }               
 }
 

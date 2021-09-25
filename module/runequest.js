@@ -64,6 +64,22 @@ Hooks.once("init", async function() {
     default: true,
     config: true
   });
+  game.settings.register("Runequest", "generalTextColor", {
+    name: "General Text Color",
+    hint: "Allows to change the general text color on the Character Sheets at client level",
+    scope: "client",
+    type: String,
+    default: "black",
+    config: true
+  });
+  game.settings.register("Runequest", "generalTextFont", {
+    name: "General Text Font",
+    hint: "Allows to change the general text font on the Character Sheets at client level",
+    scope: "client",
+    type: String,
+    default: "MedievalSharp",
+    config: true
+  });    
   game.Runequest = {
     macros: {
       itemRoll: RQGTools.itemRollMacro
@@ -151,4 +167,7 @@ Handlebars.registerHelper({
   or() {
       return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
   }
+});
+Handlebars.registerHelper("getGameSetting", function(setting) {
+  return game.settings.get("Runequest",setting);
 });

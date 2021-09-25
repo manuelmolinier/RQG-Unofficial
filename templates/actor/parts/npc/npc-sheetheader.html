@@ -11,23 +11,11 @@
             <div class="npc-header-reputation">{{localize 'RQG.Reputation'}}:<input type="text" name="data.general.reputation.value" value="{{data.general.reputation.value}}"/></div>
             <div class="npc-header-app">{{localize "RQG.Appearance"}}:<input type="text" name="data.general.appearance" value="{{data.general.appearance}}"/></div>
         </div>
-        <div class="npc-header-cults skill-category" data-type="cult">
-            <div class="item-controls npc-cults-plus" style="flex: 1 0 20%;">
-                <a class="item-control item-create" title="Create item" data-type="cult"><i class="fas fa-plus"></i></a>
-            </div>
-            {{#each data.cults as |cult id|}}
-                {{#if (lt @index 2)}}
-                    <div class="item npc-cults-cult{{@index}} npc-cult-container" data-item-id="{{cult._id}}" data-cultname="{{cult.name}}">
-                        <div class="item-name npc-cult-cult">{{localize "RQG.Cult"}}: {{cult.name}}</div>
-                        <div class="item-name npc-cult-rank">{{localize "RQG.Rank"}}: {{cult.data.data.rank}}</div>
-                        <div class="item-name npc-cult-subcult">{{localize "RQG.Subcult"}}: {{cult.data.data.subcult}}</div>
-                        <div class="item-name npc-cult-runepoints">{{localize "RQG.Runepoints"}}: {{cult.data.data.currentrunepoint}} / {{cult.data.data.maxrunepoint}}</div>
-                    </div>
-                    <div class="item item-controls npc-cults-edit{{@index}}" data-item-id="{{cult._id}}" data-cultname="{{cult.name}}">
-                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                    </div>
-                {{/if}}
-            {{/each}}      
-        </div>                 
+        <div class="npc-summary-charac">
+            <table class="general-list-table">
+                <tbody>
+                    {{> "systems/runequest/templates/actor/parts/npc/npc-partial-characteristics.html"}}
+                </tbody>
+            </table>
+        </div>
     </header>

@@ -1,3 +1,16 @@
+**V0.1.9**
+**Bug Fixes**
+- Fix for Crush Criticals, they will now follow the Errata from BRP forum
+- Fix for the Skill gain rolls
+- Possibly other bug fixes :)
+**Additional features**
+- Reworked the CS display:
+    - Increased font-size
+    - Added a parameter to select the Text color
+    - Added a parameter to select the Font used for text.
+    - Added Runes icons in the Rune sheet
+    - Moved the menu on the side.
+- Added an NPC sheet for GMs. Note it need to be reworked for the UI to align on CS changes
 **V0.1.7**
 **Bug Fixes**
 - Fixes for HP computation on edge cases

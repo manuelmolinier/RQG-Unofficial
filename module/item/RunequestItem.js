@@ -82,16 +82,7 @@ export class RunequestItem extends Item {
     console.log(actor);
     console.log("item");
     console.log(item);
-    switch(item.type) {
-      case "passion":
-        this._passiongainroll(item,actor,testmodifier);
-        break;
-      case "skill":
-        this._skillgainroll(item,actor);
-        break;
-      default:
-        break;
-    }
+    this._skillgainroll(item,actor);
   }
 
   _attackroll(attack,actor,testmodifier) {
@@ -384,7 +375,13 @@ export class RunequestItem extends Item {
     }
     else if(result=="critical") {
       damageData.criticaldamage.roll();
-      damageData.damagebonus.roll();
+      if(attack.data.data.specialtype != "C") {
+        damageData.damagebonus.roll();        
+      }
+      else {
+        damageData.damagebonus = new Roll("0");
+        damageData.damagebonus.roll();        
+      }
       damageData.totaldamage = damageData.criticaldamage.total + damageData.damagebonus.total;
     }
 
@@ -473,13 +470,11 @@ export class RunequestItem extends Item {
     return damageData;
   }
   async _skillgainroll(skill,actor) {
-
-    console.log("skillgainroll in item");
-    console.log(skill);
-    console.log(actor);
     let skillname = skill.data.name;
     const categoryid= skill.data.data.skillcategory;
-    let catmodifier = actor.data.data.skillcategory[categoryid].modifier;
+    if(!skill.data.data.experience) { return; }
+    skill.data.data.experience = false;
+    let catmodifier = skill.type == 'skill'?actor.data.data.skillcategory[categoryid].modifier:0;
     let skillvalue = skill.data.data.total;
     const critical = Math.max(Math.round(skillvalue/20),1);
     const special = Math.round(skillvalue/5);

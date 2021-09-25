@@ -5,31 +5,31 @@
                 <table class="general-list-table">
                     <tbody>
                         <tr>
-                        <td class="general-list-td" colspan="14">Name:<input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></td>
+                        <td class="header-name-td" colspan="14">Name:<input class="header-input-name" name="name" type="text" value="{{actor.name}}" placeholder="Name"/></td>
                         </tr>
                         {{> "systems/runequest/templates/actor/parts/character/actor-partial-characteristics.html"}}
                         <tr>
-                            <td class="characteristic-list-td" colspan="2">Damage Bonus: {{actor.data.data.attributes.damagebonus}}</td>
-                            <td class="characteristic-list-td" colspan="1">SIZ SR: {{actor.data.data.attributes.sizsr}}</td>
-                            <td class="characteristic-list-td" colspan="2">DEX SR: {{actor.data.data.attributes.dexsr}}</td>
-                            <td class="characteristic-list-td" colspan="2">Healing Rate: {{actor.data.data.attributes.healingrate}}</td>
+                            <td class="header-attributes-list-td" colspan="2">Damage Bonus: {{actor.data.data.attributes.damagebonus}}</td>
+                            <td class="header-attributes-list-td" colspan="1">SIZ SR: {{actor.data.data.attributes.sizsr}}</td>
+                            <td class="header-attributes-list-td" colspan="2">DEX SR: {{actor.data.data.attributes.dexsr}}</td>
+                            <td class="header-attributes-list-td" colspan="2">Healing Rate: {{actor.data.data.attributes.healingrate}}</td>
                         </tr>
                         <tr>
-                            <td class="characteristic-list-td" colspan="2">
+                            <td class="header-attributes-list-td" colspan="2">
                                 <div>
                                     {{localize 'RQG.HP'}}: <input class="resource-input" type="text" name="data.attributes.hitpoints.value" value="{{actor.data.data.attributes.hitpoints.value}}" data-dtype="Number"/>
                                     /
                                     {{actor.data.data.attributes.hitpoints.max}}
                                 </div>
                             </td>                         
-                            <td class="characteristic-list-td" colspan="2">
+                            <td class="header-attributes-list-td" colspan="2">
                                 <div>
                                     {{localize 'RQG.MP'}}: <input class="resource-input" type="text" name="data.attributes.magicpoints.value" value="{{actor.data.data.attributes.magicpoints.value}}" data-dtype="Number"/>
                                     /
                                     {{actor.data.data.attributes.magicpoints.max}}
                                 </div>
                             </td>
-                            <td class="characteristic-list-td" colspan="3">
+                            <td class="header-attributes-list-td" colspan="3">
                                 <div>
                                     {{localize 'RQG.MPSTORAGE'}}: <input class="resource-input" type="text" name="data.attributes.magicpointsreserve.value" value="{{actor.data.data.attributes.magicpointsreserve.value}}" data-dtype="Number"/>
                                     /
@@ -37,22 +37,6 @@
                                 </div>
                             </td>                            
                         </tr>
-                        {{#each data.cults as |cult id|}}
-                        {{log cult}}
-                        <tr>
-                            <td class="characteristic-list-td" colspan="14">
-                                <li class="item flexrow" data-item-id="{{cult._id}}" data-cultname="{{cult.name}}">
-                                    <h4 class="item-name">{{cult.name}}</h4>
-                                    <h4 class="item-name">{{cult.data.data.rank}}</h4>
-                                    <h4 class="item-name">{{cult.data.data.subcult}}</h4>
-                                    <h4 class="item-name">{{cult.data.data.currentrunepoint}} / {{cult.data.data.maxrunepoint}}</h4>
-                                    <div class="item-controls">
-                                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                                    </div>
-                                </li>
-                            </td>
-                        </tr>
-                        {{/each}}   
                     </tbody>
                 </table>    
             </div> 
