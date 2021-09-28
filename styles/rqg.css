@@ -431,7 +431,7 @@ input[type="text"].header-input-name {
   border-bottom: 1px solid #AAA;
 }
 .rqg .summary-runes-list {
-  /* font-family: AtlantisRegular; */
+  font-size: 0.8em;
   list-style: none;
   margin: 2px;
   padding: 2px;
@@ -955,57 +955,45 @@ input[type="text"].npc-wounds {
 }
 .rqg .elemental-rune-air {
   grid-area: air;
-  background-image: url("./img/air.png");
-  background-size: cover;
 }
 .rqg .elemental-rune-air-value {
   grid-area: airvalue;
-  color: darkblue;
+  color: var(--main-text-color);
 }
 .rqg .elemental-rune-fire {
   grid-area: fire;
-  background-image: url("./img/fire.png");
-  background-size: cover;
 }
 .rqg .elemental-rune-fire-value {
   grid-area: firevalue;
-  color: darkblue;  
+  color: var(--main-text-color);  
 }
 .rqg .elemental-rune-darkness {
   grid-area: darkness;
-  background-image: url("./img/darkness.png");
-  background-size: cover;
 }
 .rqg .elemental-rune-darkness-value {
   grid-area: darknessvalue;
-  color: darkblue;
+  color: var(--main-text-color);
 }
 .rqg .elemental-rune-moon {
   grid-area: moon;
-  background-image: url("./img/moon.png");
-  background-size: cover;
 }
 .rqg .elemental-rune-moon-value {
   grid-area: moonvalue;
-  color: darkblue;
+  color: var(--main-text-color);
 }
 .rqg .elemental-rune-earth {
   grid-area: earth;
-  background-image: url("./img/earth.png");
-  background-size: cover;
 }
 .rqg .elemental-rune-earth-value {
   grid-area: earthvalue;
-  color: darkblue;
+  color: var(--main-text-color);
 }
 .rqg .elemental-rune-water {
   grid-area: water;
-  background-image: url("./img/water.png");
-  background-size: cover;
 }
 .rqg .elemental-rune-water-value {
   grid-area: watervalue;
-  color: darkblue;
+  color: var(--main-text-color);
 }
 .rqg .power-rune-grid-container {
   flex: 0 1 300px;
@@ -1027,93 +1015,73 @@ input[type="text"].npc-wounds {
 }
 .rqg .power-rune-man {
   grid-area: man;
-  background-image: url("./img/man.png");
-  background-size: cover;
 }
 .rqg .power-rune-man-value {
   grid-area: manvalue;
-  color: darkblue;
+  color: var(--main-text-color);
 }
 .rqg .power-rune-beast {
   grid-area: beast;
-  background-image: url("./img/beast.png");
-  background-size: cover;
 }
 .rqg .power-rune-beast-value {
   grid-area: beastvalue;
-  color: darkblue;
+  color: var(--main-text-color);
 }
 .rqg .power-rune-fertility {
   grid-area: fertility;
-  background-image: url("./img/fertility.png");
-  background-size: cover;
 }
 .rqg .power-rune-fertility-value {
   grid-area: fertilityvalue;
-  color: darkblue;
+  color: var(--main-text-color);
 }
 .rqg .power-rune-death {
   grid-area: death;
-  background-image: url("./img/death.png");
-  background-size: cover;
 }
 .rqg .power-rune-death-value {
   grid-area: deathvalue;
-  color: darkblue;
+  color: var(--main-text-color);
 }
 .rqg .power-rune-harmony {
   grid-area: harmony;
-  background-image: url("./img/harmony.png");
-  background-size: cover;
 }
 .rqg .power-rune-harmony-value {
   grid-area: harmonyvalue;
-  color: darkblue;
+  color: var(--main-text-color);
 }
 .rqg .power-rune-disorder {
   grid-area: disorder;
-  background-image: url("./img/disorder.png");
-  background-size: cover;
 }
 .rqg .power-rune-disorder-value {
   grid-area: disordervalue;
-  color: darkblue;
+  color: var(--main-text-color);
 }
 .rqg .power-rune-truth {
   grid-area: truth;
-  background-image: url("./img/truth.png");
-  background-size: cover;
 }
 .rqg .power-rune-truth-value {
   grid-area: truthvalue;
-  color: darkblue;
+  color: var(--main-text-color);
 }
 .rqg .power-rune-illusion {
   grid-area: illusion;
-  background-image: url("./img/illusion.png");
-  background-size: cover;
 }
 .rqg .power-rune-illusion-value {
   grid-area: illusionvalue;
-  color: darkblue;
+  color: var(--main-text-color);
 }
 .rqg .power-rune-stasis {
   grid-area: stasis;
-  background-image: url("./img/stasis.png");
-  background-size: cover;
 }
 .rqg .power-rune-stasis-value {
   grid-area: stasisvalue;
-  color: darkblue;
+  color: var(--main-text-color);
 }
 .rqg .power-rune-movement {
   grid-area: movement;
-  background-image: url("./img/movement.png");
-  background-size: cover;
 }
 .rqg .power-rune-movement-value {
   grid-area: movementvalue;
-  color: darkblue;
+  color: var(--main-text-color);
 }
 .rqg .tooltip {
   position: relative;

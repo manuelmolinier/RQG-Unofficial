@@ -5,15 +5,12 @@
     {{!-- Attack Type --}}
         <select name="attackname">
             {{#each attacks.melee as |attack id|}}
-            {{log attack}}
             <option value="{{attack._id}}">{{attack.name}}</option>
             {{/each}}
             {{#each attacks.missile as |attack id|}}
-            {{log attack}}
             <option value="{{attack._id}}">{{attack.name}}</option>
             {{/each}}
             {{#each attacks.natural as |attack id|}}
-            {{log attack}}
             <option value="{{attack._id}}">{{attack.name}}</option>
             {{/each}}            
         </select>

@@ -58,3 +58,12 @@ RQG.specialtype = {
     "C":"RQG.Crush",
     "I":"RQG.Impale"
 }
+RQG.characteristics = {
+    "STR":"RQG.Strength",
+    "CON":"RQG.Constitution",
+    "SIZ":"RQG.Size",
+    "INT":"RQG.Intelligence",
+    "POW":"RQG.Power",
+    "DEX":"RQG.Dexterity",
+    "CHA":"RQG.Charisma"
+}

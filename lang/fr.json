@@ -55,7 +55,7 @@
     "RQG.Modifier": "Modificateur",
     "RQG.Value": "Valeur",
     "RQG.CategoryModifier":"Modificateur de catégorie",    
-    "RQG.Roll": "Jet de dé",
+    "RQG.Roll": "Jet",
     "RQG.Passions": "Passions",
     "RQG.HitLocations": "Localisations",
     "RQG.MeleeAttacks": "Attaque de melee",
@@ -206,7 +206,7 @@
     "RQG.Rank": "Rang",
     "RQG.Subcult": "Sous-culte",
     "RQG.Runepoints": "Points de Rune",
-    "RQG.DB": "Bonus dégats",
+    "RQG.DB": "B.Dég",
     "RQG.SIZSR": "RA TAI",
     "RQG.DEXSR": "RA DEX",
     "RQG.WDS": "Bl."

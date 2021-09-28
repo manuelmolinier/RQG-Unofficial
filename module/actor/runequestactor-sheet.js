@@ -32,7 +32,7 @@ export class RunequestActorSheet extends ActorSheet {
     // the context variable to see the structure, but some key properties for
     // sheets are the actor object, the data object, whether or not it's
     // editable, the items array, and the effects array.
-    console.log("getData() starting");
+    //("getData() starting");
     const context = super.getData();
 
     // Use a safe clone of the actor data for further operations.
@@ -69,7 +69,7 @@ export class RunequestActorSheet extends ActorSheet {
   /** @override */
   /**
   getData(options) {
-    console.log("getData(options) started");
+    //("getData(options) started");
     const data = super.getData(options);
     const actorData = data.data;
     data.dtypes = ["String", "Number", "Boolean"];
@@ -156,7 +156,7 @@ export class RunequestActorSheet extends ActorSheet {
     let totalwounds = 0;
     // Iterate through items, allocating to containers
     // let totalWeight = 0;
-    console.log(actorData);
+    //(actorData);
     for (let i of sheetData.items) {
       let item = i.data;
       i.img = i.img || DEFAULT_TOKEN;
@@ -245,8 +245,8 @@ export class RunequestActorSheet extends ActorSheet {
     actorData.data.defense = defense;
     actorData.data.mpstorage = mpstorage;
     actorData.data.data.attributes.hitpoints.value = actorData.data.data.attributes.hitpoints.max - totalwounds;
-    console.log("ActorSheet - Prepare Items");
-    console.log(actorData);
+    //("ActorSheet - Prepare Items");
+    //(actorData);
   }
 
   /* -------------------------------------------- */
@@ -339,12 +339,12 @@ export class RunequestActorSheet extends ActorSheet {
       if(event.button == 0) {}
       else {return;}      
       const row= event.target.parentElement.parentElement;
-      console.log(row);
+      //(row);
       let passionname = row.dataset["passionname"];
       const passionid = row.dataset["itemId"];
-      console.log("passionname:"+passionname+" - passionid:"+passionid);
+      //("passionname:"+passionname+" - passionid:"+passionid);
       const passion = this.actor.getOwnedItem(passionid);
-      console.log(passion);
+      //(passion);
       let dialogOptions = {
         title: "Passion Roll",
         template : "/systems/runequest/templates/chat/skill-dialog.html",
@@ -388,16 +388,16 @@ export class RunequestActorSheet extends ActorSheet {
     html.find('.passion-roll').mousedown(event => this._onPassionRoll(event));
     // Roll for Rune Spells
     html.find('.runespell-roll').mousedown(event => {
-      console.log("casting a runespell");
-      console.log(event);
-      console.log(event.button);
+      //("casting a runespell");
+      //(event);
+      //(event.button);
       event.preventDefault();
       const data = this.getData();
       if(event.button == 0) {}
       else {return;}
       const row= event.target.parentElement.parentElement;
       const runename = row.dataset["rune"];
-      console.log(runename);
+      //(runename);
       const spellname = row.dataset["spellname"]+" ("+runename+")";
       const rune = this._findrune(data,runename);
       const target = rune.value;
@@ -407,7 +407,7 @@ export class RunequestActorSheet extends ActorSheet {
     html.find('.elementalrunes-roll').mousedown(event => {
       event.preventDefault();
       const data = this.getData().data;
-      console.log(data);
+      //(data);
       if(event.button == 0) {}
       else {return;}
       const runerow= event.target.parentElement.parentElement;
@@ -649,9 +649,9 @@ export class RunequestActorSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   async _onLockToggle(event) {
-    console.log('onLockToggle');
+    //('onLockToggle');
     this.actor.toggleActorFlag ('locked');
-    console.log(this.actor);
+    //(this.actor);
   }
   /**
    * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
@@ -689,12 +689,20 @@ export class RunequestActorSheet extends ActorSheet {
   _onAttackRoll(event) {
     event.preventDefault();
     const data = this.getData();
-    console.log("starting _onAttackRoll");
-    console.log(data.data);
+    let targetdefense = 0;
+    //("starting _onAttackRoll");
+    //(data.data);
     if(event.button == 0) {}
     else {return;}
     const attackrow = event.target.parentElement.parentElement;
     const attackid = attackrow.dataset["itemId"];
+    console.log(game.user.targets);
+    if(game.user.targets.size > 0) {
+      let targets=Array.from(game.user.targets);
+      console.log(targets[0].actor);
+      targetdefense = targets[0].actor.data.data.defense[0]?targets[0].actor.data.data.defense[0]:null;
+      console.log(targetdefense);
+    }
     if(!attackid) {
       let dialogOptions = {
         title: "Attack Roll",
@@ -704,7 +712,8 @@ export class RunequestActorSheet extends ActorSheet {
 
         data : {
           "attacks": data.data.attacks,
-          "data": data.data
+          "data": data.data,
+          "targetdefense": targetdefense
         },
         callback : (html) => {
           // When dialog confirmed, fill testData dialog information
@@ -713,8 +722,8 @@ export class RunequestActorSheet extends ActorSheet {
           let testmodifier =   Number(html.find('[name="testmodifier"]').val());
           let attack = this.actor.getOwnedItem(attackid);
           let testData = {"testmodifier":testmodifier};
-          console.log("_onAttackRoll-attack");
-          console.log(attack);
+          //("_onAttackRoll-attack");
+          //(attack);
           attack.roll(testData);
           //this.genericAttackRoll(attack);
         }
@@ -739,9 +748,9 @@ export class RunequestActorSheet extends ActorSheet {
     }
     else {
       let attack = this.actor.getOwnedItem(attackid);
-      console.log("_onAttackRoll-attack");
-      console.log(attack);
-      attack.roll();      
+      //("_onAttackRoll-attack");
+      //(attack);
+      attack.roll({"targetdefense": targetdefense});      
     }      
   }
   _onCharacteristicRoll(event) {
@@ -843,12 +852,12 @@ export class RunequestActorSheet extends ActorSheet {
   _onSkillRoll(event) {
     event.preventDefault();
     const data = this.getData();
-    console.log(event);
+    //(event);
     if(event.button == 0) {
       if(event.ctrlKey == true){
         const skillid = event.currentTarget.dataset.itemid;
         let skill = this.actor.getOwnedItem(skillid);
-        console.log(skill)
+        //(skill)
         skill.gainroll();
         return;
       }
@@ -868,19 +877,19 @@ export class RunequestActorSheet extends ActorSheet {
     //const catrow = event.target.parentElement.parentElement.parentElement;
     const skillid = event.currentTarget.dataset.itemid;
     let skill = this.actor.getOwnedItem(skillid);
-    console.log("_onSkillRoll");
-    console.log(skill);
+    //("_onSkillRoll");
+    //(skill);
     skill.roll();       
   }
   _onPassionRoll(event) {
     event.preventDefault();
     const data = this.getData();
-    console.log(event);
+    //(event);
     if(event.button == 0) {
       if(event.ctrlKey == true){
         const passionid = event.currentTarget.dataset.itemId;
         let passion = this.actor.getOwnedItem(passionid);
-        console.log(passion)
+        //(passion)
         passion.gainroll();
         return;
       }
@@ -898,8 +907,8 @@ export class RunequestActorSheet extends ActorSheet {
     //const catrow = event.target.parentElement.parentElement.parentElement;
     const passionid = event.currentTarget.dataset.itemId;
     let passion = this.actor.getOwnedItem(passionid);
-    console.log("_onPassionRoll");
-    console.log(passion);
+    //("_onPassionRoll");
+    //(passion);
     passion.roll();       
   }  
   async basicRoll(charname, target) {
@@ -1102,94 +1111,94 @@ export class RunequestActorSheet extends ActorSheet {
     }
   }  
   async _updateObject(event, formData) {
-    console.log("_updateObjet");
-    console.log(event);
-    console.log(formData);
+    //("_updateObjet");
+    //(event);
+    //(formData);
     const actor = this.getData().actor
     const skills = actor.data.data.skills;
     const hitLocations = actor.data.data.hitlocations;
     if (event.target) {
-      console.log(event.currentTarget.classList);
+      //(event.currentTarget.classList);
       if( event.currentTarget.classList){
-        console.log(event.currentTarget.classList);
+        //(event.currentTarget.classList);
         if(event.currentTarget.classList.contains('hitloc-wounds')){
-          console.log(event.currentTarget.closest('.item').dataset);
+          //(event.currentTarget.closest('.item').dataset);
 					let hl = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemid);
-          console.log(hl);
+          //(hl);
           
           if(hl){
             const value = event.currentTarget.value? parseInt(event.currentTarget.value) : null;
-            console.log("value:"+value);
-            console.log("name:"+event.currentTarget.name);
+            //("value:"+value);
+            //("name:"+event.currentTarget.name);
             if( !event.currentTarget.value) {
               await hl.update( {[event.currentTarget.name]: null});
             }
             else if( !isNaN(value)) {
                await hl.update( {[event.currentTarget.name]: value});           
 						}
-            console.log(hl);
+            //(hl);
           }        
         }
         if(event.currentTarget.classList.contains('mpstorage-current')) {
-          console.log(event.currentTarget.closest('.item').dataset);
+          //(event.currentTarget.closest('.item').dataset);
 					let mpstorage = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemId);
-          console.log(mpstorage);
+          //(mpstorage);
           if(mpstorage){
             const value = event.currentTarget.value? parseInt(event.currentTarget.value) : null;
-            console.log("value:"+value);
-            console.log("name:"+event.currentTarget.name);
+            //("value:"+value);
+            //("name:"+event.currentTarget.name);
             if( !event.currentTarget.value) {
               await mpstorage.update( {[event.currentTarget.name]: null});
             }
             else if( !isNaN(value)) {
                await mpstorage.update( {[event.currentTarget.name]: value});           
 						}
-            console.log(mpstorage);
+            //(mpstorage);
           }
         }
         if(event.currentTarget.classList.contains('mpstorage-equiped')) {
-          console.log(event.currentTarget.closest('.item').dataset);
+          //(event.currentTarget.closest('.item').dataset);
 					let mpstorage = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemId);
-          console.log(mpstorage);
-          console.log(event.currentTarget.value);
+          //(mpstorage);
+          //(event.currentTarget.value);
           if(mpstorage){
             const value = event.currentTarget.checked? true : false;
-            console.log("value:"+value);
-            console.log("name:"+event.currentTarget.name);
+            //("value:"+value);
+            //("name:"+event.currentTarget.name);
             await mpstorage.update( {[event.currentTarget.name]: value});           
-            console.log(mpstorage);
+            //(mpstorage);
           }
         }
         if(event.currentTarget.classList.contains('skill-experience')) {
-          console.log(event.currentTarget.closest('.item').dataset);
+          //(event.currentTarget.closest('.item').dataset);
 					let skill = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemId);
-          console.log(skill);
-          console.log(event.currentTarget.value);
+          //(skill);
+          //(event.currentTarget.value);
           if(skill){
             const value = event.currentTarget.checked? true : false;
-            console.log("value:"+value);
-            console.log("name:"+event.currentTarget.name);
+            //("value:"+value);
+            //("name:"+event.currentTarget.name);
             await skill.update( {[event.currentTarget.name]: value});           
-            console.log(skill);
+            //(skill);
           }
         }
         if(event.currentTarget.classList.contains('passion-experience')) {
-          console.log(event.currentTarget.closest('.item').dataset);
+          //(event.currentTarget.closest('.item').dataset);
 					let passion = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemId);
-          console.log(passion);
-          console.log(event.currentTarget.value);
+          //(passion);
+          //(event.currentTarget.value);
           if(passion){
             const value = event.currentTarget.checked? true : false;
-            console.log("value:"+value);
-            console.log("name:"+event.currentTarget.name);
+            //("value:"+value);
+            //("name:"+event.currentTarget.name);
             await passion.update( {[event.currentTarget.name]: value});           
-            console.log(passion);
+            //(passion);
           }
         }
         if(event.currentTarget.classList.contains('attacks')){
-          console.log(event.currentTarget.closest('.item').dataset);
+          //(event.currentTarget.closest('.item').dataset);
 					let attack = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemId);
-          console.log(attack);        
+          //(attack);        
           if(attack){
             let value = null;
             if(event.currentTarget.dataset.dtype === "Number"){
@@ -1198,8 +1207,8 @@ export class RunequestActorSheet extends ActorSheet {
             else {
               value = event.currentTarget.value;
             }
-            console.log("value:"+value);
-            console.log("name:"+event.currentTarget.name);
+            //("value:"+value);
+            //("name:"+event.currentTarget.name);
             if(event.currentTarget.name !== "data.name" ) {
               if( !event.currentTarget.value) {
                 await attack.update( {[event.currentTarget.name]: null});
@@ -1216,20 +1225,20 @@ export class RunequestActorSheet extends ActorSheet {
                 await attack.update( {['name']: value});           
               }
             }
-            console.log(attack);
+            //(attack);
           }        
         }
         if(event.currentTarget.classList.contains('attacks-db')) {
-          console.log(event.currentTarget.closest('.item').dataset);
+          //(event.currentTarget.closest('.item').dataset);
 					let attack = this.actor.items.get( event.currentTarget.closest('.item').dataset.itemId);
-          console.log(attack);
-          console.log(event.currentTarget.value);
+          //(attack);
+          //(event.currentTarget.value);
           if(attack){
             const value = event.currentTarget.checked? true : false;
-            console.log("value:"+value);
-            console.log("name:"+event.currentTarget.name);
+            //("value:"+value);
+            //("name:"+event.currentTarget.name);
             await attack.update( {[event.currentTarget.name]: value});           
-            console.log(attack);
+            //(attack);
           }
         }
       }
@@ -1244,7 +1253,7 @@ export class RunequestActorSheet extends ActorSheet {
   }
   _preparehitlocation(hitlocation, actorData) {
     // Prepare the HitLocations by calculating the Max HP of the location and the remaining HP based on wounds
-    console.log(hitlocation);
+    //(hitlocation);
     hitlocation.data.data.maxhp = hitlocation.data.data.basehp + actorData.data.attributes.hpmodifier;
     hitlocation.data.data.currenthp = hitlocation.data.data.maxhp - hitlocation.data.data.wounds;
   }

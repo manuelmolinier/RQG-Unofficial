@@ -15,8 +15,8 @@ export class RunequestItem extends Item {
     const itemData = this.data;
     const actorData = this.actor ? this.actor.data : {};
     const data = itemData.data;
-    console.log("In Item prepareData for: "+itemData.name+" and type: "+itemData.type);
-    console.log(actorData);
+    //("In Item prepareData for: "+itemData.name+" and type: "+itemData.type);
+    //(actorData);
     if(itemData.type !== "attack") {
       data.total=data.base+data.increase+data.modifier;
     }
@@ -37,7 +37,7 @@ export class RunequestItem extends Item {
       }
 
       //Setup the values for the attack.
-      console.log(data.skillvalue+"+"+data.modifier);
+      //(data.skillvalue+"+"+data.modifier);
       data.attacktotal=data.skillvalue+data.modifier;
     }
   }
@@ -45,16 +45,18 @@ export class RunequestItem extends Item {
   async roll({configureDialog=true, rollMode, createMessage=true, testmodifier=0}={}) {
     let item = this;
     const actor = this.actor;
-
+    console.log(arguments);
     // Reference aspects of the item data necessary for usage
     const id = this.data.data;                // Item data
-    console.log("actor");
-    console.log(actor);
-    console.log("item");
-    console.log(item);
+    //("actor");
+    //(actor);
+    //("item");
+    //(item);
     switch(item.type) {
       case "attack":
-        this._attackroll(item,actor,testmodifier);
+        let targetdefense = arguments[0].targetdefense?arguments[0].targetdefense:null;
+        console.log(targetdefense);
+        this._attackroll(item,actor,testmodifier,targetdefense);
         break;
       case "skill":
         this._skillroll(item,actor);
@@ -78,67 +80,59 @@ export class RunequestItem extends Item {
 
     // Reference aspects of the item data necessary for usage
     const id = this.data.data;                // Item data
-    console.log("actor");
-    console.log(actor);
-    console.log("item");
-    console.log(item);
+    //("actor");
+    //(actor);
+    //("item");
+    //(item);
     this._skillgainroll(item,actor);
   }
 
-  _attackroll(attack,actor,testmodifier) {
+  _attackroll(attack,actor,testmodifier,targetdefense) {
     const data = actor.data;
     let categoryid = attack.data.data.attacktype+"weapons";
-    console.log(actor);
-    console.log(attack);
     const damagebonus = data.data.attributes.damagebonus;
-    //console.log("skillname:"+skillname);
-    //let skills= actor.itemTypes["skill"];
-
     const skillused = actor.getEmbeddedDocument("Item",attack.data.data.skillused);
     const skillname = skillused.name;
-    console.log(skillused);
-    const categorymod = (categoryid == "spiritweapons")?data.data.skillcategory["magic"].modifier:data.data.skillcategory[categoryid].modifier;
-    console.log("categoryid:"+categoryid+" / "+categorymod);
-    let target= skillused.data.data.total+categorymod+attack.data.data.modifier+testmodifier;
-    const critical = Math.max(Math.round(target/20),1);
-    const special = Math.round(target/5);
-    const fumblerange= Math.round((100-target)/20);
-    const fumble = 100-Math.max(fumblerange,0);
-    let roll;
-    roll = new Roll("1d100").roll();
     let result;
-    console.log(attack);
-
-    if((roll.total < 96 && roll.total <= target) || roll.total <= 5) { //This is a success we check type of success
-      if(roll.total <= critical) {
-        result = "critical";
-      }
-      else {
-        if(roll.total <= special) {
-          result= "special";
+    const categorymod = (categoryid == "spiritweapons")?data.data.skillcategory["magic"].modifier:data.data.skillcategory[categoryid].modifier;
+    let attackskill= skillused.data.data.total+categorymod+attack.data.data.modifier+testmodifier;
+    let attackroll;
+    attackroll = new Roll("1d100").roll();
+    let attackresult;
+    let defenseroll = new Roll("1d100").roll();
+    let defenseskill
+    let defenseresult;
+    if(targetdefense) {
+      defenseskill = targetdefense.data.data.total;
+      // Compare the attack and defense value to apply difference if one or both are over 100%
+      if(attackskill > 100 || defenseskill > 100) {
+        if(attackskill > defenseskill) {
+          // Attacker have the advantage and defense will be decreased as much
+          let diff = attackskill - 100;
+          attackskill -= diff;
+          defenseskill -= diff;
         }
         else {
-          result = "success"
+          // Defender have the advantage and attack will be decreased as much
+          let diff = defenseskill - 100;
+          attackskill -= diff;
+          defenseskill -= diff;          
         }
       }
+      defenseresult = this.runequestroll(defenseroll,defenseskill);
+      attackresult = this.runequestroll(attackroll,attackskill);
+      result = this._compareOpposedParryRoll(attackresult,defenseresult);
     }
     else {
-      if(roll.total >= fumble) {
-        result = "fumble"; 
-      }
-      else {
-        result = "failure";
-      }
+      attackresult = this.runequestroll(attackroll,attackskill);
+      result = attackresult;
     }
-    console.log(damagebonus);
-    console.log("Finish attack roll in item")
-    this.htmldamageroll(roll,target,result,attack,damagebonus);
-
+    this.htmldamageroll(attackroll,attackskill,result,attack,damagebonus,attackresult, targetdefense, defenseroll, defenseskill, defenseresult);
   }
   async _skillroll(skill,actor){
-    console.log("skillroll in item");
-    console.log(skill);
-    console.log(actor);
+    //("skillroll in item");
+    //(skill);
+    //(actor);
     let skillname = skill.data.name;
     const categoryid= skill.data.data.skillcategory;
     let catmodifier = actor.data.data.skillcategory[categoryid].modifier;
@@ -161,12 +155,12 @@ export class RunequestItem extends Item {
         // When dialog confirmed, fill testData dialog information
         // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
         skillname =    html.find('[name="skillname"]').val();
-        console.log(skillname);
+        //(skillname);
         let testmodifier =   Number(html.find('[name="testmodifier"]').val());
         catmodifier = Number(html.find('[name="catmodifier"]').val());
         skillvalue =   Number(html.find('[name="skillvalue"]').val());
         let skillid = html.find('[name="skillid"]').val();
-        console.log("In skillroll callback with skill._id = "+skillid);
+        //("In skillroll callback with skill._id = "+skillid);
         const target = (skillvalue+catmodifier+testmodifier);
         let result = this.basicRoll(skillname,target);
         
@@ -192,9 +186,9 @@ export class RunequestItem extends Item {
       });     
   }
   async _passionroll(passion,actor){
-    console.log("passionroll in item");
-    console.log(passion);
-    console.log(actor);
+    //("passionroll in item");
+    //(passion);
+    //(actor);
     let passionname = passion.data.name;
     let passionvalue = passion.data.data.total;
     let result="failure";
@@ -215,11 +209,11 @@ export class RunequestItem extends Item {
         // When dialog confirmed, fill testData dialog information
         // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
         passionname =    html.find('[name="skillname"]').val();
-        console.log(passionname);
+        //(passionname);
         let testmodifier =   Number(html.find('[name="testmodifier"]').val());
         passionvalue =   Number(html.find('[name="skillvalue"]').val());
         let passionid = html.find('[name="skillid"]').val();
-        console.log("In passionroll callback with passion._id = "+passionid);
+        //("In passionroll callback with passion._id = "+passionid);
         const target = (passionvalue+testmodifier);
         let result = this.basicRoll(passionname,target);
         
@@ -265,11 +259,11 @@ export class RunequestItem extends Item {
         // When dialog confirmed, fill testData dialog information
         // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
         runename =    html.find('[name="skillname"]').val();
-        console.log(runename);
+        //(runename);
         let testmodifier =   Number(html.find('[name="testmodifier"]').val());
         runevalue =   Number(html.find('[name="skillvalue"]').val());
         let runeid = html.find('[name="skillid"]').val();
-        console.log("In runeroll callback with rune._id = "+runeid);
+        //("In runeroll callback with rune._id = "+runeid);
         const target = (runevalue+testmodifier);
         let result = this.basicRoll(runename,target);
         
@@ -343,19 +337,13 @@ export class RunequestItem extends Item {
       });     
 
   }        
-  async htmldamageroll(roll,target,result,attack,damagebonus) {
-    //const itemData = this.data.data;
+  async htmldamageroll(attackroll,attackskill,result,attack,damagebonus,attackresult, targetdefense, defenseroll, defenseskill, defenseresult) {
     const actorData = this.actor.data.data;
     const flags = this.actor.data.flags || {};
-    console.log("htmldamageroll- damagebonus"+damagebonus);
-    console.log(attack);
     if(!attack.data.data.db) {
       damagebonus="0";
     }
-    let attackcontent;
-    let damagecontent;
     let damageData = this.getdamagedata(attack,damagebonus);
-
     let rollMode = game.settings.get("core", "rollMode");
     let isCritical = (result=="critical");
     let isSpecial= (result=="special");
@@ -386,11 +374,11 @@ export class RunequestItem extends Item {
     }
 
     let hitlocationtable = RollTables.instance.getName("Hit Location - Humanoid");
-    console.log("Hit Location - Humanoid loading")
-    console.log(hitlocationtable);
+    //("Hit Location - Humanoid loading")
+    //(hitlocationtable);
     let hitlocation = await hitlocationtable.draw({displayChat: false});
-    console.log("Hitlocation drawn:");
-    console.log(hitlocationtable);
+    //("Hitlocation drawn:");
+    //(hitlocationtable);
 
 
     const templateData = {
@@ -402,9 +390,14 @@ export class RunequestItem extends Item {
       actor: this.actor,
       item: this,
       attack: attack,
-      target: target,
-      roll: roll,
       result: result,
+      attackskill: attackskill,
+      attackroll: attackroll,
+      attackresult: attackresult,
+      defenseresult: defenseresult,
+      defenseroll: defenseroll,
+      targetdefense: targetdefense,
+      defenseskill: defenseskill,
       damageData: damageData,
       hitlocation: hitlocation.results[0].data.text
     };
@@ -435,9 +428,9 @@ export class RunequestItem extends Item {
     ChatMessage.create(chatData);
   }  
   getdamagedata(attack,damagebonus) {
-    console.log("getdamagedata starting with:");
-    console.log(attack);
-    console.log(damagebonus);
+    //("getdamagedata starting with:");
+    //(attack);
+    //(damagebonus);
     let specialdamage;
     let critdamage;
     let maxeddamagebonus = new Roll();
@@ -446,15 +439,15 @@ export class RunequestItem extends Item {
       damagebonus: new Roll(damagebonus),
       damage: new Roll(attack.data.data.damage)
     }
-    console.log(damageData);
+    //(damageData);
     switch (attack.data.data.specialtype) {
       case "C":
         specialdamage = damageData.damage.formula+"+"+damageData.damagebonus.clone().evaluate({maximize: true}).total;
-        console.log(specialdamage);
+        //(specialdamage);
         damageData.specialdamage= new Roll(specialdamage);
-        console.log(damageData.specialdamage);
+        //(damageData.specialdamage);
         critdamage = damageData.specialdamage.clone().evaluate({maximize: true}).total+"+"+damageData.damagebonus.clone().evaluate({maximize: true}).total;
-        console.log(critdamage);
+        //(critdamage);
         damageData.criticaldamage = new Roll(""+critdamage);
         break;
       case "I":
@@ -482,7 +475,7 @@ export class RunequestItem extends Item {
     const fumble = 100-Math.max(fumblerange,0);
     let roll;
     roll = new Roll("1d100+@catmodifier",{catmodifier: catmodifier}).roll();
-    console.log(roll);
+    //(roll);
 
     let result;
 
@@ -557,7 +550,7 @@ export class RunequestItem extends Item {
     let roll;
     roll = new Roll("1d100").roll();
     let result;
-    console.log(this);
+    //(this);
     if((roll.total < 96 && roll.total <= target) || roll.total <= 5) { //This is a success we check type of success
       if(roll.total <= critical) {
         result = "critical";
@@ -570,9 +563,9 @@ export class RunequestItem extends Item {
           result = "success"
         }
       }
-      console.log("experience:"+this.data.data.experience);
+      //("experience:"+this.data.data.experience);
       await this.update({["data.experience"]:true});
-      console.log("updated experience"+this.data.data.experience);
+      //("updated experience"+this.data.data.experience);
       //this.update(this.data);
     }
     else {
@@ -621,11 +614,11 @@ export class RunequestItem extends Item {
     return result;
   }
   async _gethitlocations(hitlocationtype) {
-    console.log("hitlocations was empty so we load them");
+    //("hitlocations was empty so we load them");
     const compendiumname = "runequest."+hitlocationtype+"locations";
     const hitlocationslist = await RunequestActor.loadCompendium(compendiumname);
     const hitlocations = hitlocationslist.map(i => i.toObject());
-    console.log(hitlocations);
+    //(hitlocations);
     return hitlocations;
   } 
   /* -------------------------------------------- */
@@ -636,9 +629,77 @@ export class RunequestItem extends Item {
 
   /* -------------------------------------------- */
   static async loadCompendium(compendium, filter = item => true) {
-    console.log("Loading compendium:"+compendium);
+    //("Loading compendium:"+compendium);
     let compendiumData = await RunequestActor.loadCompendiumData(compendium);
     return compendiumData.filter(filter);
+  }
+  runequestroll(roll,target) {
+    const critical = Math.max(Math.round(target/20),1);
+    const special = Math.round(target/5);
+    const fumblerange= Math.round((100-target)/20);
+    const fumble = 100-Math.max(fumblerange,0);
+    let result;
+    if((roll.total < 96 && roll.total <= target) || roll.total <= 5) { //This is a success we check type of success
+      if(roll.total <= critical) {
+        result = "critical";
+      }
+      else {
+        if(roll.total <= special) {
+          result= "special";
+        }
+        else {
+          result = "success"
+        }
+      }
+    }
+    else {
+      if(roll.total >= fumble) {
+        result = "fumble"; 
+      }
+      else {
+        result = "failure";
+      }
+    }
+    return result;
+  }
+  _compareOpposedParryRoll(attackresult,defenseresult) {
+    if(attackresult == "critical") {
+      switch (defenseresult) {
+        case "critical":
+          return "special";
+        default:
+          return "critical";
+      }
+    }
+    if(attackresult == "special") {
+      switch (defenseresult) {
+        case "critical":
+          return "failure";
+        case "special":
+          return "success";
+        default:
+          return "special";          
+      }
+    }
+    if(attackresult == "success") {
+      switch (defenseresult) {
+        case "critical":
+        case "special":
+        case "success":
+          return "failure";
+        default:
+          return "success";          
+      }
+    }
+    if(attackresult == "failure") {
+      switch (defenseresult) {
+        case "fumble":
+          return "success";
+        default:
+          return "failure";          
+      }
+    }
+    return "fumble";
   }    
 }
   

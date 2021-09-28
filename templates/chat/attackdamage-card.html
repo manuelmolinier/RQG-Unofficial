@@ -15,12 +15,29 @@
             <tbody>
                 <tr>
                     <td>{{item.name}}</td>
-                    <td>[[{{roll.total}}]]</td>
-                    <td>[[{{target}}]]</td>
-                    <td>{{result}}</td>
+                    <td>[[{{attackroll.total}}]]</td>
+                    <td>[[{{attackskill}}]]</td>
+                    <td>{{attackresult}}</td>
                 </tr>
             </tbody>
         </table>
+        <table>
+            <thead>
+                <th>{{localize "RQG.Defense"}}</th>
+                <th>{{localize "RQG.Roll"}}</th>
+                <th>{{localize "RQG.Target"}}</th>
+                <th>{{localize "RQG.Result"}}</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{targetdefense.data.name}}</td>
+                    <td>[[{{defenseroll.total}}]]</td>
+                    <td>[[{{defenseskill}}]]</td>
+                    <td>{{defenseresult}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <span>Result: {{result}}</span>        
         {{log damageData}}
         {{#if isFumble}}
             <h3>Make a roll on the Fumble list</h3>
