@@ -253,6 +253,17 @@ export class RunequestActor extends Actor {
       // a must be equal to b
       return 0;
     });
+    defense.sort(function(a, b) {
+      if (a.data.data.total < b.data.data.total) {
+          return -1;
+      }
+      if (a.data.data.total > b.data.data.total) {
+        return 1;
+      }
+      // a must be equal to b
+      return 0;
+    });
+    defense.reverse();    
     context.data.gear = gear;
     context.data.features = features;
     context.data.spells = spells;
@@ -319,6 +330,12 @@ export class RunequestActor extends Actor {
       else if (i.type === 'skill') {
         this.prepareSkill(i); // To be removed once fix is found
         skills.push(i);
+        if(i.data.data.skillcategory == "shields"){
+          defense.push(i);
+        }
+        if(i.data.name == "Dodge") {
+          defense.push(i);
+        }
       }
       else if (i.type === 'rune') {
         console.log("handling a rune in Actor with:"+i.name);
@@ -387,6 +404,17 @@ export class RunequestActor extends Actor {
       // a must be equal to b
       return 0;
     });
+    defense.sort(function(a, b) {
+      if (a.data.data.total < b.data.data.total) {
+          return -1;
+      }
+      if (a.data.data.total > b.data.data.total) {
+        return 1;
+      }
+      // a must be equal to b
+      return 0;
+    });
+    defense.reverse();      
     context.data.gear = gear;
     context.data.features = features;
     context.data.spells = spells;
@@ -673,5 +701,95 @@ export class RunequestActor extends Actor {
     console.log("Loading compendium:"+compendium);
     let compendiumData = await RunequestActor.loadCompendiumData(compendium);
     return compendiumData.filter(filter);
-  }    
+  }
+  rollAbility(ability) {
+    let charac = this.data.data.characteristics[ability];
+    let charname = game.i18n.localize(charac.label);
+    let charvalue= charac.value;
+    let difficultymultiplier = 5;
+    let dialogOptions = {
+      title: "Characteristic Roll",
+      template : "/systems/runequest/templates/chat/char-dialog.html",
+      'z-index': 100,
+      // Prefilled dialog data
+
+      data : {
+        "charname": charname,
+        "charvalue": charvalue,
+        "difficultymultiplier": difficultymultiplier
+      },
+      callback : (html) => {
+        // When dialog confirmed, fill testData dialog information
+        // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
+        charname =    html.find('[name="charname"]').val();
+        let testmodifier =   Number(html.find('[name="testmodifier"]').val());
+        difficultymultiplier = Number(html.find('[name="difficultymultiplier"]').val());
+        charvalue =   Number(html.find('[name="charvalue"]').val());
+        const target = (charvalue*difficultymultiplier+testmodifier);
+        this.basicRoll(charname,target);              
+      }
+    };
+    renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
+      {
+        new Dialog(
+        {
+          title: dialogOptions.title,
+          content: dlg,
+          buttons:
+          {
+            rollButton:
+            {
+              label: game.i18n.localize("Roll"),
+              callback: html => dialogOptions.callback(html)
+            }
+          },
+          default: "rollButton"
+        }).render(true);
+      });    
+  }
+  async rolldefense() {
+    let dialogOptions = {
+      title: "Defense Roll",
+      template : "/systems/runequest/templates/chat/defense-dialog.html",
+      'z-index': 100,
+      // Prefilled dialog data
+
+      data : {
+        "defenses": data.data.defense,
+        "data": data.data,
+      },
+      callback : (html) => {
+        // When dialog confirmed, fill testData dialog information
+        // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
+        let defenseid = html.find('[name="defensename"]').val();
+        let testmodifier =   Number(html.find('[name="testmodifier"]').val());
+        let defense = this.actor.getOwnedItem(defenseid);
+        let testData = {"testmodifier":testmodifier};
+        //("_onAttackRoll-attack");
+        //(attack);
+        //attack.roll(testData);
+        //this.genericAttackRoll(attack);
+        let testData = {"testmodifier":testmodifier};
+        result = defense.basicRoll(defense.data.name, defense.data.data.total+testmodifier);
+        return {defense: defense, result: result};
+      }
+    };
+    return await renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
+      {
+        new Dialog(
+        {
+          title: dialogOptions.title,
+          content: dlg,
+          buttons:
+          {
+            rollButton:
+            {
+              label: game.i18n.localize("RQG.Roll"),
+              callback: html => dialogOptions.callback(html)
+            }
+          },
+          default: "rollButton"
+        }).render(true);
+      });    
+  }      
 }
