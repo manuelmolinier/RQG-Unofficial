@@ -29,7 +29,9 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/runequest/templates/actor/parts/npc/npc-partial-skilltable.html",
     "systems/runequest/templates/actor/parts/npc/npc-partial-hitlocations.html",
     "systems/runequest/templates/actor/parts/npc/npc-partial-attacks.html",
-    "systems/runequest/templates/actor/parts/npc/npc-magic.html"
+    "systems/runequest/templates/actor/parts/npc/npc-magic.html",
     // Item Sheet Partials
+    "systems/runequest/templates/item/parts/origin-skills.html",
+    "systems/runequest/templates/item/parts/origin-skilltable.html"
   ]);
 };

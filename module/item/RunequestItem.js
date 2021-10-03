@@ -700,6 +700,6 @@ export class RunequestItem extends Item {
       }
     }
     return "fumble";
-  }    
+  }
 }
   

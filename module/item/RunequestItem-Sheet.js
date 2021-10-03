@@ -67,6 +67,8 @@ export class RunequestItemSheet extends ItemSheet {
   
       // Add or Remove Attribute
       html.find(".attributes").on("click", ".attribute-control", this._onClickAttributeControl.bind(this));
+      html.find('.dropable').on('drop', event => this._onDrop(event));    
+      html.find('.dropable').on('dragend', event => this._onDrop(event));         
     }
   
     /* -------------------------------------------- */
@@ -130,6 +132,26 @@ export class RunequestItemSheet extends ItemSheet {
       return this.object.update(formData);
     }
 
-    // Item Roll function to move it from Actor.
-  }
+    _onItemCreate(event) {
+      event.preventDefault();
+      const header = event.currentTarget;
+      // Get the type of item to create.
+      const type = header.dataset.type;
+      // Grab any data associated with this control.
+      const data = duplicate(header.dataset);
+      // Initialize a default name.
+      const name = `New ${type.capitalize()}`;
+      // Prepare the item object.
+      const itemData = {
+        name: name,
+        type: type,
+        data: data
+      };
+      // Remove the type from the dataset since it's in the itemData.type prop.
+      delete itemData.data["type"];
+  
+      // Finally, create the item!
+      return this.actor.createOwnedItem(itemData);
+    }
+}
   

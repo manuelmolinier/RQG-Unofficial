@@ -1,0 +1,53 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+        </div>
+    </header>
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="details">Details</a>
+        <a class="item" data-tab="description">Description</a>     
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        {{!-- Attributes Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.STR"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.characteristics.strength.score"  value="{{data.characteristics.strength.score}}"  data-dtype="String"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.CON"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.characteristics.constitution.score"  value="{{data.characteristics.constitution.score}}"  data-dtype="String"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.SIZ"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.characteristics.size.score"  value="{{data.characteristics.size.score}}"  data-dtype="String"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.INT"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.characteristics.intelligence.score"  value="{{data.characteristics.intelligence.score}}"  data-dtype="String"  />
+            </div> 
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.POW"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.characteristics.power.score"  value="{{data.characteristics.power.score}}"  data-dtype="String"  />
+            </div>                                  
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.DEX"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.characteristics.dexterity.score"  value="{{data.characteristics.dexterity.score}}"  data-dtype="String"  />
+            </div>
+            <div class="form-group">
+                <label class="label-text">{{localize "RQG.CHA"}}</label>
+                <input  class="attribute-value"  type="text"  name="data.characteristics.charisma.score"  value="{{data.characteristics.charisma.score}}"  data-dtype="String"  />
+            </div>        
+        </div>
+
+        {{!-- Description Tab --}}
+        <div class="tab" data-group="primary" data-tab="description">
+            {{editor content=data.description.description.value target="data.description.description.value" button=true owner=owner editable=editable}}
+        </div>
+    </section>
+</form>

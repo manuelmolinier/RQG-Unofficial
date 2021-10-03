@@ -26,10 +26,8 @@
     </div>
     -->
     <div class="elemental-rune-grid-container">
-        {{log "Runes and Passions with Path:"}}
-        {{log path}}
         {{#each data.elementalrunes as |elementalrune id|}}
-        <img class="elemental-rune-{{id}} elemental-rune" data-rune="{{id}}" src="/systems/runequest/styles/img/{{id}}.png">
+        <img class="elemental-rune-{{id}} elemental-rune" data-rune="{{id}}" src="/systems/runequest/styles/img/{{id}}.png" alt="{{localize elementalrune.label}}"/>       
         <div class="elemental-rune elemental-rune-{{id}}-value" data-rune="{{id}}">
             <span><a class="elementalrunes-roll rollable" data-rune="{{id}}">{{elementalrune.value}}</a></span>         
         </div>
@@ -38,7 +36,7 @@
     <div class="power-rune-grid-container">
         {{#each data.powerrunes as |powerrunepair pairid|}}
             {{#each powerrunepair as |powerrune runeid|}}
-                <img class="elemental-rune power-rune-{{runeid}}" src="systems/runequest/styles/img/{{runeid}}.png"/> 
+                <img class="elemental-rune power-rune-{{runeid}}" src="systems/runequest/styles/img/{{runeid}}.png" alt="{{localize powerrune.label}}"/> 
                 <div class="elemental-rune power-rune-{{runeid}}-value" data-runepair="{{pairid}}">
                     <a class="powerrunes-roll" data-rune="{{runeid}}">{{powerrune.value}}</a>
                 </div>            

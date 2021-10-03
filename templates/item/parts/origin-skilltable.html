@@ -1,0 +1,16 @@
+<table class="skill-category-table skillcategory dropable" data-skillcategory="{{skillcat}}" ondragover="return false">
+    <thead class="skill-table-thead">
+        <tr class="skill-list-header" ondragover="return false">
+            <th class="item-name skill-table-header dropable" ondragover="return false">Skills</th>
+            <th class="item-name skill-table-header dropable" ondragover="return false">Base</th>
+            <th class="item-name skill-table-header dropable" ondragover="return false">Bonus</th>
+        </tr>
+    </thead>
+    {{#each skillList as |item id|}}
+        <tr class="skill" data-item-id="{{item._id}}" data-itemid="{{item._id}}">
+            <td class="item skill-table-name dropable" data-item-id="{{item._id}}" ondragover="return false">{{item.name}}</td>
+            <td class="item skill-table-value dropable" data-item-id="{{item._id}}" ondragover="return false">{{item.data.data.base}}</td>
+            <td class="item skill-table-value dropable" data-item-id="{{item._id}}" ondragover="return false">{{item.data.data.increase}}</td>            
+        </tr>
+    {{/each}}
+</table>

@@ -335,7 +335,7 @@
   }
 },
 "Item": {
-  "types": ["item","skill","passion","attack","spiritspell","runespell","sorceryspell","hitlocation","cult","armor","mpstorage","ally","event","rune","parentage","familyhistory"],
+  "types": ["item","skill","passion","attack","spiritspell","runespell","sorceryspell","hitlocation","cult","armor","mpstorage","ally","event","rune","parentage","familyhistory","origin"],
   "templates": {
     "quantity": {
       "quantity": {
@@ -642,6 +642,48 @@
     "herohistory":[],
     "treasuresandboons": "",
     "famousancestors": ""
+  },
+  "origin": {
+    "templates": ["description"],
+    "name": "",
+    "characteristics":{
+      "strength": {
+        "score": "3D6"
+      },
+      "constitution": {
+        "score": "3D6"
+      },
+      "size": {
+        "score": "2D6+6"
+      },
+      "intelligence": {
+        "score": "2D6+6"
+      },
+      "power": {
+        "score": "3D6"
+      },
+      "dexterity": {
+        "score": "3D6"
+      },
+      "charisma": {
+        "score": "3D6"
+      }
+    },
+    "skills": [],
+    "runes": [],
+    "passions": [],
+    "hitlocationstype": "Humanoids"  
+  },
+  "occupation": {
+    "templates": ["description"],
+    "name": "",
+    "occupationalskills": [],
+    "standardofliving": "",
+    "baseincome": 0,
+    "cults": [],
+    "favoredpassions": [],
+    "ransom": "250L",
+    "equipment": []
   }
 }
 
