@@ -10,6 +10,7 @@
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="item" data-tab="details">Details</a>
         <a class="item" data-tab="description">Description</a>
+        <a class="item actor-item" data-tab="activeeffects">Effects</a>        
     </nav>
 
     {{!-- Sheet Body --}}
@@ -29,6 +30,9 @@
         <div class="tab" data-group="primary" data-tab="description">
             {{editor content=data.description.description.value target="data.description.description.value" button=true owner=owner editable=editable}}
         </div>
-
+        {{!-- Active Effects Tab --}}
+        <div class="tab activeeffects" data-group="primary" data-tab="activeeffects">
+            {{> "systems/runequest/templates/actor/parts/actor-activeeffectsv2.html"}}
+        </div>
     </section>
 </form>

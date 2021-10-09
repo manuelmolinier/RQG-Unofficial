@@ -1,5 +1,6 @@
 import {RQG} from '../config.js';
 import { RQGTools } from '../tools/rqgtools.js';
+import ActiveEffectRunequest from "../active-effect.js";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -42,7 +43,10 @@ export class RunequestActorNPCSheet extends ActorSheet {
 
     // Prepare NPC data and items.
     this._prepareItems(context);
-    
+
+    // Prepare the Active Effects
+    context.effects = ActiveEffectRunequest.prepareActiveEffectCategories(this.actor.effects);
+
     // Add roll data for TinyMCE editors.
     context.rollData = context.actor.getRollData();
 
@@ -610,7 +614,9 @@ export class RunequestActorNPCSheet extends ActorSheet {
     html.find('.summary-characteristic-roll').mousedown(event => this._onCharacteristicRoll(event));
     html.find('.attack-roll').click(event => this._onAttackRoll(event));
     html.find('.unlock-character-sheet').click(event => this._onLockToggle(event));
-    html.find('.item').on('dragstart', event => RQGTools._onDragItem(event,this.actor));    
+    html.find('.item').on('dragstart', event => RQGTools._onDragItem(event,this.actor));
+    html.find(".effect-control").click(ev => ActiveEffectRunequest.onManageActiveEffect(ev, this.actor));
+    html.find(".spell-toggle").click(this._onSpellToggle.bind(this));
   }
   /* -------------------------------------------- */
 
@@ -655,12 +661,20 @@ export class RunequestActorNPCSheet extends ActorSheet {
   _onAttackRoll(event) {
     event.preventDefault();
     const data = this.getData();
+    let targetdefense = 0;
     //("starting _onAttackRoll");
     //(data.data);
     if(event.button == 0) {}
     else {return;}
     const attackrow = event.target.parentElement.parentElement;
     const attackid = attackrow.dataset["itemId"];
+    console.log(game.user.targets);
+    if(game.user.targets.size > 0) {
+      let targets=Array.from(game.user.targets);
+      console.log(targets[0].actor);
+      targetdefense = targets[0].actor.data.data.defense[0]?targets[0].actor.data.data.defense[0]:null;
+      console.log(targetdefense);
+    }
     if(!attackid) {
       let dialogOptions = {
         title: "Attack Roll",
@@ -670,7 +684,8 @@ export class RunequestActorNPCSheet extends ActorSheet {
 
         data : {
           "attacks": data.data.attacks,
-          "data": data.data
+          "data": data.data,
+          "targetdefense": targetdefense
         },
         callback : (html) => {
           // When dialog confirmed, fill testData dialog information
@@ -707,7 +722,7 @@ export class RunequestActorNPCSheet extends ActorSheet {
       let attack = this.actor.getOwnedItem(attackid);
       //("_onAttackRoll-attack");
       //(attack);
-      attack.roll();      
+      attack.roll({"targetdefense": targetdefense});      
     }      
   }
   _onCharacteristicRoll(event) {
@@ -1212,4 +1227,19 @@ export class RunequestActorNPCSheet extends ActorSheet {
     hitlocation.data.data.maxhp = hitlocation.data.data.basehp + actorData.data.attributes.hpmodifier;
     hitlocation.data.data.currenthp = hitlocation.data.data.maxhp - hitlocation.data.data.wounds;
   }
+  async _onSpellToggle(event) {
+    const spellid = event.currentTarget.closest(".item").dataset.itemId;
+    const spell = this.actor.items.get(spellid);
+    const effects = this.actor.effects;
+    const spelleffects = effects.filter(effect => effect.data.origin.endsWith(spellid));
+    if (spelleffects.length == 0) {
+      //No effects found for this spell.
+      return;
+    }
+    const spellstatus = !spell.data.data.active;
+    for(const effect of spelleffects) {
+      await effect.update({ disabled: !spellstatus});
+    }
+    return spell.update({"data.active": spellstatus});
+  }  
 }

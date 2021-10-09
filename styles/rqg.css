@@ -23,7 +23,7 @@
   /* Attributes */
   /*font-family: 'Verdana';*/
   font-family: var(--main-text-font);
-  color: var(--main-text-color);
+  /*color: var(--main-text-color);*/
 }
 .rqg .window-content {
   height: 100%;

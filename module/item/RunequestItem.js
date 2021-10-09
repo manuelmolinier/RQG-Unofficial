@@ -95,7 +95,7 @@ export class RunequestItem extends Item {
     const skillname = skillused.name;
     let result;
     const categorymod = (categoryid == "spiritweapons")?data.data.skillcategory["magic"].modifier:data.data.skillcategory[categoryid].modifier;
-    let attackskill= skillused.data.data.total+categorymod+attack.data.data.modifier+testmodifier;
+    let attackskill= (skillused.data.data.total+categorymod+attack.data.data.modifier+testmodifier+data.data.attributes.inspiration)*data.data.attributes.attackmultiplier;
     let attackroll;
     attackroll = new Roll("1d100").roll();
     let attackresult;

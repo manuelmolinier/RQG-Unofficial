@@ -28,6 +28,7 @@
         -->
         <a class="item actor-item" data-tab="description">{{localize 'RQG.Backstory'}}</a>
         <a class="item actor-item" data-tab="items">{{localize 'RQG.Items'}}</a>
+        <a class="item actor-item" data-tab="activeeffects">Effects</a>
     </nav>
 
     {{!-- Sheet Body --}}
@@ -89,7 +90,10 @@
             {{/each}}
             </ol>
         </div>
-
+        {{!-- Active Effects Tab --}}
+        <div class="tab activeeffects" data-group="primary" data-tab="activeeffects">
+            {{> "systems/runequest/templates/actor/parts/actor-activeeffectsv2.html"}}
+        </div>
     </section>
 </form>
 

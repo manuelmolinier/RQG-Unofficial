@@ -11,6 +11,7 @@
             <li class="item flexrow" data-item-id="{{spell._id}}" data-spellname="{{spell.name}}">
                 <h4 class="item-name"><a class="spiritspell-roll" data-item-id="{{spell._id}}">{{spell.name}}</a></h4>
                 <h4 class="item-name"><a class="spiritspell-roll" data-item-id="{{spell._id}}">{{spell.data.mpcost}}</a></h4>
+                <a class="spell-toggle" title="Toggle"><i class="fas {{#if spell.data.data.active}}fa-times{{else}}fa-check{{/if}}"></i></a>
                 <div class="item-controls">
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -33,6 +34,7 @@
                 <h4 class="item-name"><a class="runespell-roll">{{spell.name}}</a></h4>
                 <h4 class="item-name"><a class="runespell-roll">{{spell.data.data.points}}</a></h4>
                 <h4 class="item-name"><a class="runespell-roll"><span class="runefont">{{spell.data.data.rune}}</span></a></h4>
+                <a class="spell-toggle" title="Toggle"><i class="fas {{#if spell.data.data.active}}fa-times{{else}}fa-check{{/if}}"></i></a>
                 <div class="item-controls">
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

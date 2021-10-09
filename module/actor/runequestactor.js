@@ -75,7 +75,7 @@ export class RunequestActor extends Actor {
     }
     if(!data['data.flags.locked']) {
       data['data.flags.locked'] = true;
-    }
+    } 
   }
 
   prepareDerivedData(){
@@ -463,6 +463,9 @@ export class RunequestActor extends Actor {
     data.attributes.dexsr=this._preparedexsr(data.characteristics.dexterity);
     data.attributes.sizsr=this._preparesizsr(data.characteristics.size);
     data.attributes.spiritcombatdamage=this._preparespiritcombatdamage(data.characteristics.power,data.characteristics.charisma);
+    data.attributes.attackmultiplier = data.attributes.attackmultiplier?data.attributes.attackmultiplier:1;
+    data.attributes.defensemultiplier = data.attributes.defensemultiplier?data.attributes.defensemultiplier:1;
+    data.attributes.inspiration = data.attributes.inspiration?data.attributes.inspiration:0;
   }
   _preparedexsr(dex) {
     const value=dex.value;

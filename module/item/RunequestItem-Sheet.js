@@ -1,3 +1,5 @@
+import ActiveEffectRunequest from "../active-effect.js";
+
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -42,6 +44,7 @@ export class RunequestItemSheet extends ItemSheet {
       */
       data.item = itemData;
       data.data = itemData.data;
+      data.effects = ActiveEffectRunequest.prepareActiveEffectCategories(this.item.effects);
       return data;
     }
   
@@ -68,7 +71,12 @@ export class RunequestItemSheet extends ItemSheet {
       // Add or Remove Attribute
       html.find(".attributes").on("click", ".attribute-control", this._onClickAttributeControl.bind(this));
       html.find('.dropable').on('drop', event => this._onDrop(event));    
-      html.find('.dropable').on('dragend', event => this._onDrop(event));         
+      html.find('.dropable').on('dragend', event => this._onDrop(event));
+      html.find(".effect-control").click(ev => {
+        if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.")
+        ActiveEffectRunequest.onManageActiveEffect(ev, this.item)
+      });
+
     }
   
     /* -------------------------------------------- */

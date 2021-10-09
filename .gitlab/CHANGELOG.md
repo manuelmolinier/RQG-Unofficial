@@ -1,3 +1,15 @@
+**V0.1.10**
+**Bug Fixes**
+- Fixed issue with the header font color that was making it hard to read
+- Possibly other bug fixes :(
+- Possibly new bugs :(
+**Additional features**
+- Added first round of support for Active Effect. They can now be added to spell and items and will be added to the characters when spells are added.
+- Added support for Spell toggling active effect. When Spell is active the Active effect(s) associated will be active / disabled
+- Added first support for opposed attack / defense rolls:
+    - When another Token is targeted it will automatically roll the best defense and adjust final result
+    - It will take in account Skills over 100% in Rules as Written and adjust the combatant skills accordingly
+    - It isn't yet giving opportunity to chose defense (coming "soon") nor implemented the different behaviors between Parry and Dodge :(
 **V0.1.9**
 **Bug Fixes**
 - Fix for Crush Criticals, they will now follow the Errata from BRP forum

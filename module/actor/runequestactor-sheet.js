@@ -2,6 +2,7 @@ import {RQG} from '../config.js';
 import { RQGTools } from '../tools/rqgtools.js';
 import {skillMenuOptions} from "../menu/skill-context.js";
 import {attackMenuOptions} from "../menu/attack-context.js";
+import ActiveEffectRunequest from "../active-effect.js";
 
 
 /**
@@ -59,7 +60,9 @@ export class RunequestActorSheet extends ActorSheet {
     // Add roll data for TinyMCE editors.
     context.rollData = context.actor.getRollData();
 
-    // Prepare active effects
+    // Prepare the Active Effects
+    context.effects = ActiveEffectRunequest.prepareActiveEffectCategories(this.actor.effects);
+
     // Commented until new Active effects are added
     //context.effects = prepareActiveEffectCategories(this.actor.effects);
 
@@ -402,6 +405,7 @@ export class RunequestActorSheet extends ActorSheet {
       const rune = this._findrune(data,runename);
       const target = rune.value;
       this.basicRoll(spellname,target);
+  
     });
 
     html.find('.elementalrunes-roll').mousedown(event => {
@@ -644,7 +648,9 @@ export class RunequestActorSheet extends ActorSheet {
     html.find('.summary-characteristic-roll').mousedown(event => this._onCharacteristicRoll(event));
     html.find('.attack-roll').click(event => this._onAttackRoll(event));
     html.find('.unlock-character-sheet').click(event => this._onLockToggle(event));
-    html.find('.item').on('dragstart', event => RQGTools._onDragItem(event,this.actor));    
+    html.find('.item').on('dragstart', event => RQGTools._onDragItem(event,this.actor));
+    html.find(".effect-control").click(ev => ActiveEffectRunequest.onManageActiveEffect(ev, this.actor));
+    html.find(".spell-toggle").click(this._onSpellToggle.bind(this));
   }
   /* -------------------------------------------- */
 
@@ -1256,5 +1262,20 @@ export class RunequestActorSheet extends ActorSheet {
     //(hitlocation);
     hitlocation.data.data.maxhp = hitlocation.data.data.basehp + actorData.data.attributes.hpmodifier;
     hitlocation.data.data.currenthp = hitlocation.data.data.maxhp - hitlocation.data.data.wounds;
+  }
+  async _onSpellToggle(event) {
+    const spellid = event.currentTarget.closest(".item").dataset.itemId;
+    const spell = this.actor.items.get(spellid);
+    const effects = this.actor.effects;
+    const spelleffects = effects.filter(effect => effect.data.origin.endsWith(spellid));
+    if (spelleffects.length == 0) {
+      //No effects found for this spell.
+      return;
+    }
+    const spellstatus = !spell.data.data.active;
+    for(const effect of spelleffects) {
+      await effect.update({ disabled: !spellstatus});
+    }
+    return spell.update({"data.active": spellstatus});
   }
 }

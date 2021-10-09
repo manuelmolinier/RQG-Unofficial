@@ -1,0 +1,44 @@
+{{log effects}}
+{{#each effects as |section sid|}}
+    <table class="skill-category-table activeeffects" data-effectcategory="{{section}}">
+        <thead class="skill-table-thead">
+            <tr>
+                <th class="item-name skill-table-header" colspan = "2">{{localize section.label}}</th>
+                <th class="item-name skill-table-header">{{localize "RQG.Source"}}</th>
+                <th class="item-name skill-table-header">{{localize "RQG.Duration"}}</th>
+                <th class="item-name item-controls effect-controls">
+                    <div  data-effect-type="{{section.type}}">
+                        <a class="effect-control" data-action="create" title="{{localize 'RQG.CreateEffect'}}">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        {{#each section.effects as |effect|}}
+        <tr class="active-effects" data-item-id="{{item._id}}" data-itemid="{{item._id}}">
+            <td class="effects-table-img">
+                <img class="effect-image" style="width: 10px; height: 10px" src="{{effect.data.icon}}"/>
+            </td>
+            <td class="effects-table-name">
+                {{effect.data.label}}
+            </td>        
+            <td class="effect-table-source">{{effect.sourceName}}</td>
+            <td class="effect-table-duration">{{effect.duration.label}}</td>
+            <td class="item-controls effect-controls flexrow">
+                <div data-effect-id="{{effect.id}}">
+                    <a class="effect-control" data-action="toggle" title="{{localize 'RQG.EffectToggle'}}">
+                        <i class="fas {{#if effect.data.disabled}}fa-check{{else}}fa-times{{/if}}"></i>
+                    </a>
+                    <a class="effect-control" data-action="edit" title="{{localize 'RQG.EffectEdit'}}">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a class="effect-control" data-action="delete" title="{{localize 'RQG.EffectDelete'}}">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        {{/each}}
+    </table>
+{{/each}}

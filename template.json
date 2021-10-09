@@ -29,7 +29,10 @@
         "generalwounds": 0,
         "totalwounds": 0,
         "hitlocationstype": "Humanoids",
-        "freeint": 0
+        "freeint": 0,
+        "attackmultiplier": 1,
+        "defensemultiplier": 1,
+        "inspiration":0
       },
       "characteristics":{
         "strength": {
@@ -440,14 +443,16 @@
     "range":"",
     "duration": "",
     "type":"",
-    "keywords": []
+    "keywords": [],
+    "active": false
   },
   "runespell": {
     "name": "",
     "templates": ["description"],
     "points": 0,
     "keywords": [],
-    "rune": ""
+    "rune": "",
+    "active": false
   },
   "meleeattack":{
     "name": "",
@@ -494,7 +499,7 @@
     "equiped": true,
     "armorpenalty": 0,
     "ENC":0,
-    "hitlocationstype": "Humanoids"    
+    "hitlocationstype": "Humanoids"
   },
   "mpstorage": {
     "name": "",
@@ -598,7 +603,8 @@
     "points": 0,
     "keywords": [],
     "runestechniques": [],
-    "skill": ""
+    "skill": "",
+    "active": false
   },
   "event": {
     "name": "",
