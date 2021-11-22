@@ -1,3 +1,10 @@
+**V0.1.11**
+**Bug Fixes**
+- Not listed (yes bad habit but spent too long on it to recall)
+- Possibly new bugs :(
+**Additional features**
+- Added a new Character Sheet inspired by the Starter Set folio. It is available in Sheet -> This sheet -> RQG.CharacterSheetStarterSet or to change the default.
+
 **V0.1.10**
 **Bug Fixes**
 - Fixed issue with the header font color that was making it hard to read
