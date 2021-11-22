@@ -1,0 +1,107 @@
+.rqgss.sheet.actor {
+  min-width: 800px;
+  min-height: 600px;
+}
+.rqgss .sheet-body {
+  overflow: auto;
+  height: 99%;
+}
+.rqgss .sheet-body .tab {
+  height: 100%;
+  overflow-y: auto;
+}
+.rqgss .window-content {
+  height: 100%;
+  padding: 5px;
+  overflow-y: scroll;
+  background-image: url("./backgrounds/old-brown-paper-texture-image.jpg");
+  background-size: cover;
+}
+.rqgss .general-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 30% 40% 30%;
+  grid-template-rows: 100%;
+  grid-template-areas: "name portrait runes";
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+}
+.rqgss .general-name-container {
+  grid-area: name;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+}
+.rqgss .general-portrait-container {
+  grid-area: portrait;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+}
+.rqgss .general-portrait-container .character-profile-img {
+  border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+}
+.rqgss .general-runes-container {
+  grid-area: runes;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  /*height: 200px;*/
+  overflow: auto;
+  margin-bottom: 10px;
+}
+.rqgss .general-runes-container .rune-name {
+  font-size: small;
+  font-weight: bold;
+}
+.rqgss .general-runes-container .rune-input {
+  width: 2.5em;
+  height: 2.5em;
+  font-size: normal;
+}
+.rqgss .general-runes-container .rune-img {
+  border-radius: 8px;
+  max-width: 2.5em;
+  height: auto;
+}
+.rqgss .general-runes-container .rune-bloc {
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  width: 33%;
+}
+.rqgss .section-name {
+  font-weight: bold;
+  font-family: var(--main-text-font);
+  text-align: center;
+  width: 100%;
+}
+.rqgss .section-name .title {
+  width: 100%;
+  font-size: large;
+}
+.rqgss .section-name .name-input {
+  width: 100%;
+  font-size: normal;
+}
+.rqgss .section-description {
+  overflow-y: auto;
+  height: 400px;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+}
+.rqgss .section-description .title {
+  font-weight: bold;
+  font-family: var(--main-text-font);
+  text-align: center;
+  width: 100%;
+  font-size: large;
+}
+.rqgss .section-notes {
+  overflow-y: auto;
+  height: 400px;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+}

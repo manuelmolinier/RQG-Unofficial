@@ -1104,4 +1104,8 @@ input[type="text"].npc-wounds {
 .rqg .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+/****
+  Rules for the Starter Set style Character Sheets
+  Will be prefaced with .rqgss as RQG Starter Set
+****/
 

@@ -1,33 +1,9 @@
 <div class="summary-row flexrow">
     {{!-- Runes --}}
     {{#if data.flags.locked}}
-    <!--
-    <div  class="summary-runes-list flexrow">
-        <table>
-            <tbody>
-                {{#each data.elementalrunes as |elementalrune id|}}
-                    <tr class="elemental-rune" data-rune="{{id}}">
-                        <td class="elemental-rune" colspan="2">
-                            <a class="elementalrunes-roll rollable">{{localize elementalrune.label}}: {{elementalrune.value}}</a>
-                        </td>
-                    </tr>
-                {{/each}}
-                {{#each data.powerrunes as |powerrunepair pairid|}}
-                    <tr  class="elemental-rune" data-runepair="{{pairid}}">
-                    {{#each powerrunepair as |powerrune runeid|}}
-                        <td class="elemental-rune" >
-                            <a class="powerrunes-roll" data-rune="{{runeid}}">{{localize powerrune.label}}: {{powerrune.value}}</a>
-                        </td>
-                    {{/each}}
-                    </li>
-                {{/each}}
-            </tbody>
-        </table>
-    </div>
-    -->
     <div class="elemental-rune-grid-container">
         {{#each data.elementalrunes as |elementalrune id|}}
-        <img class="elemental-rune-{{id}} elemental-rune" data-rune="{{id}}" src="/systems/runequest/styles/img/{{id}}.png" alt="{{localize elementalrune.label}}"/>       
+        <img class="elemental-rune-{{id}} elemental-rune" data-rune="{{id}}" src="/systems/runequest/styles/img/{{id}}.png" title="{{localize elementalrune.label}}" alt="{{localize elementalrune.label}}"/>       
         <div class="elemental-rune elemental-rune-{{id}}-value" data-rune="{{id}}">
             <span><a class="elementalrunes-roll rollable" data-rune="{{id}}">{{elementalrune.value}}</a></span>         
         </div>
@@ -36,7 +12,7 @@
     <div class="power-rune-grid-container">
         {{#each data.powerrunes as |powerrunepair pairid|}}
             {{#each powerrunepair as |powerrune runeid|}}
-                <img class="elemental-rune power-rune-{{runeid}}" src="systems/runequest/styles/img/{{runeid}}.png" alt="{{localize powerrune.label}}"/> 
+                <img class="elemental-rune power-rune-{{runeid}}" src="systems/runequest/styles/img/{{runeid}}.png" title="{{localize powerrune.label}}" alt="{{localize powerrune.label}}"/> 
                 <div class="elemental-rune power-rune-{{runeid}}-value" data-runepair="{{pairid}}">
                     <a class="powerrunes-roll" data-rune="{{runeid}}">{{powerrune.value}}</a>
                 </div>            

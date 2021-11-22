@@ -7,10 +7,10 @@
                 <thead class="combat-table-header">
                     <th class="combat-table-thead" colspan="{{data.defense.length}}">{{localize "RQG.Defense"}}</th>
                 </thead>
-                <tbody>
-                    <tr>
+                <tbody class="item-list">
+                    <tr class="item-list">
                     {{#each data.defense as |item id|}}
-                        <td class="skill summary-skill-roll combat-defense-field" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.skillcategory}}">
+                        <td class="item skill summary-skill-roll combat-defense-field" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.skillcategory}}">
                             {{item.name}}: {{item.data.data.total}}                     
                         </td>
                     {{/each}}

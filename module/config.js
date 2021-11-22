@@ -67,3 +67,27 @@ RQG.characteristics = {
     "DEX":"RQG.Dexterity",
     "CHA":"RQG.Charisma"
 }
+RQG.spelltype = {
+    "active": "RQG.Active",
+    "enchantment": "RQG.Enchantment",
+    "passive": "RQG.Passive",
+    "ritual": "RQG.Ritual"
+}
+RQG.BasicRune = {
+    "air": "RQG.Air",
+    "fire": "RQG.Fire",
+    "darkness": "RQG.Darkness",
+    "water": "RQG.Water",
+    "earth": "RQG.Earth",
+    "moon": "RQG.Moon",
+    "man": "RQG.Man",
+    "beast": "RQG.Beast",
+    "fertility": "RQG.Fertility",
+    "death": "RQG.Death",
+    "harmony": "RQG.Harmony",
+    "disorder": "RQG.Disorder",
+    "truth": "RQG.Truth",
+    "illusion": "RQG.Illusion",
+    "stasis": "RQG.Stasis",
+    "movement": "RQG.Movement"
+}
