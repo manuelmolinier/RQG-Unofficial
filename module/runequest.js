@@ -9,13 +9,11 @@ import { RunequestActor } from "./actor/runequestactor.js";
 import { RunequestItem } from "./item/RunequestItem.js";
 import { RunequestItemSheet } from "./item/RunequestItem-Sheet.js";
 import { RunequestActorSheet } from "./actor/runequestactor-sheet.js";
-import { RunequestActorStarterSetSheet } from "./actor/runequestactor-sheet-starterset.js";
 import { RunequestActorNPCSheet } from "./actor/runequestactornpc-sheet.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
-import { RQG } from "./config.js";
-import * as Chat from "./chat.js";
-import { RunequestCombat } from "./combat/combat.js";
-import { RunequestCombatTracker } from "./combat/combat-tracker.js";
+import { RQG } from "./config.js"; // Config for RQG
+
+console.log("importing RQGTools");
 import { RQGTools } from "./tools/rqgtools.js";
 
 /* -------------------------------------------- */
@@ -39,8 +37,6 @@ Hooks.once("init", async function() {
 	// Define custom Entity classes
   CONFIG.Actor.entityClass = RunequestActor;
   CONFIG.Item.entityClass = RunequestItem;
-  CONFIG.Combat.entityClass = RunequestCombat;
-  CONFIG.ui.combat = RunequestCombatTracker;
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
@@ -49,12 +45,7 @@ Hooks.once("init", async function() {
     types: ["character"],
     makeDefault: true,
     label: "RQG.CharacterSheet"
-  }); 
-  Actors.registerSheet("runequest", RunequestActorStarterSetSheet, {
-    types: ["character"],
-    makeDefault: false,
-    label: "RQG.CharacterSheetStarterSet"
-  });   
+  });    
   Actors.registerSheet("runequest", RunequestActorNPCSheet, {
     types: ["npc"],
     makeDefault: true,
@@ -101,7 +92,6 @@ Hooks.once("init", async function() {
 Hooks.on('hotbarDrop', async (bar, data, slot) =>
   RQGTools.createMacro(bar, data, slot)
 )
-Hooks.on("renderChatLog", (app, html, data) => Chat.addChatListener(html));
 
 // Added Helpers to Handlebars
 Handlebars.registerHelper("skillcategorymodifier", function(skillcategories, skillcategory) {

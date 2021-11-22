@@ -28,7 +28,7 @@
                         <th class="summary-attack-damage">&nbsp;</th>
                     </tr>                    
                 </thead>
-                <tbody class="item-list">
+                <tbody>
                 {{#if data.flags.locked}}
                     {{#each attacks as |attack id|}}
                     <tr class="item" data-itemid="{{attack._id}}" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="{{attacktype}}weapons">

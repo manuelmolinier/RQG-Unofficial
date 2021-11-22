@@ -6,17 +6,6 @@ import {RQG} from '../config.js';
  */
 export class RunequestItem extends Item {
   /**
-   * Dictionnary for chatTemplates to render Item "rolls" in Chats
-   */
-  chatTemplate = {
-    "attack": "systems/runequest/templates/chat/partials/attack-card.hbs",
-    "runespell": "systems/runequest/templates/chat/partials/runespell-card.hbs",
-    "spiritspell": "systems/runequest/templates/chat/partials/spiritspell-card.hbs",
-    "skill": "systems/runequest/templates/chat/partials/skill-card.hbs",
-    "passion": "systems/runequest/templates/chat/partials/passion-card.hbs",
-    "default":"systems/runequest/templates/chat/partials/default-card.hbs"
-  }
-  /**
    * Augment the basic Item data model with additional dynamic data.
    */
   prepareData() {
