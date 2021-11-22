@@ -1,0 +1,23 @@
+<p class="subtitle">{{localize "RQG.Spiritspells"}}</p>
+<table class="spiritspells-table">
+    <thead class="spells-thead">
+        <th>{{localize "RQG.Spell"}}</th>
+        <th>{{localize "RQG.Points"}}</th>
+        <th>&nbsp;</th>
+    </thead>
+    <tbody>
+        {{#each data.spells.spirit as |spell id|}}
+        <tr class="item spell-row" data-item-id="{{spell._id}}" data-spellname="{{spell.name}}">
+            <td><a class="spiritspell-roll" data-item-id="{{spell._id}}">{{spell.name}}</a></td>
+            <td><a class="spiritspell-roll" data-item-id="{{spell._id}}">{{spell.data.data.mpcost}}</a></td>
+            <td>
+                <div class="item-controls">                   
+                    <a class="spell-toggle" title="Toggle"><i class="fas {{#if spell.data.data.active}}fa-times{{else}}fa-check{{/if}}"></i></a>
+                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                </div>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

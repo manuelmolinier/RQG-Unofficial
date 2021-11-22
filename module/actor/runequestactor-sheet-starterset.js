@@ -17,8 +17,8 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
 	  return mergeObject(super.defaultOptions, {
   	  classes: ["rqgss", "sheet", "actor"],
   	  template: "systems/runequest/templates/actor/starterset/actor-starter-set-sheet.html",
-      width: 800,
-      height: 600,
+      width: 1200,
+      height: 1000,
       dragDrop: [{ dragSelector: '.item', dropSelector: null }],
       tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "summary"}]
     });
@@ -78,7 +78,7 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
     new ContextMenu(html, ".skill-roll", skillMenuOptions(this.actor, this.token));
     new ContextMenu(html, ".summary-skill-roll", skillMenuOptions(this.actor, this.token));
     new ContextMenu(html, ".passion-roll", skillMenuOptions(this.actor, this.token));
-    new ContextMenu(html, ".attack-roll", attackMenuOptions(this.actor, this.token));
+    new ContextMenu(html, ".attack-roll-ss", attackMenuOptions(this.actor, this.token));
     // Add Inventory Item
     html.find('.item-create').click(this._onItemCreate.bind(this));
 
@@ -249,199 +249,6 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
     });
     html.find('.skill-roll').click(event => this._onSkillRoll(event));
     html.find('.rune-roll').mousedown(event => this._onSkillRoll(event));    
-    html.find('.meleeattack-roll').mousedown(event => {
-      event.preventDefault();
-      const data = this.getData();
-      if(event.button == 0) {}
-      else {return;}
-      const attackrow = event.target.parentElement.parentElement;
-      const categoryid = "meleeweapons";
-      const attackid = attackrow.dataset["itemId"];
-      const attack = data.actor.attacks["melee"].find(function(element) {
-        return element._id==attackid;
-      });
-      let attackname = attack.name;
-      // Find the appropriate skillname
-      let skillname= game.i18n.localize(RQG.weaponskills[attack.data.skillused]);
-      const skill = data.actor.skills[categoryid].find(function(element) {
-        return element.name==skillname;
-      });
-      let damagebonus = data.data.attributes.damagebonus;
-      let catmodifier = data.data.skillcategory[skill.data.skillcategory].modifier;
-      let skillvalue = skill.data.total;
-      let modifier= attack.data.modifier;
-      if(data.actor.flags.runequestspell["bladesharp"]) {
-        modifier = modifier+(data.actor.flags.runequestspell["bladesharp"]*5);
-      }
-      let dialogOptions = {
-        title: "Melee Attack Rolls",
-        template : "/systems/runequest/templates/chat/meleeattack-dialog.html",
-        'z-index': 100,
-        // Prefilled dialog data
-
-        data : {
-          "skillname": skillname,
-          "skillvalue": skillvalue,
-          "catmodifier": catmodifier,
-          "damagebonus": damagebonus
-        },
-        callback : (html) => {
-          // When dialog confirmed, fill testData dialog information
-          // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
-          skillname =    html.find('[name="skillname"]').val();
-          let testmodifier =   Number(html.find('[name="testmodifier"]').val());
-          catmodifier = Number(html.find('[name="catmodifier"]').val());
-          skillvalue =   Number(html.find('[name="skillvalue"]').val());
-          damagebonus =  html.find('[name="damagebonus"]').val();
-          const target = (skillvalue+catmodifier+modifier+testmodifier);
-          this.attackRoll(attack,target,damagebonus);
-    
-        }
-      };
-      renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
-        {
-          new Dialog(
-          {
-            title: dialogOptions.title,
-            content: dlg,
-            buttons:
-            {
-              rollButton:
-              {
-                label: game.i18n.localize("Roll"),
-                callback: html => dialogOptions.callback(html)
-              }
-            },
-            default: "rollButton"
-          }).render(true);
-        });
-    });
-    html.find('.naturalattack-roll').mousedown(event => {
-      event.preventDefault();
-      const data = this.getData();
-      if(event.button == 0) {}
-      else {return;}
-      const attackrow = event.target.parentElement.parentElement;
-      const categoryid = "naturalweapons";
-      const attackid = attackrow.dataset["itemId"];
-      const attack = data.actor.attacks["natural"].find(function(element) {
-        return element._id==attackid;
-      });
-      let attackname = attack.name;
-      let skillname= game.i18n.localize(RQG.weaponskills[attack.data.skillused]);
-      const skill = data.actor.skills[categoryid].find(function(element) {
-        return element.name==skillname;
-      });
-      let damagebonus = data.data.attributes.damagebonus;
-      let catmodifier = data.data.skillcategory[skill.data.skillcategory].modifier;
-      let skillvalue = skill.data.total;
-      let modifier= attack.data.modifier;
-      let dialogOptions = {
-        title: "Natural Attack Roll",
-        template : "/systems/runequest/templates/chat/meleeattack-dialog.html",
-        'z-index': 100,
-        // Prefilled dialog data
-
-        data : {
-          "skillname": skillname,
-          "skillvalue": skillvalue,
-          "catmodifier": catmodifier,
-          "damagebonus": damagebonus
-        },
-        callback : (html) => {
-          // When dialog confirmed, fill testData dialog information
-          // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
-          skillname =    html.find('[name="skillname"]').val();
-          let testmodifier =   Number(html.find('[name="testmodifier"]').val());
-          catmodifier = Number(html.find('[name="catmodifier"]').val());
-          skillvalue =   Number(html.find('[name="skillvalue"]').val());
-          damagebonus =  html.find('[name="damagebonus"]').val();
-          const target = (skillvalue+catmodifier+modifier+testmodifier);
-          this.attackRoll(attack,target,damagebonus);
-    
-        }
-      };
-      renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
-        {
-          new Dialog(
-          {
-            title: dialogOptions.title,
-            content: dlg,
-            buttons:
-            {
-              rollButton:
-              {
-                label: game.i18n.localize("Roll"),
-                callback: html => dialogOptions.callback(html)
-              }
-            },
-            default: "rollButton"
-          }).render(true);
-        });
-    });
-    html.find('.missileattack-roll').mousedown(event => {
-      event.preventDefault();
-      const data = this.getData();
-      if(event.button == 0) {}
-      else {return;}
-      const attackrow = event.target.parentElement.parentElement;
-      const categoryid = "missileweapons";
-      const attackid = attackrow.dataset["itemId"];
-      const attack = data.actor.attacks["missile"].find(function(element) {
-        return element._id==attackid;
-      });
-      let attackname = attack.name;
-      let skillname= game.i18n.localize(RQG.weaponskills[attack.data.skillused]);
-      const skill = data.actor.skills[categoryid].find(function(element) {
-        return element.name==skillname;
-      });
-      let damagebonus = data.data.attributes.damagebonus;
-      let catmodifier = data.data.skillcategory[skill.data.skillcategory].modifier;
-      let skillvalue = skill.data.total;
-      let modifier= attack.data.modifier;
-
-      let dialogOptions = {
-        title: "Missile Attack Roll",
-        template : "/systems/runequest/templates/chat/meleeattack-dialog.html",
-        'z-index': 100,
-        // Prefilled dialog data
-
-        data : {
-          "skillname": skillname,
-          "skillvalue": skillvalue,
-          "catmodifier": catmodifier,
-          "damagebonus": damagebonus
-        },
-        callback : (html) => {
-          // When dialog confirmed, fill testData dialog information
-          // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
-          skillname =    html.find('[name="skillname"]').val();
-          let testmodifier =   Number(html.find('[name="testmodifier"]').val());
-          catmodifier = Number(html.find('[name="catmodifier"]').val());
-          skillvalue =   Number(html.find('[name="skillvalue"]').val());
-          damagebonus =  html.find('[name="damagebonus"]').val();
-          const target = (skillvalue+catmodifier+modifier+testmodifier);
-          this.missileattackRoll(attack,target,damagebonus);
-        }
-      };
-      renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
-        {
-          new Dialog(
-          {
-            title: dialogOptions.title,
-            content: dlg,
-            buttons:
-            {
-              rollButton:
-              {
-                label: game.i18n.localize("Roll"),
-                callback: html => dialogOptions.callback(html)
-              }
-            },
-            default: "rollButton"
-          }).render(true);
-        });
-    });
     html.find('.experiencecheck').mousedown(event => {
       event.preventDefault();
       const data = this.getData();
@@ -461,6 +268,8 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
     html.find('.summary-skill-roll').mousedown(event => this._onSkillRoll(event));
     html.find('.summary-characteristic-roll').mousedown(event => this._onCharacteristicRoll(event));
     html.find('.attack-roll').click(event => this._onAttackRoll(event));
+    html.find('.attack-roll-ss').click(event => this._onAttackRollSS(event));
+    
     html.find('.unlock-character-sheet').click(event => this._onLockToggle(event));
     html.find('.item').on('dragstart', event => RQGTools._onDragItem(event,this.actor));
     html.find(".effect-control").click(ev => ActiveEffectRunequest.onManageActiveEffect(ev, this.actor));
@@ -1082,6 +891,9 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
     hitlocation.data.data.maxhp = hitlocation.data.data.basehp + actorData.data.attributes.hpmodifier;
     hitlocation.data.data.currenthp = hitlocation.data.data.maxhp - hitlocation.data.data.wounds;
   }
+  _onAttackRollSS(event) {
+    this._onAttackRoll(event);
+  }  
   async _onSpellToggle(event) {
     const spellid = event.currentTarget.closest(".item").dataset.itemId;
     const spell = this.actor.items.get(spellid);

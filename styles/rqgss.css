@@ -1,6 +1,26 @@
+@font-face {
+  font-family: EBGaramond-Bold;
+  src: url("./fonts/EBGaramond-Bold.ttf");
+}
+@font-face {
+  font-family: EBGaramond-Regular;
+  src: url("./fonts/EBGaramond-Regular.ttf");
+}
+@font-face {
+  font-family: VarelaRound-Regular;
+  src: url("./fonts/Varela_Round/VarelaRound-Regular.ttf");
+}
 .rqgss.sheet.actor {
   min-width: 800px;
   min-height: 600px;
+}
+.rqgss .rqgss-navigation {
+  font-family: EBGaramond-Bold;
+  font-size: large;
+  font-weight: 900;
+}
+.rqgss .editor {
+  height: 200px;
 }
 .rqgss .sheet-body {
   overflow: auto;
@@ -19,89 +39,465 @@
 }
 .rqgss .general-container {
   display: grid;
-  height: 100%;
   grid-template-columns: 30% 40% 30%;
-  grid-template-rows: 100%;
+  grid-template-rows: auto;
   grid-template-areas: "name portrait runes";
   border: 1px solid #7a7971;
   border-radius: 3px;
 }
-.rqgss .general-name-container {
+.rqgss .general-container .general-name-container {
   grid-area: name;
   border: 1px solid #7a7971;
   border-radius: 3px;
 }
-.rqgss .general-portrait-container {
+.rqgss .general-container .general-portrait-container {
   grid-area: portrait;
   border: 1px solid #7a7971;
   border-radius: 3px;
+  text-align: center;
 }
-.rqgss .general-portrait-container .character-profile-img {
+.rqgss .general-container .general-portrait-container .character-profile-img {
   border-radius: 8px;
   max-width: 100%;
   height: auto;
 }
-.rqgss .general-runes-container {
+.rqgss .general-container .general-portrait-container .title {
+  width: 100%;
+  font-size: x-large;
+  font-family: 'EBGaramond-Bold';
+  color: darkred;
+}
+.rqgss .general-container .general-runes-container {
   grid-area: runes;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 300px 1fr;
+  grid-template-areas: "title" "elemental" "power";
   border: 1px solid #7a7971;
   border-radius: 3px;
+  margin-bottom: 10px;
+  height: 800px;
+}
+.rqgss .general-container .general-runes-container .title-container {
+  grid-area: title;
+}
+.rqgss .general-container .general-runes-container .elemental-container {
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  grid-area: elemental;
+  width: 100%;
+  position: relative;
+}
+.rqgss .general-container .general-runes-container .elemental-container .air-bloc {
+  position: absolute;
+  top: 33%;
+  left: 5px;
+}
+.rqgss .general-container .general-runes-container .elemental-container .fire-bloc {
+  position: absolute;
+  top: 5px;
+  left: 40%;
+}
+.rqgss .general-container .general-runes-container .elemental-container .darkness-bloc {
+  position: absolute;
+  top: 33%;
+  left: 80%;
+}
+.rqgss .general-container .general-runes-container .elemental-container .water-bloc {
+  position: absolute;
+  bottom: 5px;
+  left: 60%;
+}
+.rqgss .general-container .general-runes-container .elemental-container .earth-bloc {
+  position: absolute;
+  bottom: 5px;
+  left: 20%;
+}
+.rqgss .general-container .general-runes-container .elemental-container .moon-bloc {
+  position: absolute;
+  top: 33%;
+  left: 40%;
+}
+.rqgss .general-container .general-runes-container .power-container {
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  grid-area: power;
+  width: 100%;
+  position: relative;
+}
+.rqgss .general-container .general-runes-container .power-container .man-bloc {
+  position: absolute;
+  top: 5px;
+  left: 40%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  width: 50px;
+  align-items: center;
+}
+.rqgss .general-container .general-runes-container .power-container .beast-bloc {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  position: absolute;
+  bottom: 5px;
+  left: 40%;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  width: 50px;
+  align-items: center;
+}
+.rqgss .general-container .general-runes-container .power-container .fertility-bloc {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  /*height: 200px;*/
-  overflow: auto;
-  margin-bottom: 10px;
-}
-.rqgss .general-runes-container .rune-name {
-  font-size: small;
-  font-weight: bold;
-}
-.rqgss .general-runes-container .rune-input {
-  width: 2.5em;
-  height: 2.5em;
-  font-size: normal;
-}
-.rqgss .general-runes-container .rune-img {
-  border-radius: 8px;
-  max-width: 2.5em;
-  height: auto;
-}
-.rqgss .general-runes-container .rune-bloc {
+  position: absolute;
+  top: 25%;
+  left: 5px;
   border: 1px solid #7a7971;
   border-radius: 3px;
   width: 33%;
+  align-items: center;
 }
-.rqgss .section-name {
+.rqgss .general-container .general-runes-container .power-container .fertility-bloc .rune-bloc-values {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.rqgss .general-container .general-runes-container .power-container .death-bloc {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 25%;
+  left: 60%;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  align-items: center;
+  width: 33%;
+}
+.rqgss .general-container .general-runes-container .power-container .death-bloc .rune-bloc-values {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.rqgss .general-container .general-runes-container .power-container .harmony-bloc {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 37.5%;
+  left: 5px;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  align-items: center;
+  width: 33%;
+}
+.rqgss .general-container .general-runes-container .power-container .harmony-bloc .rune-bloc-values {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.rqgss .general-container .general-runes-container .power-container .disorder-bloc {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 37.5%;
+  left: 60%;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  align-items: center;
+  width: 33%;
+}
+.rqgss .general-container .general-runes-container .power-container .disorder-bloc .rune-bloc-values {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.rqgss .general-container .general-runes-container .power-container .truth-bloc {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  align-items: center;
+  width: 33%;
+}
+.rqgss .general-container .general-runes-container .power-container .truth-bloc .rune-bloc-values {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.rqgss .general-container .general-runes-container .power-container .illusion-bloc {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  align-items: center;
+  width: 33%;
+}
+.rqgss .general-container .general-runes-container .power-container .illusion-bloc .rune-bloc-values {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.rqgss .general-container .general-runes-container .power-container .stasis-bloc {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 62.5%;
+  left: 5px;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  align-items: center;
+  width: 33%;
+}
+.rqgss .general-container .general-runes-container .power-container .stasis-bloc .rune-bloc-values {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.rqgss .general-container .general-runes-container .power-container .movement-bloc {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 62.5%;
+  left: 60%;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  align-items: center;
+  width: 33%;
+}
+.rqgss .general-container .general-runes-container .power-container .movement-bloc .rune-bloc-values {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.rqgss .general-container .general-runes-container .rune-name {
+  font-size: x-small;
+  font-family: VarelaRound-Regular;
+  color: black;
+}
+.rqgss .general-container .general-runes-container .rune-input {
+  width: 45px;
+  height: 20px;
+  font-size: small;
+  color: black;
+}
+.rqgss .general-container .general-runes-container .rune-img {
+  border-radius: 8px;
+  max-width: 35px;
+  max-height: 35px;
+  height: auto;
+}
+.rqgss .general-container .general-runes-container .rune-bloc {
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  width: 50px;
+  align-items: center;
+}
+.rqgss .general-container .general-runes-container .title {
+  width: 100%;
+  font-size: x-large;
+  font-family: 'EBGaramond-Bold';
+  color: darkred;
+  text-align: center;
+}
+.rqgss .general-container .section-name {
   font-weight: bold;
-  font-family: var(--main-text-font);
+  font-family: 'EBGaramond-Bold';
   text-align: center;
   width: 100%;
 }
-.rqgss .section-name .title {
+.rqgss .general-container .section-name .title {
+  width: 100%;
+  font-size: x-large;
+  font-family: 'EBGaramond-Bold';
+  color: darkred;
+}
+.rqgss .general-container .section-name .name-input {
   width: 100%;
   font-size: large;
+  color: black;
+  font-family: 'EBGaramond-Bold';
 }
-.rqgss .section-name .name-input {
+.rqgss .general-container .section-description {
+  overflow-y: auto;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+}
+.rqgss .general-container .section-description .title {
   width: 100%;
-  font-size: normal;
+  font-size: x-large;
+  font-family: 'EBGaramond-Bold';
+  color: darkred;
+  text-align: center;
 }
-.rqgss .section-description {
+.rqgss .general-container .section-description .editor {
+  height: 600px;
+}
+.rqgss .general-container .section-notes {
   overflow-y: auto;
   height: 400px;
   border: 1px solid #7a7971;
   border-radius: 3px;
 }
-.rqgss .section-description .title {
-  font-weight: bold;
-  font-family: var(--main-text-font);
-  text-align: center;
-  width: 100%;
-  font-size: large;
-}
-.rqgss .section-notes {
-  overflow-y: auto;
-  height: 400px;
+.rqgss .game-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 30% 40% 30%;
+  grid-template-rows: 100%;
+  grid-template-areas: "statistics skills magic";
   border: 1px solid #7a7971;
   border-radius: 3px;
+}
+.rqgss .game-container .game-statistics-container {
+  grid-area: statistics;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  align: center;
+}
+.rqgss .game-container .game-statistics-container .title {
+  width: 100%;
+  font-size: x-large;
+  font-family: 'EBGaramond-Bold';
+  color: darkred;
+  text-align: center;
+}
+.rqgss .game-container .game-statistics-container .attributes-hl-container {
+  display: grid;
+  grid-template-columns: 65% 35%;
+  grid-template-rows: min-content min-content;
+  grid-template-areas: "hitlocations attributes" "hpbar hpbar";
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+}
+.rqgss .game-container .game-statistics-container .attributes-hl-container .attributes-table {
+  grid-area: attributes;
+  font-size: smaller;
+}
+.rqgss .game-container .game-statistics-container .attributes-hl-container .attributes-table .attributes-thead {
+  background-color: darkgreen;
+  color: whitesmoke;
+}
+.rqgss .game-container .game-statistics-container .attributes-hl-container .hitlocations-table {
+  grid-area: hitlocations;
+  font-size: smaller;
+}
+.rqgss .game-container .game-statistics-container .attributes-hl-container .hitlocations-table .hitlocations-thead {
+  background-color: darkgreen;
+  color: whitesmoke;
+}
+.rqgss .game-container .game-statistics-container .attributes-hl-container .attribute-input {
+  width: 30px;
+}
+.rqgss .game-container .game-statistics-container .attributes-hl-container .hpbar {
+  grid-area: hpbar;
+}
+.rqgss .game-container .game-statistics-container .attributes-hl-container .hpbar .attribute-progress {
+  width: 60%;
+  height: 30px;
+}
+.rqgss .game-container .game-statistics-container .characteristic-label {
+  font-size: large;
+  font-family: 'EBGaramond-Bold';
+  color: darkred;
+  text-align: center;
+}
+.rqgss .game-container .game-statistics-container .attacks-thead {
+  background-color: darkgreen;
+  color: whitesmoke;
+  font-family: EBGaramond-Bold;
+}
+.rqgss .game-container .game-statistics-container .attack-row {
+  font-family: EBGaramond-Bold;
+}
+.rqgss .game-container .game-statistics-container .spiritcombat-row {
+  background-color: darkolivegreen;
+  color: whitesmoke;
+  font-family: EBGaramond-Bold;
+}
+.rqgss .game-container .game-skills-container {
+  grid-area: skills;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  display: grid;
+  height: 100%;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: min-content min-content;
+  grid-template-areas: "skill-col1 skill-col2 weapon" "passions passions gear";
+  font-size: small;
+}
+.rqgss .game-container .game-skills-container .skill-col1 {
+  grid-area: skill-col1;
+}
+.rqgss .game-container .game-skills-container .skill-col2 {
+  grid-area: skill-col2;
+}
+.rqgss .game-container .game-skills-container .weapon-col {
+  grid-area: weapon;
+}
+.rqgss .game-container .game-skills-container .experience-box {
+  width: 10px;
+  height: 10px;
+}
+.rqgss .game-container .game-skills-container .skill-thead {
+  background-color: darkgreen;
+  color: whitesmoke;
+  font-family: EBGaramond-Bold;
+}
+.rqgss .game-container .game-skills-container .skill-row {
+  font-family: EBGaramond-Bold;
+}
+.rqgss .game-container .game-magic-container {
+  grid-area: magic;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+}
+.rqgss .game-container .game-magic-container .title {
+  width: 100%;
+  font-size: x-large;
+  font-family: 'EBGaramond-Bold';
+  color: darkred;
+  text-align: center;
+}
+.rqgss .game-container .game-magic-container .subtitle {
+  width: 100%;
+  font-size: large;
+  font-family: 'VarelaRound-Regular';
+  color: darkred;
+  text-align: center;
+}
+.rqgss .game-container .game-magic-container .spells-thead {
+  background-color: darkgreen;
+  color: whitesmoke;
+  font-family: EBGaramond-Bold;
+}
+.rqgss .game-container .game-magic-container .spell-row {
+  font-family: EBGaramond-Bold;
+}
+.rqgss .game-container .game-magic-container .cult-row {
+  font-family: EBGaramond-Bold;
+}
+.rqgss .game-container .game-magic-container .mpstorage-table .mpstorage-thead {
+  background-color: darkgreen;
+  color: whitesmoke;
+  font-family: EBGaramond-Bold;
+}
+.rqgss .game-container .game-magic-container .mpstorage-table .mpstorage-input {
+  width: 40px;
 }

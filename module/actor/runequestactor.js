@@ -462,10 +462,13 @@ export class RunequestActor extends Actor {
     data.attributes.hpmodifier = this._preparehpmodifier(data.attributes.hitpoints.max);
     data.attributes.dexsr=this._preparedexsr(data.characteristics.dexterity);
     data.attributes.sizsr=this._preparesizsr(data.characteristics.size);
+    data.attributes.meleesr=data.attributes.sizsr+data.attributes.dexsr;
     data.attributes.spiritcombatdamage=this._preparespiritcombatdamage(data.characteristics.power,data.characteristics.charisma);
     data.attributes.attackmultiplier = data.attributes.attackmultiplier?data.attributes.attackmultiplier:1;
     data.attributes.defensemultiplier = data.attributes.defensemultiplier?data.attributes.defensemultiplier:1;
     data.attributes.inspiration = data.attributes.inspiration?data.attributes.inspiration:0;
+    data.attributes.healingrate = data.attributes.healingrate?data.attributes.healingrate:1;
+    data.attributes.move = data.attributes.move?data.attributes.move:3;
   }
   _preparedexsr(dex) {
     const value=dex.value;

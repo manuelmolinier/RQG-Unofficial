@@ -10,24 +10,9 @@
         </div>
     </div>
     <div class="general-portrait-container">
-        <img class="character-profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+        <img class="character-profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>       
     </div>
     <div class="general-runes-container">
-        {{#each data.elementalrunes as |elementalrune id|}}
-        <div class="rune-bloc">
-            <label class="rune-name">{{localize elementalrune.label}}</label>
-            <img class="rune-img" data-rune="{{id}}" src="/systems/runequest/styles/img/{{id}}.png" title="{{localize elementalrune.label}}" alt="{{localize elementalrune.label}}"/>       
-            <input  class="rune-input"  type="text"  name="data.elementalrunes.{{id}}.value"  value="{{elementalrune.value}}"  data-dtype="Number"  />       
-        </div>
-        {{/each}}
-        {{#each data.powerrunes as |powerrunepair pairid|}}
-            {{#each powerrunepair as |powerrune runeid|}}
-            <div class="rune-bloc">
-                <label class="rune-name">{{localize powerrune.label}}</label>
-                <img class="rune-img" data-rune="{{runeid}}" src="/systems/runequest/styles/img/{{runeid}}.png" title="{{localize powerrune.label}}" alt="{{localize powerrune.label}}"/>       
-                <input  class="rune-input"  type="text"  name="data.powerrunes.{{pairid}}.{{runeid}}.value"  value="{{powerrune.value}}"  data-dtype="Number"  />       
-            </div>        
-            {{/each}}
-        {{/each}}
+        {{> "systems/runequest/templates/actor/starterset/parts/runes-ss-partial.html"}}
     </div>
 </div>

@@ -209,5 +209,12 @@
     "RQG.DB": "B.Dég",
     "RQG.SIZSR": "RA TAI",
     "RQG.DEXSR": "RA DEX",
-    "RQG.WDS": "Bl."
+    "RQG.WDS": "Bl.",
+    "RQG.AP": "PA",
+    "RQG.Statistics": "Statistiques",
+    "RQG.Runespells": "Sorts de Magie Runique",
+    "RQG.Spiritspells": "Sorts de Magie Spirituelle",
+    "RQG.Cults": "Cultes",
+    "RQG.Game": "Jeu",
+    "RQG.Spell": "Spell"            
 }

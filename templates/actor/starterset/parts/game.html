@@ -1,3 +1,160 @@
-<div>
-    <p>Hello Game</p>
+<div class="game-container">
+    <div class="game-statistics-container">
+        <p class="title">{{localize "RQG.Statistics"}}</p>
+        <div class="caracteristics-container">
+            <table>
+                <tr>
+                    {{#each data.characteristics as |characteristic id|}}
+                    <td class="characteristic characteristic-label" data-characteristic-id="{{id}}"><a class="summary-characteristic-roll">{{localize characteristic.label}}</a></td>
+                    {{/each}}                    
+                </tr>
+                <tr>
+                    {{#each data.characteristics as |characteristic id|}}
+                        <td class="characteristic" data-characteristic-id="{{id}}">
+                            <input  class="attribute-value"  type="text"  name="data.characteristics.{{id}}.base"  value="{{characteristic.base}}"  data-dtype="Number" />
+                        </td>
+                    {{/each}}
+                </tr>
+                <tr>
+                    {{#each data.characteristics as |characteristic id|}}
+                    <td class="characteristic" data-characteristic-id="{{id}}">
+                        <input  class="attribute-value"  type="text"  name="data.characteristics.{{id}}.modifier"  value="{{characteristic.modifier}}"  data-dtype="Number"  />
+                    </td>
+                    {{/each}}
+                </tr>
+                <tr>
+                    {{#each data.characteristics as |characteristic id|}}
+                        <td class="characteristic characteristic-label" data-characteristic-id="{{id}}"><a class="summary-characteristic-roll">{{characteristic.value}}</a></td>
+                    {{/each}}
+                </tr>                                
+            </table>
+        </div>
+        <div class="attacks-container">
+            <table>
+                <thead class="attacks-thead">
+                    <th>Weapon</th>
+                    <th>%</th>
+                    <th>Damage</th>
+                    <th>SR</th>
+                    <th>Pts</th>
+                </thead>
+                {{#each data.attacks.melee as |attack id|}}
+                <tr class="item attack-row" data-itemid="{{attack._id}}" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="meleeweapons">
+                    <td class="summary-attack-label"><a class="attack-roll-ss">{{attack.name}}</a></td>
+                    <td class="summary-attack-value">{{attack.data.data.attacktotal}}</td>
+                    <td class="summary-attack-damage">{{attack.data.data.damage}}</td>
+                    <td class="summary-attack-damage">{{attack.data.data.sr}}</td>  
+                    <td class="summary-attack-damage">{{attack.data.data.hpcurrent}}/{{attack.data.data.hpmax}}</td>                  
+                </tr>
+                {{/each}}
+                {{#each data.attacks.missile as |attack id|}}
+                <tr class="item attack-row" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="missileweapons">
+                    <td class="summary-attack-label"><a class="attack-roll">{{attack.name}}</a></td>
+                    <td class="summary-attack-value">{{attack.data.data.attacktotal}}</td>
+                    <td class="summary-attack-damage">{{attack.data.data.damage}}</td>
+                    <td class="summary-attack-damage">{{attack.data.data.sr}}</td>  
+                    <td class="summary-attack-damage">{{attack.data.data.hpcurrent}}/{{attack.data.data.hpmax}}</td>                  
+                </tr>
+                {{/each}}
+                {{#each data.attacks.natural as |attack id|}}
+                <tr class="item attack-row" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="naturalweapons">
+                    <td class="summary-attack-label"><a class="attack-roll">{{attack.name}}</a></td>
+                    <td class="summary-attack-value">{{attack.data.data.attacktotal}}</td>
+                    <td class="summary-attack-damage">{{attack.data.data.damage}}</td>
+                    <td class="summary-attack-damage">{{attack.data.data.sr}}</td>  
+                    <td class="summary-attack-damage">{{attack.data.data.hpcurrent}}/{{attack.data.data.hpmax}}</td>                  
+                </tr>
+                {{/each}}
+                {{#each data.attacks.spirit as |attack id|}}
+                <tr class="item spiritcombat-row" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="spiritweapons">
+                    <td class="summary-attack-label"><a class="attack-roll">{{attack.name}}</a></td>
+                    <td class="summary-attack-value">{{attack.data.data.attacktotal}}</td>
+                    <td class="summary-attack-damage">{{attack.data.data.damage}}</td>
+                    <td class="summary-attack-damage">12</td>                   
+                    <td class="summary-attack-damage">-</td>                   
+                </tr>
+                {{/each}}
+
+            </table>
+        </div>
+        <div class="attributes-hl-container">
+            {{> "systems/runequest/templates/actor/starterset/parts/attributes-ss-partial.html"}}
+            {{> "systems/runequest/templates/actor/starterset/parts/hitlocations-ss-partial.html"}}            
+            <table class="hpbar">
+                <tr>
+                    <td>{{localize 'RQG.HP'}}</td>
+                    <td>
+                        {{actor.data.data.attributes.hitpoints.value}}
+                        /
+                        {{actor.data.data.attributes.hitpoints.max}}                
+                    </td>
+                    <td>
+                        <progress class="attribute-progress" id="hitpoints" value="{{data.attributes.hitpoints.value}}" max="{{data.attributes.hitpoints.max}}">{{data.attributes.hitpoints.value}} / {{data.attributes.hitpoints.max}}</progress>
+                    </td>                   
+                </tr>
+            </table>
+            <div class="passions-container">
+                <p class="title">{{localize "RQG.Passions"}} <a class="item-control item-create" title="Create item" data-type="passion"><i class="fas fa-plus"></i></a></p>
+                {{> "systems/runequest/templates/actor/starterset/parts/passions-ss-partial.html"}}                
+            </div>
+        </div>
+    </div>
+    <div class="game-skills-container">
+        <div class="skill-col1">
+            {{> "systems/runequest/templates/actor/starterset/parts/skills-ss-partial.html" skillcat="agility" skillList=data.skills.agility}}
+            {{> "systems/runequest/templates/actor/starterset/parts/skills-ss-partial.html" skillcat="knowledge" skillList=data.skills.knowledge}}
+        </div>
+        <div class="skill-col2">
+            {{> "systems/runequest/templates/actor/starterset/parts/skills-ss-partial.html" skillcat="communication" skillList=data.skills.communication}}
+            {{> "systems/runequest/templates/actor/starterset/parts/skills-ss-partial.html" skillcat="magic" skillList=data.skills.magic}}
+            {{> "systems/runequest/templates/actor/starterset/parts/skills-ss-partial.html" skillcat="perception" skillList=data.skills.perception}}    
+            {{> "systems/runequest/templates/actor/starterset/parts/skills-ss-partial.html" skillcat="stealth" skillList=data.skills.stealth}}    
+        </div>
+        <div class="weapon-col">
+            {{> "systems/runequest/templates/actor/starterset/parts/skills-ss-partial.html" skillcat="manipulation" skillList=data.skills.manipulation}}
+            {{> "systems/runequest/templates/actor/starterset/parts/skills-ss-partial.html" skillcat="meleeweapons" skillList=data.skills.meleeweapons}}
+            {{> "systems/runequest/templates/actor/starterset/parts/skills-ss-partial.html" skillcat="missileweapons" skillList=data.skills.missileweapons}}
+            {{> "systems/runequest/templates/actor/starterset/parts/skills-ss-partial.html" skillcat="shields" skillList=data.skills.shields}}    
+            {{> "systems/runequest/templates/actor/starterset/parts/skills-ss-partial.html" skillcat="naturalweapons" skillList=data.skills.naturalweapons}}    
+        </div>            
+        <div class="passions-container"></div>
+        <div class="gear-container"></div>
+    </div>
+    <div class="game-magic-container">
+        <p class="title">{{localize "RQG.Magic"}}</p>
+        <div>
+            <table class="mpbar">
+                <tr>
+                    <td>{{localize 'RQG.MP'}}</td>
+                    <td>
+                        <input class="attribute-input" type="text" name="data.attributes.magicpoints.value" value="{{actor.data.data.attributes.magicpoints.value}}" data-dtype="Number"/>
+                        /
+                        {{actor.data.data.attributes.magicpoints.max}}
+                    </td>
+                    <td>
+                        <progress class="attribute-progress" id="magicpoints" value="{{data.attributes.magicpoints.value}}" max="{{data.attributes.magicpoints.max}}">{{data.attributes.magicpoints.value}} / {{data.attributes.magicpoints.max}}</progress>
+                    </td>                   
+                </tr>
+                <tr>
+                    <td>
+                        {{localize 'RQG.MPSTORAGE'}}
+                    </td>
+                    <td>
+                        <input class="attribute-input" type="text" name="data.attributes.magicpointsreserve.value" value="{{actor.data.data.attributes.magicpointsreserve.value}}" data-dtype="Number"/>
+                        /
+                        {{actor.data.data.attributes.magicpointsreserve.max}}                        
+                    </td>
+                    <td>
+                        <progress class="attribute-progress" id="magicpointsreserve" value="{{data.attributes.magicpointsreserve.value}}" max="{{data.attributes.magicpointsreserve.max}}">{{data.attributes.magicpointsreserve.value}} / {{data.attributes.magicpointsreserve.max}}</progress>
+                    </td>                      
+                </tr>
+            </table>
+        </div>
+        <div>{{> "systems/runequest/templates/actor/starterset/parts/runespells-ss-partial.html"}}</div>
+        <div>{{> "systems/runequest/templates/actor/starterset/parts/cults-ss-partial.html"}}</div>
+        <div>{{> "systems/runequest/templates/actor/starterset/parts/spiritspells-ss-partial.html"}}</div>
+        {{> "systems/runequest/templates/actor/starterset/parts/mpstorage-ss-partial.html"}}
+
+
+    </div>
 </div>

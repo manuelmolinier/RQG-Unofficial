@@ -1,0 +1,17 @@
+<p class="subtitle">{{localize "RQG.Cults"}} & {{localize "RQG.Runepoints"}}</p>
+<table class="cults-table">
+    {{#each data.cults as |cult id|}}
+    <tr class="item cult-row" data-item-id="{{cult._id}}" data-cultname="{{cult.name}}">
+        <td>{{cult.name}}</td>
+        <td>{{cult.data.rank}}</td>
+        <td>{{cult.data.subcult}}</td>
+        <td>{{cult.data.data.currentrunepoint}} / {{cult.data.data.maxrunepoint}}</td>
+        <td>
+            <div class="item-controls">
+                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+            </div>
+        </td>
+    </tr>
+    {{/each}}        
+</table>

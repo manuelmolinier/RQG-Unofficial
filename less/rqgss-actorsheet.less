@@ -1,8 +1,28 @@
+@font-face {
+    font-family: EBGaramond-Bold;
+    src: url("./fonts/EBGaramond-Bold.ttf");
+}
+@font-face {
+    font-family: EBGaramond-Regular;
+    src: url("./fonts/EBGaramond-Regular.ttf");
+}
+@font-face {
+    font-family: VarelaRound-Regular;
+    src: url("./fonts/Varela_Round/VarelaRound-Regular.ttf");
+}
 .rqgss.sheet.actor {
     min-width: 800px;
     min-height: 600px;
 }
 .rqgss {
+    .rqgss-navigation {
+        font-family: EBGaramond-Bold;
+        font-size:large;
+        font-weight: 900;
+    }
+    .editor {
+        height:200px;
+    }
     .sheet-body {
         overflow: auto;
         height:99%;
@@ -20,9 +40,8 @@
     }      
     .general-container{
         display: grid;
-        height: 100%;       
         grid-template-columns: 30% 40% 30%;
-        grid-template-rows: 100%;
+        grid-template-rows: auto;
         grid-template-areas: 
             "name portrait runes";
         border: 1px solid #7a7971;
@@ -36,68 +55,305 @@
             grid-area:portrait;
             border: 1px solid #7a7971;
             border-radius: 3px;
+            text-align: center;
             .character-profile-img {
                 border-radius: 8px;
                 max-width: 100%;
                 height: auto;            
-            }        
+            }
+            .title {
+                width:100%;
+                font-size:x-large;
+                font-family: 'EBGaramond-Bold';
+                color:darkred;
+            }                    
         }
         .general-runes-container{
             grid-area:runes;
             border: 1px solid #7a7971;
             border-radius: 3px;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            /*height: 200px;*/
-            overflow: auto;
-            margin-bottom: 10px;        
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 50px 300px 1fr;
+            grid-template-areas: 
+                "title"
+                "elemental"
+                "power";
+            border: 1px solid #7a7971;
+            border-radius: 3px;            
+            margin-bottom: 10px;
+            height:800px;
+            .title-container {
+                grid-area:title;
+            }
+            .elemental-container {
+                border: 1px solid #7a7971;
+                border-radius: 3px;            
+                margin-bottom: 10px;                
+                grid-area:elemental;
+                width:100%;
+                position: relative;
+                .air-bloc {
+                    position: absolute;
+                    top: 33%;
+                    left: 5px;
+                }
+                .fire-bloc {
+                    position: absolute;
+                    top: 5px;
+                    left: 40%;
+                }
+                .darkness-bloc {
+                    position: absolute;
+                    top: 33%;
+                    left: 80%;
+                }
+                .water-bloc {
+                    position: absolute;
+                    bottom: 5px;
+                    left: 60%;
+                } 
+                .earth-bloc {
+                    position: absolute;
+                    bottom: 5px;
+                    left: 20%;
+                }
+                .moon-bloc {
+                    position: absolute;
+                    top: 33%;
+                    left: 40%;
+                }                                                
+            }
+            .power-container {
+                border: 1px solid #7a7971;
+                border-radius: 3px;            
+                margin-bottom: 10px;
+                grid-area:power;
+                width:100%;
+                position: relative;
+                .man-bloc {
+                    position: absolute;
+                    top: 5px;
+                    left: 40%;
+                    display:flex;
+                    flex-direction: column;
+                    flex-wrap: wrap;                    
+                    border: 1px solid #7a7971;
+                    border-radius: 3px;
+                    width:50px;
+                    align-items: center;                      
+                }
+                .beast-bloc {
+                    display:flex;
+                    flex-direction: column;
+                    flex-wrap: wrap;
+                    position: absolute;
+                    bottom: 5px;
+                    left: 40%;
+                    border: 1px solid #7a7971;
+                    border-radius: 3px;
+                    width:50px;
+                    align-items: center;                      
+                }
+                .fertility-bloc {
+                    display:flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    position: absolute;
+                    top: 25%;
+                    left: 5px;
+                    border: 1px solid #7a7971;
+                    border-radius: 3px;
+                    width:33%;
+                    align-items: center;
+                    .rune-bloc-values {
+                        display:flex;
+                        flex-direction: column;
+                        flex-wrap: wrap;
+                    }
+                }
+                .death-bloc {
+                    display:flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    position: absolute;
+                    top: 25%;
+                    left: 60%;
+                    border: 1px solid #7a7971;
+                    border-radius: 3px;
+                    align-items: center;
+                    width:33%;
+                    .rune-bloc-values {
+                        display:flex;
+                        flex-direction: column;
+                        flex-wrap: wrap;
+                    }
+                }
+                .harmony-bloc {
+                    display:flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    position: absolute;
+                    top: 37.5%;
+                    left: 5px;
+                    border: 1px solid #7a7971;
+                    border-radius: 3px;
+                    align-items: center;                      
+                    width:33%;
+                    .rune-bloc-values {
+                        display:flex;
+                        flex-direction: column;
+                        flex-wrap: wrap;
+                    }                
+                }
+                .disorder-bloc {
+                    display:flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    position: absolute;
+                    top: 37.5%;
+                    left: 60%;
+                    border: 1px solid #7a7971;
+                    border-radius: 3px;
+                    align-items: center;                      
+                    width:33%;
+                    .rune-bloc-values {
+                        display:flex;
+                        flex-direction: column;
+                        flex-wrap: wrap;
+                    }
+                }
+                .truth-bloc {
+                    display:flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    position: absolute;
+                    top: 50%;
+                    left: 5px;
+                    border: 1px solid #7a7971;
+                    border-radius: 3px;
+                    align-items: center;                      
+                    width:33%;
+                    .rune-bloc-values {
+                        display:flex;
+                        flex-direction: column;
+                        flex-wrap: wrap;
+                    }
+                }
+                .illusion-bloc {
+                    display:flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    position: absolute;
+                    top: 50%;
+                    left: 60%;
+                    border: 1px solid #7a7971;
+                    border-radius: 3px;
+                    align-items: center;                      
+                    width:33%;
+                    .rune-bloc-values {
+                        display:flex;
+                        flex-direction: column;
+                        flex-wrap: wrap;
+                    }
+                }
+                .stasis-bloc {
+                    display:flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    position: absolute;
+                    top: 62.5%;
+                    left: 5px;
+                    border: 1px solid #7a7971;
+                    border-radius: 3px;
+                    align-items: center;                      
+                    width:33%;
+                    .rune-bloc-values {
+                        display:flex;
+                        flex-direction: column;
+                        flex-wrap: wrap;
+                    }
+                }
+                .movement-bloc {
+                    display:flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    position: absolute;
+                    top: 62.5%;
+                    left: 60%;
+                    border: 1px solid #7a7971;
+                    border-radius: 3px;
+                    align-items: center;                      
+                    width:33%;
+                    .rune-bloc-values {
+                        display:flex;
+                        flex-direction: column;
+                        flex-wrap: wrap;
+                    }
+                }                                                                    
+            }
             .rune-name {
-                font-size:small;
-                font-weight:bold;            
+                font-size:x-small;
+                font-family: VarelaRound-Regular;
+                color:black;            
             }
             .rune-input {
-                width:2.5em;
-                height:2.5em;
-                font-size: normal;            
+                width:45px;
+                height:20px;
+                font-size: small;
+                color:black;                  
             }
             .rune-img {
                 border-radius: 8px;
-                max-width: 2.5em;
+                max-width: 35px;
+                max-height: 35px;
                 height: auto;                 
             }
             .rune-bloc {
                 border: 1px solid #7a7971;
                 border-radius: 3px;
-                width:33%            
+                width:50px;
+                align-items: center;            
+            }
+            .title {
+                width:100%;
+                font-size:x-large;
+                font-family: 'EBGaramond-Bold';
+                color:darkred;
+                text-align: center;
             }
         }
         .section-name {
             font-weight: bold;
-            font-family: var(--main-text-font);
+            font-family: 'EBGaramond-Bold';
             text-align: center;
             width: 100%;
             .title {
                 width:100%;
-                font-size: large;
+                font-size:x-large;
+                font-family: 'EBGaramond-Bold';
+                color:darkred;
             }
             .name-input {
                 width:100%;
-                font-size: normal;            
+                font-size: large;
+                color:black;                
+                font-family: 'EBGaramond-Bold';
             }
         }
         .section-description {
             overflow-y: auto;
-            height:400px;
             border: 1px solid #7a7971;
             border-radius: 3px;           
             .title {
-                font-weight: bold;
-                font-family: var(--main-text-font);
-                text-align: center;
                 width:100%;
-                font-size: large;
+                font-size:x-large;
+                font-family: 'EBGaramond-Bold';
+                color:darkred;
+                text-align: center;
+            }
+            .editor {
+                height:600px;
             }        
         }
         .section-notes {
@@ -106,5 +362,158 @@
             border: 1px solid #7a7971;
             border-radius: 3px; 
         }                                
+    }
+    .game-container {
+        display: grid;
+        height: 100%;       
+        grid-template-columns: 30% 40% 30%;
+        grid-template-rows: 100%;
+        grid-template-areas: 
+            "statistics skills magic";
+        border: 1px solid #7a7971;
+        border-radius: 3px;
+        .game-statistics-container {
+            grid-area:statistics;
+            border: 1px solid #7a7971;
+            border-radius: 3px;
+            align: center;
+            .title {
+                width:100%;
+                font-size:x-large;
+                font-family: 'EBGaramond-Bold';
+                color:darkred;
+                text-align: center;              
+            }
+            .attributes-hl-container {
+                display: grid;
+                grid-template-columns: 65% 35%;
+                grid-template-rows: min-content min-content;
+                grid-template-areas: 
+                    "hitlocations attributes"
+                    "hpbar hpbar";
+                border: 1px solid #7a7971;
+                border-radius: 3px;
+                .attributes-table {
+                    grid-area: attributes;
+                    font-size: smaller;
+                    .attributes-thead {
+                        background-color:darkgreen;
+                        color:whitesmoke;                        
+                    }
+                }
+                .hitlocations-table {
+                    grid-area: hitlocations;
+                    font-size: smaller;
+                    .hitlocations-thead {
+                        background-color:darkgreen;
+                        color:whitesmoke;                        
+                    }                    
+                }
+                .attribute-input {
+                    width:30px;
+                }
+
+                .hpbar {
+                    grid-area: hpbar;
+                    .attribute-progress {
+                        width:60%;
+                        height:30px;
+                    }
+                }
+            }
+            .characteristic-label {
+                font-size:large;
+                font-family: 'EBGaramond-Bold';
+                color:darkred;
+                text-align: center;                 
+            }
+            .attacks-thead {
+                background-color:darkgreen;
+                color:whitesmoke;
+                font-family: EBGaramond-Bold;                
+            }
+            .attack-row {
+                font-family: EBGaramond-Bold; 
+            }
+            .spiritcombat-row {
+                background-color:darkolivegreen;
+                color:whitesmoke;                
+                font-family: EBGaramond-Bold;                 
+            }
+        }
+        .game-skills-container {
+            grid-area:skills;
+            border: 1px solid #7a7971;
+            border-radius: 3px;
+            display: grid;
+            height: 100%;       
+            grid-template-columns: 33% 33% 33%;
+            grid-template-rows: min-content min-content;
+            grid-template-areas: 
+                "skill-col1 skill-col2 weapon"
+                "passions passions gear";
+            font-size: small;                
+            .skill-col1 {
+                grid-area:skill-col1;
+            }   
+            .skill-col2 {
+                grid-area:skill-col2;
+            }
+            .weapon-col {
+                grid-area:weapon;
+            }
+            .experience-box {
+                width:10px;
+                height:10px;
+            }
+            .skill-thead {
+                background-color:darkgreen;
+                color:whitesmoke;
+                font-family: EBGaramond-Bold;
+            }
+            .skill-row {
+                font-family: EBGaramond-Bold; 
+            }
+        }
+        .game-magic-container {
+            grid-area:magic;
+            border: 1px solid #7a7971;
+            border-radius: 3px;
+            .title {
+                width:100%;
+                font-size:x-large;
+                font-family: 'EBGaramond-Bold';
+                color:darkred;
+                text-align: center;              
+            }
+            .subtitle {
+                width:100%;
+                font-size:large;
+                font-family: 'VarelaRound-Regular';
+                color:darkred;
+                text-align: center;                 
+            }
+            .spells-thead {
+                background-color:darkgreen;
+                color:whitesmoke;
+                font-family: EBGaramond-Bold;                
+            }
+            .spell-row {
+                font-family: EBGaramond-Bold; 
+            }  
+            .cult-row {
+                font-family: EBGaramond-Bold; 
+            }
+            .mpstorage-table {
+                .mpstorage-thead {
+                    background-color:darkgreen;
+                    color:whitesmoke;
+                    font-family: EBGaramond-Bold;   
+                }
+                .mpstorage-input {
+                    width: 40px;
+                }
+            }                                           
+        }
     }
 }

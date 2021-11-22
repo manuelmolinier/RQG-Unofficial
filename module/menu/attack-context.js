@@ -6,6 +6,7 @@ export const attackMenuOptions = (actor, token) => [
       icon: '<i class="fas fa-dice-d20"></i>',
       condition: () => true,
       callback: async (el) => {
+        let targetdefense = 0;
         const itemId = RQGTools.getDataset(el, "itemId");
         const item = actor.items.get(itemId);
         if (!item || !item.sheet) {
@@ -13,7 +14,7 @@ export const attackMenuOptions = (actor, token) => [
           ui.notifications?.error(msg);
           throw new Error(msg, el);
         }
-        item.roll();
+        item.roll({"targetdefense": targetdefense});
       }
     },  
     {

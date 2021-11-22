@@ -32,7 +32,8 @@
         "freeint": 0,
         "attackmultiplier": 1,
         "defensemultiplier": 1,
-        "inspiration":0
+        "inspiration":0,
+        "move": 3
       },
       "characteristics":{
         "strength": {

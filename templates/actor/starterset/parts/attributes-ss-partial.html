@@ -1,0 +1,56 @@
+<table class="attributes-table" border="2">
+    <thead class="attributes-thead">
+        <tr>
+            <th>Quality</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{localize 'RQG.HP'}}</td>
+            <td>
+                {{actor.data.data.attributes.hitpoints.value}}
+                /
+                {{actor.data.data.attributes.hitpoints.max}}                
+            </td>
+        </tr>
+        <tr>
+            <td>{{localize "RQG.GENERALWOUNDS"}}</td>
+            <td><input class="attribute-input" type="text" name="data.attributes.generalwounds" value="{{actor.data.data.attributes.generalwounds}}" data-dtype="Number"/></td>
+        </tr>                
+        <tr>
+            <td>{{localize 'RQG.MP'}}</td>
+            <td>
+                {{actor.data.data.attributes.magicpoints.value}}
+                /
+                {{actor.data.data.attributes.magicpoints.max}}                
+            </td>
+        </tr>        
+        <tr>
+        </tr>
+        <tr>
+            <td>SIZ SR</td>
+            <td>{{actor.data.data.attributes.sizsr}}</td>
+        </tr>             
+        <tr>
+            <td>DEX SR</td>
+            <td>{{actor.data.data.attributes.dexsr}}</td>
+        </tr>             
+        <tr>
+            <td>Melee SR</td>
+            <td>{{actor.data.data.attributes.meleesr}}</td>
+        </tr> 
+        <tr>
+            <td>Damage Bonus</td>
+            <td>{{actor.data.data.attributes.damagebonus}}</td>
+        </tr>        
+        <tr>
+            <td>Move</td>
+            <td>{{actor.data.data.attributes.move}}</td>
+        </tr>
+        <tr>
+            <td>Healing Rate</td>
+            <td>{{actor.data.data.attributes.healingrate}}</td>
+        </tr>        
+    </tbody>
+</table>

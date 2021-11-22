@@ -7,7 +7,7 @@
     </style>
     <!-- No sheet header in Starter Set style Character Sheet we move directly to content-->    
     {{!-- Sheet Tab Navigation --}}
-    <nav class="nav-sheet-tabs sheet-tabs tabs flexrow" data-group="primary">
+    <nav class="nav-sheet-tabs sheet-tabs tabs flexrow rqgss-navigation" data-group="primary">
         {{#if data.flags.locked}}
             <a class="unlock-character-sheet" title="{{localize 'RQG.UnlockSheet'}}"> <i class="fas fa-lock"></i> </a>
         {{else}}
@@ -15,6 +15,7 @@
         {{/if}}
         <a class="item actor-item" data-tab="general">{{localize 'RQG.General'}}</a>
         <a class="item actor-item" data-tab="game">{{localize 'RQG.Game'}}</a>
+        <a class="item actor-item" data-tab="backstory">{{localize 'RQG.Backstory'}}</a>
         <a class="item actor-item" data-tab="activeeffects">Effects</a>
         {{#if isGM}}
             <a class="item actor-item" data-tab="gmtools">GM Tools</a>
@@ -31,6 +32,10 @@
         <div  class="tab game"  data-group="primary"  data-tab="game">
             {{> "systems/runequest/templates/actor/starterset/parts/game.html"}}
         </div> 
+        {{!-- backstory Tab --}}
+        <div  class="tab backstory"  data-group="primary"  data-tab="backstory">
+            {{> "systems/runequest/templates/actor/starterset/parts/backstory.html"}}
+        </div>         
         {{!-- Active Effects Tab --}}
         <div class="tab activeeffects" data-group="primary" data-tab="activeeffects">
             {{> "systems/runequest/templates/actor/parts/actor-activeeffectsv2.html"}}

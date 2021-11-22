@@ -1,0 +1,23 @@
+<p class="subtitle">{{localize "RQG.Runespells"}}</p>
+<table class="runespell-table">
+    <thead class="spells-thead">
+        <th>{{localize "RQG.Spell"}}</th>
+        <th>{{localize "RQG.Points"}}</th>
+        <th>{{localize "RQG.Runes"}}</th>
+        <th>&nbsp;</th>
+    </thead>
+    {{#each data.spells.rune as |spell id|}}
+        <tr class="item spell-row" data-item-id="{{spell._id}}" data-spellname="{{spell.name}}" data-rune="{{spell.data.data.rune}}">
+            <td><a class="runespell-roll">{{spell.name}}</a></td>
+            <td><a class="runespell-roll">{{spell.data.data.points}}</a></td>
+            <td><a class="runespell-roll">{{spell.data.data.rune}}</a></td>
+            <td>
+                <div class="item-controls">
+                    <a class="spell-toggle" title="Toggle"><i class="fas {{#if spell.data.data.active}}fa-times{{else}}fa-check{{/if}}"></i></a>
+                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                </div>
+            </td>
+        </tr>
+    {{/each}}
+</table>

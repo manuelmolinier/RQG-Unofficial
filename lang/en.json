@@ -210,5 +210,12 @@
     "RQG.DB": "Damage bonus",
     "RQG.SIZSR": "SIZ SR",
     "RQG.DEXSR": "DEX SR",
-    "RQG.WDS": "Wds."
+    "RQG.WDS": "Wds.",
+    "RQG.AP": "AP",
+    "RQG.Statistics": "Statistics",
+    "RQG.Runespells": "Rune Magic Spells",
+    "RQG.Spiritspells": "Spirit Magic Spells",
+    "RQG.Cults": "Cults",
+    "RQG.Game": "Game",
+    "RQG.Spell": "Spell"
 }

@@ -1,0 +1,33 @@
+<p class="title title-container">{{localize "RQG.Runes"}}</p>
+<div class="elemental-container">
+    {{#each data.elementalrunes as |elementalrune id|}}
+    <div class="rune-bloc {{id}}-bloc elemental-rune" data-rune="{{id}}">
+        <label class="rune-name">{{localize elementalrune.label}}</label>
+        <a class="elementalrunes-roll rollable"><img class="rune-img" data-rune="{{id}}" src="/systems/runequest/styles/img/{{id}}.png" title="{{localize elementalrune.label}}" alt="{{localize elementalrune.label}}"/></a>
+        <input  class="rune-input"  type="text"  name="data.elementalrunes.{{id}}.value"  value="{{elementalrune.value}}"  data-dtype="Number"  />       
+    </div>
+    {{/each}}
+</div>
+<div class="power-container">
+{{#each data.powerrunes as |powerrunepair pairid|}}
+    {{#each powerrunepair as |powerrune runeid|}}
+        {{#if (or (eq runeid "man") (eq runeid "man"))}}
+            <div class="{{runeid}}-bloc">
+                <label class="rune-name">{{localize powerrune.label}}</label>
+                <div>
+                    <a class="powerrunes-roll rollable" data-rune="{{runeid}}" data-runepair="{{pairid}}"><img class="rune-img" data-rune="{{runeid}}" src="/systems/runequest/styles/img/{{runeid}}.png" title="{{localize powerrune.label}}" alt="{{localize powerrune.label}}"/></a>       
+                    <input  class="rune-input"  type="text"  name="data.powerrunes.{{pairid}}.{{runeid}}.value"  value="{{powerrune.value}}"  data-dtype="Number"  />       
+                </div>
+            </div>
+        {{else}}
+            <div class="{{runeid}}-bloc">
+                <a class="powerrunes-roll rollable" data-rune="{{runeid}}" data-runepair="{{pairid}}"><img class="rune-img" data-rune="{{runeid}}" src="/systems/runequest/styles/img/{{runeid}}.png" title="{{localize powerrune.label}}" alt="{{localize powerrune.label}}"/></a>       
+                <div class="rune-bloc-values">
+                    <label class="rune-name">{{localize powerrune.label}}</label>
+                    <input  class="rune-input"  type="text"  name="data.powerrunes.{{pairid}}.{{runeid}}.value"  value="{{powerrune.value}}"  data-dtype="Number"  />       
+                </div>
+            </div>
+        {{/if}}        
+    {{/each}}
+{{/each}}
+</div>

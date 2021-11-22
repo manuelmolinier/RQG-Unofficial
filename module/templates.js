@@ -38,6 +38,16 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/runequest/templates/item/parts/origin-skilltable.html",
     // Starter Set Style CS Partials
     "systems/runequest/templates/actor/starterset/parts/general.html",
-    "systems/runequest/templates/actor/starterset/parts/game.html"
+    "systems/runequest/templates/actor/starterset/parts/game.html",
+    "systems/runequest/templates/actor/starterset/parts/skills-ss-partial.html",
+    "systems/runequest/templates/actor/starterset/parts/hitlocations-ss-partial.html", 
+    "systems/runequest/templates/actor/starterset/parts/attributes-ss-partial.html",
+    "systems/runequest/templates/actor/starterset/parts/runespells-ss-partial.html",
+    "systems/runequest/templates/actor/starterset/parts/cults-ss-partial.html",
+    "systems/runequest/templates/actor/starterset/parts/spiritspells-ss-partial.html",
+    "systems/runequest/templates/actor/starterset/parts/runes-ss-partial.html",
+    "systems/runequest/templates/actor/starterset/parts/passions-ss-partial.html",
+    "systems/runequest/templates/actor/starterset/parts/mpstorage-ss-partial.html",
+    "systems/runequest/templates/actor/starterset/parts/backstory.html"               
   ]);
 };

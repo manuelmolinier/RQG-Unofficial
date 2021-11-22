@@ -1,0 +1,26 @@
+<div>
+    <p class="subtitle">{{localize "RQG.MPStorage"}}</p>
+    <table class="mpstorage-table">
+    <thead class="mpstorage-thead">
+        <th>{{localize "RQG.Name"}}</th>
+        <th>{{localize "RQG.CurrentMP"}}</th>
+        <th>{{localize "RQG.MaxMP"}}</th>
+        <th>{{localize "RQG.Equiped"}}</th>
+        <th><a class="item-control item-create" title="Create item" data-type="mpstorage"><i class="fas fa-plus"></i></a></th>
+    </thead>
+    <tbody>
+    {{#each data.mpstorage as |storage id|}}
+        <tr class="item" data-item-id="{{storage._id}}">
+        <td>{{localize storage.name}}</td>
+        <td><input class="mpstorage-current mpstorage-input" id="{{id}}_{{storage._id}}_currentmp_mpstorage" type="text" name="data.currentmp" value="{{storage.data.data.currentmp}}"/></td>
+        <td>{{storage.data.data.maxmp}}</td>
+        <td><input class="mpstorage-equiped" id="{{id}}_{{storage._id}}_mpstorage_equiped" type="checkbox" name="data.equiped" {{checked storage.data.data.equiped}}/></td>
+        <td>
+            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>                
+        </td>
+        </tr>        
+    {{/each}}
+    </tbody>
+    </table>
+</div>
