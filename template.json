@@ -453,7 +453,10 @@
     "points": 0,
     "keywords": [],
     "rune": "",
-    "active": false
+    "active": false,
+    "range":"",
+    "duration": "",
+    "type":""
   },
   "meleeattack":{
     "name": "",
@@ -605,7 +608,10 @@
     "keywords": [],
     "runestechniques": [],
     "skill": "",
-    "active": false
+    "active": false,
+    "range":"",
+    "duration": "",
+    "type":""
   },
   "event": {
     "name": "",

@@ -8,7 +8,10 @@
   "templateVersion": 2,
   "author": "Astaroth",
   "esmodules": ["module/runequest.js"],
-  "styles": ["styles/rqg.css"],
+  "styles": [
+    "styles/rqg.css",
+    "styles/rqgss.css"
+  ],
   "packs": [
     {
       "name": "skills",
@@ -61,7 +64,16 @@
       "path": "./packs/scorpionmen-locations.db",
       "entity": "Item",
       "tag" : "hitlocation"   
-    }                
+    },
+    {
+      "name": "character-items-export",
+      "label": "Character Items Export",
+      "system": "runequest",
+      "module": "runequest",
+      "path": "./packs/character-items-export.db",
+      "entity": "Item",
+      "tag" : "export"   
+    }                    
   ],
   "languages": [
     {

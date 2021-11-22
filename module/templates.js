@@ -22,6 +22,7 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/runequest/templates/actor/parts/character/actor-backstory.html",
     "systems/runequest/templates/actor/parts/character/actor-runesandpassions.html",
     "systems/runequest/templates/actor/parts/character/actor-runesandpassionsv2.html",
+    "systems/runequest/templates/actor/parts/actor-gmtools.html",
     // NPC Sheet Partial
     "systems/runequest/templates/actor/parts/npc/npc-sheetheader.html",
     "systems/runequest/templates/actor/parts/npc/npc-summary.html",

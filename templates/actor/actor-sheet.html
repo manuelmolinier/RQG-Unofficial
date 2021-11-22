@@ -29,6 +29,9 @@
         <a class="item actor-item" data-tab="description">{{localize 'RQG.Backstory'}}</a>
         <a class="item actor-item" data-tab="items">{{localize 'RQG.Items'}}</a>
         <a class="item actor-item" data-tab="activeeffects">Effects</a>
+        {{#if isGM}}
+            <a class="item actor-item" data-tab="gmtools">GM Tools</a>
+        {{/if}}
     </nav>
 
     {{!-- Sheet Body --}}
@@ -94,6 +97,10 @@
         <div class="tab activeeffects" data-group="primary" data-tab="activeeffects">
             {{> "systems/runequest/templates/actor/parts/actor-activeeffectsv2.html"}}
         </div>
+        {{!-- Active Effects Tab --}}
+        <div class="tab activeeffects" data-group="primary" data-tab="gmtools">
+            {{> "systems/runequest/templates/actor/parts/actor-gmtools.html"}}
+        </div>        
     </section>
 </form>
 

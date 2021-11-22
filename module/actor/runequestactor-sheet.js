@@ -3,13 +3,14 @@ import { RQGTools } from '../tools/rqgtools.js';
 import {skillMenuOptions} from "../menu/skill-context.js";
 import {attackMenuOptions} from "../menu/attack-context.js";
 import ActiveEffectRunequest from "../active-effect.js";
+import {RunequestBaseActorSheet} from "./rqg-baseactor-sheet.js";
 
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class RunequestActorSheet extends ActorSheet {
+export class RunequestActorSheet extends RunequestBaseActorSheet {
 
   /** @override */
 	static get defaultOptions() {
@@ -42,7 +43,12 @@ export class RunequestActorSheet extends ActorSheet {
     //Load config
     context.config = CONFIG.RQG;
 
-
+    //Collect if user is Owner and if User is GM
+    context.isOwner = this.actor.isOwner;
+    context.isGM = game.user.isGM;
+    if(game.user.isGM) {
+      context.gmitems = game.items;
+    }
     // Add the actor's data to context.data for easier access, as well as flags.
     context.data = actorData.data;
     context.flags = actorData.flags;
@@ -651,6 +657,11 @@ export class RunequestActorSheet extends ActorSheet {
     html.find('.item').on('dragstart', event => RQGTools._onDragItem(event,this.actor));
     html.find(".effect-control").click(ev => ActiveEffectRunequest.onManageActiveEffect(ev, this.actor));
     html.find(".spell-toggle").click(this._onSpellToggle.bind(this));
+    if(game.user.isGM) {
+      //Adding listener only available to GM users
+      html.find(".export-items").click(this._onExportItems.bind(this));
+
+    }
   }
   /* -------------------------------------------- */
 
@@ -1278,4 +1289,29 @@ export class RunequestActorSheet extends ActorSheet {
     }
     return spell.update({"data.active": spellstatus});
   }
+  async _onExportItems(event) {
+    // This function will export Actor Owned items to a new directory in the Items Directory.
+    // To be improved with more features as we go.
+
+    //First we create the compendium
+    let timestamp = Date.now();
+    let label = this.actor.data.name+"-"+timestamp;
+    const itemCompendium = await game.packs.get("runequest.character-items-export").duplicateCompendium({label: label});
+    console.log(itemCompendium);
+    for (let i of this.actor.items) {
+      itemCompendium.importDocument(i);
+    }
+    return;
+  }
+  static async loadCompendiumData(compendium) {
+    const pack = game.packs.get(compendium);
+    return await pack?.getDocuments() ?? [];
+  }
+
+  /* -------------------------------------------- */
+  static async loadCompendium(compendium, filter = item => true) {
+    console.log("Loading compendium:"+compendium);
+    let compendiumData = await RunequestActorSheet.loadCompendiumData(compendium);
+    return compendiumData.filter(filter);
+  }    
 }
