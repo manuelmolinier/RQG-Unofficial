@@ -34,7 +34,6 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/runequest/templates/actor/parts/actor-activeeffectsv2.html",     
     // Item Sheet Partials
     "systems/runequest/templates/item/parts/origin-skills.html",
-<<<<<<< HEAD
     "systems/runequest/templates/item/parts/origin-skilltable.html",
     // Starter Set Style CS Partials
     "systems/runequest/templates/actor/starterset/parts/general.html",
@@ -49,8 +48,5 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/runequest/templates/actor/starterset/parts/passions-ss-partial.html",
     "systems/runequest/templates/actor/starterset/parts/mpstorage-ss-partial.html",
     "systems/runequest/templates/actor/starterset/parts/backstory.html"               
-=======
-    "systems/runequest/templates/item/parts/origin-skilltable.html"
->>>>>>> parent of 1eb3331 (added less support and a new Character Sheet Style)
   ]);
 };
