@@ -1,0 +1,9 @@
+** V0.1.12 **
+** Bug Fixes **
+- Fixed a bug where the edit of Ranged and Natural attacks couldn't be edited on the new Character Sheet.
+- Changed Starter Set sheet MPStorage to a label as the number cannot be edited at this place
+
+** Additional features **
+
+
+

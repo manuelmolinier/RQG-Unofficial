@@ -1,99 +1,100 @@
 {
-  "name": "runequest",
-  "title": "Runequest (Unofficial)",
-  "description": "A fan made ruleset for Runequest Glorantha.",
-  "version": "0.1.11",
-  "minimumCoreVersion": "0.8.0",
-  "compatibleCoreVersion": "0.8.9",
-  "templateVersion": 2,
-  "author": "Astaroth",
-  "esmodules": ["module/runequest.js"],
-  "styles": [
-    "styles/rqg.css",
-    "styles/rqgss.css"
-  ],
-  "packs": [
-    {
-      "name": "skills",
-      "label": "Skills",
-      "system": "runequest",
-      "module": "runequest",
-      "path": "./packs/skills.db",
-      "entity": "Item",
-      "tag" : "skill"
-    },
-    {
-      "name": "rolltables",
-      "label": "RQG Rolltables",
-      "path": "./packs/rolltables.db",
-      "entity": "RollTable",
-      "module": "runequest"
-    },
-    {
-      "name": "Humanoidslocations",
-      "label": "Humanoids Locations",
-      "system": "runequest",
-      "module": "runequest",
-      "path": "./packs/humanoidlocations.db",
-      "entity": "Item",
-      "tag" : "hitlocation"   
-    },
-    {
-      "name": "Four-legged Animalslocations",
-      "label": "Four-legged Animals Locations",
-      "system": "runequest",
-      "module": "runequest",
-      "path": "./packs/four-legged-animals-locations.db",
-      "entity": "Item",
-      "tag" : "hitlocation"   
-    },
-    {
-      "name": "Humanoidswingedlocations",
-      "label": "Winged Humanoids Locations",
-      "system": "runequest",
-      "module": "runequest",
-      "path": "./packs/winged-humanoids-locations.db",
-      "entity": "Item",
-      "tag" : "hitlocation"   
-    },
-    {
-      "name": "Scorpionmenlocations",
-      "label": "Scorpion Men Locations",
-      "system": "runequest",
-      "module": "runequest",
-      "path": "./packs/scorpionmen-locations.db",
-      "entity": "Item",
-      "tag" : "hitlocation"   
-    },
-    {
-      "name": "character-items-export",
-      "label": "Character Items Export",
-      "system": "runequest",
-      "module": "runequest",
-      "path": "./packs/character-items-export.db",
-      "entity": "Item",
-      "tag" : "export"   
-    }                    
-  ],
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/en.json"
-    },
-    {
-      "lang": "fr",
-      "name": "French",
-      "path": "lang/fr.json"
-    }
-
-  ],
-  "gridDistance": 1.5,
-  "gridUnits": "m",
-  "primaryTokenAttribute": "attributes.hitpoints",
-  "secondaryTokenAttribute": "attributes.magicpoints",
-  "url": "https://gitlab.com/manuelmolinier/runequest-foundryvtt",
-  "manifest": "https://gitlab.com/manuelmolinier/runequest-foundryvtt/-/raw/master/system.json",
-  "download": "https://gitlab.com/astarothrpg/runequest-foundryvtt/-/archive/v0.1.11/runequest-foundryvtt-v0.1.11.zip",
-  "license": "LICENSE.txt"
+    "name": "runequest",
+    "title": "Runequest (Unofficial)",
+    "description": "A fan made ruleset for Runequest Glorantha.",
+    "version": "0.1.12.2",
+    "minimumCoreVersion": "0.8.0",
+    "compatibleCoreVersion": "0.8.9",
+    "templateVersion": 2,
+    "author": "Astaroth",
+    "esmodules": [
+        "module/runequest.js"
+    ],
+    "styles": [
+        "styles/rqg.css",
+        "styles/rqgss.css"
+    ],
+    "packs": [
+        {
+            "name": "skills",
+            "label": "Skills",
+            "system": "runequest",
+            "module": "runequest",
+            "path": "./packs/skills.db",
+            "entity": "Item",
+            "tag": "skill"
+        },
+        {
+            "name": "rolltables",
+            "label": "RQG Rolltables",
+            "path": "./packs/rolltables.db",
+            "entity": "RollTable",
+            "module": "runequest"
+        },
+        {
+            "name": "Humanoidslocations",
+            "label": "Humanoids Locations",
+            "system": "runequest",
+            "module": "runequest",
+            "path": "./packs/humanoidlocations.db",
+            "entity": "Item",
+            "tag": "hitlocation"
+        },
+        {
+            "name": "Four-legged Animalslocations",
+            "label": "Four-legged Animals Locations",
+            "system": "runequest",
+            "module": "runequest",
+            "path": "./packs/four-legged-animals-locations.db",
+            "entity": "Item",
+            "tag": "hitlocation"
+        },
+        {
+            "name": "Humanoidswingedlocations",
+            "label": "Winged Humanoids Locations",
+            "system": "runequest",
+            "module": "runequest",
+            "path": "./packs/winged-humanoids-locations.db",
+            "entity": "Item",
+            "tag": "hitlocation"
+        },
+        {
+            "name": "Scorpionmenlocations",
+            "label": "Scorpion Men Locations",
+            "system": "runequest",
+            "module": "runequest",
+            "path": "./packs/scorpionmen-locations.db",
+            "entity": "Item",
+            "tag": "hitlocation"
+        },
+        {
+            "name": "character-items-export",
+            "label": "Character Items Export",
+            "system": "runequest",
+            "module": "runequest",
+            "path": "./packs/character-items-export.db",
+            "entity": "Item",
+            "tag": "export"
+        }
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        },
+        {
+            "lang": "fr",
+            "name": "French",
+            "path": "lang/fr.json"
+        }
+    ],
+    "gridDistance": 1.5,
+    "gridUnits": "m",
+    "primaryTokenAttribute": "attributes.hitpoints",
+    "secondaryTokenAttribute": "attributes.magicpoints",
+    "url": "https://github.com/manuelmolinier/RQG-Unofficial",
+    "manifest": "https://github.com/manuelmolinier/RQG-Unofficial/releases/latest/download/system.json",
+    "download": "https://github.com/manuelmolinier/RQG-Unofficial/releases/download/v0.1.12.2/runequest.zip",
+    "license": "LICENSE.txt"
 }
