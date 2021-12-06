@@ -98,7 +98,7 @@ export class RunequestItem extends Item {
     this._skillgainroll(item,actor);
   }
 
-  _attackroll(attack,actor,testmodifier,targetdefense) {
+  async _attackroll(attack,actor,testmodifier,targetdefense) {
     const data = actor.data;
     let categoryid = attack.data.data.attacktype+"weapons";
     const damagebonus = data.data.attributes.damagebonus;
@@ -108,9 +108,9 @@ export class RunequestItem extends Item {
     const categorymod = (categoryid == "spiritweapons")?data.data.skillcategory["magic"].modifier:data.data.skillcategory[categoryid].modifier;
     let attackskill= (skillused.data.data.total+categorymod+attack.data.data.modifier+testmodifier+data.data.attributes.inspiration)*data.data.attributes.attackmultiplier;
     let attackroll;
-    attackroll = new Roll("1d100").roll();
+    attackroll = await new Roll("1d100").roll();
     let attackresult;
-    let defenseroll = new Roll("1d100").roll();
+    let defenseroll = await new Roll("1d100").roll();
     let defenseskill
     let defenseresult;
     if(targetdefense) {
@@ -160,7 +160,7 @@ export class RunequestItem extends Item {
         "skillname": skillname,
         "skillvalue": skillvalue,
         "catmodifier": catmodifier,
-        "skillid":skill._id
+        "skillid":skill.id
       },
       callback : (html) => {
         // When dialog confirmed, fill testData dialog information
@@ -171,7 +171,7 @@ export class RunequestItem extends Item {
         catmodifier = Number(html.find('[name="catmodifier"]').val());
         skillvalue =   Number(html.find('[name="skillvalue"]').val());
         let skillid = html.find('[name="skillid"]').val();
-        //("In skillroll callback with skill._id = "+skillid);
+        //("In skillroll callback with skill.id = "+skillid);
         const target = (skillvalue+catmodifier+testmodifier);
         let result = this.basicRoll(skillname,target);
         
@@ -214,7 +214,7 @@ export class RunequestItem extends Item {
         "skillname": passionname,
         "skillvalue": passionvalue,
         "catmodifier": 0,
-        "skillid":passion._id
+        "skillid":passion.id
       },
       callback : (html) => {
         // When dialog confirmed, fill testData dialog information
@@ -224,7 +224,7 @@ export class RunequestItem extends Item {
         let testmodifier =   Number(html.find('[name="testmodifier"]').val());
         passionvalue =   Number(html.find('[name="skillvalue"]').val());
         let passionid = html.find('[name="skillid"]').val();
-        //("In passionroll callback with passion._id = "+passionid);
+        //("In passionroll callback with passion.id = "+passionid);
         const target = (passionvalue+testmodifier);
         let result = this.basicRoll(passionname,target);
         
@@ -264,7 +264,7 @@ export class RunequestItem extends Item {
         "skillname": runename,
         "skillvalue": runevalue,
         "catmodifier": 0,
-        "skillid":rune._id
+        "skillid":rune.id
       },
       callback : (html) => {
         // When dialog confirmed, fill testData dialog information
@@ -274,7 +274,7 @@ export class RunequestItem extends Item {
         let testmodifier =   Number(html.find('[name="testmodifier"]').val());
         runevalue =   Number(html.find('[name="skillvalue"]').val());
         let runeid = html.find('[name="skillid"]').val();
-        //("In runeroll callback with rune._id = "+runeid);
+        //("In runeroll callback with rune.id = "+runeid);
         const target = (runevalue+testmodifier);
         let result = this.basicRoll(runename,target);
         
@@ -314,7 +314,7 @@ export class RunequestItem extends Item {
         "skillname": spellname,
         "skillvalue": spellskill,
         "catmodifier": 0,
-        "skillid":spell._id
+        "skillid":spell.id
       },
       callback : (html) => {
         // When dialog confirmed, fill testData dialog information
@@ -354,7 +354,7 @@ export class RunequestItem extends Item {
     if(!attack.data.data.db) {
       damagebonus="0";
     }
-    let damageData = this.getdamagedata(attack,damagebonus);
+    let damageData = await this.getdamagedata(attack,damagebonus);
     let rollMode = game.settings.get("core", "rollMode");
     let isCritical = (result=="critical");
     let isSpecial= (result=="special");
@@ -363,23 +363,23 @@ export class RunequestItem extends Item {
     let isFumble= (result== "fumble");
 
     if( result== "success") {
-      damageData.damage.roll();
-      damageData.damagebonus.roll();
+      damageData.damage = await damageData.damage.roll();
+      damageData.damagebonus = await damageData.damagebonus.roll();
       damageData.totaldamage = damageData.damage.total+ damageData.damagebonus.total;
     }
     else if(result=="special") {  
-      damageData.specialdamage.roll();
-      damageData.damagebonus.roll();
+      damageData.specialdamage = await damageData.specialdamage.roll();
+      damageData.damagebonus = await damageData.damagebonus.roll();
       damageData.totaldamage = damageData.specialdamage.total + damageData.damagebonus.total;
     }
     else if(result=="critical") {
-      damageData.criticaldamage.roll();
+      damageData.criticaldamage = await damageData.criticaldamage.roll();
       if(attack.data.data.specialtype != "C") {
-        damageData.damagebonus.roll();        
+        damageData.damagebonus = await damageData.damagebonus.roll();        
       }
       else {
         damageData.damagebonus = new Roll("0");
-        damageData.damagebonus.roll();        
+        damageData.damagebonus = await damageData.damagebonus.roll();        
       }
       damageData.totaldamage = damageData.criticaldamage.total + damageData.damagebonus.total;
     }
@@ -421,10 +421,10 @@ export class RunequestItem extends Item {
     // Basic chat message data
 
     const chatData = {
-      user: game.user._id,
+      user: game.user.id,
       content: html,
       speaker: {
-        actor: this.actor._id,
+        actor: this.actor.id,
         token: this.actor.token,
         alias: this.actor.name
       }
@@ -438,7 +438,7 @@ export class RunequestItem extends Item {
 
     ChatMessage.create(chatData);
   }  
-  getdamagedata(attack,damagebonus) {
+  async getdamagedata(attack,damagebonus) {
     //("getdamagedata starting with:");
     //(attack);
     //(damagebonus);
@@ -485,7 +485,7 @@ export class RunequestItem extends Item {
     const fumblerange= Math.round((100-skillvalue)/20);
     const fumble = 100-Math.max(fumblerange,0);
     let roll;
-    roll = new Roll("1d100+@catmodifier",{catmodifier: catmodifier}).roll();
+    roll = await new Roll("1d100+@catmodifier",{catmodifier: catmodifier}).roll();
     //(roll);
 
     let result;
@@ -531,10 +531,10 @@ export class RunequestItem extends Item {
     // Basic chat message data
 
     const chatData = {
-      user: game.user._id,
+      user: game.user.id,
       content: html,
       speaker: {
-        actor: this.actor._id,
+        actor: this.actor.id,
         token: this.actor.token,
         alias: this.actor.name
       }
@@ -559,7 +559,7 @@ export class RunequestItem extends Item {
     const fumblerange= Math.round((100-target)/20);
     const fumble = 100-Math.max(fumblerange,0);
     let roll;
-    roll = new Roll("1d100").roll();
+    roll = await new Roll("1d100").roll();
     let result;
     //(this);
     if((roll.total < 96 && roll.total <= target) || roll.total <= 5) { //This is a success we check type of success
@@ -604,10 +604,10 @@ export class RunequestItem extends Item {
     // Basic chat message data
 
     const chatData = {
-      user: game.user._id,
+      user: game.user.id,
       content: html,
       speaker: {
-        actor: this.actor._id,
+        actor: this.actor.id,
         token: this.actor.token,
         alias: this.actor.name
       }

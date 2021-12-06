@@ -23,7 +23,7 @@ export class RQGTools {
         const a = event.currentTarget;
         const data = duplicate(a.dataset);
         data.type = "Item";
-        data.actorid = actor._id;   
+        data.actorid = actor.id;   
         event.originalEvent.dataTransfer.setData('text/plain', JSON.stringify(data))
     }
     static async createMacro (bar, data, slot) {

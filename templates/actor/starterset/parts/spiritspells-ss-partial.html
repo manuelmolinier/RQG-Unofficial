@@ -7,9 +7,9 @@
     </thead>
     <tbody>
         {{#each data.spells.spirit as |spell id|}}
-        <tr class="item spell-row" data-item-id="{{spell._id}}" data-spellname="{{spell.name}}">
-            <td><a class="spiritspell-roll" data-item-id="{{spell._id}}">{{spell.name}}</a></td>
-            <td><a class="spiritspell-roll" data-item-id="{{spell._id}}">{{spell.data.data.mpcost}}</a></td>
+        <tr class="item spell-row" data-item-id="{{spell.id}}" data-spellname="{{spell.name}}">
+            <td><a class="spiritspell-roll" data-item-id="{{spell.id}}">{{spell.name}}</a></td>
+            <td><a class="spiritspell-roll" data-item-id="{{spell.id}}">{{spell.data.data.mpcost}}</a></td>
             <td>
                 <div class="item-controls">                   
                     <a class="spell-toggle" title="Toggle"><i class="fas {{#if spell.data.data.active}}fa-times{{else}}fa-check{{/if}}"></i></a>

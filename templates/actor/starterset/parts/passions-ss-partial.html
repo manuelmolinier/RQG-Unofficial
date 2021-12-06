@@ -1,9 +1,9 @@
 <table  class="passion-table" >
     <tbody>
         {{#each data.passions as |passion id|}}
-        <tr class="item" data-itemid="{{passion._id}}" data-item-id="{{passion._id}}" data-passionname="{{passion.name}}">
-            <td class="item summary-passion-check" data-item-id="{{passion._id}}"><input class="passion-experience" id="{{id}}_{{passion._id}}_passion_skill" type="checkbox" name="data.experience" {{checked passion.data.data.experience}}/></td>                         
-            <td class="summary-passion-label"><a class="passion-roll" data-item-id="{{passion._id}}">{{passion.name}} - {{passion.data.data.total}}</a></td>
+        <tr class="item" data-itemid="{{passion.id}}" data-item-id="{{passion.id}}" data-passionname="{{passion.name}}">
+            <td class="item summary-passion-check" data-item-id="{{passion.id}}"><input class="passion-experience" id="{{id}}_{{passion.id}}_passion_skill" type="checkbox" name="data.experience" {{checked passion.data.data.experience}}/></td>                         
+            <td class="summary-passion-label"><a class="passion-roll" data-item-id="{{passion.id}}">{{passion.name}} - {{passion.data.data.total}}</a></td>
             <td class="item-controls summary-passion-button">
                 <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                 <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

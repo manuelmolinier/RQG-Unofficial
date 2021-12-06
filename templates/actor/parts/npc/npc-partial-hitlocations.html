@@ -14,12 +14,12 @@
         </thead>
         <tbody>
         {{#each data.hitlocations as |hl id|}}
-            <tr class="item" data-itemid="{{hl._id}}">
+            <tr class="item" data-itemid="{{hl.id}}">
                 <td class="npc-hitlocationname">{{localize hl.name}}</td>
                 <td class="npc-hitlocationlockedfield">{{hl.data.data.rangestart}}-{{hl.data.data.rangeend}}</td>
                 <td class="npc-hitlocationlockedfield">{{hl.data.data.currenthp}}</td>
                 <td class="npc-hitlocationlockedfield">{{hl.data.data.armor}}</td>
-                <td class="npc-hitlocationlockedfield"><input id="{{hl._id}}_wounds" class="attribute-value hitloc-wounds npc-wounds"  type="text"  name="data.wounds"  value="{{hl.data.data.wounds}}"  data-dtype="Number"  /></td>
+                <td class="npc-hitlocationlockedfield"><input id="{{hl.id}}_wounds" class="attribute-value hitloc-wounds npc-wounds"  type="text"  name="data.wounds"  value="{{hl.data.data.wounds}}"  data-dtype="Number"  /></td>
             </tr>        
         {{/each}}
         </tbody>
@@ -46,13 +46,13 @@
         </thead>
         <tbody>                
         {{#each data.hitlocations as |hl id|}}
-            <tr style="height: 28px;" class="item" data-item-id="{{hl._id}}">
+            <tr style="height: 28px;" class="item" data-item-id="{{hl.id}}">
                 <td class="npc-hitlocationname">{{localize hl.name}}</td>
                 <td class="npc-hitlocationunlockedfield">{{hl.data.data.rangestart}}-{{hl.data.data.rangeend}}</td>
                 <td class="npc-hitlocationunlockedfield">{{hl.data.data.currenthp}}</td>
                 <td class="npc-hitlocationunlockedfield">{{hl.data.data.maxhp}}</td>
-                <td class="npc-hitlocationunlockedfield"><input class="attribute-value resource-input" id="{{hl._id}}_armor" class="attribute-value hitloc-armor"  type="text"  name="data.armor"  value="{{hl.data.data.armor}}"  data-dtype="Number"  /></td>
-                <td class="npc-hitlocationunlockedfield"><input id="{{hl._id}}_wounds" class="attribute-value hitloc-wounds resource-input"  type="text"  name="data.wounds"  value="{{hl.data.data.wounds}}"  data-dtype="Number"  /></td>
+                <td class="npc-hitlocationunlockedfield"><input class="attribute-value resource-input" id="{{hl.id}}_armor" class="attribute-value hitloc-armor"  type="text"  name="data.armor"  value="{{hl.data.data.armor}}"  data-dtype="Number"  /></td>
+                <td class="npc-hitlocationunlockedfield"><input id="{{hl.id}}_wounds" class="attribute-value hitloc-wounds resource-input"  type="text"  name="data.wounds"  value="{{hl.data.data.wounds}}"  data-dtype="Number"  /></td>
                 <td class="item-controls hitlocationunlockedfield">
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

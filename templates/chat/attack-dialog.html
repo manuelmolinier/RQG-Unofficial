@@ -5,13 +5,13 @@
     {{!-- Attack Type --}}
         <select name="attackname">
             {{#each attacks.melee as |attack id|}}
-            <option value="{{attack._id}}">{{attack.name}}</option>
+            <option value="{{attack.id}}">{{attack.name}}</option>
             {{/each}}
             {{#each attacks.missile as |attack id|}}
-            <option value="{{attack._id}}">{{attack.name}}</option>
+            <option value="{{attack.id}}">{{attack.name}}</option>
             {{/each}}
             {{#each attacks.natural as |attack id|}}
-            <option value="{{attack._id}}">{{attack.name}}</option>
+            <option value="{{attack.id}}">{{attack.name}}</option>
             {{/each}}            
         </select>
     </div>   

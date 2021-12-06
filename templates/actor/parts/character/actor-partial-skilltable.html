@@ -10,10 +10,10 @@
         </tr>
     </thead>
     {{#each skillList as |item id|}}
-        <tr class="skill" data-item-id="{{item._id}}" data-itemid="{{item._id}}">
-            <td class="item skill-table-name" data-item-id="{{item._id}}"><a class="skill-roll skill-menu" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.data.skillcategory}}">{{item.name}}</a></td>
-            <td class="item skill-table-value" data-item-id="{{item._id}}"><a class="skill-roll skill-menu" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.data.skillcategory}}">{{item.data.data.total}}</a></td>
-            <td class="item skill-table-check" data-item-id="{{item._id}}"><input class="skill-experience" id="{{id}}_{{item._id}}_experience_skill" type="checkbox" name="data.experience" {{checked item.data.data.experience}}/></td>                         
+        <tr class="skill" data-item-id="{{item.id}}" data-itemid="{{item.id}}">
+            <td class="item skill-table-name" data-item-id="{{item.id}}"><a class="skill-roll skill-menu" data-itemid="{{item.id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.data.skillcategory}}">{{item.name}}</a></td>
+            <td class="item skill-table-value" data-item-id="{{item.id}}"><a class="skill-roll skill-menu" data-itemid="{{item.id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.data.skillcategory}}">{{item.data.data.total}}</a></td>
+            <td class="item skill-table-check" data-item-id="{{item.id}}"><input class="skill-experience" id="{{id}}_{{item.id}}_experience_skill" type="checkbox" name="data.experience" {{checked item.data.data.experience}}/></td>                         
         </tr>
     {{/each}}
 </table>

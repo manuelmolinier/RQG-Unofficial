@@ -1,7 +1,7 @@
 <p class="subtitle">{{localize "RQG.Cults"}} & {{localize "RQG.Runepoints"}}</p>
 <table class="cults-table">
     {{#each data.cults as |cult id|}}
-    <tr class="item cult-row" data-item-id="{{cult._id}}" data-cultname="{{cult.name}}">
+    <tr class="item cult-row" data-item-id="{{cult.id}}" data-cultname="{{cult.name}}">
         <td>{{cult.name}}</td>
         <td>{{cult.data.rank}}</td>
         <td>{{cult.data.subcult}}</td>

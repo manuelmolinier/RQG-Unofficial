@@ -407,6 +407,26 @@
       "STR":0,
       "DEX":0,
       "attacktotal":0
+    },
+    "runes": {
+      "runes": {
+        "air": true,
+        "fire": true,
+        "darkness": true,
+        "water": true,
+        "earth": true,
+        "moon": true,
+        "man": true,
+        "beast": true,
+        "fertility": true,
+        "death": true,
+        "harmony": true,
+        "disorder": true,
+        "truth": true,
+        "illusion": true,
+        "stasis": true,
+        "movement": true
+      }
     }
   },  
   "item": {
@@ -449,7 +469,7 @@
   },
   "runespell": {
     "name": "",
-    "templates": ["description"],
+    "templates": ["description","runes"],
     "points": 0,
     "keywords": [],
     "rune": "",

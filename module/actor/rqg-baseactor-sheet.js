@@ -12,7 +12,7 @@ import ActiveEffectRunequest from "../active-effect.js";
 export class RunequestBaseActorSheet extends ActorSheet {
 
   static confirmItemDelete(actor, itemId) {
-    actor.deleteOwnedItem(itemId);
+    actor.deleteEmbeddedDocuments("Item",[itemId]);
   }
   /* -------------------------------------------- */
 

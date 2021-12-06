@@ -16,11 +16,9 @@
     </thead>
     <tbody>
     {{#each data.gear as |item id|}}
-        {{log "Displaying gear item:"}}
-        {{log item}}
-        <tr class="item" data-item-id="{{item._id}}" style="height: 28px;">
+        <tr class="item" data-item-id="{{item.id}}" style="height: 28px;">
         <td style="width: 25%; height: 28px; text-align: center;">{{localize item.name}}</td>
-        <td style="width: 15%; height: 28px; text-align: center;"><input class="item-edit" id="{{id}}_{{item._id}}_item_qty" type="text" name="data.quantity" value="{{item.data.data.quantity}}"/></td>
+        <td style="width: 15%; height: 28px; text-align: center;"><input class="item-edit" id="{{id}}_{{item.id}}_item_qty" type="text" name="data.quantity" value="{{item.data.data.quantity}}"/></td>
         <td style="width: 15%; height: 28px; text-align: center;">{{item.data.data.weight}}</td>
         <td style="width: 10%; text-align: center;">
             {{displayDescription item.data.data.description}} <!-- To be replaced by a better display once I find if Editor can be used readonly -->

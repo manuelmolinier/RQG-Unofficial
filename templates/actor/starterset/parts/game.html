@@ -39,7 +39,8 @@
                     <th>Pts</th>
                 </thead>
                 {{#each data.attacks.melee as |attack id|}}
-                <tr class="item attack-row" data-itemid="{{attack._id}}" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="meleeweapons">
+                {{log attack}}
+                <tr class="item attack-row" data-itemid="{{attack.id}}" data-item-id="{{attack.id}}" data-attackname="{{attack.name}}" data-skillcategory="meleeweapons">
                     <td class="summary-attack-label"><a class="attack-roll-ss">{{attack.name}}</a></td>
                     <td class="summary-attack-value">{{attack.data.data.attacktotal}}</td>
                     <td class="summary-attack-damage">{{attack.data.data.damage}}</td>
@@ -48,8 +49,8 @@
                 </tr>
                 {{/each}}
                 {{#each data.attacks.missile as |attack id|}}
-                <tr class="item attack-row" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="missileweapons">
-                    <td class="summary-attack-label"><a class="attack-roll">{{attack.name}}</a></td>
+                <tr class="item attack-row" data-itemid="{{attack.id}}" data-item-id="{{attack.id}}" data-attackname="{{attack.name}}" data-skillcategory="missileweapons">
+                    <td class="summary-attack-label"><a class="attack-roll-ss">{{attack.name}}</a></td>
                     <td class="summary-attack-value">{{attack.data.data.attacktotal}}</td>
                     <td class="summary-attack-damage">{{attack.data.data.damage}}</td>
                     <td class="summary-attack-damage">{{attack.data.data.sr}}</td>  
@@ -57,8 +58,8 @@
                 </tr>
                 {{/each}}
                 {{#each data.attacks.natural as |attack id|}}
-                <tr class="item attack-row" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="naturalweapons">
-                    <td class="summary-attack-label"><a class="attack-roll">{{attack.name}}</a></td>
+                <tr class="item attack-row" data-itemid="{{attack.id}}" data-item-id="{{attack.id}}" data-attackname="{{attack.name}}" data-skillcategory="naturalweapons">
+                    <td class="summary-attack-label"><a class="attack-roll-ss">{{attack.name}}</a></td>
                     <td class="summary-attack-value">{{attack.data.data.attacktotal}}</td>
                     <td class="summary-attack-damage">{{attack.data.data.damage}}</td>
                     <td class="summary-attack-damage">{{attack.data.data.sr}}</td>  
@@ -66,8 +67,8 @@
                 </tr>
                 {{/each}}
                 {{#each data.attacks.spirit as |attack id|}}
-                <tr class="item spiritcombat-row" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="spiritweapons">
-                    <td class="summary-attack-label"><a class="attack-roll">{{attack.name}}</a></td>
+                <tr class="item spiritcombat-row" data-itemid="{{attack.id}}" data-item-id="{{attack.id}}" data-attackname="{{attack.name}}" data-skillcategory="spiritweapons">
+                    <td class="summary-attack-label"><a class="attack-roll-ss">{{attack.name}}</a></td>
                     <td class="summary-attack-value">{{attack.data.data.attacktotal}}</td>
                     <td class="summary-attack-damage">{{attack.data.data.damage}}</td>
                     <td class="summary-attack-damage">12</td>                   

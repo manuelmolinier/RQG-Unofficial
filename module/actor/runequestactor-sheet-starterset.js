@@ -25,7 +25,7 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
   }
 
   static confirmItemDelete(actor, itemId) {
-    actor.deleteOwnedItem(itemId);
+    actor.deleteEmbeddedDocuments("Item",[itemId]);
   }
   /* -------------------------------------------- */
 
@@ -85,14 +85,14 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
     // Update Inventory Item
     html.find('.item-edit').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.getOwnedItem(li.data("itemId"));
+      const item = this.actor.getEmbeddedDocument("Item",li.data("itemId"));
       item.sheet.render(true);
     });
 
     // Delete Inventory Item
     html.find('.item-delete').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
-      this.actor.deleteOwnedItem(li.data("itemId"));
+      this.actor.deleteEmbeddedDocuments("Item",[li.data("itemId")]);
       li.slideUp(200, () => this.render(false));
     });
 
@@ -160,7 +160,7 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
       let passionname = row.dataset["passionname"];
       const passionid = row.dataset["itemId"];
       //("passionname:"+passionname+" - passionid:"+passionid);
-      const passion = this.actor.getOwnedItem(passionid);
+      const passion = this.actor.getEmbeddedDocument("Item",passionid);
       //(passion);
       let dialogOptions = {
         title: "Passion Roll",
@@ -203,7 +203,8 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
         });
     });
     html.find('.passion-roll').mousedown(event => this._onPassionRoll(event));
-    // Roll for Rune Spells
+    
+    /* Roll for Rune Spells
     html.find('.runespell-roll').mousedown(event => {
       //("casting a runespell");
       //(event);
@@ -221,6 +222,7 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
       this.basicRoll(spellname,target);
   
     });
+    */
 
     html.find('.elementalrunes-roll').mousedown(event => {
       event.preventDefault();
@@ -257,7 +259,7 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
       const skillrow = event.target.parentElement;
       const skillid = skillrow.dataset["itemId"];
       const skillname = skillrow.dataset["skillname"];
-      const skill = this.object.getOwnedItem(skillid);
+      const skill = this.object.getEmbeddedDocument("Item",skillid);
       if(skill.data.data.experience){
         skill.data.data.experience = false;
       }
@@ -265,6 +267,7 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
         skill.data.data.experience = true;
       }
     });
+    html.find('.runespell-roll').mousedown(event => this._onRunespellRoll(event));
     html.find('.summary-skill-roll').mousedown(event => this._onSkillRoll(event));
     html.find('.summary-characteristic-roll').mousedown(event => this._onCharacteristicRoll(event));
     html.find('.attack-roll').click(event => this._onAttackRoll(event));
@@ -311,13 +314,74 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
     delete itemData.data["type"];
 
     // Finally, create the item!
-    return this.actor.createOwnedItem(itemData);
+    //return this.actor.createOwnedItem(itemData);
+    return this.actor.createEmbeddedDocuments("Item",[itemData]);
   }
 
+  _onRunespellRoll(event) {
+      //("casting a runespell");
+      //(event);
+      //(event.button);
+      event.preventDefault();
+      const data = this.getData();
+      if(event.button == 0) {}
+      else {return;}
+      /*
+      const row= event.target.parentElement.parentElement;
+      const runename = row.dataset["rune"];
+      //(runename);
+      const spellname = row.dataset["spellname"]+" ("+runename+")";
+      const rune = this._findrune(data,runename);
+      const target = rune.value;
+      */
+      const runespellrow = event.target.parentElement.parentElement;
+      const runespellid = runespellrow.dataset["itemId"];
+      let runespell = this.actor.getEmbeddedDocument("Item",runespellid);
+
+      let dialogOptions = {
+        title: "Runespell Casting",
+        template : "/systems/runequest/templates/chat/runespell-dialog.html",
+        'z-index': 100,
+        // Prefilled dialog data
+
+        data : {
+          "runespell": runespell,
+          "spellname": runespell.name,
+          "data": data.data,
+          "config": RQG
+        },
+        callback : (html) => {
+          // When dialog confirmed, fill testData dialog information
+          // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
+          let runeused = html.find('[name="runeused"]').val();
+          let spellname = html.find('[name="spellname"]').val();          
+          let rune = this._findrune(data,runeused);
+          let target = rune.value;
+          this.basicRoll(spellname,target);
+        }
+      };
+      renderTemplate(dialogOptions.template, dialogOptions.data).then(dlg =>
+        {
+          new Dialog(
+          {
+            title: dialogOptions.title,
+            content: dlg,
+            buttons:
+            {
+              rollButton:
+              {
+                label: game.i18n.localize("RQG.Roll"),
+                callback: html => dialogOptions.callback(html)
+              }
+            },
+            default: "rollButton"
+          }).render(true);
+      });
+  }  
   _onSpiritSpellRoll(event) {
       event.preventDefault();
       const spellid = event.currentTarget.dataset.itemId;
-      let spell = this.actor.getOwnedItem(spellid);
+      let spell = this.actor.getEmbeddedDocument("Item",spellid);
       spell.roll();   
   }
   _onAttackRoll(event) {
@@ -354,7 +418,7 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
           // Note that this does not execute until DiceWFRP.prepareTest() has finished and the user confirms the dialog
           let attackid = html.find('[name="attackname"]').val();
           let testmodifier =   Number(html.find('[name="testmodifier"]').val());
-          let attack = this.actor.getOwnedItem(attackid);
+          let attack = this.actor.getEmbeddedDocument("Item",attackid);
           let testData = {"testmodifier":testmodifier};
           //("_onAttackRoll-attack");
           //(attack);
@@ -381,7 +445,7 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
         });
     }
     else {
-      let attack = this.actor.getOwnedItem(attackid);
+      let attack = this.actor.getEmbeddedDocument("Item",attackid);
       //("_onAttackRoll-attack");
       //(attack);
       attack.roll({"targetdefense": targetdefense});      
@@ -490,7 +554,7 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
     if(event.button == 0) {
       if(event.ctrlKey == true){
         const skillid = event.currentTarget.dataset.itemid;
-        let skill = this.actor.getOwnedItem(skillid);
+        let skill = this.actor.getEmbeddedDocument("Item",skillid);
         //(skill)
         skill.gainroll();
         return;
@@ -499,10 +563,10 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
     /*
     else if(event.button == 2) {
       if(event.altKey == true){
-        this.actor.deleteOwnedItem(event.currentTarget.dataset.itemid);
+        this.actor.deleteEmbeddedDocuments("Item",[event.currentTarget.dataset.itemid]);
         return;
       }
-      const item = this.actor.getOwnedItem(event.currentTarget.dataset.itemid);
+      const item = this.actor.getEmbeddedDocument("Item",event.currentTarget.dataset.itemid);
       item.sheet.render(true);
       return;
     }
@@ -510,7 +574,7 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
     else {return;}
     //const catrow = event.target.parentElement.parentElement.parentElement;
     const skillid = event.currentTarget.dataset.itemid;
-    let skill = this.actor.getOwnedItem(skillid);
+    let skill = this.actor.getEmbeddedDocument("Item",skillid);
     //("_onSkillRoll");
     //(skill);
     skill.roll();       
@@ -522,7 +586,7 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
     if(event.button == 0) {
       if(event.ctrlKey == true){
         const passionid = event.currentTarget.dataset.itemId;
-        let passion = this.actor.getOwnedItem(passionid);
+        let passion = this.actor.getEmbeddedDocument("Item",passionid);
         //(passion)
         passion.gainroll();
         return;
@@ -530,17 +594,17 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
     }
     else if(event.button == 2) {
       if(event.altKey == true){
-        this.actor.deleteOwnedItem(event.currentTarget.dataset.itemid);
+        this.actor.deleteEmbeddedDocuments("Item",[event.currentTarget.dataset.itemid]);
         return;
       }
-      const item = this.actor.getOwnedItem(event.currentTarget.dataset.itemid);
+      const item = this.actor.getEmbeddedDocument("Item",event.currentTarget.dataset.itemid);
       item.sheet.render(true);
       return;
     }
     else {return;}
     //const catrow = event.target.parentElement.parentElement.parentElement;
     const passionid = event.currentTarget.dataset.itemId;
-    let passion = this.actor.getOwnedItem(passionid);
+    let passion = this.actor.getEmbeddedDocument("Item",passionid);
     //("_onPassionRoll");
     //(passion);
     passion.roll();       
@@ -550,8 +614,8 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
     const special = Math.round(target/5);
     const fumblerange= Math.round((100-target)/20);
     const fumble = 100-Math.max(fumblerange,0);
-    let roll;
-    roll = new Roll("1d100").roll();
+    let roll = new Roll("1d100");
+    roll = await roll.roll();
     let result;
 
     if((roll.total < 96 && roll.total <= target) || roll.total <= 5) { //This is a success we check type of success
@@ -592,10 +656,10 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
     // Basic chat message data
 
     const chatData = {
-      user: game.user._id,
+      user: game.user.id,
       content: html,
       speaker: {
-        actor: this.actor._id,
+        actor: this.actor.id,
         token: this.actor.token,
         alias: this.actor.name
       }
@@ -618,7 +682,7 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
     const fumblerange= Math.round((100-target)/20);
     const fumble = 100-Math.max(fumblerange,0);
     let roll;
-    roll = new Roll("1d100").roll();
+    roll = await new Roll("1d100").roll();
     let result;
 
     if((roll.total < 96 && roll.total <= target) || roll.total <= 5) { //This is a success we check type of success
@@ -659,10 +723,10 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
     // Basic chat message data
 
     const chatData = {
-      user: game.user._id,
+      user: game.user.id,
       content: html,
       speaker: {
-        actor: this.actor._id,
+        actor: this.actor.id,
         token: this.actor.token,
         alias: this.actor.name
       }
@@ -686,11 +750,11 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
   _onItemRoll(event) {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.getOwnedItem(itemId);
+    const item = this.actor.getEmbeddedDocument("Item",itemId);
     return item.roll();
   }
 
-  genericAttackRoll(attack) {
+  async genericAttackRoll(attack) {
     const data = this.getData();
     let categoryid = attack.data.data.attacktype+"weapons"
     const skillname = game.i18n.localize(RQG.weaponskills[attack.data.data.skillused]);
@@ -705,7 +769,7 @@ export class RunequestActorStarterSetSheet extends RunequestBaseActorSheet {
     const fumblerange= Math.round((100-target)/20);
     const fumble = 100-Math.max(fumblerange,0);
     let roll;
-    roll = new Roll("1d100").roll();
+    roll = await new Roll("1d100").roll();
     let result;
 
     if((roll.total < 96 && roll.total <= target) || roll.total <= 5) { //This is a success we check type of success

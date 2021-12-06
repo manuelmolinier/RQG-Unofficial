@@ -21,8 +21,8 @@
                 {{#if @root.document.parent}}
                 <select name="data.hitloc">
                     {{#select data.hitloc}}
-                    {{#each (getcharacterattackskills @root.document.parent.data._id data.attacktype) as |skill id|}}
-                    <option value="{{skill._id}}">{{skill.name}}</option>
+                    {{#each (getcharacterattackskills @root.document.parent.data.id data.attacktype) as |skill id|}}
+                    <option value="{{skill.id}}">{{skill.name}}</option>
                     {{/each}}
                     {{/select}}
                 </select>                  

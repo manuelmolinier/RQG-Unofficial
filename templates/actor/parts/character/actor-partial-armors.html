@@ -7,7 +7,7 @@
             </div>
         </li>
         {{#each data.armors as |armor id|}}
-            <li class="item flexrow" data-item-id="{{armor._id}}">
+            <li class="item flexrow" data-item-id="{{armor.id}}">
                 <h4 class="item-name">{{armor.name}}</h4>
                 <h4 class="item-name">{{armor.data.data.ap}}</h4>
                 <label class="skill-value">{{armor.data.data.currentap}}</label>

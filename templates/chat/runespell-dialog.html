@@ -1,0 +1,18 @@
+<form class="skill-test">
+    <div class="form-group">
+        <label name="spellname">{{spellname}}</label>
+        {{log runespell}}
+        {{!-- Used Rune --}}
+        {{log runespell.data.data.runes}}
+        {{log config}}
+        <select name="runeused">
+            {{#each config.basicrunes as |name rune|}}
+                {{log rune}}
+                {{log (lookup ../runespell.data.data.runes rune)}}
+                {{#if (lookup ../runespell.data.data.runes rune)}}
+                <option value="{{rune}}">{{localize name}}</option>
+                {{/if}}
+            {{/each}}
+        </select>
+    </div>
+</form>

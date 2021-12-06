@@ -73,7 +73,7 @@ RQG.spelltype = {
     "passive": "RQG.Passive",
     "ritual": "RQG.Ritual"
 }
-RQG.BasicRune = {
+RQG.basicrunes = {
     "air": "RQG.Air",
     "fire": "RQG.Fire",
     "darkness": "RQG.Darkness",

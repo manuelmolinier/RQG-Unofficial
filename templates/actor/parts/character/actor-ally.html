@@ -15,10 +15,10 @@
             <tr style="height: 28px;">
             <td style="width: 25%; height: 28px; text-align: center;">{{localize hl.name}}</td>
             <td style="width: 15%; height: 28px; text-align: center;">{{hl.data.rangestart}}-{{hl.data.rangeend}}</td>
-            <td style="width: 15%; height: 28px; text-align: center;"><input id="{{id}}_{{hl._id}}_currenthp_hitloc" type="text" name="hl.data.currenthp" value="{{hl.data.currenthp}}"/></td>
+            <td style="width: 15%; height: 28px; text-align: center;"><input id="{{id}}_{{hl.id}}_currenthp_hitloc" type="text" name="hl.data.currenthp" value="{{hl.data.currenthp}}"/></td>
             <td style="width: 15%; height: 28px; text-align: center;">{{hl.data.maxhp}}</td>
-            <td style="width: 10%; height: 28px; text-align: center;"><input  id="{{id}}_{{hl._id}}_armor_hitloc" class="attribute-value"  type="text"  name="hl.data.armor"  value="{{hl.data.armor}}"  data-dtype="Number"  /></td>
-            <td style="width: 10%; text-align: center;"><input id="{{id}}_{{hl._id}}_wounds_hitloc" class="attribute-value"  type="text"  name="hl.data.wounds"  value="{{hl.data.wounds}}"  data-dtype="Number"  /></td>
+            <td style="width: 10%; height: 28px; text-align: center;"><input  id="{{id}}_{{hl.id}}_armor_hitloc" class="attribute-value"  type="text"  name="hl.data.armor"  value="{{hl.data.armor}}"  data-dtype="Number"  /></td>
+            <td style="width: 10%; text-align: center;"><input id="{{id}}_{{hl.id}}_wounds_hitloc" class="attribute-value"  type="text"  name="hl.data.wounds"  value="{{hl.data.wounds}}"  data-dtype="Number"  /></td>
             </tr>        
         {{/each}}
         </tbody>
@@ -61,7 +61,7 @@
                             </div>
                         </li>
                         {{#each actor.passions as |passion id|}}
-                            <li class="item flexrow" data-item-id="{{passion._id}}" data-passionname="{{passion.name}}">
+                            <li class="item flexrow" data-item-id="{{passion.id}}" data-passionname="{{passion.name}}">
                                 <h4 class="item-name"><a class="passion-roll">{{passion.name}}</a></h4>
                                 <h4 class="item-name"><a class="passion-roll">{{passion.data.total}}</a></h4>
                                 <div class="item-controls">
@@ -80,7 +80,7 @@
                     <div class="item-name flexrow">{{localize "RQG.MeleeAttacks"}}</div>
                 </li>
                 {{#each actor.attacks.melee as |attack id|}}
-                    <li class="item flexrow" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="meleeweapons">
+                    <li class="item flexrow" data-item-id="{{attack.id}}" data-attackname="{{attack.name}}" data-skillcategory="meleeweapons">
                         <span class="summary-attack-label"><a class="meleeattack-roll">{{attack.name}}</a></span>
                         <span class="summary-attack-value">{{attack.data.skillvalue}}</label>
                         <span class="summary-attack-damage">{{attack.data.damage}}</span>
@@ -92,7 +92,7 @@
                     <div class="item-name flexrow">{{localize "RQG.MissileAttacks"}}</div>
                 </li>
                 {{#each actor.attacks.missile as |attack id|}}
-                    <li class="item flexrow" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="missileweapons">
+                    <li class="item flexrow" data-item-id="{{attack.id}}" data-attackname="{{attack.name}}" data-skillcategory="missileweapons">
                         <h4 class="item-name"><a class="missileattack-roll">{{attack.name}}</a></h4>
                         <label class="skill-value">{{attack.data.skillvalue}}</label>
                         <h4 class="item-name">{{attack.data.damage}}</h4>
@@ -111,7 +111,7 @@
                 <tbody>
                 {{#each actor.defense as |item id|}}
                     <tr>
-                        <td class="skill summary-skill-roll" data-itemid="{{item._id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.skillcategory}}">
+                        <td class="skill summary-skill-roll" data-itemid="{{item.id}}" data-skillname="{{item.name}}" data-skillcategory="{{item.data.skillcategory}}">
                             {{item.name}}: {{item.data.total}}                     
                         </td>
                     </tr>

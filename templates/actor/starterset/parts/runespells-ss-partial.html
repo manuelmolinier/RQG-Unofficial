@@ -7,7 +7,7 @@
         <th>&nbsp;</th>
     </thead>
     {{#each data.spells.rune as |spell id|}}
-        <tr class="item spell-row" data-item-id="{{spell._id}}" data-spellname="{{spell.name}}" data-rune="{{spell.data.data.rune}}">
+        <tr class="item spell-row" data-item-id="{{spell.id}}" data-spellname="{{spell.name}}" data-rune="{{spell.data.data.rune}}">
             <td><a class="runespell-roll">{{spell.name}}</a></td>
             <td><a class="runespell-roll">{{spell.data.data.points}}</a></td>
             <td><a class="runespell-roll">{{spell.data.data.rune}}</a></td>

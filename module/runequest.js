@@ -25,6 +25,23 @@ import { RQGTools } from "./tools/rqgtools.js";
 Hooks.once("init", async function() {
   console.log(`Initializing Runequest System`);
 
+  // Create a namespace within the game global
+  /*
+  game.Runequest = {
+    applications: {
+      RunequestActorSheet,
+      RunequestActorStarterSetSheet,
+      RunequestActorNPCSheet,
+      RunequestItemSheet
+    },
+    config: RQG,
+    entities: {
+      RunequestActor,
+      RunequestItem
+    },
+  };
+  */
+ 
 	/**
 	 * Set an initiative formula for the system
 	 * @type {String}
@@ -37,9 +54,9 @@ Hooks.once("init", async function() {
   // Record Configuration Values
   CONFIG.RQG = RQG;
 	// Define custom Entity classes
-  CONFIG.Actor.entityClass = RunequestActor;
-  CONFIG.Item.entityClass = RunequestItem;
-  CONFIG.Combat.entityClass = RunequestCombat;
+  CONFIG.Actor.documentClass = RunequestActor;
+  CONFIG.Item.documentClass = RunequestItem;
+  CONFIG.Combat.documentClass = RunequestCombat;
   CONFIG.ui.combat = RunequestCombatTracker;
 
   // Register sheet application classes
@@ -101,11 +118,10 @@ Hooks.once("init", async function() {
 Hooks.on('hotbarDrop', async (bar, data, slot) =>
   RQGTools.createMacro(bar, data, slot)
 )
-Hooks.on("renderChatLog", (app, html, data) => Chat.addChatListener(html));
+//Hooks.on("renderChatLog", (app, html, data) => Chat.addChatListener(html));
 
 // Added Helpers to Handlebars
 Handlebars.registerHelper("skillcategorymodifier", function(skillcategories, skillcategory) {
-  console.log("skillcategorymodifier with:"+skillcategory)
   if(skillcategory == "others") {
     return 0;
   }

@@ -7,7 +7,6 @@ export class RunequestActor extends Actor {
   /** @override */
 
   static async create(data, options) {
-
     // Case of compendium global import
     if (data instanceof Array) {
       return super.create(data, options);
@@ -57,6 +56,7 @@ export class RunequestActor extends Actor {
     super.prepareData();
     const  actorData = this.data;
     const  data = actorData.data;
+    //console.log("Entering prepareData for:"+actorData.name);
     this._prepareCharacterFlags(actorData);
     for (const [index, charac] of Object.entries(data.characteristics)) {
       const characid=charac.label;
@@ -141,6 +141,8 @@ export class RunequestActor extends Actor {
     const features = [];
 
     // Iterate through items, allocating to containers
+    //console.log("Prepare Data in :"+actor.name);
+    //console.log(context.items);
     for (let i of context.items) {
       // Append to gear.
       if (i.type === 'item') {
@@ -180,9 +182,9 @@ export class RunequestActor extends Actor {
         }
       }
       else if (i.type === 'rune') {
-        console.log("handling a rune in Actor with:"+i.name);
-        console.log(i);
-        console.log(i.data.data.type);
+        //console.log("handling a rune in Actor with:"+i.name);
+        //console.log(i);
+        //console.log(i.data.data.type);
         if(i.data.data.type != "") {
           runes[i.data.data.type].push(i);
         }
@@ -224,7 +226,7 @@ export class RunequestActor extends Actor {
         mpstorage.push(i);
       }
       else if(i.type === 'meleeattack' || i.type === 'missileattack' || i.type === 'naturalattack') {
-        console.log(i);
+        //console.log(i);
       }
       else if(i.type === 'familyhistory') {
         familyhistory.push(i);
@@ -232,15 +234,15 @@ export class RunequestActor extends Actor {
     }
     totalwounds+= context.data.attributes.generalwounds;
     // Assign and return
-    console.log("In prepareItems with hitlocations.length = "+hitlocations.length);
-    console.log(hitlocations); 
+    //console.log("In prepareItems with hitlocations.length = "+hitlocations.length);
+    //console.log(hitlocations); 
     if(hitlocations.length < 1 && context.data.attributes.hitlocationstype !== "Others") {
-      console.log(context.data.attributes);
+      //console.log(context.data.attributes);
       let hitlocationslist = this._preparehitlocationtype(context.data.attributes.hitlocationstype).then(function(result) {
-        console.log(result);
-        console.log(actor);
+        //console.log(result);
+        //console.log(actor);
         let hitlocations=actor.createEmbeddedDocuments("Item",result);
-        console.log(hitlocations);    
+        //console.log(hitlocations);    
       });
     }
     hitlocations.sort(function(a, b) {
@@ -285,6 +287,7 @@ export class RunequestActor extends Actor {
     context.data.attributes.magicpointsreserve.value = magicpointreservecurrent;
   }
   prepareNPCItems(){
+    //console.log("prepareNPCItems");
     let actor = this;
     let context = this.data;
     const gear = [];
@@ -338,9 +341,9 @@ export class RunequestActor extends Actor {
         }
       }
       else if (i.type === 'rune') {
-        console.log("handling a rune in Actor with:"+i.name);
-        console.log(i);
-        console.log(i.data.data.type);
+        //console.log("handling a rune in Actor with:"+i.name);
+        //console.log(i);
+        //console.log(i.data.data.type);
         if(i.data.data.type != "") {
           runes[i.data.data.type].push(i);
         }
@@ -378,20 +381,20 @@ export class RunequestActor extends Actor {
         mpstorage.push(i);
       }
       else if(i.type === 'meleeattack' || i.type === 'missileattack' || i.type === 'naturalattack') {
-        console.log("error with incorrect item type" + i._id);
+        //console.log("error with incorrect item type" + i.id);
       }
     }
     totalwounds+= context.data.attributes.generalwounds;
     // Assign and return
-    console.log("In prepareItems with hitlocations.length = "+hitlocations.length);
-    console.log(hitlocations); 
+    //console.log("In prepareItems with hitlocations.length = "+hitlocations.length);
+    //console.log(hitlocations); 
     if(hitlocations.length < 1 && context.data.attributes.hitlocationstype !== "Others") {
-      console.log(context.data.attributes);
+      //console.log(context.data.attributes);
       let hitlocationslist = this._preparehitlocationtype(context.data.attributes.hitlocationstype).then(function(result) {
-        console.log(result);
-        console.log(actor);
+        //console.log(result);
+        //console.log(actor);
         let hitlocations=actor.createEmbeddedDocuments("Item",result);
-        console.log(hitlocations);    
+        //console.log(hitlocations);    
       });
     }
     hitlocations.sort(function(a, b) {
@@ -640,7 +643,7 @@ export class RunequestActor extends Actor {
     //compute Max HP modifier
     let modifier=0;
     if(hp < 13) {
-      modifier=Math.ceil((hp-13)/3);
+      modifier=Math.floor((hp-13)/3);
     }
     else if(hp > 15) {
       modifier=Math.ceil((hp-15)/3);
@@ -652,16 +655,16 @@ export class RunequestActor extends Actor {
   }
   _preparehitlocation(hitlocation, actorData) {
     // Prepare the HitLocations by calculating the Max HP of the location and the remaining HP based on wounds
-    console.log(hitlocation);
+    //console.log(hitlocation);
     hitlocation.data.data.maxhp = hitlocation.data.data.basehp + actorData.data.attributes.hpmodifier;
     hitlocation.data.data.currenthp = hitlocation.data.data.maxhp - hitlocation.data.data.wounds;
   }
   async _preparehitlocationtype(hitlocationtype) {
-    console.log("hitlocations was empty so we load them");
+    //console.log("hitlocations was empty so we load them");
     const compendiumname = "runequest."+hitlocationtype+"locations";
     const hitlocationslist = await RunequestActor.loadCompendium(compendiumname);
     const hitlocations = hitlocationslist.map(i => i.toObject());
-    console.log(hitlocations);
+    //console.log(hitlocations);
     return hitlocations;
   }
   async toggleActorFlag (flagName) {
@@ -704,7 +707,7 @@ export class RunequestActor extends Actor {
 
   /* -------------------------------------------- */
   static async loadCompendium(compendium, filter = item => true) {
-    console.log("Loading compendium:"+compendium);
+    //console.log("Loading compendium:"+compendium);
     let compendiumData = await RunequestActor.loadCompendiumData(compendium);
     return compendiumData.filter(filter);
   }   

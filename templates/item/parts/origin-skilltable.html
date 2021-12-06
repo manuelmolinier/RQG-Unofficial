@@ -7,10 +7,10 @@
         </tr>
     </thead>
     {{#each skillList as |item id|}}
-        <tr class="skill" data-item-id="{{item._id}}" data-itemid="{{item._id}}">
-            <td class="item skill-table-name dropable" data-item-id="{{item._id}}" ondragover="return false">{{item.name}}</td>
-            <td class="item skill-table-value dropable" data-item-id="{{item._id}}" ondragover="return false">{{item.data.data.base}}</td>
-            <td class="item skill-table-value dropable" data-item-id="{{item._id}}" ondragover="return false">{{item.data.data.increase}}</td>            
+        <tr class="skill" data-item-id="{{item.id}}" data-itemid="{{item.id}}">
+            <td class="item skill-table-name dropable" data-item-id="{{item.id}}" ondragover="return false">{{item.name}}</td>
+            <td class="item skill-table-value dropable" data-item-id="{{item.id}}" ondragover="return false">{{item.data.data.base}}</td>
+            <td class="item skill-table-value dropable" data-item-id="{{item.id}}" ondragover="return false">{{item.data.data.increase}}</td>            
         </tr>
     {{/each}}
 </table>

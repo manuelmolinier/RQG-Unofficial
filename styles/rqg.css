@@ -1108,4 +1108,17 @@ input[type="text"].npc-wounds {
   Rules for the Starter Set style Character Sheets
   Will be prefaced with .rqgss as RQG Starter Set
 ****/
-
+.runes-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  /*height: 200px;*/
+  overflow: auto;
+  margin-bottom: 10px;
+  font-size:12px;
+  align-items:flex-start;  
+}
+.rune-checkbox {
+  flex: 1 0 10%;
+}

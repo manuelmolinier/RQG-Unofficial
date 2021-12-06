@@ -24,7 +24,7 @@
             <div class="form-group">
                 <label class="label-text">{{localize "Rune"}}</label>
                 <input  class="attribute-value"  type="text"  name="data.rune"  value="{{data.rune}}"  data-dtype="String"  />
-            </div>
+            </div>        
             <div class="form-group">
                 <label class="label-text">{{localize "Range"}}</label>
                 <input  class="attribute-value"  type="text"  name="data.range"  value="{{data.range}}"  data-dtype="String"  />
@@ -36,7 +36,15 @@
             <div class="form-group">
                 <label class="label-text">{{localize "Type"}}</label>
                 <input  class="attribute-value"  type="text"  name="data.type"  value="{{data.type}}"  data-dtype="String"  />
-            </div>            
+            </div>
+            <div class="runes-group">
+                <label>{{ localize "RQG.Runes" }}</label>
+                {{#each config.basicrunes as |name rune|}}
+                <label class="checkbox rune-checkbox">
+                    <input type="checkbox" name="data.runes.{{rune}}" {{#if (lookup ../data.runes rune)}} checked {{/if}}/> {{ localize name }}
+                </label>
+                {{/each}}
+            </div>                          
         </div>
         {{!-- Description Tab --}}
         <div class="tab" data-group="primary" data-tab="description">

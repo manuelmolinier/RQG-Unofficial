@@ -31,7 +31,7 @@
                 <tbody class="item-list">
                 {{#if data.flags.locked}}
                     {{#each attacks as |attack id|}}
-                    <tr class="item" data-itemid="{{attack._id}}" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="{{attacktype}}weapons">
+                    <tr class="item" data-itemid="{{attack.id}}" data-item-id="{{attack.id}}" data-attackname="{{attack.name}}" data-skillcategory="{{attacktype}}weapons">
                         <td class="summary-attack-label"><a class="attack-roll">{{attack.name}}</a></td>
                         <td class="summary-attack-value">{{attack.data.data.attacktotal}}</td>
                         <td class="summary-attack-damage">{{attack.data.data.damage}}</td>
@@ -81,7 +81,7 @@
                         <th>{{localize "RQG.Edit"}}</th>
                     </tr>
                     {{#each attacks as |attack id|}}
-                    <tr class="item" data-item-id="{{attack._id}}" data-attackname="{{attack.name}}" data-skillcategory="{{attacktype}}weapons">
+                    <tr class="item" data-item-id="{{attack.id}}" data-attackname="{{attack.name}}" data-skillcategory="{{attacktype}}weapons">
                         <td>
                             <input  class="attribute-value attacks"  type="text"  name="data.name"  value="{{attack.data.name}}"  data-dtype="String"  />
                         </td>
@@ -91,8 +91,8 @@
                             {{#if @root.actor}}
                             <select class= "attack-select attacks" name="data.skillused" data-dtype="String">
                                 {{#select attack.data.data.skillused}}
-                                {{#each (getcharacterattackskills @root.actor.data._id attack.data.data.attacktype) as |skill id|}}
-                                <option value="{{skill._id}}">{{skill.name}}</option>
+                                {{#each (getcharacterattackskills @root.actor.data.id attack.data.data.attacktype) as |skill id|}}
+                                <option value="{{skill.id}}">{{skill.name}}</option>
                                 {{/each}}
                                 {{/select}}
                             </select>                  
