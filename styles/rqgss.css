@@ -501,3 +501,29 @@
 .rqgss .game-container .game-magic-container .mpstorage-table .mpstorage-input {
   width: 40px;
 }
+.rqgss .backstory-gear-container {
+  display: grid;
+  grid-template-columns: 30% 40% 30%;
+  grid-template-rows: auto;
+  grid-template-areas: "gear backstory events";
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+}
+.rqgss .backstory-gear-container .gear-container {
+  grid-area: gear;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  text-align: center;
+}
+.rqgss .backstory-gear-container .backstory-container {
+  grid-area: backstory;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  text-align: center;
+}
+.rqgss .backstory-gear-container .events-container {
+  grid-area: events;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  text-align: center;
+}

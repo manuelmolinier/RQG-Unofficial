@@ -384,7 +384,12 @@ export class RunequestItem extends Item {
       damageData.totaldamage = damageData.criticaldamage.total + damageData.damagebonus.total;
     }
 
-    let hitlocationtable = RollTables.instance.getName("Hit Location - Humanoid");
+    const compendiumname = "runequest.rolltables";
+    const hitlocationslist = await RunequestItem.loadCompendiumData(compendiumname);
+    console.log(hitlocationslist);
+
+    //let hitlocationtable = RollTables.instance.getName("Hit Location - Humanoid");
+    let hitlocationtable = hitlocationslist[0];
     //("Hit Location - Humanoid loading")
     //(hitlocationtable);
     let hitlocation = await hitlocationtable.draw({displayChat: false});
@@ -587,13 +592,14 @@ export class RunequestItem extends Item {
         result = "failure";
       }
     }
-    
+    let renderedRoll = await roll.render();
     const templateData = {
       actor: this.actor,
       item: this.data,
       charname: charname,
       target: target,
       roll: roll,
+      renderedRoll: renderedRoll,
       result: result
     };
     // Render the chat card template
@@ -610,7 +616,9 @@ export class RunequestItem extends Item {
         actor: this.actor.id,
         token: this.actor.token,
         alias: this.actor.name
-      }
+      },
+      roll: roll,
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL      
     };
 
 
@@ -641,7 +649,7 @@ export class RunequestItem extends Item {
   /* -------------------------------------------- */
   static async loadCompendium(compendium, filter = item => true) {
     //("Loading compendium:"+compendium);
-    let compendiumData = await RunequestActor.loadCompendiumData(compendium);
+    let compendiumData = await RunequestItem.loadCompendiumData(compendium);
     return compendiumData.filter(filter);
   }
   runequestroll(roll,target) {

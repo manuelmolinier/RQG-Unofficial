@@ -3,13 +3,18 @@
     <header class="card-header">
         <img src="{{actor.img}}" title="{{charname}}" width="50" height="50"/>
     </header>
-
+    <!-- {{{renderedRoll}}} -->
     <div class="card-content">
         <table>
             <tbody>
                 <tr><td colspan="2">{{charname}}</td></tr>
-                <tr><td>{{localize "RQG.Roll"}}</td><td>[[{{roll.total}}]]</td></tr>
-                <tr><td>{{localize "RQG.Target"}}</td><td>[[{{target}}]]</td></tr>
+                <tr>
+                    <td>{{localize "RQG.Roll"}}</td>
+                    <td>
+                        <h4 class="dice-total">{{roll.total}}</h4>                        
+                    </td>
+                </tr>
+                <tr><td>{{localize "RQG.Target"}}</td><td>{{target}}</td></tr>
                 <tr><td>{{localize "RQG.Result"}}</td><td>{{result}}</td></tr>
             </tbody>
         </table>
