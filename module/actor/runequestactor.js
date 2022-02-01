@@ -290,6 +290,7 @@ export class RunequestActor extends Actor {
     //console.log("prepareNPCItems");
     let actor = this;
     let context = this.data;
+    const events=[];
     const gear = [];
     const defense = [];
     const skills = [];
@@ -324,6 +325,9 @@ export class RunequestActor extends Actor {
       // Append to gear.
       if (i.type === 'item') {
         gear.push(i);
+      }
+      else if (i.type === 'event') {
+        events.push(i);
       }
       // Append to features.
       else if (i.type === 'feature') {
@@ -417,7 +421,8 @@ export class RunequestActor extends Actor {
       // a must be equal to b
       return 0;
     });
-    defense.reverse();      
+    defense.reverse();
+    context.data.events = events;      
     context.data.gear = gear;
     context.data.features = features;
     context.data.spells = spells;

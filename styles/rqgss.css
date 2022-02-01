@@ -514,12 +514,25 @@
   border: 1px solid #7a7971;
   border-radius: 3px;
   text-align: center;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.rqgss .backstory-gear-container .gear-container .gear-item {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
 .rqgss .backstory-gear-container .backstory-container {
   grid-area: backstory;
   border: 1px solid #7a7971;
   border-radius: 3px;
   text-align: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+.rqgss .backstory-gear-container .backstory-container .backstory-column {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
 .rqgss .backstory-gear-container .events-container {
   grid-area: events;

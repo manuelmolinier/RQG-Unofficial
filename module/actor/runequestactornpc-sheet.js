@@ -11,7 +11,7 @@ export class RunequestActorNPCSheet extends ActorSheet {
   /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-  	  classes: ["rqg", "sheet", "actor"],
+  	  classes: ["rqg", "rqgss", "sheet", "actor"],
   	  template: "systems/runequest/templates/actor/npc-actor-sheet.html",
       width: 900,
       height: 700,
@@ -649,7 +649,7 @@ export class RunequestActorNPCSheet extends ActorSheet {
     delete itemData.data["type"];
 
     // Finally, create the item!
-    return this.actor.createOwnedItem(itemData);
+    return this.actor.createEmbeddedDocuments("Item",[itemData]);
   }
 
   _onSpiritSpellRoll(event) {

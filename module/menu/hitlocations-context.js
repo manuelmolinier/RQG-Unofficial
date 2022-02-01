@@ -34,7 +34,7 @@ export const hitlocationMenuOptions = (actor, token) => [
     {
       name: "Edit",
       icon: '<i class="fas fa-edit"></i>',
-      condition: () => !!game.user?.isGM,
+      condition: () => true,
       callback: (el) => {
         const itemId = RQGTools.getDataset(el, "itemid");
         const item = actor.items.get(itemId);
@@ -49,7 +49,7 @@ export const hitlocationMenuOptions = (actor, token) => [
     {
       name: "Delete",
       icon: '<i class="fas fa-trash"></i>',
-      condition: () => !!game.user?.isGM,
+      condition: () => true,
       callback: (el) => {
         const itemId = RQGTools.getDataset(el, "itemid");
         RunequestActorSheet.confirmItemDelete(actor, itemId);

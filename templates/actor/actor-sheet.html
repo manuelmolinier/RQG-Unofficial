@@ -9,7 +9,7 @@
     {{> "systems/runequest/templates/actor/parts/character/actor-sheetheader.html"}}
 
     {{!-- Sheet Tab Navigation --}}
-    <nav class="nav-sheet-tabs sheet-tabs tabs flexrow" data-group="primary">
+    <nav class="nav-sheet-tabs sheet-tabs tabs flexrow rqgss-navigation" data-group="primary">
         {{#if data.flags.locked}}
             <a class="unlock-character-sheet" title="{{localize 'RQG.UnlockSheet'}}"> <i class="fas fa-lock"></i> </a>
         {{else}}

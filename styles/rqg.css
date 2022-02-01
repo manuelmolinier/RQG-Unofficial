@@ -141,12 +141,12 @@ input[type="text"].header-input-name {
 .rqg .tabs .item {
   line-height: 40px;
   font-weight: bold;
-  font-size:12px;
+  font-size:x-large;
 }
 .rqg .tabs .actor-item {
   line-height: 40px;
   font-weight: bold;
-  font-size:12px;
+  font-size:x-large;
   writing-mode: vertical-rl;
   text-orientation: mixed;
   padding: 0px 0px 10px 0px;
@@ -154,6 +154,8 @@ input[type="text"].header-input-name {
 .rqg .tabs .item.active {
   text-decoration: underline;
   text-shadow: none;
+  font-size: xx-large;
+  color:darkred;
 }
 .rqg .sheet-body {
   overflow: auto;
@@ -676,6 +678,10 @@ input[type="text"].header-input-name {
 }
 .rqg nav.nav-sheet-tabs {
   grid-area:nav;
+  display:flex;
+  flex-direction: column;
+  height:fit-content;
+  font-size:x-large;
 }
 .rqg header.grid-sheet-header {
   display: grid;

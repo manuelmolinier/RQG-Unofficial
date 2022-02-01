@@ -1,3 +1,61 @@
-<div class="backstory-container">
-    <p>This tab will contain the bacstory tab</p>
+<div class="backstory-gear-container">
+    <div class="gear-container">
+        <div>GEAR</div>
+        <div>
+            <table style="height: 70px;" border="2">
+                <colgroup>
+                    <col span="1" style="width: 20%;">
+                    <col span="1" style="width: 10%;">
+                    <col span="1" style="width: 10%;">
+                    <col span="1" style="width: 35%;">
+                    <col span="1" style="width: 15%;">
+                </colgroup> 
+                <thead style="height: 28px;">
+                    <th style="width: 25%; text-align: center; height: 28px;">{{localize "RQG.Name"}}</th>
+                    <th style="width: 15%; text-align: center; height: 28px;">{{localize "RQG.QTY"}}</th>
+                    <th style="width: 15%; text-align: center; height: 28px;">{{localize "RQG.Weight"}}</th>
+                    <th style="width: 10%; text-align: center; height: 28px;">{{localize "RQG.Description"}}</th>
+                    <th style="width: 10%; text-align: center; height: 28px;"><a class="item-control item-create" title="Create item" data-type="item"><i class="fas fa-plus"></i></a></th>
+                </thead>
+                <tbody>
+                {{#each data.gear as |item id|}}
+                    {{log "Displaying gear item:"}}
+                    {{log item}}
+                    <tr class="item" data-item-id="{{item.id}}" style="height: 28px;">
+                    <td style="width: 25%; height: 28px; text-align: center;">{{localize item.name}}</td>
+                    <td style="width: 15%; height: 28px; text-align: center;"><input class="item-edit" id="{{id}}_{{item.id}}_item_qty" type="text" name="data.quantity" value="{{item.data.data.quantity}}"/></td>
+                    <td style="width: 15%; height: 28px; text-align: center;">{{item.data.data.weight}}</td>
+                    <td style="width: 10%; text-align: center;">
+                        {{displayDescription item.data.data.description}} <!-- To be replaced by a better display once I find if Editor can be used readonly -->
+                    </td>
+                    <td>
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>                
+                    </td>
+                    </tr>        
+                {{/each}}
+                </tbody>
+            </table>       
+        </div>
+    </div>
+    <div class="backstory-container">
+        <div class="section-name">
+            <p class="title">{{localize "RQG.Backstory"}}</p>
+        </div>
+        <div class="backstory-column">
+            <div>{{localize 'RQG.BirthYear'}}: <input type="text" name="data.general.birthyear.value" value="{{data.general.birthyear.value}}"/></div>
+            <div>{{localize 'RQG.Age'}}:<input type="text" name="data.general.age.value" value="{{data.general.age.value}}"/></div>
+            <div>{{localize 'RQG.Occupation'}}:<input type="text" name="data.general.occupation.value" value="{{data.general.occupation.value}}"/></div>
+            <div>{{localize 'RQG.Ransom'}}:<input type="text" name="data.general.ransom.value" value="{{data.general.ransom.value}}"/></div>
+            <div>{{localize 'RQG.Gender'}}:<input type="text" name="data.general.gender.value" value="{{data.general.gender.value}}"/></div>
+            <div>{{localize 'RQG.Reputation'}}:<input type="text" name="data.general.reputation.value" value="{{data.general.reputation.value}}"/></div>
+            <div>{{localize 'RQG.StandardofLiving'}}:<input type="text" name="data.general.standardofliving.value" value="{{data.general.standardofliving.value}}"/></div>
+            <div>{{localize 'RQG.BaseIncome'}}:<input type="text" name="data.general.baseincome.value" value="{{data.general.baseincome.value}}"/></div>
+            <div>{{localize 'RQG.Homeland'}}:<input type="text" name="data.general.homeland.value" value="{{data.general.homeland.value}}"/></div>
+            <div>{{localize 'RQG.Tribe'}}:<input type="text" name="data.general.tribe.value" value="{{data.general.tribe.value}}"/></div>
+            <div>{{localize 'RQG.Clan'}}:<input type="text" name="data.general.clan.value" value="{{data.general.clan.value}}"/></div>
+            <div>{{localize 'RQG.Campaign'}}:<input type="text" name="data.general.campaign.value" value="{{data.general.campaign.value}}"/></div>
+        </div>        
+    </div>
+    <div class="events-container">EVENTS</div>
 </div>
