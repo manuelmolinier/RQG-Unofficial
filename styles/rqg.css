@@ -137,6 +137,7 @@ input[type="text"].header-input-name {
   height: 40px;
   border-top: 1px solid #AAA;
   border-bottom: 1px solid #AAA;
+  flex-wrap: wrap;
 }
 .rqg .tabs .item {
   line-height: 40px;
