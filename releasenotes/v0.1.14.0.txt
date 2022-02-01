@@ -1,0 +1,6 @@
+** V0.1.14 **
+** Bug Fixes **
+- Fixed a bug where players weren't seeing the full context menu to edit stuff
+- Fixed bugs on the "old" character Sheet with v0.9 of Foundry.
+
+** Additional features **
