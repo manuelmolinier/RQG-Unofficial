@@ -4,7 +4,7 @@
   "description": "A fan made ruleset for Runequest Glorantha.",
   "version": "0.1.14.0",
   "minimumCoreVersion": "0.8.0",
-  "compatibleCoreVersion": "0.9",
+  "compatibleCoreVersion": "9",
   "templateVersion": 2,
   "author": "Astaroth",
   "esmodules": ["module/runequest.js"],

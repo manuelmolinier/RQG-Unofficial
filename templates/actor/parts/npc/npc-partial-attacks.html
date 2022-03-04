@@ -9,10 +9,11 @@
                     <col span="1" style="width: 15%;">
                     <col span="1" style="width: 10%;">
                     <col span="1" style="width: 10%;">
-                </colgroup>            
+                </colgroup>
                 <thead>
                     <th colspan="5">{{localize attacklabel}}</th>
-                    <th colspan="1"><a class="item-control item-create" title="Create item" data-type="attack" data-attacktype="{{attacktype}}"><i class="fas fa-plus"></i></a></th>
+                    <th colspan="1"><a class="item-control item-create" title="Create item" data-type="attack"
+                            data-attacktype="{{attacktype}}"><i class="fas fa-plus"></i></a></th>
                 </thead>
                 <thead>
                     <tr>
@@ -22,12 +23,13 @@
                         <th class="summary-attack-damage">{{localize "RQG.HP"}}</th>
                         <th class="summary-attack-damage">{{localize "RQG.SR"}}</th>
                         <th class="summary-attack-damage">&nbsp;</th>
-                    </tr>                    
+                    </tr>
                 </thead>
                 <tbody>
-                {{#if data.flags.locked}}
+                    {{#if data.flags.locked}}
                     {{#each attacks as |attack id|}}
-                    <tr class="item" data-item-id="{{attack.id}}" data-attackname="{{attack.name}}" data-skillcategory="{{attacktype}}weapons">
+                    <tr class="item" data-item-id="{{attack.id}}" data-attackname="{{attack.name}}"
+                        data-skillcategory="{{attacktype}}weapons">
                         <td class="summary-attack-label"><a class="attack-roll">{{attack.name}}</a></td>
                         <td class="summary-attack-value">{{attack.data.data.attacktotal}}</td>
                         <td class="summary-attack-damage">{{attack.data.data.damage}}</td>
@@ -36,10 +38,10 @@
                         <td class="item-controls">
                             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                             <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                        </td>                        
+                        </td>
                     </tr>
                     {{/each}}
-                {{else}}
+                    {{else}}
                     <tr class="attack-header">
                         <th>
                             {{localize "RQG.Name"}}
@@ -77,36 +79,32 @@
                         <th>{{localize "RQG.Edit"}}</th>
                     </tr>
                     {{#each attacks as |attack id|}}
-                    <tr class="item" data-item-id="{{attack.id}}" data-attackname="{{attack.name}}" data-skillcategory="{{attacktype}}weapons">
+                    <tr class="item" data-item-id="{{attack.id}}" data-attackname="{{attack.name}}"
+                        data-skillcategory="{{attacktype}}weapons">
                         <td>
-                            <input  class="attribute-value attacks"  type="text"  name="data.name"  value="{{attack.data.name}}"  data-dtype="String"  />
+                            <input class="attribute-value attacks" type="text" name="data.name"
+                                value="{{attack.data.name}}" data-dtype="String" />
                         </td>
                         <td>
                             {{log "In CS-Summary preparing display of attackskills"}}
                             {{log @root}}
-                            {{#if @root.actor}}
-                            <select class= "attack-select attacks" name="data.skillused" data-dtype="String">
+                            <select class="attack-select attacks" name="data.skillused" data-dtype="String">
                                 {{#select attack.data.data.skillused}}
-                                {{#each (getcharacterattackskills @root.actor.data.id attack.data.data.attacktype) as |skill id|}}
+                                {{#each (getcharacterattackskills @root.actor.data._id attack.data.data.attacktype)
+                                as
+                                |skill id|}}
                                 <option value="{{skill.id}}">{{skill.name}}</option>
                                 {{/each}}
                                 {{/select}}
-                            </select>                  
-                            {{else}}
-                            <select class= "attacks" name="data.skillused" data-dtype="String">
-                                {{#select attack.data.data.skillused}}
-                                {{#each @root.config.weaponskills as |name type|}}
-                                <option value="{{type}}">{{localize name}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>                  
-                            {{/if}}            
+                            </select>
                         </td>
                         <td>
-                            <input  class="attribute-value attacks"  type="text"  name="data.modifier"  value="{{attack.data.data.modifier}}"  data-dtype="Number"  />
+                            <input class="attribute-value attacks" type="text" name="data.modifier"
+                                value="{{attack.data.data.modifier}}" data-dtype="Number" />
                         </td>
                         <td>
-                            <input  class="attribute-value attacks"  type="text"  name="data.damage"  value="{{attack.data.data.damage}}"  data-dtype="String"  />
+                            <input class="attribute-value attacks" type="text" name="data.damage"
+                                value="{{attack.data.data.damage}}" data-dtype="String" />
                         </td>
                         <td>
                             <!-- <input  class="attribute-value attacks"  type="text"  name="data.specialtype"  value="{{attack.data.data.specialtype}}"  data-dtype="String"  /> -->
@@ -114,32 +112,38 @@
                             <select class="attack-select attacks" name="data.specialtype">
                                 {{#select attack.data.data.specialtype}}
                                 {{#each @root.config.specialtype as |name type|}}
-                                    <option value="{{type}}">{{localize name}}</option>
+                                <option value="{{type}}">{{localize name}}</option>
                                 {{/each}}
                                 {{/select}}
-                            </select> 
+                            </select>
                         </td>
                         <td>
-                            <input  class="attribute-value attacks"  type="text"  name="data.wsr"  value="{{attack.data.data.wsr}}"  data-dtype="String"  />
-                        </td>         
-                        <td>
-                            <input  class="attribute-value attacks"  type="text"  name="data.hpmax"  value="{{attack.data.data.hpmax}}"  data-dtype="String"  />
+                            <input class="attribute-value attacks" type="text" name="data.wsr"
+                                value="{{attack.data.data.wsr}}" data-dtype="String" />
                         </td>
                         <td>
-                            <input  class="attribute-value attacks"  type="text"  name="data.hpcurrent"  value="{{attack.data.data.hpcurrent}}"  data-dtype="String"  />
-                        </td>            
+                            <input class="attribute-value attacks" type="text" name="data.hpmax"
+                                value="{{attack.data.data.hpmax}}" data-dtype="String" />
+                        </td>
                         <td>
-                            <input  class="attribute-value attacks"  type="text"  name="data.range"  value="{{attack.data.data.range}}"  data-dtype="String"  />
-                        </td>    
+                            <input class="attribute-value attacks" type="text" name="data.hpcurrent"
+                                value="{{attack.data.data.hpcurrent}}" data-dtype="String" />
+                        </td>
                         <td>
-                            <input  class="attribute-value attacks"  type="text"  name="data.rate"  value="{{attack.data.data.rate}}"  data-dtype="String"  />
-                        </td> 
+                            <input class="attribute-value attacks" type="text" name="data.range"
+                                value="{{attack.data.data.range}}" data-dtype="String" />
+                        </td>
                         <td>
-                            <input  class="attribute-value attacks"  type="text"  name="data.amno"  value="{{attack.data.data.amno}}"  data-dtype="String"  />
-                        </td>             
+                            <input class="attribute-value attacks" type="text" name="data.rate"
+                                value="{{attack.data.data.rate}}" data-dtype="String" />
+                        </td>
                         <td>
-                            <input class="attacks-db" type="checkbox" name="data.db" {{checked attack.data.data.db}}/>
-                        </td>            
+                            <input class="attribute-value attacks" type="text" name="data.amno"
+                                value="{{attack.data.data.amno}}" data-dtype="String" />
+                        </td>
+                        <td>
+                            <input class="attacks-db" type="checkbox" name="data.db" {{checked attack.data.data.db}} />
+                        </td>
                         <!-- 
                         <td class="summary-attack-label"><a class="attack-roll">{{attack.name}}</a></td>
                         <td class="summary-attack-skillname">{{attack.data.data.skillused}}</td>
@@ -156,9 +160,9 @@
                         </td>
                     </tr>
                     {{/each}}
-                {{/if}}
-            </tbody>
-            </table>   
+                    {{/if}}
+                </tbody>
+            </table>
         </ol>
-    </div>    
+    </div>
 </div>
