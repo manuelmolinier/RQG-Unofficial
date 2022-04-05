@@ -14,8 +14,8 @@ import { RunequestActorNPCSheet } from "./actor/runequestactornpc-sheet.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 import { RQG } from "./config.js";
 import * as Chat from "./chat.js";
-import { RunequestCombat } from "./combat/combat.js";
-import { RunequestCombatTracker } from "./combat/combat-tracker.js";
+//import { RunequestCombat } from "./combat/combat.js";
+//import { RunequestCombatTracker } from "./combat/combat-tracker.js";
 import { RQGTools } from "./tools/rqgtools.js";
 
 /* -------------------------------------------- */
@@ -56,8 +56,8 @@ Hooks.once("init", async function() {
 	// Define custom Entity classes
   CONFIG.Actor.documentClass = RunequestActor;
   CONFIG.Item.documentClass = RunequestItem;
-  CONFIG.Combat.documentClass = RunequestCombat;
-  CONFIG.ui.combat = RunequestCombatTracker;
+  //CONFIG.Combat.documentClass = RunequestCombat;
+  //CONFIG.ui.combat = RunequestCombatTracker;
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
