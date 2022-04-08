@@ -232,6 +232,11 @@ export class RunequestActor extends Actor {
         familyhistory.push(i);
       }
     }
+
+    for (let k in skills) {
+      skills[k].sort((a,b) => (a.data.name > b.data.name) ? 1 : -1);
+    }
+
     totalwounds+= context.data.attributes.generalwounds;
     // Assign and return
     //console.log("In prepareItems with hitlocations.length = "+hitlocations.length);
