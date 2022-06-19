@@ -524,13 +524,13 @@ export class RunequestActor extends Actor {
       hptotal += -1;
     }
     else if(data.characteristics.size.value >= 13){
-      hptotal += Math.ceil((data.characteristics.size.value-13)/4);
+      hptotal += Math.ceil((data.characteristics.size.value-12)/4);
     }
     if(data.characteristics.power.value < 5) {
       hptotal += -1;
     }
     else if(data.characteristics.power.value >= 17){
-      hptotal += Math.ceil((data.characteristics.power.value-17)/4);
+      hptotal += Math.ceil((data.characteristics.power.value-16)/4);
     }
     return hptotal;
   }
